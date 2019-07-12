@@ -1,3 +1,2 @@
 # Cyberbezpieczenstwo_w_administracji
-Gra tworzona w ramach projektu studentów prawa i administracji.
-TEST
+//Gra tworzona w ramach projektu studentów prawa i administracji.//
