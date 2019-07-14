@@ -13,18 +13,84 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Pliki nagłówkowe\Engine">
+      <UniqueIdentifier>{4df1cd44-c0d7-4923-9dd0-0fb73178cb16}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pliki źródłowe\Engine">
+      <UniqueIdentifier>{b9aaea00-ca2b-44d9-b5d2-96f66fece634}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source.cpp">
       <Filter>Pliki źródłowe</Filter>
     </ClCompile>
-    <ClCompile Include="maciek.cpp">
-      <Filter>Pliki źródłowe</Filter>
+    <ClCompile Include="Engine\Assets.cpp">
+      <Filter>Pliki źródłowe\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Button.cpp">
+      <Filter>Pliki źródłowe\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\CheckBox.cpp">
+      <Filter>Pliki źródłowe\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Core.cpp">
+      <Filter>Pliki źródłowe\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Information.cpp">
+      <Filter>Pliki źródłowe\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Lighting.cpp">
+      <Filter>Pliki źródłowe\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\SliderH.cpp">
+      <Filter>Pliki źródłowe\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\SliderV.cpp">
+      <Filter>Pliki źródłowe\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\TextButton.cpp">
+      <Filter>Pliki źródłowe\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\TextField.cpp">
+      <Filter>Pliki źródłowe\Engine</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="maciek.h">
-      <Filter>Pliki nagłówkowe</Filter>
+    <ClInclude Include="Engine\Assets.h">
+      <Filter>Pliki nagłówkowe\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Button.h">
+      <Filter>Pliki nagłówkowe\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\CheckBox.h">
+      <Filter>Pliki nagłówkowe\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Core.h">
+      <Filter>Pliki nagłówkowe\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Engine.h">
+      <Filter>Pliki nagłówkowe\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Information.h">
+      <Filter>Pliki nagłówkowe\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Lighting.h">
+      <Filter>Pliki nagłówkowe\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\SlideFrame.h">
+      <Filter>Pliki nagłówkowe\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\SliderH.h">
+      <Filter>Pliki nagłówkowe\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\SliderV.h">
+      <Filter>Pliki nagłówkowe\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\TextButton.h">
+      <Filter>Pliki nagłówkowe\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\TextField.h">
+      <Filter>Pliki nagłówkowe\Engine</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

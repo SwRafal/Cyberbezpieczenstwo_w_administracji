@@ -115,11 +115,31 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="maciek.cpp" />
+    <ClCompile Include="Engine\Assets.cpp" />
+    <ClCompile Include="Engine\Button.cpp" />
+    <ClCompile Include="Engine\CheckBox.cpp" />
+    <ClCompile Include="Engine\Core.cpp" />
+    <ClCompile Include="Engine\Information.cpp" />
+    <ClCompile Include="Engine\Lighting.cpp" />
+    <ClCompile Include="Engine\SliderH.cpp" />
+    <ClCompile Include="Engine\SliderV.cpp" />
+    <ClCompile Include="Engine\TextButton.cpp" />
+    <ClCompile Include="Engine\TextField.cpp" />
     <ClCompile Include="Source.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="maciek.h" />
+    <ClInclude Include="Engine\Assets.h" />
+    <ClInclude Include="Engine\Button.h" />
+    <ClInclude Include="Engine\CheckBox.h" />
+    <ClInclude Include="Engine\Core.h" />
+    <ClInclude Include="Engine\Engine.h" />
+    <ClInclude Include="Engine\Information.h" />
+    <ClInclude Include="Engine\Lighting.h" />
+    <ClInclude Include="Engine\SlideFrame.h" />
+    <ClInclude Include="Engine\SliderH.h" />
+    <ClInclude Include="Engine\SliderV.h" />
+    <ClInclude Include="Engine\TextButton.h" />
+    <ClInclude Include="Engine\TextField.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
