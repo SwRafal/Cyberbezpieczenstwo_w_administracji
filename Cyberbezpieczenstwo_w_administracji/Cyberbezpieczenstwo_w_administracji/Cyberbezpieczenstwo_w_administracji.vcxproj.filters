@@ -21,9 +21,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Source.cpp">
-      <Filter>Pliki źródłowe</Filter>
-    </ClCompile>
     <ClCompile Include="Engine\Assets.cpp">
       <Filter>Pliki źródłowe\Engine</Filter>
     </ClCompile>
@@ -53,6 +50,12 @@
     </ClCompile>
     <ClCompile Include="Engine\TextField.cpp">
       <Filter>Pliki źródłowe\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\StateMachine.cpp">
+      <Filter>Pliki źródłowe\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>Pliki źródłowe</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -90,6 +93,9 @@
       <Filter>Pliki nagłówkowe\Engine</Filter>
     </ClInclude>
     <ClInclude Include="Engine\TextField.h">
+      <Filter>Pliki nagłówkowe\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\StateMachine.h">
       <Filter>Pliki nagłówkowe\Engine</Filter>
     </ClInclude>
   </ItemGroup>

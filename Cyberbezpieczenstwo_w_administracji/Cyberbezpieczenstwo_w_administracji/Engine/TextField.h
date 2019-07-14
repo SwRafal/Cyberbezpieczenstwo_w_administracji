@@ -2,6 +2,7 @@
 #include "TextButton.h"
 #include <iostream>
 
+#define FRAME_BREAK 120
 #define BACKSPACE 8
 #define ENTER 13
 

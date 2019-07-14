@@ -1,5 +1,6 @@
 #pragma once
 #include <SFML/Graphics.hpp>
+#include <iostream>
 
 namespace gm
 {
@@ -7,8 +8,8 @@ namespace gm
 	{
 	public:
 		/*Editable constants*/
-		const std::string window_name = "Binaryzacja i progowanie obrazow";
-		const unsigned int resolution_x = 1200;
+		const std::string window_name = "Cyberbezpieczeñstwo w administracji";
+		const unsigned int resolution_x = 1280;
 		const unsigned int resolution_y = 720;
 		//////////////////////////////////////////////////////////////////
 	private:
@@ -24,6 +25,11 @@ namespace gm
 		sf::Uint32 last_entered_char;
 		sf::Clock clk;
 		sf::VideoMode resolution;
+		
+		
+
+
+
 	public:
 		~Core();
 

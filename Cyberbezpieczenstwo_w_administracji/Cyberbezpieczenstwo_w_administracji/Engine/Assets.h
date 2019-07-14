@@ -6,6 +6,9 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
 
+#define NO_TEXTURE_PATH "notexture.png"
+#define NO_FONT_PATH "nofont.ttf"
+
 namespace gm
 {
 	class Assets

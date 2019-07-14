@@ -123,9 +123,10 @@
     <ClCompile Include="Engine\Lighting.cpp" />
     <ClCompile Include="Engine\SliderH.cpp" />
     <ClCompile Include="Engine\SliderV.cpp" />
+    <ClCompile Include="Engine\StateMachine.cpp" />
     <ClCompile Include="Engine\TextButton.cpp" />
     <ClCompile Include="Engine\TextField.cpp" />
-    <ClCompile Include="Source.cpp" />
+    <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\Assets.h" />
@@ -138,6 +139,7 @@
     <ClInclude Include="Engine\SlideFrame.h" />
     <ClInclude Include="Engine\SliderH.h" />
     <ClInclude Include="Engine\SliderV.h" />
+    <ClInclude Include="Engine\StateMachine.h" />
     <ClInclude Include="Engine\TextButton.h" />
     <ClInclude Include="Engine\TextField.h" />
   </ItemGroup>
