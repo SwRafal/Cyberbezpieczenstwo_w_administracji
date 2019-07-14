@@ -1,6 +1,6 @@
 #include "Assets.h"
 
-namespace bu
+namespace gm
 {
 	Assets::Assets(){}
 

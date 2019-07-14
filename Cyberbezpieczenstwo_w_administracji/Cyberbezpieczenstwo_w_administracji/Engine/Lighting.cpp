@@ -1,6 +1,6 @@
 #include "Lighting.h"
 
-namespace bu
+namespace gm
 {
 	void Lighting::draw(sf::RenderTarget &target, sf::RenderStates states) const
 	{

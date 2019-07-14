@@ -1,16 +1,8 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 
-namespace bu
+namespace gm
 {
-	/*Consts for selecting between main_menu, game, options etc.*/
-	enum SECTIONS
-	{
-		NO_SECTION = 0,
-		MAIN_MENU = 1
-		//...add more here if needed...
-	};
-
 	class SlideFrame
 	{
 	public:

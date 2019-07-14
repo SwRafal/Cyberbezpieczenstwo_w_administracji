@@ -2,11 +2,10 @@
 #include "TextButton.h"
 #include <iostream>
 
-#define FRAME_BREAK 120
 #define BACKSPACE 8
 #define ENTER 13
 
-namespace bu
+namespace gm
 {
 	class TextField : public TextButton
 	{

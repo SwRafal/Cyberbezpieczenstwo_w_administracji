@@ -1,7 +1,7 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 
-namespace bu
+namespace gm
 {
 	class Button : public sf::RectangleShape
 	{

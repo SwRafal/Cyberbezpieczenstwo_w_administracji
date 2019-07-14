@@ -1,6 +1,6 @@
 #include "Information.h"
 
-namespace bu
+namespace gm
 {
 	void Information::adjust_text()
 	{

@@ -1,7 +1,7 @@
 #pragma once
 #include "Button.h"
 
-namespace bu
+namespace gm
 {
 	/*Horizontal slider*/
 	class SliderH : public sf::Drawable

@@ -1,7 +1,7 @@
 #include "SliderH.h"
 #include <iostream>
 
-namespace bu
+namespace gm
 {
 	void SliderH::adjust_button()
 	{

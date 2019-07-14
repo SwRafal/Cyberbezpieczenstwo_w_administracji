@@ -1,6 +1,6 @@
 #include "Core.h"
 
-namespace bu
+namespace gm
 {
 	Core::Core()
 	{

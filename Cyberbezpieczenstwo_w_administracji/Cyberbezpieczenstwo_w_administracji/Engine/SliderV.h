@@ -2,7 +2,7 @@
 #include "Button.h"
 
 /*Vertical slider*/
-namespace bu
+namespace gm
 {
 	class SliderV : public sf::Drawable
 	{

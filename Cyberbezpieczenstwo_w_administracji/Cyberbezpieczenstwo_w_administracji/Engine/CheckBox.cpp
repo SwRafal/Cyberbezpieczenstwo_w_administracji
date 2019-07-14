@@ -1,6 +1,6 @@
 #include "CheckBox.h"
 
-namespace bu
+namespace gm
 {
 	void CheckBox::adjust_x()
 	{

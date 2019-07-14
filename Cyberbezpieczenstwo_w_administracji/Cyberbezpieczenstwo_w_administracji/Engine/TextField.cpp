@@ -1,6 +1,6 @@
 #include "TextField.h"
 
-namespace bu
+namespace gm
 {
 	void TextField::setActive(bool active)
 	{

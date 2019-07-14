@@ -3,7 +3,7 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 
-namespace bu
+namespace gm
 {
 	class Information : public sf::RectangleShape
 	{

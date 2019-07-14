@@ -1,7 +1,7 @@
 #include "Button.h"
 #include <iostream>
 
-namespace bu
+namespace gm
 {
 	void Button::setSize(float x, float y)
 	{

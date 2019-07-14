@@ -1,6 +1,6 @@
 #include "SliderV.h"
 
-namespace bu
+namespace gm
 {
 	void SliderV::adjust_button()
 	{

@@ -1,7 +1,7 @@
 #include "TextButton.h"
 #include <iostream>
 
-namespace bu
+namespace gm
 {
 	//Tekst
 	void TextButton::adjust_text()
