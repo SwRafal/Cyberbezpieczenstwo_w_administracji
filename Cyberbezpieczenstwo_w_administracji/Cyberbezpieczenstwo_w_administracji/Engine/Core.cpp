@@ -11,7 +11,7 @@ namespace gm
 
 		window = new sf::RenderWindow(resolution, window_name);
 		ev = new sf::Event;
-		window->setFramerateLimit(120);
+		window->setFramerateLimit(fps);
 
 		//window->setIcon();
 	}

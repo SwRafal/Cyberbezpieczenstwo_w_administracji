@@ -136,9 +136,12 @@
     <ClCompile Include="Engine\StateMachine.cpp" />
     <ClCompile Include="Engine\TextButton.cpp" />
     <ClCompile Include="Engine\TextField.cpp" />
+    <ClCompile Include="Game.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="SplashScreenState.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Definitions.h" />
     <ClInclude Include="Engine\Assets.h" />
     <ClInclude Include="Engine\Button.h" />
     <ClInclude Include="Engine\CheckBox.h" />
@@ -152,6 +155,8 @@
     <ClInclude Include="Engine\StateMachine.h" />
     <ClInclude Include="Engine\TextButton.h" />
     <ClInclude Include="Engine\TextField.h" />
+    <ClInclude Include="Game.h" />
+    <ClInclude Include="SplashScreenState.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

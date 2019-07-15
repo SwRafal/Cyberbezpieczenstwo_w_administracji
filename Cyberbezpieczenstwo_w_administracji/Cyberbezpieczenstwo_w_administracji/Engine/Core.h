@@ -1,6 +1,7 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 #include <iostream>
+#include "../Definitions.h"
 
 namespace gm
 {
@@ -8,10 +9,10 @@ namespace gm
 	{
 	public:
 		/*Editable constants*/
-		const std::string window_name = "Cyberbezpieczeñstwo w administracji";
-		const unsigned int resolution_x = 1280;
-		const unsigned int resolution_y = 720;
-		const unsigned int fps = 60;
+		const std::string window_name = SCREEN_TITLE;
+		const unsigned int resolution_x = SCREEN_WIDTH;
+		const unsigned int resolution_y = SCREEN_HEIGHT;
+		const unsigned int fps = FPS;
 		//////////////////////////////////////////////////////////////////
 	private:
 		Core();
