@@ -11,7 +11,7 @@
 #define FPS 60
 
 /* Fonts */
-#define FONT_FILEPATH "resources/Bittermilk.ttf"
+#define FONT_FILEPATH "resources/fonts/Bittermilk.ttf"
 
 /* Splash State */
 
