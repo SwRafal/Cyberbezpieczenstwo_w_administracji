@@ -1,9 +1,8 @@
 #include "Game.h"
+#include "Definitions.h"
 #include "SplashScreenState.h"
 
-#define ICON_FILEPATH "resources/icon.png"
-#define ICON_SIZE 32
-#define FONT_FILEPATH "resources/Bittermilk.ttf"
+
 
 namespace gm
 {
