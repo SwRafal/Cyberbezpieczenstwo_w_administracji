@@ -138,6 +138,7 @@
     <ClCompile Include="Engine\TextField.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="SplashScreen.cpp" />
     <ClCompile Include="SplashScreenState.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -156,6 +157,7 @@
     <ClInclude Include="Engine\TextButton.h" />
     <ClInclude Include="Engine\TextField.h" />
     <ClInclude Include="Game.h" />
+    <ClInclude Include="SplashScreen.h" />
     <ClInclude Include="SplashScreenState.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

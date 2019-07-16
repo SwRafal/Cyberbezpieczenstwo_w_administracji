@@ -1,5 +1,9 @@
 #pragma once
 
+/* Fonts */
+
+#define FONT_FILEPATH "resources/fonts/Bittermilk.ttf"
+
 /* Window Data */
 
 #define ICON_FILEPATH "resources/icon.png"
@@ -10,10 +14,10 @@
 #define SCREEN_HEIGHT 720
 #define FPS 60
 
-/* Fonts */
-#define FONT_FILEPATH "resources/fonts/Bittermilk.ttf"
-
 /* Splash State */
 
-
+#define SPLASH_STATE_WINDOW_HEIGHT 507
+#define SPLASH_STATE_WINDOW_WIDTH 400
+#define SPLASH_STATE_SHOWTIME 2
+#define SPLASH_STATE_BACKGROUND_FILEPATH "resources/temp_meme.png"
 
