@@ -137,6 +137,7 @@
     <ClCompile Include="Engine\TextButton.cpp" />
     <ClCompile Include="Engine\TextField.cpp" />
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="GameState.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="SplashScreen.cpp" />
     <ClCompile Include="SplashScreenState.cpp" />
@@ -157,6 +158,7 @@
     <ClInclude Include="Engine\TextButton.h" />
     <ClInclude Include="Engine\TextField.h" />
     <ClInclude Include="Game.h" />
+    <ClInclude Include="GameState.h" />
     <ClInclude Include="SplashScreen.h" />
     <ClInclude Include="SplashScreenState.h" />
   </ItemGroup>

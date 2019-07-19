@@ -39,7 +39,7 @@ void SplashScreenState::handleInput()
 	}
 }
 
-void SplashScreenState::update()
+void SplashScreenState::update(sf::RenderWindow &win)
 {
 	
 }

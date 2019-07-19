@@ -36,7 +36,7 @@ namespace gm
 			this->data->machine.processStateChanges();
 
 			this->data->machine.getActiveState()->handleInput();
-			this->data->machine.getActiveState()->update();
+			this->data->machine.getActiveState()->update(Core::getWindow());
 			this->data->machine.getActiveState()->draw(Core::getWindow());
 		}
 	}

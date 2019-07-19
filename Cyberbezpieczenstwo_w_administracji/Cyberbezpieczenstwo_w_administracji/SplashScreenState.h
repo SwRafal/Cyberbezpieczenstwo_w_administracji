@@ -14,7 +14,7 @@ public:
 
 	void init() override;
 	void handleInput() override;
-	void update() override;
+	void update(sf::RenderWindow &win) override;
 	void draw(sf::RenderWindow& win) override;
 
 };
