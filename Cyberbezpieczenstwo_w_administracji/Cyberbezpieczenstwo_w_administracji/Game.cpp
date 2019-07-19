@@ -1,6 +1,7 @@
 #include "Game.h"
 #include "Definitions.h"
 #include "SplashScreenState.h"
+#include "GameState.h"
 
 
 
@@ -22,7 +23,8 @@ namespace gm
 			exit(EXIT_FAILURE);
 		}
 
-		data->machine.addState(StateRef(new SplashScreenState (this->data)));
+		//data->machine.addState(StateRef(new SplashScreenState (this->data)));
+		data->machine.addState(StateRef(new GameState (this->data)));
 
 		this->run();
 	}
