@@ -1,5 +1,12 @@
 #include "GameState.h"
 
+void error_win_close()
+{
+	gm::Core::getWindow().close();
+	system("pause");
+	exit(EXIT_FAILURE);
+}
+
 GameState::GameState(gm::gameDataRef data) : data(data)
 {
 
@@ -22,66 +29,59 @@ void GameState::init()
 	//Wall
 	gm::Assets::LoadTexture("WALL", TEXTURE_WALL);
 	if (gm::Assets::getTexture("WALL") == nullptr)
+		error_win_close();
+	else
 	{
-		system("pause");
-		exit(EXIT_FAILURE);
+		wall.setTexture(*gm::Assets::getTexture("WALL"));
+		wall.setPosition(sf::Vector2f(0, 0));
 	}
+
 	//Calendar
 	gm::Assets::LoadTexture("CALENDAR", TEXTURE_CALENDAR);
 	if (gm::Assets::getTexture("CALENDAR") == nullptr)
-	{
-		system("pause");
-		exit(EXIT_FAILURE);
-	}
+		error_win_close();
+
 	//Drawer
 	gm::Assets::LoadTexture("DRAWER", TEXTURE_DRAWER);
 	if (gm::Assets::getTexture("DRAWER") == nullptr)
-	{
-		system("pause");
-		exit(EXIT_FAILURE);
-	}
+		error_win_close();
+	else
+		drawer.setTexture(*gm::Assets::getTexture("DRAWER"));
+
 	//Customer's window
 	gm::Assets::LoadTexture("CUSTOMER_WINDOW", TEXTURE_CUSTOMER_WINDOW);
 	if (gm::Assets::getTexture("CUSTOMER_WINDOW") == nullptr)
-	{
-		system("pause");
-		exit(EXIT_FAILURE);
-	}
+		error_win_close();
+	else
+		customer_window.setTexture(*gm::Assets::getTexture("CUSTOMER_WINDOW"));
+
 	//Desk
 	gm::Assets::LoadTexture("DESK", TEXTURE_DESK);
 	if (gm::Assets::getTexture("DESK") == nullptr)
-	{
-		system("pause");
-		exit(EXIT_FAILURE);
-	}
+		error_win_close();
+	else
+		desk.setTexture(*gm::Assets::getTexture("DESK"));
+
 	//Computer
-	gm::Assets::LoadTexture("COMPUTER", TEXTURE_COMPUTER);
-	if (gm::Assets::getTexture("COMPUTER") == nullptr)
-	{
-		system("pause");
-		exit(EXIT_FAILURE);
-	}
+	//gm::Assets::LoadTexture("COMPUTER", TEXTURE_COMPUTER);
+	//if (gm::Assets::getTexture("COMPUTER") == nullptr)
+		//error_win_close();
+
 	//Monitor
-	gm::Assets::LoadTexture("MONITOR", TEXTURE_MONITOR);
-	if (gm::Assets::getTexture("MONITOR") == nullptr)
-	{
-		system("pause");
-		exit(EXIT_FAILURE);
-	}
+	//gm::Assets::LoadTexture("MONITOR", TEXTURE_MONITOR);
+	//if (gm::Assets::getTexture("MONITOR") == nullptr)
+		//error_win_close();
+
 	//Keyboard
-	gm::Assets::LoadTexture("KEYBOARD", TEXTURE_KEYBOARD);
-	if (gm::Assets::getTexture("KEYBOARD") == nullptr)
-	{
-		system("pause");
-		exit(EXIT_FAILURE);
-	}
+	//gm::Assets::LoadTexture("KEYBOARD", TEXTURE_KEYBOARD);
+	//if (gm::Assets::getTexture("KEYBOARD") == nullptr)
+		//error_win_close();
+
 	//Telephone
-	gm::Assets::LoadTexture("TELEPHONE", TEXTURE_TELEPHONE);
-	if (gm::Assets::getTexture("TELEPHONE") == nullptr)
-	{
-		system("pause");
-		exit(EXIT_FAILURE);
-	}
+	//gm::Assets::LoadTexture("TELEPHONE", TEXTURE_TELEPHONE);
+	//if (gm::Assets::getTexture("TELEPHONE") == nullptr)
+		//error_win_close();
+
 
 	/*Starting settings*/
 	//...
@@ -119,7 +119,7 @@ void GameState::update(sf::RenderWindow &win)
 
 void GameState::draw(sf::RenderWindow& win)
 {
-	win.clear();
+	win.clear(sf::Color::Black);
 
 	win.draw(wall);
 	//win.draw(calendar);
@@ -128,7 +128,7 @@ void GameState::draw(sf::RenderWindow& win)
 	win.draw(desk);
 	//win.draw(computer);
 	//win.draw(monitor);
-	win.draw(keyboard);
+	//win.draw(keyboard);
 	//win.draw(telephone);
 
 

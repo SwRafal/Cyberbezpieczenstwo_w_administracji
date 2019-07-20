@@ -2,11 +2,17 @@
 #include "Engine/Engine.h"
 #include "Game.h"
 
+void error_win_close();
+
 class GameState : public gm::SlideFrame
 {
 private:
 	gm::gameDataRef data;
 
+	/*Settings*/
+	unsigned int day;
+
+	/*Environment*/
 	sf::Sprite wall;
 	//sf::Sprite calendrar;
 	sf::Sprite drawer;
@@ -16,7 +22,6 @@ private:
 	//sf::Sprite monitor;
 	sf::Sprite keyboard;
 	//sf::Sprite telephone;
-
 public:
 	GameState(gm::gameDataRef data);
 	~GameState();
