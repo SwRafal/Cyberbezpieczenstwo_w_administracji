@@ -1,12 +1,5 @@
 #include "GameState.h"
 
-void error_win_close()
-{
-	gm::Core::getWindow().close();
-	system("pause");
-	exit(EXIT_FAILURE);
-}
-
 GameState::GameState(gm::gameDataRef data) : data(data)
 {
 
@@ -40,27 +33,40 @@ void GameState::init()
 	gm::Assets::LoadTexture("CALENDAR", TEXTURE_CALENDAR);
 	if (gm::Assets::getTexture("CALENDAR") == nullptr)
 		error_win_close();
+	else
+	{
+		//...
+	}
 
 	//Drawer
 	gm::Assets::LoadTexture("DRAWER", TEXTURE_DRAWER);
 	if (gm::Assets::getTexture("DRAWER") == nullptr)
 		error_win_close();
 	else
+	{
 		drawer.setTexture(*gm::Assets::getTexture("DRAWER"));
+		drawer.setPosition(sf::Vector2f(SCREEN_WIDTH/2, 100));
+	}
 
 	//Customer's window
 	gm::Assets::LoadTexture("CUSTOMER_WINDOW", TEXTURE_CUSTOMER_WINDOW);
 	if (gm::Assets::getTexture("CUSTOMER_WINDOW") == nullptr)
 		error_win_close();
 	else
+	{
 		customer_window.setTexture(*gm::Assets::getTexture("CUSTOMER_WINDOW"));
+		customer_window.setPosition(sf::Vector2f(0, 0));
+	}
 
 	//Desk
 	gm::Assets::LoadTexture("DESK", TEXTURE_DESK);
 	if (gm::Assets::getTexture("DESK") == nullptr)
 		error_win_close();
 	else
+	{
 		desk.setTexture(*gm::Assets::getTexture("DESK"));
+		desk.setPosition(sf::Vector2f(0, SCREEN_HEIGHT/2));
+	}
 
 	//Computer
 	//gm::Assets::LoadTexture("COMPUTER", TEXTURE_COMPUTER);
