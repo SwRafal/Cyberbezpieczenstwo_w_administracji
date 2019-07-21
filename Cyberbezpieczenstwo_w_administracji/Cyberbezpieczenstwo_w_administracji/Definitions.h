@@ -1,5 +1,9 @@
 #pragma once
 
+/* Sounds */
+
+#define CLICK_SOUND_FILEPATH "resources/sounds/ClickSoundLong.wav"
+
 /* Fonts */
 
 #define FONT_FILEPATH "resources/fonts/Bittermilk.ttf"
@@ -20,6 +24,10 @@
 #define SPLASH_STATE_WINDOW_WIDTH 400
 #define SPLASH_STATE_SHOWTIME 2
 #define SPLASH_STATE_BACKGROUND_FILEPATH "resources/temp_meme.png"
+
+/* Menu State */
+
+#define MENU_BACKGROUND_ANIMATION_FILEPATH "resources/textures/menu_animation.png"
 
 /* Game Textures*/
 #define TEXTURE_WALL "resources/textures/wall.png"

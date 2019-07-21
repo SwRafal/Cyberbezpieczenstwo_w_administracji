@@ -89,8 +89,7 @@ void GameState::init()
 
 void GameState::handleInput()
 {
-	while (gm::Core::getWindow().isOpen())
-	{
+	
 		/*Events*/
 		gm::Core::resetEvent();
 
@@ -106,7 +105,7 @@ void GameState::handleInput()
 				break;
 			}
 		}
-	}
+	
 }
 
 void GameState::update(sf::RenderWindow &win)

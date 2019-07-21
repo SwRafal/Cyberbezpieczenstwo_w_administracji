@@ -140,7 +140,7 @@
     <ClCompile Include="GameState.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="SplashScreen.cpp" />
-    <ClCompile Include="SplashScreenState.cpp" />
+    <ClCompile Include="MenuState.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Definitions.h" />
@@ -160,7 +160,7 @@
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameState.h" />
     <ClInclude Include="SplashScreen.h" />
-    <ClInclude Include="SplashScreenState.h" />
+    <ClInclude Include="MenuState.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
