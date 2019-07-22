@@ -88,6 +88,16 @@ void GameState::init()
 	//if (gm::Assets::getTexture("TELEPHONE") == nullptr)
 		//error_win_close();
 
+	//Watch
+	gm::Assets::LoadTexture("WATCH", TEXTURE_WATCH);
+	if (gm::Assets::getTexture("WATCH") == nullptr)
+		error_win_close();
+	else
+	{
+		watch.setTexture(*gm::Assets::getTexture("WATCH"));
+		watch.setPosition(sf::Vector2f(SCREEN_WIDTH / 2 - gm::Assets::getTexture("WATCH")->getSize().x / 2 , 0));
+	}
+
 
 	/*Starting settings*/
 	//...
@@ -135,7 +145,7 @@ void GameState::draw(sf::RenderWindow& win)
 	//win.draw(monitor);
 	//win.draw(keyboard);
 	//win.draw(telephone);
-
+	win.draw(watch);
 
 	win.display();
 }

@@ -39,3 +39,4 @@
 #define TEXTURE_MONITOR "resources/textures/monitor.png"
 #define TEXTURE_KEYBOARD "resources/textures/keyboard.png"
 #define TEXTURE_TELEPHONE "resources/textures/telephone.png"
+#define TEXTURE_WATCH "resources/textures/zegar.png"

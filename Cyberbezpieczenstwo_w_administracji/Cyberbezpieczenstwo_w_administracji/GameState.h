@@ -23,6 +23,8 @@ private:
 	//sf::Sprite monitor;
 	sf::Sprite keyboard;
 	//sf::Sprite telephone;
+	sf::Sprite watch;
+
 public:
 	GameState(gm::gameDataRef data);
 	~GameState();
