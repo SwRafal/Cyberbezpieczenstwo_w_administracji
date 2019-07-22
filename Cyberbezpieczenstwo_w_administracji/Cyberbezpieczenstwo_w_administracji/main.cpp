@@ -4,7 +4,6 @@
 #include "Definitions.h"
 #include "SplashScreen.h"
 
-/*KOMENTARZ*/
 int main()
 {
 	srand(time(nullptr));
