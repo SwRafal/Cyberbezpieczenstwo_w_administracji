@@ -17,7 +17,7 @@ namespace gm
 
 	void StateMachine::processStateChanges()
 	{
-		if (this->isRemoving == true && this->states.empty())
+		if (this->isRemoving == true && !this->states.empty())
 		{
 			this->states.pop();
 

@@ -2,6 +2,7 @@
 #include "Engine/Engine.h"
 #include "Game.h"
 #include "Functions.h"
+#include "PauseState.h"
 
 void error_win_close();
 

@@ -1,4 +1,6 @@
 #include "GameState.h"
+#include <thread>
+#include "MenuState.h"
 
 GameState::GameState(gm::gameDataRef data) : data(data)
 {
@@ -105,9 +107,13 @@ void GameState::init()
 
 void GameState::handleInput()
 {
-	
+		
+
 		/*Events*/
 		gm::Core::resetEvent();
+		gm::Core::setEnteredChar(NULL);
+		
+
 
 		while (gm::Core::getWindow().pollEvent(gm::Core::getEvent()))
 		{
@@ -118,10 +124,27 @@ void GameState::handleInput()
 				break;
 			case sf::Event::TextEntered:
 				gm::Core::setEnteredChar(gm::Core::getEvent().text.unicode);
+				
+				
+				
 				break;
 			}
 		}
-	
+
+	if(gm::Core::getEnteredChar() == 0x0000001B)
+	{
+		//pause state		
+		sf::Texture tex;
+		tex.create(gm::Core::getWindow().getSize().x,gm::Core::getWindow().getSize().y);
+		tex.update(gm::Core::getWindow());
+		gm::Assets::LoadTextureFromImage("pause bg", tex.copyToImage());
+		data->machine.addState(gm::StateRef(new PauseState (this->data)),false);      
+	}
+	if(data->returnToMenu == true)
+	{
+		data->returnToMenu = false;
+		data->machine.addState(gm::StateRef(new MenuState (this->data))); 
+	}
 }
 
 void GameState::update(sf::RenderWindow &win)

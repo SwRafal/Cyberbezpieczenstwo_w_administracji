@@ -32,6 +32,7 @@ namespace gm
 
 		static void LoadIcon(std::string filepath);
 		static void LoadTexture(std::string name, std::string filepath);
+		static void LoadTextureFromImage(std::string name, sf::Image img);
 		static void LoadFont(std::string filepath);
 		static void LoadSound(std::string name, std::string filepath);
 		static void LoadMusic(std::string filepath);

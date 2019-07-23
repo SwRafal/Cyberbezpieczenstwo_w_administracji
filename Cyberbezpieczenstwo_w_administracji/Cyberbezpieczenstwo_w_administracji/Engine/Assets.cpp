@@ -42,6 +42,14 @@ namespace gm
 		if (t->loadFromFile(filepath))
 			getSingleton()._textures[name] = t;
 	}
+	void Assets::LoadTextureFromImage(std::string name, sf::Image img)
+	{
+		EraseTexture(name);
+
+		sf::Texture* t = new sf::Texture;
+		if (t->loadFromImage(img))
+			getSingleton()._textures[name] = t;
+	}
 	void Assets::LoadFont(std::string filepath)
 	{
 		EraseFont();

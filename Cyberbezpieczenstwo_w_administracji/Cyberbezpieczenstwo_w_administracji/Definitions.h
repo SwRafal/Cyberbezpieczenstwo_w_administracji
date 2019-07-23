@@ -29,6 +29,10 @@
 
 #define MENU_BACKGROUND_ANIMATION_FILEPATH "resources/textures/menu_animation.png"
 
+/* Pause State */
+
+#define ROUNDED_RECT_SHAPE_FILEPATH "resources/textures/rect shape.png"
+
 /* Game Textures*/
 #define TEXTURE_WALL "resources/textures/wall.png"
 #define TEXTURE_CALENDAR "resources/textures/calendar.png"
