@@ -81,6 +81,9 @@
     <ClCompile Include="PauseState.cpp">
       <Filter>Pliki źródłowe</Filter>
     </ClCompile>
+    <ClCompile Include="Calendar.cpp">
+      <Filter>Pliki źródłowe\GameStateItems</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\Assets.h">
@@ -142,6 +145,12 @@
     </ClInclude>
     <ClInclude Include="PauseState.h">
       <Filter>Pliki nagłówkowe</Filter>
+    </ClInclude>
+    <ClInclude Include="Calendar.h">
+      <Filter>Pliki nagłówkowe\GameStateItems</Filter>
+    </ClInclude>
+    <ClInclude Include="GameStateItems.h">
+      <Filter>Pliki nagłówkowe\GameStateItems</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

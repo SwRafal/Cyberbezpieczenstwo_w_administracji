@@ -36,11 +36,5 @@
 /* Game Textures*/
 #define TEXTURE_WALL "resources/textures/wall.png"
 #define TEXTURE_CALENDAR "resources/textures/calendar.png"
-#define TEXTURE_DRAWER "resources/textures/drawer.png"
-#define TEXTURE_CUSTOMER_WINDOW "resources/textures/customer_window.png"
-#define TEXTURE_DESK "resources/textures/desk.png"
-#define TEXTURE_COMPUTER "resources/textures/computer.png"
-#define TEXTURE_MONITOR "resources/textures/monitor.png"
-#define TEXTURE_KEYBOARD "resources/textures/keyboard.png"
 #define TEXTURE_TELEPHONE "resources/textures/telephone.png"
-#define TEXTURE_WATCH "resources/textures/zegar.png"
+#define TEXTURE_WATCH "resources/textures/watch.png"

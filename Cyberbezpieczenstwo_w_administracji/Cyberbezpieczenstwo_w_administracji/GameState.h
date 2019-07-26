@@ -2,6 +2,7 @@
 #include "Engine/Engine.h"
 #include "Game.h"
 #include "Functions.h"
+#include "GameStateItems.h"
 #include "PauseState.h"
 
 void error_win_close();
@@ -16,13 +17,7 @@ private:
 
 	/*Environment*/
 	sf::Sprite wall;
-	//sf::Sprite calendrar;
-	sf::Sprite drawer;
-	sf::Sprite customer_window;
-	sf::Sprite desk;
-	//sf::Sprite computer;
-	//sf::Sprite monitor;
-	sf::Sprite keyboard;
+	Calendar *calendar = nullptr;
 	//sf::Sprite telephone;
 	sf::Sprite watch;
 

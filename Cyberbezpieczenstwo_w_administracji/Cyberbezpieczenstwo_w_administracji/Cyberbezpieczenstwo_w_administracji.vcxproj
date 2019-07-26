@@ -135,6 +135,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Calendar.cpp" />
     <ClCompile Include="Engine\Assets.cpp" />
     <ClCompile Include="Engine\Button.cpp" />
     <ClCompile Include="Engine\CheckBox.cpp" />
@@ -155,6 +156,7 @@
     <ClCompile Include="MenuState.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Calendar.h" />
     <ClInclude Include="Definitions.h" />
     <ClInclude Include="Engine\Assets.h" />
     <ClInclude Include="Engine\Button.h" />
@@ -172,6 +174,7 @@
     <ClInclude Include="Functions.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameState.h" />
+    <ClInclude Include="GameStateItems.h" />
     <ClInclude Include="PauseState.h" />
     <ClInclude Include="SplashScreen.h" />
     <ClInclude Include="MenuState.h" />
