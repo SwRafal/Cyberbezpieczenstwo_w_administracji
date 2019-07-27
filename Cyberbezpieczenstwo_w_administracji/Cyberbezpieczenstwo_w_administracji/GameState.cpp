@@ -10,7 +10,10 @@ GameState::~GameState()
 {
 	delete calendar;
 	calendar = nullptr;
+	delete watch;
+	watch = nullptr;
 
+	gm::Assets::EraseTexture("WATCH");
 	gm::Assets::EraseTexture("TELEPHONE");
 	gm::Assets::EraseTexture("CALENDAR");
 	gm::Assets::EraseTexture("WALL");
@@ -34,14 +37,9 @@ void GameState::init()
 		error_win_close();
 	else
 	{
-		calendar = new Calendar(gm::Assets::getFont(), gm::Assets::getTexture("CALENDAR"), "as", "df", "milczy");
-		calendar->setPosition(CALENDAR_POS_X, CALENDAR_POS_Y);
+		calendar = new Calendar(gm::Assets::getFont(), gm::Assets::getTexture("CALENDAR")/*,date*/);
+		calendar->setPosition(sf::Vector2f(CALENDAR_POS_X, CALENDAR_POS_Y));
 	}
-
-	//Telephone
-	//gm::Assets::LoadTexture("TELEPHONE", TEXTURE_TELEPHONE);
-	//if (gm::Assets::getTexture("TELEPHONE") == nullptr)
-		//error_win_close();
 
 	//Watch
 	gm::Assets::LoadTexture("WATCH", TEXTURE_WATCH);
@@ -49,10 +47,14 @@ void GameState::init()
 		error_win_close();
 	else
 	{
-		watch.setTexture(*gm::Assets::getTexture("WATCH"));
-		watch.setPosition(sf::Vector2f(SCREEN_WIDTH / 2 - gm::Assets::getTexture("WATCH")->getSize().x / 2 , 0));
+		watch = new Watch(gm::Assets::getFont(), gm::Assets::getTexture("WATCH"), 8, 0);
+		watch->setPosition(sf::Vector2f(WATCH_POS_X, WATCH_POS_Y));
 	}
 
+	//Telephone
+	//gm::Assets::LoadTexture("TELEPHONE", TEXTURE_TELEPHONE);
+	//if (gm::Assets::getTexture("TELEPHONE") == nullptr)
+		//error_win_close();
 
 	/*Starting settings*/
 	//...
@@ -102,7 +104,8 @@ void GameState::handleInput()
 
 void GameState::update(sf::RenderWindow &win)
 {
-	//calendra->update();
+	calendar->update(win);
+	watch->update(gm::Core::getClock());
 	//telephone->update();
 }
 
@@ -112,8 +115,8 @@ void GameState::draw(sf::RenderWindow& win)
 
 	win.draw(wall);
 	calendar->draw(win);
+	watch->draw(win);
 	//win.draw(telephone);
-	win.draw(watch);
 
 	win.display();
 }

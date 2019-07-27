@@ -24,22 +24,22 @@ Calendar::Calendar(sf::Font *font, sf::Texture *texture, sf::String month, sf::S
 	_weekday.setString(weekday);
 }
 
-/*Overrites*/
+/*Overrides*/
 void Calendar::setPosition(float x, float y)
 {
 	sf::Sprite::setPosition(x, y);
 	sf::Vector2f new_month_pos;
-	new_month_pos.x = (TEXTURE_OFFSET + this->getPosition().x + this->getTexture()->getSize().x - _month.getLocalBounds().width - _month.getLocalBounds().left) / 2;
+	new_month_pos.x = this->getPosition().x + (TEXTURE_OFFSET + this->getTexture()->getSize().x - _month.getLocalBounds().width - _month.getLocalBounds().left) / 2;
 	new_month_pos.y = this->getPosition().y + MONTH_POS_Y;
 	_month.setPosition(new_month_pos);
 
 	sf::Vector2f new_day_pos;
-	new_day_pos.x = (TEXTURE_OFFSET + this->getPosition().x + this->getTexture()->getSize().x - _day.getLocalBounds().width - _day.getLocalBounds().left) / 2;
+	new_day_pos.x = this->getPosition().x + (TEXTURE_OFFSET + this->getTexture()->getSize().x - _day.getLocalBounds().width - _day.getLocalBounds().left) / 2;
 	new_day_pos.y = this->getPosition().y + DAY_POS_Y;
 	_day.setPosition(new_day_pos);
 
 	sf::Vector2f new_weekday_pos;
-	new_weekday_pos.x = (TEXTURE_OFFSET + this->getPosition().x + this->getTexture()->getSize().x - _weekday.getLocalBounds().width - _weekday.getLocalBounds().left) / 2;
+	new_weekday_pos.x = this->getPosition().x + (TEXTURE_OFFSET + this->getTexture()->getSize().x - _weekday.getLocalBounds().width - _weekday.getLocalBounds().left) / 2;
 	new_weekday_pos.y = this->getPosition().y + WEEKDAY_POS_Y;
 	_weekday.setPosition(new_weekday_pos);
 }
@@ -60,14 +60,26 @@ void Calendar::move(const sf::Vector2f &offset)
 void Calendar::setMonth(const sf::String month)
 {
 	_month.setString(month);
+	sf::Vector2f new_month_pos;
+	new_month_pos.x = this->getPosition().x + (TEXTURE_OFFSET + this->getTexture()->getSize().x - _month.getLocalBounds().width - _month.getLocalBounds().left) / 2;
+	new_month_pos.y = this->getPosition().y + MONTH_POS_Y;
+	_month.setPosition(new_month_pos);
 }
 void Calendar::setDay(const sf::String day)
 {
 	_day.setString(day);
+	sf::Vector2f new_day_pos;
+	new_day_pos.x = this->getPosition().x + (TEXTURE_OFFSET + this->getTexture()->getSize().x - _day.getLocalBounds().width - _day.getLocalBounds().left) / 2;
+	new_day_pos.y = this->getPosition().y + DAY_POS_Y;
+	_day.setPosition(new_day_pos);
 }
 void Calendar::setWeekDay(const sf::String weekday)
 {
 	_weekday.setString(weekday);
+	sf::Vector2f new_weekday_pos;
+	new_weekday_pos.x = this->getPosition().x + (TEXTURE_OFFSET + this->getTexture()->getSize().x - _weekday.getLocalBounds().width - _weekday.getLocalBounds().left) / 2;
+	new_weekday_pos.y = this->getPosition().y + WEEKDAY_POS_Y;
+	_weekday.setPosition(new_weekday_pos);
 }
 
 /*Draw & Update*/
@@ -81,5 +93,10 @@ void Calendar::draw(sf::RenderWindow &win)
 
 void Calendar::update(sf::RenderWindow &win)
 {
-
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
+	{
+		int n = std::stoi(_day.getString().toWideString());
+		n++;
+		setDay(std::to_string(n));
+	}
 }

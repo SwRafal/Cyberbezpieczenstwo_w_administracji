@@ -154,6 +154,7 @@
     <ClCompile Include="PauseState.cpp" />
     <ClCompile Include="SplashScreen.cpp" />
     <ClCompile Include="MenuState.cpp" />
+    <ClCompile Include="Watch.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Calendar.h" />
@@ -178,6 +179,7 @@
     <ClInclude Include="PauseState.h" />
     <ClInclude Include="SplashScreen.h" />
     <ClInclude Include="MenuState.h" />
+    <ClInclude Include="Watch.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
