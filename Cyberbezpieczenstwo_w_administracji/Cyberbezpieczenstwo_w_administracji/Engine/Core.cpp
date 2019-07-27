@@ -9,7 +9,7 @@ namespace gm
 
 		clk.restart();
 
-		window = new sf::RenderWindow(resolution, window_name,sf::Style::Close);
+		window = new sf::RenderWindow(resolution, window_name);
 		ev = new sf::Event;
 		window->setFramerateLimit(fps);
 
