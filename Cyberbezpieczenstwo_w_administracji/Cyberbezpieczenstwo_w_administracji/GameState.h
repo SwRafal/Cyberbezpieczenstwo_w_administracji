@@ -19,7 +19,7 @@ private:
 	sf::Sprite wall;
 	Calendar *calendar = nullptr;
 	//sf::Sprite telephone;
-	sf::Sprite watch;
+	Watch *watch = nullptr;
 
 public:
 	GameState(gm::gameDataRef data);

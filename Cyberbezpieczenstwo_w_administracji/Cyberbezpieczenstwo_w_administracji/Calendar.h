@@ -2,13 +2,11 @@
 #include "Engine/Engine.h"
 #include "Functions.h"
 
-#define CALENDAR_WIDTH 109
-#define CALENDAR_HEIGHT 144
 #define CALENDAR_POS_X 1155
 #define CALENDAR_POS_Y 20
 
 #define MONTH_POS_Y 15 //Offset from calendar's position
-#define MONTH_FONT_SIZE 16
+#define MONTH_FONT_SIZE 18
 
 #define DAY_POS_Y 45 //Offset from calendar's position
 #define DAY_FONT_SIZE 36
