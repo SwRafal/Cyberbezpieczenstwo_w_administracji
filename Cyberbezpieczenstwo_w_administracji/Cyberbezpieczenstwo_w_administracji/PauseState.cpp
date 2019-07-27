@@ -148,8 +148,8 @@ void PauseState::draw(sf::RenderWindow& win)
 
 	if(opacity >= 170 && scale >= 1.0)
 	{
-		resumeButton.draw(win,sf::RenderStates::Default);
-		menuButton.draw(win,sf::RenderStates::Default);
+		win.draw(resumeButton);
+		win.draw(menuButton);
 	}
 
 	win.display();

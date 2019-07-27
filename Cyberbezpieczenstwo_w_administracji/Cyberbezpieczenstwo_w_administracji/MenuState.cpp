@@ -132,9 +132,9 @@ void MenuState::draw(sf::RenderWindow& win)
 	win.clear();
 
 	win.draw(background_animation_spritesheet);
-	playButton.draw(win,sf::RenderStates::Default);
-	exitButton.draw(win,sf::RenderStates::Default);
-	intro.draw(win,sf::RenderStates::Default);
+	win.draw(playButton);
+	win.draw(exitButton);
+	win.draw(intro);
 	
 	win.display();
 }

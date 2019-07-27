@@ -14,6 +14,8 @@ namespace gm
 		sf::Color idle_text_color;
 		sf::Color aimed_text_color;
 		sf::Color press_text_color;
+	protected:
+		void draw(sf::RenderTarget &target, sf::RenderStates states) const;
 	public:
 		//Ca³oœæ guzika
 		void setSize(const sf::Vector2f &size);
@@ -35,7 +37,6 @@ namespace gm
 		void setTextPressColor(const sf::Color &color);
 
 		//G³ówne
-		void draw(sf::RenderTarget &target, sf::RenderStates states) const;
 		bool clicked(sf::RenderWindow &win);
 
 		TextButton(sf::Font &font) : TextButton(font, sf::Vector2f(0, 0), sf::Vector2f(200, 100)) {};
