@@ -24,7 +24,8 @@ void PauseState::init()
 	/* scene background */
 	gm::Assets::LoadTexture("rounded rect shape", ROUNDED_RECT_SHAPE_FILEPATH);
 	buttonsbackground.setTexture(*gm::Assets::getTexture("rounded rect shape"));
-	buttonsbackground.setPosition(gm::Core::getWindow().getSize().x / 2 - buttonsbackground.getGlobalBounds().width / 2, gm::Core::getWindow().getSize().y / 2 - buttonsbackground.getGlobalBounds().height / 2 );
+	buttonsbackground.setPosition(gm::Core::getWindow().getSize().x / 2 - buttonsbackground.getGlobalBounds().width / 2,
+		gm::Core::getWindow().getSize().y / 2 - buttonsbackground.getGlobalBounds().height / 2 );
 	
 
 	background.setTexture(*gm::Assets::getTexture("pause bg"));
@@ -132,6 +133,8 @@ void PauseState::update(sf::RenderWindow &win)
 		if(opacity > 0)
 			opacity = opacity - 10;
 	}
+
+	
 
 }
 

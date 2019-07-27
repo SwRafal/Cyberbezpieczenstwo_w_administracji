@@ -3,7 +3,7 @@
 #include "Windows.h"
 
 
-MenuState::MenuState(gm::gameDataRef data) : data(data), playButton(*gm::Assets::getFont()),exitButton(*gm::Assets::getFont())
+MenuState::MenuState(gm::gameDataRef data) : data(data), playButton(*gm::Assets::getFont()),exitButton(*gm::Assets::getFont()),intro(*gm::Assets::getFont())
 {
 
 }
@@ -38,6 +38,18 @@ void MenuState::init()
 	exitButton.setSize(200,40);
 	exitButton.setTextSize(70);
 	exitButton.setTextString("Wyjscie");
+
+	/* intro button */
+	intro.setPosition(0,0);
+	intro.setTextIdleColor(sf::Color::White);
+	intro.setTextAimedColor(sf::Color(230, 120, 255,255));
+	intro.setTextPressColor(sf::Color(216, 46, 255,255));
+	intro.setIdleColor(sf::Color::Transparent);
+	intro.setAimedColor(sf::Color::Transparent);
+	intro.setPressColor(sf::Color::Transparent);
+	intro.setSize(200,40);
+	intro.setTextSize(70);
+	intro.setTextString("intro");
 
 	/* animated background */
 	animationCounteri = 0;
@@ -87,6 +99,13 @@ void MenuState::handleInput()
 		Sleep(100);
 		exit(EXIT_SUCCESS);
 	}
+
+	if(intro.clicked(gm::Core::getWindow()))
+	{
+		clickSound.play();
+		Sleep(100);
+		
+	}
 		
 }
 
@@ -115,6 +134,7 @@ void MenuState::draw(sf::RenderWindow& win)
 	win.draw(background_animation_spritesheet);
 	playButton.draw(win,sf::RenderStates::Default);
 	exitButton.draw(win,sf::RenderStates::Default);
+	intro.draw(win,sf::RenderStates::Default);
 	
 	win.display();
 }

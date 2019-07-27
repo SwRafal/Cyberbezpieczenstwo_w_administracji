@@ -26,6 +26,6 @@ public:
 
 	sf::Sound clickSound;
 
-
+	gm::TextButton intro;
 };
 
