@@ -1,6 +1,20 @@
 #include "PauseState.h"
 
+void PauseState::fixOrigin()
+{
+	if(gm::Core::getWindow().getSize().x != SCREEN_WIDTH || gm::Core::getWindow().getSize().y != SCREEN_WIDTH)
+	{
+		int scaleX,scaleY;
+		scaleX = gm::Core::getWindow().getSize().x / SCREEN_WIDTH;
+		scaleY = gm::Core::getWindow().getSize().y / SCREEN_HEIGHT;
 
+		buttonsbackground.setOrigin(buttonsbackground.getPosition().x + (buttonsbackground.getGlobalBounds().width * scaleX) / 2,
+			buttonsbackground.getPosition().y + (buttonsbackground.getGlobalBounds().height * scaleY) / 2 );
+	}
+	else
+		buttonsbackground.setOrigin(buttonsbackground.getPosition().x + buttonsbackground.getGlobalBounds().width / 2,
+			buttonsbackground.getPosition().y + buttonsbackground.getGlobalBounds().height / 2);
+}
 
 PauseState::PauseState(gm::gameDataRef data) : data(data), resumeButton(*gm::Assets::getFont()),menuButton(*gm::Assets::getFont())
 {
@@ -24,8 +38,11 @@ void PauseState::init()
 	/* scene background */
 	gm::Assets::LoadTexture("rounded rect shape", ROUNDED_RECT_SHAPE_FILEPATH);
 	buttonsbackground.setTexture(*gm::Assets::getTexture("rounded rect shape"));
-	buttonsbackground.setPosition(gm::Core::getWindow().getSize().x / 2 - buttonsbackground.getGlobalBounds().width / 2,
-		gm::Core::getWindow().getSize().y / 2 - buttonsbackground.getGlobalBounds().height / 2 );
+	fixOrigin();
+	buttonsbackground.setPosition(gm::Core::getWindow().getSize().x / 2,
+		gm::Core::getWindow().getSize().y / 2);
+	
+	
 	
 
 	background.setTexture(*gm::Assets::getTexture("pause bg"));
@@ -80,6 +97,11 @@ void PauseState::handleInput()
 		case sf::Event::TextEntered:
 			gm::Core::setEnteredChar(gm::Core::getEvent().text.unicode);
 			break;
+		case sf::Event::Resized:
+			fixOrigin();
+			buttonsbackground.setPosition(gm::Core::getWindow().getSize().x / 2,
+		gm::Core::getWindow().getSize().y / 2);
+			break;
 		}
 	}
 
@@ -110,10 +132,10 @@ void PauseState::update(sf::RenderWindow &win)
 	if(resuming == true && opacity <= 0 && scale <= 0.05)
 		data->machine.removeState();
 
-	if(resuming == false)
+	if(resuming == false && (opacity < 170 || scale < 1.0))
 	{
 		buttonsbackground.setScale(scale,scale);
-		buttonsbackground.setPosition(gm::Core::getWindow().getSize().x / 2 - buttonsbackground.getGlobalBounds().width / 2, gm::Core::getWindow().getSize().y / 2 - buttonsbackground.getGlobalBounds().height / 2 );
+		buttonsbackground.setPosition(gm::Core::getWindow().getSize().x / 2, gm::Core::getWindow().getSize().y / 2);
 		if(scale < 1.0)
 			scale = scale + 0.05;
 
@@ -122,10 +144,10 @@ void PauseState::update(sf::RenderWindow &win)
 			opacity = opacity + 10;
 	}
 
-	if(resuming == true)
+	if(resuming == true && (opacity > 0 || scale > 0.05))
 	{
 		buttonsbackground.setScale(scale,scale);
-		buttonsbackground.setPosition(gm::Core::getWindow().getSize().x / 2 - buttonsbackground.getGlobalBounds().width / 2, gm::Core::getWindow().getSize().y / 2 - buttonsbackground.getGlobalBounds().height / 2 );
+		buttonsbackground.setPosition(gm::Core::getWindow().getSize().x / 2, gm::Core::getWindow().getSize().y / 2);
 		if(scale > 0.05)
 			scale = scale - 0.05;
 

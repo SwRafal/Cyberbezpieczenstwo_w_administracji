@@ -22,6 +22,7 @@ public:
 	sf::RectangleShape rect;
 
 	sf::Sprite buttonsbackground;
+	void fixOrigin();
 	float scale;
 	int opacity;
 
