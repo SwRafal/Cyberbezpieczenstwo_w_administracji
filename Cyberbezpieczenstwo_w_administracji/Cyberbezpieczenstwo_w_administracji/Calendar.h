@@ -18,13 +18,33 @@
 
 class Calendar : public sf::Sprite
 {
+	enum MONTHS
+	{
+		MONTHS_NONE = 0, JANUARY, FEBRUARY, MARCH, APRIL, MAY, JUNE,
+		JULY, AUGUST, SEPTEMBER, OCTOBER, NOVEMBER, DECEMBER
+	};
+	friend MONTHS operator++(MONTHS& m, int);
+	friend MONTHS operator+(MONTHS& m, unsigned int n);
+
+	enum WEEKDAYS
+	{
+		WEEKDAYS_NONE = 0, MONDAY, TUESDAY, WEDNESDAY,
+		THURSDAY, FRIDAY, SATURDAY, SUNDAY
+	};
+	friend WEEKDAYS operator++(WEEKDAYS& w, int);
+	friend WEEKDAYS operator+(WEEKDAYS& w, unsigned int n);
+
 private:
-	sf::Text _month;
-	sf::Text _day;
-	sf::Text _weekday;
+	MONTHS _month;
+	unsigned short _day;
+	WEEKDAYS _weekday;
+
+	sf::Text _month_txt;
+	sf::Text _day_txt;
+	sf::Text _weekday_txt;
 public:
 	virtual void draw(sf::RenderTarget &target, sf::RenderStates states) = delete;
-	Calendar(sf::Font *font, sf::Texture *texture, sf::String month = L"Styczeñ", sf::String day = "1", sf::String weekday = "pon.");
+	Calendar(sf::Font *font, sf::Texture *texture, MONTHS month = JANUARY, unsigned short day = 1, WEEKDAYS weekday = MONDAY);
 
 	void setPosition(float x, float y);
 	void setPosition(const sf::Vector2f &position);
@@ -34,11 +54,11 @@ public:
 	void draw(sf::RenderWindow &win);
 	void update(sf::RenderWindow &win);
 
-	void setMonth(const sf::String month);
-	void setDay(const sf::String day);
-	void setWeekDay(const sf::String weekday);
+	void setMonth(const MONTHS month);
+	void setDay(unsigned short day);
+	void setWeekDay(const WEEKDAYS weekday);
 
-	sf::String getMonth() { return _month.getString(); }
-	sf::String getDay() { return _day.getString(); }
-	sf::String getWeekDay() { return _weekday.getString(); }
+	MONTHS getMonth() { return _month; }
+	unsigned short getDay() { return _day; }
+	WEEKDAYS getWeekDay() { return _weekday; }
 };
