@@ -135,7 +135,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Applicant.cpp" />
+    <ClCompile Include="Bin.cpp" />
+    <ClCompile Include="Book.cpp" />
     <ClCompile Include="Calendar.cpp" />
+    <ClCompile Include="Coffee.cpp" />
     <ClCompile Include="Engine\Assets.cpp" />
     <ClCompile Include="Engine\Button.cpp" />
     <ClCompile Include="Engine\CheckBox.cpp" />
@@ -150,14 +154,33 @@
     <ClCompile Include="Functions.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameState.cpp" />
+    <ClCompile Include="IDview.cpp" />
+    <ClCompile Include="Instructions.cpp" />
+    <ClCompile Include="Keyboard.cpp" />
+    <ClCompile Include="Letter.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Mobile.cpp" />
+    <ClCompile Include="Newspaper.cpp" />
+    <ClCompile Include="NOstamp.cpp" />
+    <ClCompile Include="OfficeApplicant.cpp" />
+    <ClCompile Include="OfficeFriend.cpp" />
     <ClCompile Include="PauseState.cpp" />
+    <ClCompile Include="PersonalID.cpp" />
+    <ClCompile Include="Phone.cpp" />
+    <ClCompile Include="Rubbish.cpp" />
+    <ClCompile Include="Screen.cpp" />
+    <ClCompile Include="Shredder.cpp" />
     <ClCompile Include="SplashScreen.cpp" />
     <ClCompile Include="MenuState.cpp" />
     <ClCompile Include="Watch.cpp" />
+    <ClCompile Include="YESstamp.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Applicant.h" />
+    <ClInclude Include="Bin.h" />
+    <ClInclude Include="Book.h" />
     <ClInclude Include="Calendar.h" />
+    <ClInclude Include="Coffee.h" />
     <ClInclude Include="Definitions.h" />
     <ClInclude Include="Engine\Assets.h" />
     <ClInclude Include="Engine\Button.h" />
@@ -176,10 +199,25 @@
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameState.h" />
     <ClInclude Include="GameStateItems.h" />
+    <ClInclude Include="IDview.h" />
+    <ClInclude Include="Instructions.h" />
+    <ClInclude Include="Keyboard.h" />
+    <ClInclude Include="Letter.h" />
+    <ClInclude Include="Mobile.h" />
+    <ClInclude Include="Newspaper.h" />
+    <ClInclude Include="NOstamp.h" />
+    <ClInclude Include="OfficeApplicant.h" />
+    <ClInclude Include="OfficeFriend.h" />
     <ClInclude Include="PauseState.h" />
+    <ClInclude Include="PersonalID.h" />
+    <ClInclude Include="Phone.h" />
+    <ClInclude Include="Rubbish.h" />
+    <ClInclude Include="Screen.h" />
+    <ClInclude Include="Shredder.h" />
     <ClInclude Include="SplashScreen.h" />
     <ClInclude Include="MenuState.h" />
     <ClInclude Include="Watch.h" />
+    <ClInclude Include="YESstamp.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
