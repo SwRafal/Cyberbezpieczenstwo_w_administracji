@@ -7,6 +7,8 @@ Position of screen
 Font(s)
 etc.*/
 
+//Najs to bêdzie obraz wyœwietlaj¹cy siê na monitorze
+
 class Screen
 {
 public:

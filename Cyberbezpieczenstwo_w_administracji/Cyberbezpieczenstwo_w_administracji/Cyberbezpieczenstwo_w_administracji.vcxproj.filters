@@ -90,9 +90,6 @@
     <ClCompile Include="Screen.cpp">
       <Filter>Pliki źródłowe\GameStateItems</Filter>
     </ClCompile>
-    <ClCompile Include="Keyboard.cpp">
-      <Filter>Pliki źródłowe\GameStateItems</Filter>
-    </ClCompile>
     <ClCompile Include="OfficeFriend.cpp">
       <Filter>Pliki źródłowe\GameStateItems</Filter>
     </ClCompile>
@@ -216,9 +213,6 @@
       <Filter>Pliki nagłówkowe\GameStateItems</Filter>
     </ClInclude>
     <ClInclude Include="Screen.h">
-      <Filter>Pliki nagłówkowe\GameStateItems</Filter>
-    </ClInclude>
-    <ClInclude Include="Keyboard.h">
       <Filter>Pliki nagłówkowe\GameStateItems</Filter>
     </ClInclude>
     <ClInclude Include="OfficeFriend.h">
