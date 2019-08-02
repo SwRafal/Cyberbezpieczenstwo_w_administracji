@@ -13,6 +13,8 @@ Bell::Bell(sf::Texture *texture)
 	setPressColor(sf::Color(120, 150, 120));
 	this->setPosition(sf::Vector2f(BELL_POS_X, BELL_POS_Y));
 
+	this->setSize(0.8 * BELL_WIDTH,0.8 * BELL_HEIGHT);
+
 	_animate = false;
 	_repeat = 0;
 	_frame = 0;

@@ -2,13 +2,13 @@
 #include "Engine/Engine.h"
 #include "Functions.h"
 
-#define BELL_POS_X 1160
+#define BELL_POS_X 1150
 #define BELL_POS_Y 165
-#define BELL_WIDTH 89
+#define BELL_WIDTH 157
 #define BELL_HEIGHT 104
 
-#define BELL_ANIM_FRAMES 2
-#define BELL_ANIM_REPEATS 5
+#define BELL_ANIM_FRAMES 4
+#define BELL_ANIM_REPEATS 2
 
 class Bell : public gm::Button
 {
