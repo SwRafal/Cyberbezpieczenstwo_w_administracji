@@ -7,7 +7,7 @@
 #define COFFEE_WIDTH 137
 #define COFFEE_HEIGHT 165
 
-#define MAX_COFFEE_LEVEL 3
+#define MAX_COFFEE_LEVEL 39
 
 /*DETAILS (position...)*/
 
@@ -26,7 +26,10 @@ public:
 	void setPosition(const sf::Vector2f &position) { setPosition(position.x,position.y); }
 	void move(float offsetX, float offsetY) { gm::Button::move(offsetX, offsetY); }
 	void move(const sf::Vector2f &offset) { move(offset.x,offset.y); }
+
 	void setLevel(unsigned short level=MAX_COFFEE_LEVEL);
+
+	const sf::Vector2f getPosition() { return gm::Button::getPosition(); }
 
 	unsigned short getLevel() { return _level; }
 };

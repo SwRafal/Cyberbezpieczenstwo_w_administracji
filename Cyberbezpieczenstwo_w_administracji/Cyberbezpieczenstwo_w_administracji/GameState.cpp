@@ -19,6 +19,8 @@ GameState::~GameState()
 	delete bell;
 	bell = nullptr;
 
+	gm::Assets::EraseTexture("NOSTAMP");
+	gm::Assets::EraseTexture("YESSTAMP");
 	gm::Assets::EraseTexture("BELL");
 	gm::Assets::EraseTexture("BATTERY");
 	gm::Assets::EraseTexture("COFFEE");
@@ -83,6 +85,25 @@ void GameState::init()
 	else
 	{
 		bell = new Bell(gm::Assets::getTexture("BELL"));
+	}
+
+	//YESstamp
+	gm::Assets::LoadTexture("YESSTAMP", TEXTURE_YESSTAMP);
+	if (gm::Assets::getTexture("YESSTAMP") == nullptr)
+		error_win_close();
+	else
+	{
+		yes_stamp = new Stamp(gm::Assets::getTexture("YESSTAMP"));
+		yes_stamp->setPosition(yes_stamp_pos);
+	}
+	//NOstamp
+	gm::Assets::LoadTexture("NOSTAMP", TEXTURE_NOSTAMP);
+	if (gm::Assets::getTexture("NOSTAMP") == nullptr)
+		error_win_close();
+	else
+	{
+		no_stamp = new Stamp(gm::Assets::getTexture("NOSTAMP"));
+		no_stamp->setPosition(no_stamp_pos);
 	}
 
 	//Telephone
@@ -151,6 +172,9 @@ void GameState::update(sf::RenderWindow &win)
 	{
 		//Call the client
 	}
+
+	yes_stamp->update(win);
+	no_stamp->update(win);
 }
 
 void GameState::draw(sf::RenderWindow& win)
@@ -163,6 +187,18 @@ void GameState::draw(sf::RenderWindow& win)
 	watch->draw(win);
 	//win.draw(telephone);
 	coffee->draw(win);
+
+	if (yes_stamp->getPosition().y < no_stamp->getPosition().y)
+	{
+		yes_stamp->draw(win);
+		no_stamp->draw(win);
+	}
+	else
+	{
+		no_stamp->draw(win);
+		yes_stamp->draw(win);
+	}
+	
 	battery->draw(win);
 
 	win.display();
