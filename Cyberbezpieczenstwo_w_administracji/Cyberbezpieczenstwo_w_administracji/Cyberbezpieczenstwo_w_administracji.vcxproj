@@ -136,6 +136,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Applicant.cpp" />
+    <ClCompile Include="Battery.cpp" />
+    <ClCompile Include="Bell.cpp" />
     <ClCompile Include="Bin.cpp" />
     <ClCompile Include="Book.cpp" />
     <ClCompile Include="Calendar.cpp" />
@@ -176,6 +178,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Applicant.h" />
+    <ClInclude Include="Battery.h" />
+    <ClInclude Include="Bell.h" />
     <ClInclude Include="Bin.h" />
     <ClInclude Include="Book.h" />
     <ClInclude Include="Calendar.h" />

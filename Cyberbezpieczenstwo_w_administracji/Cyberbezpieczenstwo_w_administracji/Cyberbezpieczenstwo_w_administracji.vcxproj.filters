@@ -141,6 +141,12 @@
     <ClCompile Include="Rubbish.cpp">
       <Filter>Pliki źródłowe\GameStateItems</Filter>
     </ClCompile>
+    <ClCompile Include="Battery.cpp">
+      <Filter>Pliki źródłowe\GameStateItems</Filter>
+    </ClCompile>
+    <ClCompile Include="Bell.cpp">
+      <Filter>Pliki źródłowe\GameStateItems</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\Assets.h">
@@ -264,6 +270,12 @@
       <Filter>Pliki nagłówkowe\GameStateItems</Filter>
     </ClInclude>
     <ClInclude Include="Rubbish.h">
+      <Filter>Pliki nagłówkowe\GameStateItems</Filter>
+    </ClInclude>
+    <ClInclude Include="Battery.h">
+      <Filter>Pliki nagłówkowe\GameStateItems</Filter>
+    </ClInclude>
+    <ClInclude Include="Bell.h">
       <Filter>Pliki nagłówkowe\GameStateItems</Filter>
     </ClInclude>
   </ItemGroup>

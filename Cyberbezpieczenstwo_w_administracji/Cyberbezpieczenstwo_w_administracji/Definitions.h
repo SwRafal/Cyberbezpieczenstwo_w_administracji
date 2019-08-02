@@ -38,3 +38,6 @@
 #define TEXTURE_CALENDAR "resources/textures/calendar.png"
 #define TEXTURE_TELEPHONE "resources/textures/telephone.png"
 #define TEXTURE_WATCH "resources/textures/watch.png"
+#define TEXTURE_COFFEE "resources/textures/coffee.png"
+#define TEXTURE_BATTERY "resources/textures/battery.png"
+#define TEXTURE_BELL "resources/textures/bell.png"

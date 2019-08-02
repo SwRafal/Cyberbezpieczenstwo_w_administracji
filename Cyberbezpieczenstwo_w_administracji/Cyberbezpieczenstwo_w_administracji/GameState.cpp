@@ -12,7 +12,16 @@ GameState::~GameState()
 	calendar = nullptr;
 	delete watch;
 	watch = nullptr;
+	delete coffee;
+	coffee = nullptr;
+	delete battery;
+	battery = nullptr;
+	delete bell;
+	bell = nullptr;
 
+	gm::Assets::EraseTexture("BELL");
+	gm::Assets::EraseTexture("BATTERY");
+	gm::Assets::EraseTexture("COFFEE");
 	gm::Assets::EraseTexture("WATCH");
 	gm::Assets::EraseTexture("TELEPHONE");
 	gm::Assets::EraseTexture("CALENDAR");
@@ -38,7 +47,6 @@ void GameState::init()
 	else
 	{
 		calendar = new Calendar(gm::Assets::getFont(), gm::Assets::getTexture("CALENDAR")/*,date*/);
-		calendar->setPosition(sf::Vector2f(CALENDAR_POS_X, CALENDAR_POS_Y));
 	}
 
 	//Watch
@@ -48,7 +56,33 @@ void GameState::init()
 	else
 	{
 		watch = new Watch(gm::Assets::getFont(), gm::Assets::getTexture("WATCH"), 8, 0);
-		watch->setPosition(sf::Vector2f(WATCH_POS_X, WATCH_POS_Y));
+	}
+
+	//Coffee
+	gm::Assets::LoadTexture("COFFEE", TEXTURE_COFFEE);
+	if (gm::Assets::getTexture("COFFEE") == nullptr)
+		error_win_close();
+	else
+	{
+		coffee = new Coffee(gm::Assets::getTexture("COFFEE"));
+	}
+
+	//Battery
+	gm::Assets::LoadTexture("BATTERY", TEXTURE_BATTERY);
+	if (gm::Assets::getTexture("BATTERY") == nullptr)
+		error_win_close();
+	else
+	{
+		battery = new Battery(gm::Assets::getTexture("BATTERY"));
+	}
+
+	//Bell
+	gm::Assets::LoadTexture("BELL", TEXTURE_BELL);
+	if (gm::Assets::getTexture("BELL") == nullptr)
+		error_win_close();
+	else
+	{
+		bell = new Bell(gm::Assets::getTexture("BELL"));
 	}
 
 	//Telephone
@@ -107,6 +141,16 @@ void GameState::update(sf::RenderWindow &win)
 	calendar->update(win);
 	watch->update(gm::Core::getClock());
 	//telephone->update();
+	if (coffee->update_drunk(win))
+	{
+		battery->setLevel(battery->getLevel() + 20);
+	}
+	battery->update_empty(gm::Core::getClock());
+
+	if (bell->update_rung(win))
+	{
+		//Call the client
+	}
 }
 
 void GameState::draw(sf::RenderWindow& win)
@@ -115,8 +159,11 @@ void GameState::draw(sf::RenderWindow& win)
 
 	win.draw(wall);
 	calendar->draw(win);
+	bell->draw(win);
 	watch->draw(win);
 	//win.draw(telephone);
+	coffee->draw(win);
+	battery->draw(win);
 
 	win.display();
 }

@@ -6,13 +6,12 @@ Watch::Watch(sf::Font *font, sf::Texture *texture, unsigned short hours, unsigne
 		error_win_close();
 
 	this->setTexture(*texture);
-	this->setPosition(sf::Vector2f(WATCH_POS_X, WATCH_POS_Y));
-
 	_hour_txt.setFont(*font);
 	_hour_txt.setCharacterSize(HOUR_FONT_SIZE);
 	_hour_txt.setFillColor(sf::Color::Black);
 
 	setHour(hours, minutes);
+	this->setPosition(sf::Vector2f(WATCH_POS_X, WATCH_POS_Y));
 
 	_time = 0;
 }

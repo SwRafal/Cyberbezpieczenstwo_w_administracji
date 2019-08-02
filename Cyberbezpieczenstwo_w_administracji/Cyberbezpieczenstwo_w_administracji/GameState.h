@@ -20,6 +20,9 @@ private:
 	Calendar *calendar = nullptr;
 	//sf::Sprite telephone;
 	Watch *watch = nullptr;
+	Coffee *coffee = nullptr;
+	Battery *battery = nullptr;
+	Bell *bell = nullptr;
 
 public:
 	GameState(gm::gameDataRef data);
