@@ -162,7 +162,6 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Mobile.cpp" />
     <ClCompile Include="Newspaper.cpp" />
-    <ClCompile Include="NOstamp.cpp" />
     <ClCompile Include="OfficeApplicant.cpp" />
     <ClCompile Include="OfficeFriend.cpp" />
     <ClCompile Include="PauseState.cpp" />
@@ -174,7 +173,7 @@
     <ClCompile Include="SplashScreen.cpp" />
     <ClCompile Include="MenuState.cpp" />
     <ClCompile Include="Watch.cpp" />
-    <ClCompile Include="YESstamp.cpp" />
+    <ClCompile Include="Stamp.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Applicant.h" />
@@ -207,7 +206,6 @@
     <ClInclude Include="Letter.h" />
     <ClInclude Include="Mobile.h" />
     <ClInclude Include="Newspaper.h" />
-    <ClInclude Include="NOstamp.h" />
     <ClInclude Include="OfficeApplicant.h" />
     <ClInclude Include="OfficeFriend.h" />
     <ClInclude Include="PauseState.h" />
@@ -219,7 +217,7 @@
     <ClInclude Include="SplashScreen.h" />
     <ClInclude Include="MenuState.h" />
     <ClInclude Include="Watch.h" />
-    <ClInclude Include="YESstamp.h" />
+    <ClInclude Include="Stamp.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

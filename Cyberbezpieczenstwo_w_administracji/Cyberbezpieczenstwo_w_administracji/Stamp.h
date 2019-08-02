@@ -2,31 +2,34 @@
 #include "Engine/Engine.h"
 #include "Functions.h"
 
-#define BELL_POS_X 1160
-#define BELL_POS_Y 165
-#define BELL_WIDTH 89
-#define BELL_HEIGHT 104
+#define STAMP_WIDTH 109
+#define STAMP_HEIGHT 141
 
-#define BELL_ANIM_FRAMES 2
-#define BELL_ANIM_REPEATS 5
+#define DESK_BEGIN 490 //The height level (from top) desk starts at
 
-class Bell : protected gm::Button
+class Stamp : protected gm::Button
 {
-private:
-	bool _animate;
-	unsigned short _frame;
-	unsigned short _repeat;
+	bool _active;
 public:
 	virtual void draw(sf::RenderTarget &target, sf::RenderStates states) = delete;
-	Bell(sf::Texture *texture);
+	Stamp(sf::Texture *texture);
+	~Stamp();
+
+	void draw(sf::RenderWindow &win);
+	void update(sf::RenderWindow &win);
 
 	void setPosition(float x, float y) { gm::Button::setPosition(x, y); }
 	void setPosition(const sf::Vector2f &position) { setPosition(position.x, position.y); }
 	void move(float offsetX, float offsetY) { gm::Button::move(offsetX, offsetY); }
 	void move(const sf::Vector2f &offset) { move(offset.x, offset.y); }
 
-	void draw(sf::RenderWindow &win);
-	bool update_rung(sf::RenderWindow &win);//Returns bool value, so GameState knows if we rang the bell
+	void setActiveFlag(bool state);
+	void setActive();
+	void setInactive();
+	void switchActivation();/*Negate the 'active' flag*/
 
 	const sf::Vector2f getPosition() { return gm::Button::getPosition(); }
+
+	bool isActive() { return _active; }
 };
+

@@ -4,3 +4,4 @@
 #include "Coffee.h"
 #include "Battery.h"
 #include "Bell.h"
+#include "Stamp.h"

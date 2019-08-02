@@ -1,7 +1,5 @@
 #include "Coffee.h"
 
-/*Maintenance(? ) */
-
 Coffee::Coffee(sf::Texture *texture)
 {
 	if (texture == nullptr)
