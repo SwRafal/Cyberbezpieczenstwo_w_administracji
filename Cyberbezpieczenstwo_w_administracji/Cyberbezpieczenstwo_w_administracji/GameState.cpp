@@ -161,44 +161,62 @@ void GameState::update(sf::RenderWindow &win)
 {
 	calendar->update(win);
 	watch->update(gm::Core::getClock());
-	//telephone->update();
-	if (coffee->update_drunk(win))
-	{
-		battery->setLevel(battery->getLevel() + 20);
-	}
-	battery->update_empty(gm::Core::getClock());
 
-	if (bell->update_rung(win))
+	if (!yes_stamp->isActive() && !no_stamp->isActive())
 	{
-		//Call the client
+		if (coffee->update_drunk(win))
+		{
+			battery->setLevel(battery->getLevel() + 20);
+		}
+		battery->update_empty(gm::Core::getClock());
+
+		if (bell->update_rung(win))
+		{
+			//Call the client
+		}
 	}
 
 	yes_stamp->update(win);
 	no_stamp->update(win);
+	if (yes_stamp->getPosition().y < no_stamp->getPosition().y)
+	{
+		if (no_stamp->isActive())
+			yes_stamp->setInactive();
+	}
+	else
+	{
+		if (yes_stamp->isActive())
+			no_stamp->setInactive();
+
+	}
 }
 
 void GameState::draw(sf::RenderWindow& win)
 {
 	win.clear(sf::Color::Black);
 
+	/*Background*/
 	win.draw(wall);
 	calendar->draw(win);
 	bell->draw(win);
 	watch->draw(win);
-	//win.draw(telephone);
-	coffee->draw(win);
 
-	if (yes_stamp->getPosition().y < no_stamp->getPosition().y)
-	{
-		yes_stamp->draw(win);
-		no_stamp->draw(win);
-	}
-	else
-	{
-		no_stamp->draw(win);
-		yes_stamp->draw(win);
-	}
+	/*Items*/
+	std::priority_queue<gm::Button*, std::vector<gm::Button*>, ItemsComparator> button_items;
+	button_items.push(coffee);
+	button_items.push(yes_stamp);
+	button_items.push(no_stamp);
+	//...more
 	
+	/*--------------------------------*/
+
+	/*Drawing*/
+	while (!button_items.empty())
+	{
+		win.draw(*button_items.top());
+		button_items.pop();
+	}
+
 	battery->draw(win);
 
 	win.display();

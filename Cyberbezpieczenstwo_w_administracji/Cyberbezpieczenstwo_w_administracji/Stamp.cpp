@@ -54,6 +54,6 @@ void Stamp::update(sf::RenderWindow &win)
 	else
 	{
 		if (getPosition().y < DESK_BEGIN - STAMP_HEIGHT)
-			move(0, 5);
+			move(0, STAMP_GRAVITY);
 	}
 }

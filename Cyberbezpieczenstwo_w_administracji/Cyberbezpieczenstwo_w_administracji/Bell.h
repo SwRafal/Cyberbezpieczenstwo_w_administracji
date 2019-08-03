@@ -10,7 +10,7 @@
 #define BELL_ANIM_FRAMES 4
 #define BELL_ANIM_REPEATS 2
 
-class Bell : protected gm::Button
+class Bell : public gm::Button
 {
 private:
 	bool _animate;

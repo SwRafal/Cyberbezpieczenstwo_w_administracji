@@ -11,7 +11,7 @@
 
 /*DETAILS (position...)*/
 
-class Coffee : protected gm::Button
+class Coffee : public gm::Button
 {
 private:
 	unsigned short _level;

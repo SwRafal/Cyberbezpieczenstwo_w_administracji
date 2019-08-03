@@ -1,4 +1,6 @@
 #pragma once
+#include <queue>
+
 #include "Engine/Engine.h"
 #include "Game.h"
 #include "Functions.h"
@@ -6,6 +8,14 @@
 #include "PauseState.h"
 
 void error_win_close();
+
+struct ItemsComparator/*Comparator for priority_queues in draw and update*/
+{
+	bool operator()(const gm::Button *b1, const gm::Button *b2)
+	{
+		return b1->getPosition().y > b2->getPosition().y;
+	}
+};
 
 class GameState : public gm::SlideFrame
 {
@@ -28,7 +38,6 @@ private:
 	Stamp *yes_stamp = nullptr;
 	const sf::Vector2f no_stamp_pos = sf::Vector2f(220, 460);
 	Stamp *no_stamp = nullptr;
-
 public:
 	GameState(gm::gameDataRef data);
 	~GameState();
