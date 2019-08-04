@@ -3,11 +3,19 @@
 #include "Functions.h"
 
 #define BATTERY_POS_X 1160
-#define BATTERY_POS_Y 500
-#define BATTERY_WIDTH 100
-#define BATTERY_HEIGHT 210
+#define BATTERY_POS_Y 560
+#define BATTERY_WIDTH 180.5
+#define BATTERY_HEIGHT 251
 
 #define MAX_BATTERY_LEVEL 200
+
+enum battery_capacity
+{
+	nearly_empty = 30,
+	low = 60,
+	medium = 120,
+	high = MAX_BATTERY_LEVEL
+};
 
 class Battery : public sf::Sprite
 {
@@ -24,4 +32,7 @@ public:
 	void setLevel(unsigned short level = MAX_BATTERY_LEVEL);
 
 	unsigned short getLevel() { return _level; }
+
+	battery_capacity capacities;
+	int prev_frame = 1;
 };
