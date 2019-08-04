@@ -3,6 +3,8 @@
 #include <fstream>
 #include "Windows.h"
 #include <queue>
+#include <locale>
+#include <iostream>
 
 
 namespace gm

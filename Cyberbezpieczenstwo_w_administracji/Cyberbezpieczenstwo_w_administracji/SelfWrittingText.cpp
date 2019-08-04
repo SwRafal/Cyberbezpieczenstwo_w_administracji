@@ -9,13 +9,17 @@ SelfWrittingText::SelfWrittingText(std::string fileName,sf::Font* font)
 
 	
 	std::wfstream file;
-	file.open(fileName,std::ios::in);
+	file.open(fileName,std::ios::in | std::ios::binary);
+	file.imbue(std::locale("zh_CN.UTF-8"));
 
 	if(file.good())
 	{
+		wchar_t junk;
+		file.get(junk);
 		while(!file.eof())
 		{
 			wchar_t c;
+			
 			file.get(c);
 			text_queue.push(c);
 		}
