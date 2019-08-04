@@ -43,3 +43,5 @@
 #define TEXTURE_BELL "resources/textures/bell.png"
 #define TEXTURE_YESSTAMP "resources/textures/yesstamp.png"
 #define TEXTURE_NOSTAMP "resources/textures/nostamp.png"
+#define TEXTURE_BOOK "resources/textures/book.png"
+#define TEXTURE_OPENEDBOOK "resources/textures/openedbook.png"

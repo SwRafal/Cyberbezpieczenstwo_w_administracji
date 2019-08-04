@@ -38,6 +38,9 @@ private:
 	Stamp *yes_stamp = nullptr;
 	const sf::Vector2f no_stamp_pos = sf::Vector2f(220, 460);
 	Stamp *no_stamp = nullptr;
+
+	Book *book = nullptr;
+	OpenedBook *openedbook = nullptr;
 public:
 	GameState(gm::gameDataRef data);
 	~GameState();

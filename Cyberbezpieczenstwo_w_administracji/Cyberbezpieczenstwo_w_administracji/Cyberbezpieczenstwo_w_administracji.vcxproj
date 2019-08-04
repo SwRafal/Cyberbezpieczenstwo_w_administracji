@@ -164,6 +164,7 @@
     <ClCompile Include="Newspaper.cpp" />
     <ClCompile Include="OfficeApplicant.cpp" />
     <ClCompile Include="OfficeFriend.cpp" />
+    <ClCompile Include="OpenedBook.cpp" />
     <ClCompile Include="PauseState.cpp" />
     <ClCompile Include="PersonalID.cpp" />
     <ClCompile Include="Phone.cpp" />
@@ -208,6 +209,7 @@
     <ClInclude Include="Newspaper.h" />
     <ClInclude Include="OfficeApplicant.h" />
     <ClInclude Include="OfficeFriend.h" />
+    <ClInclude Include="OpenedBook.h" />
     <ClInclude Include="PauseState.h" />
     <ClInclude Include="PersonalID.h" />
     <ClInclude Include="Phone.h" />

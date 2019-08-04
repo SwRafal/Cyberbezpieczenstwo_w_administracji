@@ -19,6 +19,8 @@ GameState::~GameState()
 	delete bell;
 	bell = nullptr;
 
+	gm::Assets::EraseTexture("BOOK");
+	gm::Assets::EraseTexture("OPENEDBOOK");
 	gm::Assets::EraseTexture("NOSTAMP");
 	gm::Assets::EraseTexture("YESSTAMP");
 	gm::Assets::EraseTexture("BELL");
@@ -106,6 +108,23 @@ void GameState::init()
 		no_stamp->setPosition(no_stamp_pos);
 	}
 
+	//Book
+	gm::Assets::LoadTexture("BOOK", TEXTURE_BOOK);
+	if (gm::Assets::getTexture("BOOK") == nullptr)
+		error_win_close();
+	else
+	{
+		book = new Book(gm::Assets::getTexture("BOOK"));
+	}
+	//OpenedBook
+	gm::Assets::LoadTexture("OPENEDBOOK", TEXTURE_OPENEDBOOK);
+	if (gm::Assets::getTexture("OPENEDBOOK") == nullptr)
+		error_win_close();
+	else
+	{
+		openedbook = new OpenedBook(gm::Assets::getTexture("OPENEDBOOK"), gm::Assets::getFont());
+	}
+
 	//Telephone
 	//gm::Assets::LoadTexture("TELEPHONE", TEXTURE_TELEPHONE);
 	//if (gm::Assets::getTexture("TELEPHONE") == nullptr)
@@ -159,6 +178,14 @@ void GameState::handleInput()
 
 void GameState::update(sf::RenderWindow &win)
 {
+	if (book->isOpened())
+	{
+		if (openedbook->update(win))
+			book->close();
+
+		return;
+	}
+
 	calendar->update(win);
 	watch->update(gm::Core::getClock());
 
@@ -168,7 +195,11 @@ void GameState::update(sf::RenderWindow &win)
 		{
 			battery->setLevel(battery->getLevel() + 20);
 		}
-		battery->update_empty(gm::Core::getClock());
+		if (battery->update_empty(gm::Core::getClock()))
+		{
+			//GameOver
+		}
+		book->update(win);
 
 		if (bell->update_rung(win))
 		{
@@ -203,6 +234,7 @@ void GameState::draw(sf::RenderWindow& win)
 
 	/*Items*/
 	std::priority_queue<gm::Button*, std::vector<gm::Button*>, ItemsComparator> button_items;
+	button_items.push(book);
 	button_items.push(coffee);
 	button_items.push(yes_stamp);
 	button_items.push(no_stamp);
@@ -218,6 +250,9 @@ void GameState::draw(sf::RenderWindow& win)
 	}
 
 	battery->draw(win);
+
+	if (book->isOpened())
+		openedbook->draw(win);
 
 	win.display();
 }

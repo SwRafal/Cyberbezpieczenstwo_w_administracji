@@ -144,6 +144,9 @@
     <ClCompile Include="Stamp.cpp">
       <Filter>Pliki źródłowe\GameStateItems</Filter>
     </ClCompile>
+    <ClCompile Include="OpenedBook.cpp">
+      <Filter>Pliki źródłowe\GameStateItems</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\Assets.h">
@@ -271,6 +274,9 @@
     </ClInclude>
     <ClInclude Include="Stamp.h">
       <Filter>Pliki nagłówkowe\GameStateItems</Filter>
+    </ClInclude>
+    <ClInclude Include="OpenedBook.h">
+      <Filter>Pliki nagłówkowe\Engine</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
