@@ -147,6 +147,9 @@
     <ClCompile Include="OpenedBook.cpp">
       <Filter>Pliki źródłowe\GameStateItems</Filter>
     </ClCompile>
+    <ClCompile Include="IntroState.cpp">
+      <Filter>Pliki źródłowe</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\Assets.h">
@@ -277,6 +280,9 @@
     </ClInclude>
     <ClInclude Include="OpenedBook.h">
       <Filter>Pliki nagłówkowe\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="IntroState.h">
+      <Filter>Pliki nagłówkowe</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
