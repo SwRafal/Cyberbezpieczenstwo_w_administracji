@@ -1,19 +1,21 @@
 #include "SelfWrittingText.h"
-
+#include <stdio.h>
 
 namespace gm
 {
 
 SelfWrittingText::SelfWrittingText(std::string fileName,sf::Font* font)
 {
-	std::fstream file;
+
+	
+	std::wfstream file;
 	file.open(fileName,std::ios::in);
 
 	if(file.good())
 	{
 		while(!file.eof())
 		{
-			char c;
+			wchar_t c;
 			file.get(c);
 			text_queue.push(c);
 		}
@@ -45,7 +47,7 @@ void SelfWrittingText::updateText()
 {
 	if(!text_queue.empty())
 	{
-		std::string temp;
+		sf::String temp;
 		temp = this->getString() + text_queue.front();
 		
 		text_queue.pop();
