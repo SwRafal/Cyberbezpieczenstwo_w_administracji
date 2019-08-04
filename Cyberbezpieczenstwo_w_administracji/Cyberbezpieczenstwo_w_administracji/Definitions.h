@@ -3,6 +3,7 @@
 /* Sounds */
 
 #define CLICK_SOUND_FILEPATH "resources/sounds/ClickSoundLong.wav"
+#define BELL_SOUND_FILEPATH "resources/sounds/bell_sound.wav"
 
 /* Fonts */
 

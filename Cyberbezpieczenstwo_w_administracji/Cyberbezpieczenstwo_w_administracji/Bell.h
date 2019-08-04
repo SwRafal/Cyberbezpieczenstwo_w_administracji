@@ -29,4 +29,6 @@ public:
 	bool update_rung(sf::RenderWindow &win);//Returns bool value, so GameState knows if we rang the bell
 
 	const sf::Vector2f getPosition() { return gm::Button::getPosition(); }
+
+	sf::Sound sound;
 };

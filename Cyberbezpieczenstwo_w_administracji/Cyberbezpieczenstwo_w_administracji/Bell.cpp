@@ -18,6 +18,9 @@ Bell::Bell(sf::Texture *texture)
 	_animate = false;
 	_repeat = 0;
 	_frame = 0;
+
+	gm::Assets::LoadSound("bell", BELL_SOUND_FILEPATH);
+	sound.setBuffer(*gm::Assets::getSound("bell"));
 }
 
 void Bell::draw(sf::RenderWindow &win)
@@ -28,6 +31,7 @@ bool Bell::update_rung(sf::RenderWindow &win)
 {
 	if (clicked(win))
 	{
+		sound.play();
 		_animate = true;
 		return true;
 	}

@@ -12,6 +12,9 @@ Battery::Battery(sf::Texture *texture)
 
 	setLevel();
 	_time = 0;
+
+	
+	
 }
 
 void Battery::setLevel(unsigned short level)
