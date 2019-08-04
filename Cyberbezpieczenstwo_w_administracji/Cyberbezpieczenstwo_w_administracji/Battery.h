@@ -2,26 +2,20 @@
 #include "Engine/Engine.h"
 #include "Functions.h"
 
-#define BATTERY_POS_X 1160
+#define BATTERY_POS_X 1180
 #define BATTERY_POS_Y 560
-#define BATTERY_WIDTH 180.5
-#define BATTERY_HEIGHT 251
+#define BATTERY_WIDTH 80
+#define BATTERY_HEIGHT 160
 
 #define MAX_BATTERY_LEVEL 200
-
-enum battery_capacity
-{
-	nearly_empty = MAX_BATTERY_LEVEL/4,
-	low = MAX_BATTERY_LEVEL/2,
-	medium = 3*MAX_BATTERY_LEVEL/4,
-	high = MAX_BATTERY_LEVEL
-};
 
 class Battery : public sf::Sprite
 {
 private:
 	unsigned short _level;
 	float _time;
+	sf::RectangleShape _level_display;
+	const sf::Vector2f _max_level_display_size = sf::Vector2f(3 * BATTERY_WIDTH / 4, 7 * BATTERY_HEIGHT / 8);
 public:
 	virtual void draw(sf::RenderTarget &target, sf::RenderStates states) = delete;
 	Battery(sf::Texture *texture);
@@ -32,7 +26,4 @@ public:
 	void setLevel(unsigned short level = MAX_BATTERY_LEVEL);
 
 	unsigned short getLevel() { return _level; }
-
-	battery_capacity capacities;
-	int prev_frame = 1;
 };

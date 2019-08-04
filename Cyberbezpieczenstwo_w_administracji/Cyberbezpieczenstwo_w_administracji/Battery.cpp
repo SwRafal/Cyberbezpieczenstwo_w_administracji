@@ -8,13 +8,10 @@ Battery::Battery(sf::Texture *texture)
 
 	this->setTexture(*texture);
 	this->setPosition(sf::Vector2f(BATTERY_POS_X, BATTERY_POS_Y));
-	this->setScale(0.6,0.6);
+	_level_display.setSize(_max_level_display_size);
 
 	setLevel();
 	_time = 0;
-
-	
-	
 }
 
 void Battery::setLevel(unsigned short level)
@@ -24,23 +21,19 @@ void Battery::setLevel(unsigned short level)
 	else
 		_level = level;
 
-	int capacity;
-	if (_level < nearly_empty)
-		capacity = 1;
-	else if(_level < low)
-		capacity = 2;
-	else if(_level < medium)
-		capacity = 3;
-	else
-		capacity = 4;
-
-	this->setTextureRect(sf::IntRect(capacity * BATTERY_WIDTH,0,BATTERY_WIDTH, BATTERY_HEIGHT));
+	_level_display.setSize(sf::Vector2f(_level_display.getSize().x, (float)_level/MAX_BATTERY_LEVEL * _max_level_display_size.y));
+	sf::Vector2f new_position;
+	new_position.x = BATTERY_POS_X + BATTERY_WIDTH / 2 - _level_display.getSize().x / 2;
+	new_position.y = BATTERY_POS_Y + BATTERY_HEIGHT / 2 - _level_display.getSize().y / 2 + (_max_level_display_size.y - _level_display.getSize().y)/2;
+	_level_display.setPosition(new_position);
 	this->setColor(sf::Color(MAX_BATTERY_LEVEL - _level, _level, 20));
+	_level_display.setFillColor(sf::Color(MAX_BATTERY_LEVEL - _level, _level, 20));
 }
 
 void Battery::draw(sf::RenderWindow &win)
 {
 	win.draw((sf::Sprite)*this);
+	win.draw(_level_display);
 }
 bool Battery::update_empty(sf::Clock &clk)
 {
@@ -50,23 +43,6 @@ bool Battery::update_empty(sf::Clock &clk)
 	if (clk.getElapsedTime().asSeconds() >= _time + 1)
 	{
 		_time = clk.getElapsedTime().asSeconds();
-		setLevel(_level-5);
-
-		if(prev_frame)
-			prev_frame = 0;
-		else
-			prev_frame = 1;
-	}
-
-	if(_level < nearly_empty)
-	{
-		if(prev_frame)
-		{
-			this->setTextureRect(sf::IntRect(0,0,180.5,251));
-		}
-		else
-		{
-			this->setTextureRect(sf::IntRect(180.5,0,180.5,251));
-		}
+		setLevel(_level-1);
 	}
 }
