@@ -22,7 +22,7 @@ void Battery::setLevel(unsigned short level)
 		_level = level;
 
 	int capacity;
-	if(_level < nearly_empty)
+	if (_level < nearly_empty)
 		capacity = 1;
 	else if(_level < low)
 		capacity = 2;
@@ -31,7 +31,8 @@ void Battery::setLevel(unsigned short level)
 	else
 		capacity = 4;
 
-	this->setTextureRect(sf::IntRect(capacity * 180.5,0,180.5, 251));
+	this->setTextureRect(sf::IntRect(capacity * BATTERY_WIDTH,0,BATTERY_WIDTH, BATTERY_HEIGHT));
+	this->setColor(sf::Color(MAX_BATTERY_LEVEL - _level, _level, 20));
 }
 
 void Battery::draw(sf::RenderWindow &win)
@@ -46,7 +47,7 @@ bool Battery::update_empty(sf::Clock &clk)
 	if (clk.getElapsedTime().asSeconds() >= _time + 1)
 	{
 		_time = clk.getElapsedTime().asSeconds();
-		setLevel(_level-1);
+		setLevel(_level-5);
 
 		if(prev_frame)
 			prev_frame = 0;

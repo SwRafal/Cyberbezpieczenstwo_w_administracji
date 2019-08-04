@@ -11,9 +11,9 @@
 
 enum battery_capacity
 {
-	nearly_empty = 30,
-	low = 60,
-	medium = 120,
+	nearly_empty = MAX_BATTERY_LEVEL/4,
+	low = MAX_BATTERY_LEVEL/2,
+	medium = 3*MAX_BATTERY_LEVEL/4,
 	high = MAX_BATTERY_LEVEL
 };
 
