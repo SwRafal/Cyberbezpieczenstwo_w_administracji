@@ -6,3 +6,4 @@
 #include "Bell.h"
 #include "Stamp.h"
 #include "Book.h"
+#include "Bin.h"
