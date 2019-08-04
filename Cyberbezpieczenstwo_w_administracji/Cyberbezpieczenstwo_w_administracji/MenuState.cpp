@@ -1,6 +1,7 @@
 #include "MenuState.h"
 #include "GameState.h"
 #include "Windows.h"
+#include "IntroState.h"
 
 
 MenuState::MenuState(gm::gameDataRef data) : data(data), playButton(*gm::Assets::getFont()),exitButton(*gm::Assets::getFont()),intro(*gm::Assets::getFont())
@@ -104,6 +105,7 @@ void MenuState::handleInput()
 	{
 		clickSound.play();
 		Sleep(100);
+		data->machine.addState(gm::StateRef(new IntroState (this->data))); 
 		
 	}
 		

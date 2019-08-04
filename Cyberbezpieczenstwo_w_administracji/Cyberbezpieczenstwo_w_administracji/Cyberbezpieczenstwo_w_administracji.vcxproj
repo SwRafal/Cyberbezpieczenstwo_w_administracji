@@ -171,6 +171,7 @@
     <ClCompile Include="Phone.cpp" />
     <ClCompile Include="Rubbish.cpp" />
     <ClCompile Include="Screen.cpp" />
+    <ClCompile Include="SelfWrittingText.cpp" />
     <ClCompile Include="Shredder.cpp" />
     <ClCompile Include="SplashScreen.cpp" />
     <ClCompile Include="MenuState.cpp" />
@@ -217,6 +218,7 @@
     <ClInclude Include="Phone.h" />
     <ClInclude Include="Rubbish.h" />
     <ClInclude Include="Screen.h" />
+    <ClInclude Include="SelfWrittingText.h" />
     <ClInclude Include="Shredder.h" />
     <ClInclude Include="SplashScreen.h" />
     <ClInclude Include="MenuState.h" />

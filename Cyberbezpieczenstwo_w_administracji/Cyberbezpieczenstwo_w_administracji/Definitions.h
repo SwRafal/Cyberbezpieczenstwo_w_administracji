@@ -21,10 +21,10 @@
 
 /* Splash State */
 
-#define SPLASH_STATE_WINDOW_HEIGHT 507
-#define SPLASH_STATE_WINDOW_WIDTH 400
+#define SPLASH_STATE_WINDOW_WIDTH 517
+#define SPLASH_STATE_WINDOW_HEIGHT 333
 #define SPLASH_STATE_SHOWTIME 2
-#define SPLASH_STATE_BACKGROUND_FILEPATH "resources/temp_meme.png"
+#define SPLASH_STATE_BACKGROUND_FILEPATH "resources/splash.png"
 
 /* Menu State */
 
@@ -47,3 +47,7 @@
 #define TEXTURE_BOOK "resources/textures/book.png"
 #define TEXTURE_OPENEDBOOK "resources/textures/openedbook.png"
 #define TEXTURE_BIN "resources/textures/bin.png"
+
+/* intro state */
+
+#define TEXT_FILE_FILEPATH "resources/text.txt"
