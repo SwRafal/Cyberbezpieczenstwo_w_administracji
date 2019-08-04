@@ -113,6 +113,7 @@ void GameState::init()
 
 	/*Starting settings*/
 	//...
+	
 }
 
 void GameState::handleInput()
