@@ -24,7 +24,7 @@ void Battery::setLevel(unsigned short level)
 	_level_display.setSize(sf::Vector2f(_level_display.getSize().x, (float)_level/MAX_BATTERY_LEVEL * _max_level_display_size.y));
 	sf::Vector2f new_position;
 	new_position.x = BATTERY_POS_X + BATTERY_WIDTH / 2 - _level_display.getSize().x / 2;
-	new_position.y = BATTERY_POS_Y + BATTERY_HEIGHT / 2 - _level_display.getSize().y / 2 + (_max_level_display_size.y - _level_display.getSize().y)/2;
+	new_position.y = BATTERY_POS_Y + BATTERY_HEIGHT / 2 - _level_display.getSize().y / 2 + (_max_level_display_size.y - _level_display.getSize().y)/2 + 3;
 	_level_display.setPosition(new_position);
 	this->setColor(sf::Color(MAX_BATTERY_LEVEL - _level, _level, 20));
 	_level_display.setFillColor(sf::Color(MAX_BATTERY_LEVEL - _level, _level, 20));

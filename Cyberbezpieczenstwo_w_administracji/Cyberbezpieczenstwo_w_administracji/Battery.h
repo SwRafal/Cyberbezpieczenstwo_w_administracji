@@ -15,7 +15,7 @@ private:
 	unsigned short _level;
 	float _time;
 	sf::RectangleShape _level_display;
-	const sf::Vector2f _max_level_display_size = sf::Vector2f(3 * BATTERY_WIDTH / 4, 7 * BATTERY_HEIGHT / 8);
+	const sf::Vector2f _max_level_display_size = sf::Vector2f(3 * BATTERY_WIDTH / 4, 3 * BATTERY_HEIGHT / 4);
 public:
 	virtual void draw(sf::RenderTarget &target, sf::RenderStates states) = delete;
 	Battery(sf::Texture *texture);
