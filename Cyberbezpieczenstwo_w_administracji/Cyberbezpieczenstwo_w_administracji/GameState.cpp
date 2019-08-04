@@ -18,7 +18,16 @@ GameState::~GameState()
 	battery = nullptr;
 	delete bell;
 	bell = nullptr;
+	delete yes_stamp;
+	yes_stamp = nullptr;
+	delete no_stamp;
+	no_stamp = nullptr;
+	delete book;
+	book = nullptr;
+	delete openedbook;
+	openedbook = nullptr;
 
+	gm::Assets::EraseTexture("BIN");
 	gm::Assets::EraseTexture("BOOK");
 	gm::Assets::EraseTexture("OPENEDBOOK");
 	gm::Assets::EraseTexture("NOSTAMP");
@@ -125,6 +134,15 @@ void GameState::init()
 		openedbook = new OpenedBook(gm::Assets::getTexture("OPENEDBOOK"), gm::Assets::getFont());
 	}
 
+	//Bin
+	gm::Assets::LoadTexture("BIN", TEXTURE_BIN);
+	if (gm::Assets::getTexture("BIN") == nullptr)
+		error_win_close();
+	else
+	{
+		bin = new Bin(gm::Assets::getTexture("BIN"));
+	}
+
 	//Telephone
 	//gm::Assets::LoadTexture("TELEPHONE", TEXTURE_TELEPHONE);
 	//if (gm::Assets::getTexture("TELEPHONE") == nullptr)
@@ -206,6 +224,12 @@ void GameState::update(sf::RenderWindow &win)
 		{
 			//Call the client
 		}
+
+		if (true/*œmieæ podniesiony*/)
+		{
+			if (bin->clicked(win))
+				;//Œmieæ znika
+		}
 	}
 
 	yes_stamp->update(win);
@@ -250,6 +274,7 @@ void GameState::draw(sf::RenderWindow& win)
 		button_items.pop();
 	}
 
+	bin->draw(win);
 	battery->draw(win);
 
 	if (book->isOpened())

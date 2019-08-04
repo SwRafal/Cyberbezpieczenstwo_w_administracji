@@ -41,6 +41,8 @@ private:
 
 	Book *book = nullptr;
 	OpenedBook *openedbook = nullptr;
+
+	Bin *bin = nullptr;
 public:
 	GameState(gm::gameDataRef data);
 	~GameState();

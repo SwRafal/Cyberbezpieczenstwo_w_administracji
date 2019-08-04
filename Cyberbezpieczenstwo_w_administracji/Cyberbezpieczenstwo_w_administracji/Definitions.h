@@ -3,7 +3,6 @@
 /* Sounds */
 
 #define CLICK_SOUND_FILEPATH "resources/sounds/ClickSoundLong.wav"
-#define BELL_SOUND_FILEPATH "resources/sounds/bell_sound.wav"
 
 /* Fonts */
 
@@ -46,8 +45,4 @@
 #define TEXTURE_NOSTAMP "resources/textures/nostamp.png"
 #define TEXTURE_BOOK "resources/textures/book.png"
 #define TEXTURE_OPENEDBOOK "resources/textures/openedbook.png"
-
-/* Intro state */
-
-#define OFFICE_LADY "resources/textures/office friend.png"
-#define CHAT_BUBBLE_FILEPATH "resources/textures/chat bubble.png"
+#define TEXTURE_BIN "resources/textures/bin.png"
