@@ -4,7 +4,7 @@
 #include "IntroState.h"
 
 
-MenuState::MenuState(gm::gameDataRef data) : data(data), playButton(*gm::Assets::getFont()),exitButton(*gm::Assets::getFont()),intro(*gm::Assets::getFont())
+MenuState::MenuState(gm::gameDataRef data) : data(data), playButton(*gm::Assets::getFont()), loadGameButton(*gm::Assets::getFont()), exitButton(*gm::Assets::getFont()),intro(*gm::Assets::getFont())
 {
 
 }
@@ -18,7 +18,7 @@ void MenuState::init()
 {
 	std::cout << "W ostatecznej wersji nie bedzie tego okienka";
 	/* Play button */
-	playButton.setPosition(60,500);
+	playButton.setPosition(60,435);
 	playButton.setTextIdleColor(sf::Color::White);
 	playButton.setTextAimedColor(sf::Color(230, 120, 255,255));
 	playButton.setTextPressColor(sf::Color(216, 46, 255,255));
@@ -28,6 +28,18 @@ void MenuState::init()
 	playButton.setSize(200,55);
 	playButton.setTextSize(250);
 	playButton.setTextString("Nowa gra");
+
+	/* Load Game button */
+	loadGameButton.setPosition(58, 501);
+	loadGameButton.setTextIdleColor(sf::Color::White);
+	loadGameButton.setTextAimedColor(sf::Color(230, 120, 255, 255));
+	loadGameButton.setTextPressColor(sf::Color(216, 46, 255, 255));
+	loadGameButton.setIdleColor(sf::Color::Transparent);
+	loadGameButton.setAimedColor(sf::Color::Transparent);
+	loadGameButton.setPressColor(sf::Color::Transparent);
+	loadGameButton.setSize(250, 55);
+	loadGameButton.setTextSize(70);
+	loadGameButton.setTextString(L"Wczytaj grê");
 
 	/* Exit button */
 	exitButton.setPosition(36,575);
@@ -95,6 +107,13 @@ void MenuState::handleInput()
 		data->machine.addState(gm::StateRef(new GameState (this->data)));
 	}
 
+	if (loadGameButton.clicked(gm::Core::getWindow()))
+	{
+		clickSound.play();
+		Sleep(100);
+		//data->machine.addState(gm::StateRef(new GameState(this->data)));
+	}
+
 	if(exitButton.clicked(gm::Core::getWindow()))
 	{
 		clickSound.play();
@@ -136,6 +155,7 @@ void MenuState::draw(sf::RenderWindow& win)
 
 	win.draw(background_animation_spritesheet);
 	win.draw(playButton);
+	win.draw(loadGameButton);
 	win.draw(exitButton);
 	win.draw(intro);
 	

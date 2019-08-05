@@ -18,6 +18,7 @@ public:
 	void draw(sf::RenderWindow& win) override;
 
 	gm::TextButton playButton;
+	gm::TextButton loadGameButton;
 	gm::TextButton exitButton;
 
 	sf::Sprite background_animation_spritesheet;
