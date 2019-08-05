@@ -12,6 +12,7 @@ namespace gm
 		StateMachine machine;
 
 		bool returnToMenu = false;
+		bool moveToSave = false;
 	};
 
 	typedef std::shared_ptr<gameData> gameDataRef;

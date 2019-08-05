@@ -2,7 +2,7 @@
 
 
 
-PauseState::PauseState(gm::gameDataRef data) : data(data), resumeButton(*gm::Assets::getFont()),menuButton(*gm::Assets::getFont())
+PauseState::PauseState(gm::gameDataRef data) : data(data), resumeButton(*gm::Assets::getFont()), saveButton(*gm::Assets::getFont()), menuButton(*gm::Assets::getFont())
 {
 
 }
@@ -53,6 +53,19 @@ void PauseState::init()
 	resumeButton.setTextSize(250);
 	resumeButton.setTextString(L"Wznów grê");
 	resumeButton.setPosition(SCREEN_WIDTH / 2 - resumeButton.getGlobalBounds().width / 2,SCREEN_HEIGHT / 2 - resumeButton.getGlobalBounds().height / 2 - 50);
+
+
+	/* Save button */
+	saveButton.setTextIdleColor(sf::Color::White);
+	saveButton.setTextAimedColor(sf::Color(230, 120, 255, 255));
+	saveButton.setTextPressColor(sf::Color(216, 46, 255, 255));
+	saveButton.setIdleColor(sf::Color::Transparent);
+	saveButton.setAimedColor(sf::Color::Transparent);
+	saveButton.setPressColor(sf::Color::Transparent);
+	saveButton.setSize(200, 55);
+	saveButton.setTextSize(80);
+	saveButton.setTextString(L"Zapisz grê");
+	saveButton.setPosition(SCREEN_WIDTH / 2 - saveButton.getGlobalBounds().width / 2, SCREEN_HEIGHT / 2 - saveButton.getGlobalBounds().height / 2 + 4);
 
 	/* Menu button */
 	menuButton.setTextIdleColor(sf::Color::White);
@@ -105,6 +118,14 @@ void PauseState::handleInput()
 		clickSound.play();
 		Sleep(100);
 		resuming = true;
+	}
+
+	if (saveButton.clicked(gm::Core::getWindow()))
+	{
+		clickSound.play();
+		Sleep(100);
+		resuming = true;
+		data->moveToSave = true;
 	}
 
 	if(menuButton.clicked(gm::Core::getWindow()))
@@ -163,6 +184,7 @@ void PauseState::draw(sf::RenderWindow& win)
 	if(opacity >= 170 && scale >= 1.0)
 	{
 		win.draw(resumeButton);
+		win.draw(saveButton);
 		win.draw(menuButton);
 	}
 

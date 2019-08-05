@@ -29,6 +29,7 @@ public:
 	bool resuming;
 
 	gm::TextButton resumeButton;
+	gm::TextButton saveButton;
 	gm::TextButton menuButton;
 
 	sf::Sound clickSound;
