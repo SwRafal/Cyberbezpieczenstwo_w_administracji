@@ -55,3 +55,4 @@
 #define INTRO_TEXT_3 "resources/text/intro/3.txt"
 #define INTRO_TEXT_4 "resources/text/intro/1.txt"
 #define INTRO_TEXT_SPACE "resources/text/intro/spacja.txt"
+#define INTRO_TEXT_CHOICE "resources/text/intro/choice.txt"

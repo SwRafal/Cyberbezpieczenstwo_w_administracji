@@ -24,11 +24,13 @@ public:
 	gm::SelfWrittingText space;
 
 	sf::Text title;
+	sf::Text playerChoice;
 
 	bool initialized;
 	bool nextState;
 
 	gm::TextButton choice1,choice2,choice3;
+	gm::TextButton player1, player2, player3;
 
 	int state;
 
