@@ -21,5 +21,17 @@ public:
 	void draw(sf::RenderWindow& win) override;
 
 	gm::SelfWrittingText message;
+	gm::SelfWrittingText space;
+
+	sf::Text title;
+
+	bool initialized;
+	bool nextState;
+
+	gm::TextButton choice1,choice2,choice3;
+
+	int state;
+
+	sf::Sound click;
 	
 };

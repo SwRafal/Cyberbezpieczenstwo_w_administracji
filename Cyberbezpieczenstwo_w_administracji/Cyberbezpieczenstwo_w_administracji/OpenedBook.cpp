@@ -12,10 +12,8 @@ OpenedBook::OpenedBook(sf::Texture *texture, sf::Font *font)
 	infoR->setFillColor(sf::Color::Transparent);
 	infoR->setTextColor(sf::Color::Black);
 
-	infoL->setTextString(L"To jest jakiœ przyk³adowy a a tekœcior.  I tu dalej idzie jakiœ takie tekœcik. No to jeszcze dowalmy jedno zdanie, tak ¿eby sprawdziæ"
-						 L"jak to dzia³a co nie. ");
-	infoR->setTextString(L"To jest jakiœ dodatkowy tekœcior. Sz³a dzieweczka do laseczka do zielonego hahahaha. Bum cum drup cum lama kama elo melo 3 2 0"
-						 L"Tu bêd¹ kiedyœ informacje co nie.");
+	infoL->setTextString(L"Przk³adowy tekst");
+	infoR->setTextString(L"Litwo, Ojczyzno moja! ty jesteœ jak zdrowie Ile ciê trzeba ceniæ, ten tylko siê dowie, Kto ciê straci³. Dziœ piêknoœæ tw¹ w ca³ej ozdobie Widzê i opisujê, bo têskniê po tobie.");
 }
 
 OpenedBook::~OpenedBook()

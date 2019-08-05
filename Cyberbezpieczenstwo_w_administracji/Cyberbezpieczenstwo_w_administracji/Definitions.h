@@ -50,4 +50,8 @@
 
 /* intro state */
 
-#define TEXT_FILE_FILEPATH "resources/text.txt"
+#define INTRO_TEXT_1 "resources/text/intro/1.txt"
+#define INTRO_TEXT_2 "resources/text/intro/2.txt"
+#define INTRO_TEXT_3 "resources/text/intro/3.txt"
+#define INTRO_TEXT_4 "resources/text/intro/1.txt"
+#define INTRO_TEXT_SPACE "resources/text/intro/spacja.txt"

@@ -16,6 +16,8 @@ namespace gm
 	public:
 		SelfWrittingText(std::string fileName, sf::Font* font);
 		~SelfWrittingText() {} ;
+
+		bool loadNewText(std::string fileName);
 		
 		void updateText();
 		void setTextProperties(sf::Font* font, int characterSize, sf::Color textColor,sf::Text::Style textStyle,int posX,int posY);

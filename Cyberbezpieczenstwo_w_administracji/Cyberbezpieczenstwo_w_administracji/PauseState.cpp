@@ -51,7 +51,7 @@ void PauseState::init()
 	resumeButton.setPressColor(sf::Color::Transparent);
 	resumeButton.setSize(200,55);
 	resumeButton.setTextSize(250);
-	resumeButton.setTextString("Wznow gre");
+	resumeButton.setTextString(L"Wznów grê");
 	resumeButton.setPosition(SCREEN_WIDTH / 2 - resumeButton.getGlobalBounds().width / 2,SCREEN_HEIGHT / 2 - resumeButton.getGlobalBounds().height / 2 - 50);
 
 	/* Menu button */
@@ -63,7 +63,7 @@ void PauseState::init()
 	menuButton.setPressColor(sf::Color::Transparent);
 	menuButton.setSize(300,60);
 	menuButton.setTextSize(70);
-	menuButton.setTextString("Wyjscie do menu");
+	menuButton.setTextString(L"Wyjœcie do menu");
 	menuButton.setPosition(SCREEN_WIDTH / 2 - menuButton.getGlobalBounds().width / 2,SCREEN_HEIGHT / 2 - menuButton.getGlobalBounds().height / 2 + 60);
 
 	/* click sound */

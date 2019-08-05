@@ -6,7 +6,7 @@ namespace gm
 	//Tekst
 	void TextButton::adjust_text()
 	{
-		std::string str = text.getString();
+		sf::String str = text.getString();
 
 		text.setString("A");//Chwilowa podmiana na litere 'A' dla lepszego dopasowania wysokoœci
 		while (text.getLocalBounds().height > Button::getSize().y)

@@ -16,6 +16,7 @@ MenuState::~MenuState()
 
 void MenuState::init()
 {
+	std::cout << "W ostatecznej wersji nie bedzie tego okienka";
 	/* Play button */
 	playButton.setPosition(60,500);
 	playButton.setTextIdleColor(sf::Color::White);
@@ -38,7 +39,7 @@ void MenuState::init()
 	exitButton.setPressColor(sf::Color::Transparent);
 	exitButton.setSize(200,40);
 	exitButton.setTextSize(70);
-	exitButton.setTextString("Wyjscie");
+	exitButton.setTextString(L"Wyjœcie");
 
 	/* intro button */
 	intro.setPosition(0,0);

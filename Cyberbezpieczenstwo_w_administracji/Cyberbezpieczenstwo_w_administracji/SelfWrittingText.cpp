@@ -4,6 +4,41 @@
 namespace gm
 {
 
+bool SelfWrittingText::loadNewText(std::string fileName)
+{
+	while(!text_queue.empty())
+		text_queue.pop();
+	this->setString("");
+
+	std::wfstream file;
+	file.open(fileName,std::ios::in | std::ios::binary);
+	file.imbue(std::locale("zh_CN.UTF-8"));
+
+	if(file.good())
+	{
+		wchar_t junk;
+		file.get(junk);
+		while(!file.eof())
+		{
+			wchar_t c;
+			
+			file.get(c);
+			text_queue.push(c);
+		}
+	}
+	else
+	{
+		MessageBoxA(NULL, "Nie znaleziono pliku", "b³¹d", MB_OK | MB_ICONEXCLAMATION);
+		return false;
+	}
+
+	file.close();
+
+	return true;
+}
+
+
+
 SelfWrittingText::SelfWrittingText(std::string fileName,sf::Font* font)
 {
 
