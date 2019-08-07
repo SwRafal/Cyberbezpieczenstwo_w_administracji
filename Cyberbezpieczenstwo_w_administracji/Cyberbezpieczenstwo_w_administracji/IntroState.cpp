@@ -6,6 +6,7 @@ IntroState::IntroState(gm::gameDataRef data) : data(data), message(INTRO_TEXT_1,
 choice1(*gm::Assets::getFont()),choice2(*gm::Assets::getFont()),choice3(*gm::Assets::getFont()),
 player1(*gm::Assets::getFont()), player2(*gm::Assets::getFont()), player3(*gm::Assets::getFont())
 {
+	std::cout << "konstruktor sie skonczyl" << std::endl;
 }
 
 
@@ -15,6 +16,7 @@ IntroState::~IntroState()
 
 void IntroState::init()
 {
+	
 	state = 0;
 	initialized = false;
 	nextState = false;
@@ -98,6 +100,8 @@ void IntroState::init()
 
 	gm::Assets::LoadSound("click", CLICK_SOUND_FILEPATH);
 	click.setBuffer(*gm::Assets::getSound("click"));
+
+	
 
 }
 
