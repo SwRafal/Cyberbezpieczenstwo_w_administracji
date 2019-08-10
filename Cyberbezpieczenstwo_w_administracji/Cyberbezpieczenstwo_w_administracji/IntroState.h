@@ -22,6 +22,7 @@ public:
 
 	gm::SelfWrittingText message;
 	gm::SelfWrittingText space;
+	gm::SelfWrittingText message2;
 
 	sf::Text title;
 	sf::Text playerChoice;

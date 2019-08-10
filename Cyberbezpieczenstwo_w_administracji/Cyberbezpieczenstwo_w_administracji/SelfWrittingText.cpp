@@ -93,4 +93,11 @@ void SelfWrittingText::updateText()
 	
 }
 
+bool SelfWrittingText::isQueueEmpty()
+{
+	return this->text_queue.empty();
 }
+
+
+}
+

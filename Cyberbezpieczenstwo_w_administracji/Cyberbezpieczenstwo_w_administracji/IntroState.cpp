@@ -4,9 +4,9 @@
 
 IntroState::IntroState(gm::gameDataRef data) : data(data), message(INTRO_TEXT_1,gm::Assets::getFont()), space(INTRO_TEXT_SPACE,gm::Assets::getFont()),
 choice1(*gm::Assets::getFont()),choice2(*gm::Assets::getFont()),choice3(*gm::Assets::getFont()),
-player1(*gm::Assets::getFont()), player2(*gm::Assets::getFont()), player3(*gm::Assets::getFont())
+player1(*gm::Assets::getFont()), player2(*gm::Assets::getFont()), player3(*gm::Assets::getFont()), message2(INTRO_TEXT_6,gm::Assets::getFont())
 {
-	std::cout << "konstruktor sie skonczyl" << std::endl;
+	
 }
 
 
@@ -30,79 +30,47 @@ void IntroState::init()
 
 	//choice buttons
 
-	choice1.setPosition(SCREEN_WIDTH * 0.2,SCREEN_HEIGHT * 0.75);
 	choice1.setTextIdleColor(sf::Color::White);
 	choice1.setTextAimedColor(sf::Color(230, 120, 255,255));
 	choice1.setTextPressColor(sf::Color(216, 46, 255,255));
 	choice1.setIdleColor(sf::Color::Transparent);
 	choice1.setAimedColor(sf::Color::Transparent);
 	choice1.setPressColor(sf::Color::Transparent);
+	choice1.setPosition(SCREEN_WIDTH * 0.2,SCREEN_HEIGHT * 0.75);
+
 	choice1.setSize(200,55);
 	choice1.setTextSize(250);
 	choice1.setTextString(L"Bezpieczeñstwo");
 
-	choice2.setPosition(SCREEN_WIDTH * 0.65,SCREEN_HEIGHT * 0.75);
 	choice2.setTextIdleColor(sf::Color::White);
 	choice2.setTextAimedColor(sf::Color(230, 120, 255,255));
 	choice2.setTextPressColor(sf::Color(216, 46, 255,255));
 	choice2.setIdleColor(sf::Color::Transparent);
 	choice2.setAimedColor(sf::Color::Transparent);
 	choice2.setPressColor(sf::Color::Transparent);
+
+	choice2.setPosition(SCREEN_WIDTH * 0.65,SCREEN_HEIGHT * 0.75);
 	choice2.setSize(200,55);
 	choice2.setTextSize(250);
 	choice2.setTextString(L"¯ycie na krawêdzi");
 
+	choice3.setTextIdleColor(sf::Color::White);
+	choice3.setTextAimedColor(sf::Color(230, 120, 255,255));
+	choice3.setTextPressColor(sf::Color(216, 46, 255,255));
+	choice3.setIdleColor(sf::Color::Transparent);
+	choice3.setAimedColor(sf::Color::Transparent);
+	choice3.setPressColor(sf::Color::Transparent);
+
+	choice3.setPosition(SCREEN_WIDTH * 0.65,SCREEN_HEIGHT * 0.75);
+	choice3.setSize(200,55);
+	choice3.setTextSize(250);
+
 	space.setPosition(SCREEN_WIDTH/2 - space.getGlobalBounds().width/2, SCREEN_HEIGHT - (space.getGlobalBounds().height * 2));
 
 
-	/*playerChoice.setFillColor(sf::Color::White);
-	playerChoice.setFont(*gm::Assets::getFont());
-	playerChoice.setCharacterSize(50);
-	playerChoice.setStyle(sf::Text::Style::Bold);
-	playerChoice.setString(L"Wybierz swojego gracza:");
-	playerChoice.setPosition(SCREEN_WIDTH / 2 - title.getGlobalBounds().width / 2, SCREEN_HEIGHT * 0.3);*/
-
-	//players buttons
-	player1.setPosition(SCREEN_WIDTH - player1.getGlobalBounds().width * 6, SCREEN_HEIGHT * 0.75);
-	player1.setTextIdleColor(sf::Color::White);
-	player1.setTextAimedColor(sf::Color(230, 120, 255, 255));
-	player1.setTextPressColor(sf::Color(216, 46, 255, 255));
-	player1.setIdleColor(sf::Color::Transparent);
-	player1.setAimedColor(sf::Color::Transparent);
-	player1.setPressColor(sf::Color::Transparent);
-	player1.setSize(200, 55);
-	player1.setTextSize(150);
-	player1.setTextString("Haker");
-
-	player2.setPosition(SCREEN_WIDTH / 2 - player2.getGlobalBounds().width / 2, SCREEN_HEIGHT * 0.75);
-	player2.setTextIdleColor(sf::Color::White);
-	player2.setTextAimedColor(sf::Color(230, 120, 255, 255));
-	player2.setTextPressColor(sf::Color(216, 46, 255, 255));
-	player2.setIdleColor(sf::Color::Transparent);
-	player2.setAimedColor(sf::Color::Transparent);
-	player2.setPressColor(sf::Color::Transparent);
-	player2.setSize(200, 55);
-	player2.setTextSize(250);
-	player2.setTextString("Mag");
-
-	player3.setPosition(SCREEN_WIDTH - player3.getGlobalBounds().width * 2, SCREEN_HEIGHT * 0.75);
-	player3.setTextIdleColor(sf::Color::White);
-	player3.setTextAimedColor(sf::Color(230, 120, 255, 255));
-	player3.setTextPressColor(sf::Color(216, 46, 255, 255));
-	player3.setIdleColor(sf::Color::Transparent);
-	player3.setAimedColor(sf::Color::Transparent);
-	player3.setPressColor(sf::Color::Transparent);
-	player3.setSize(300, 55);
-	player3.setTextSize(250);
-	player3.setTextString("Pani Halina");
-
 	//sound
-
 	gm::Assets::LoadSound("click", CLICK_SOUND_FILEPATH);
 	click.setBuffer(*gm::Assets::getSound("click"));
-
-	
-
 }
 
 void IntroState::handleInput()
@@ -132,6 +100,11 @@ void IntroState::handleInput()
 	{
 		nextState = true;
 	}
+	if(gm::Core::getEnteredChar() == 0x00000020 && state == 5)
+	{
+		//MessageBoxA(NULL, "WORK IN PROGRESS", "HELLO", MB_OK | MB_ICONEXCLAMATION);
+		data->machine.addState(gm::StateRef(new GameState (this->data)));
+	}
 }
 
 void IntroState::update(sf::RenderWindow& win)
@@ -140,35 +113,60 @@ void IntroState::update(sf::RenderWindow& win)
 	/* Initialize state */
 	if(!initialized)
 	{
-		if(state == 0)
+		if(state == 0) //tytul
 		{
 			//already initialized
 		}
 
-		if(state == 1)
+		if(state == 1) //twoja misja rozpoczyna sie..
 		{
 			message.loadNewText(INTRO_TEXT_2);
 			message.setCharacterSize(30);
 		}
 
-		if(state == 2)
-		{
-			message.loadNewText(INTRO_TEXT_CHOICE);
-			message.setCharacterSize(60);
-		}
-
-		if (state == 3)
+		if(state == 2) //co wybierzesz
 		{
 			message.loadNewText(INTRO_TEXT_3);
 			message.setStyle(sf::Text::Style::Bold);
 			message.setCharacterSize(40);
 		}
 
+		if (state == 3) //wybierz gracza
+		{
+			message.loadNewText(INTRO_TEXT_4);
+			message.setStyle(sf::Text::Style::Regular);
+			choice1.setTextString("Haker");
+			choice1.setPosition(SCREEN_WIDTH * 0.2 - choice1.getGlobalBounds().width / 2,SCREEN_HEIGHT * 0.75);
+			choice1.setTextSize(30);
+			choice2.setTextString("Mag");
+			choice2.setPosition(SCREEN_WIDTH * 0.5 - choice1.getGlobalBounds().width / 2,SCREEN_HEIGHT * 0.75);
+			choice2.setTextSize(30);
+			choice3.setTextString("Pani Halina");
+			choice3.setPosition(SCREEN_WIDTH * 0.8 - choice1.getGlobalBounds().width / 2,SCREEN_HEIGHT * 0.75);
+			choice3.setTextSize(30);
+		}
+
+		if (state == 4) // wybierz bron
+		{
+			message.loadNewText(INTRO_TEXT_5);
+			choice1.setTextString(L"Telefon w \npanice do \ndzia³u IT");
+
+			choice2.setTextString("Wiedza");
+
+			choice3.setTextString(L"Zap³ata okupu\n w bitcoinach");
+		}
+
+		if (state == 5) //wybory zostaly dokonane
+		{
+			message.loadNewText(INTRO_TEXT_6);
+			message2.loadNewText(INTRO_TEXT_7);
+		}
+
 		initialized = true;
 	}
-	
 
 
+	/* set central position */
 	if(state == 0)
 	{
 		message.setPosition(SCREEN_WIDTH / 2 - message.getGlobalBounds().width / 2, SCREEN_HEIGHT / 2 + (SCREEN_HEIGHT * 0.2));
@@ -183,60 +181,88 @@ void IntroState::update(sf::RenderWindow& win)
 		message.setPosition(SCREEN_WIDTH / 2 - message.getGlobalBounds().width / 2, SCREEN_HEIGHT * 0.1);
 		space.setPosition(SCREEN_WIDTH / 2 - space.getGlobalBounds().width / 2, SCREEN_HEIGHT - (space.getGlobalBounds().height * 2));
 	}
-	if(state == 3)
+	if (state == 3)
 	{
-		message.setPosition(SCREEN_WIDTH / 2 - message.getGlobalBounds().width / 2, SCREEN_HEIGHT * 0.3);
-		if(message.getString().getSize() == 14)
-		{
-			message.setString(message.getString().substring(0,13));
-			message.setString(message.getString() + "?");
-		}
+		message.setPosition(SCREEN_WIDTH / 2 - message.getGlobalBounds().width / 2, SCREEN_HEIGHT * 0.1);
+	}
+	if (state == 5)
+	{
+		message.setPosition(SCREEN_WIDTH / 2 - message.getGlobalBounds().width / 2, SCREEN_HEIGHT * 0.1);
+		message2.setPosition(SCREEN_WIDTH / 2 + SCREEN_WIDTH * 0.3 - message.getGlobalBounds().width / 2, SCREEN_HEIGHT * 0.5);
 	}
 	
-	
+	/* update self writting text */
 	message.updateText();
+	if(state == 5 && message.isQueueEmpty())
+		message2.updateText();
 	space.updateText();
 
-	if (player1.clicked(gm::Core::getWindow()))
+
+	/* buttons behaviour */
+	if(state == 2)
 	{
-		click.play();
-		Sleep(100);
-		nextState = true;
-		MessageBoxA(NULL, "Welcome to THE GAME, Haker...", "Hacker", MB_OK | MB_ICONEXCLAMATION);
-		data->machine.addState(gm::StateRef(new GameState(this->data)));
+		if(choice1.clicked(gm::Core::getWindow()))
+		{
+			click.play();
+			Sleep(100);
+			nextState = true;
+		}
+
+		if(choice2.clicked(gm::Core::getWindow()))
+		{
+			click.play();
+			Sleep(100);
+			nextState = true;
+		}
 	}
-	if (player2.clicked(gm::Core::getWindow()))
+	if(state == 3)
 	{
-		click.play();
-		Sleep(100);
-		nextState = true;
-		MessageBoxA(NULL, "Welcome to the MYSTERIOUS world, Mag...", "Mag", MB_OK | MB_ICONEXCLAMATION);
-		data->machine.addState(gm::StateRef(new GameState(this->data)));
+		if(choice1.clicked(gm::Core::getWindow()))
+		{
+			click.play();
+			Sleep(100);
+			nextState = true;
+		}
+
+		if(choice2.clicked(gm::Core::getWindow()))
+		{
+			click.play();
+			Sleep(100);
+			nextState = true;
+		}
+
+		if(choice3.clicked(gm::Core::getWindow()))
+		{
+			click.play();
+			Sleep(100);
+			nextState = true;
+		}
 	}
-	if (player3.clicked(gm::Core::getWindow()))
+	if(state == 4)
 	{
-		click.play();
-		Sleep(100);
-		nextState = true;
-		MessageBoxA(NULL, "Witaj w Grze, Gra¿ynko...\nznaczy Halinko...", "Pani Halina", MB_OK | MB_ICONEXCLAMATION);
-		data->machine.addState(gm::StateRef(new GameState(this->data)));
+		if(choice1.clicked(gm::Core::getWindow()))
+		{
+			click.play();
+			Sleep(100);
+			nextState = true;
+		}
+
+		if(choice2.clicked(gm::Core::getWindow()))
+		{
+			click.play();
+			Sleep(100);
+			nextState = true;
+		}
+
+		if(choice3.clicked(gm::Core::getWindow()))
+		{
+			click.play();
+			Sleep(100);
+			nextState = true;
+		}
 	}
-	if(choice1.clicked(gm::Core::getWindow()))
-	{
-		click.play();
-		Sleep(100);
-		nextState = true;
-		MessageBoxA(NULL, "WORK IN PROGRESS", "HI", MB_OK | MB_ICONEXCLAMATION);
-		data->machine.addState(gm::StateRef(new GameState (this->data)));
-	}
-	if(choice2.clicked(gm::Core::getWindow()))
-	{
-		click.play();
-		Sleep(100);
-		nextState = true;
-		MessageBoxA(NULL, "WORK IN PROGRESS", "HELLO", MB_OK | MB_ICONEXCLAMATION);
-		data->machine.addState(gm::StateRef(new GameState (this->data)));
-	}
+	/*MessageBoxA(NULL, "WORK IN PROGRESS", "HELLO", MB_OK | MB_ICONEXCLAMATION);
+	data->machine.addState(gm::StateRef(new GameState (this->data)));*/
 
 
 	if(nextState)
@@ -244,7 +270,6 @@ void IntroState::update(sf::RenderWindow& win)
 		state++;
 		nextState = false;
 		initialized = false;
-
 	}
 
 }
@@ -255,21 +280,29 @@ void IntroState::draw(sf::RenderWindow& win)
 
 	if(state == 0)
 		win.draw(title);
-	if(state == 1 )
+	if(state == 1 || state == 5)
 		win.draw(space);
 
-	
-	if (state == 2)
+	if(state == 2)
 	{
-		win.draw(player1);
-		win.draw(player2);
-		win.draw(player3);
+		win.draw(choice1);
+		win.draw(choice2);
 	}
-
 	if(state == 3)
 	{
 		win.draw(choice1);
 		win.draw(choice2);
+		win.draw(choice3);
+	}
+	if(state == 4)
+	{
+		win.draw(choice1);
+		win.draw(choice2);
+		win.draw(choice3);
+	}
+	if(state == 5)
+	{
+		win.draw(message2);
 	}
 
 	win.draw(message);
