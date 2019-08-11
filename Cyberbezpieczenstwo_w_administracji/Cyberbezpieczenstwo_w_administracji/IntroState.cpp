@@ -3,8 +3,7 @@
 
 
 IntroState::IntroState(gm::gameDataRef data) : data(data), message(INTRO_TEXT_1,gm::Assets::getFont()), space(INTRO_TEXT_SPACE,gm::Assets::getFont()),
-choice1(*gm::Assets::getFont()),choice2(*gm::Assets::getFont()),choice3(*gm::Assets::getFont()),
-player1(*gm::Assets::getFont()), player2(*gm::Assets::getFont()), player3(*gm::Assets::getFont()), message2(INTRO_TEXT_6,gm::Assets::getFont())
+choice1(*gm::Assets::getFont()),choice2(*gm::Assets::getFont()),choice3(*gm::Assets::getFont()), message2(INTRO_TEXT_6,gm::Assets::getFont())
 {
 	
 }
@@ -71,6 +70,8 @@ void IntroState::init()
 	//sound
 	gm::Assets::LoadSound("click", CLICK_SOUND_FILEPATH);
 	click.setBuffer(*gm::Assets::getSound("click"));
+
+	delay = true;
 }
 
 void IntroState::handleInput()
@@ -116,6 +117,9 @@ void IntroState::update(sf::RenderWindow& win)
 		if(state == 0) //tytul
 		{
 			//already initialized
+			choice1.setPosition(-500,-500);
+			choice2.setPosition(-500,-500);
+			choice3.setPosition(-500,-500);
 		}
 
 		if(state == 1) //twoja misja rozpoczyna sie..
@@ -129,6 +133,8 @@ void IntroState::update(sf::RenderWindow& win)
 			message.loadNewText(INTRO_TEXT_3);
 			message.setStyle(sf::Text::Style::Bold);
 			message.setCharacterSize(40);
+			choice1.setPosition(SCREEN_WIDTH * 0.2,SCREEN_HEIGHT * 0.75);
+			choice2.setPosition(SCREEN_WIDTH * 0.65,SCREEN_HEIGHT * 0.75);
 		}
 
 		if (state == 3) //wybierz gracza
@@ -222,6 +228,7 @@ void IntroState::update(sf::RenderWindow& win)
 			click.play();
 			Sleep(100);
 			nextState = true;
+			this->data->characterChoice = 1;
 		}
 
 		if(choice2.clicked(gm::Core::getWindow()))
@@ -229,6 +236,7 @@ void IntroState::update(sf::RenderWindow& win)
 			click.play();
 			Sleep(100);
 			nextState = true;
+			this->data->characterChoice = 2;
 		}
 
 		if(choice3.clicked(gm::Core::getWindow()))
@@ -236,6 +244,7 @@ void IntroState::update(sf::RenderWindow& win)
 			click.play();
 			Sleep(100);
 			nextState = true;
+			this->data->characterChoice = 3;
 		}
 	}
 	if(state == 4)
@@ -261,8 +270,7 @@ void IntroState::update(sf::RenderWindow& win)
 			nextState = true;
 		}
 	}
-	/*MessageBoxA(NULL, "WORK IN PROGRESS", "HELLO", MB_OK | MB_ICONEXCLAMATION);
-	data->machine.addState(gm::StateRef(new GameState (this->data)));*/
+	
 
 
 	if(nextState)
@@ -277,17 +285,24 @@ void IntroState::update(sf::RenderWindow& win)
 void IntroState::draw(sf::RenderWindow& win)
 {
 	win.clear(sf::Color::Black);
-
+	if(state==0)
+	{
+		win.draw(choice1);
+		win.draw(choice1);
+		win.draw(choice1);
+	}
 	if(state == 0)
 		win.draw(title);
 	if(state == 1 || state == 5)
 		win.draw(space);
 
-	if(state == 2)
+	if(state == 2 && delay == false)
 	{
 		win.draw(choice1);
 		win.draw(choice2);
 	}
+	delay = false;
+	
 	if(state == 3)
 	{
 		win.draw(choice1);

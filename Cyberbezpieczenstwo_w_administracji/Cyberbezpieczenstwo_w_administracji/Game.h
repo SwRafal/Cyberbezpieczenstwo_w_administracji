@@ -13,6 +13,8 @@ namespace gm
 
 		bool returnToMenu = false;
 		bool moveToSave = false;
+
+		int characterChoice = 0;
 	};
 
 	typedef std::shared_ptr<gameData> gameDataRef;
