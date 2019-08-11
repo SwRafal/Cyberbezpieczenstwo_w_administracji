@@ -6,6 +6,7 @@
 #include "Functions.h"
 #include "GameStateItems.h"
 #include "PauseState.h"
+#include "dayx.h"
 
 void error_win_close();
 
@@ -21,6 +22,8 @@ class GameState : public gm::SlideFrame
 {
 private:
 	gm::gameDataRef data;
+
+	dayx *dayShowScreen;
 
 	/*Settings*/
 	unsigned int day;

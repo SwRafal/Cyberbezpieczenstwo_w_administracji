@@ -150,7 +150,9 @@ void GameState::init()
 
 	/*Starting settings*/
 	//...
-	
+
+	dayShowScreen = new dayx(this->data->day);
+
 }
 
 void GameState::handleInput()
@@ -245,6 +247,7 @@ void GameState::update(sf::RenderWindow &win)
 			no_stamp->setInactive();
 
 	}
+	dayShowScreen->update();
 }
 
 void GameState::draw(sf::RenderWindow& win)
@@ -279,6 +282,8 @@ void GameState::draw(sf::RenderWindow& win)
 
 	if (book->isOpened())
 		openedbook->draw(win);
+
+	dayShowScreen->draw(win,sf::RenderStates::Default);
 
 	win.display();
 }

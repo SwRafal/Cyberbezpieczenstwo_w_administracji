@@ -15,6 +15,8 @@ namespace gm
 		bool moveToSave = false;
 
 		int characterChoice = 0;
+
+		int day = 0;
 	};
 
 	typedef std::shared_ptr<gameData> gameDataRef;
