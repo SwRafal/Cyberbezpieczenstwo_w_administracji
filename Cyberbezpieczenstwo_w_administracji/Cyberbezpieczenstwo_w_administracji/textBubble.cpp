@@ -12,12 +12,13 @@ textBubble::textBubble(sf::Texture *tex) : text(*gm::Assets::getFont())
 
 	text.setTextSize(20);
 	text.setTextColor(sf::Color::Black);
-	text.setFillColor(sf::Color::Transparent);
+	text.setFillColor(sf::Color(255,0,0,100));
 
 	appearing = true;
 	disappearing = false;
 	showText = false;
 
+	
 	scale = 0.05;
 	this->setScale(scale,scale);
 
@@ -31,7 +32,7 @@ void textBubble::setBubblePosition(int x, int y)
 	posy = y;
 	this->setPosition(x,y);
 	text.setPosition(x,y);
-	//text.setSize(this->getGlobalBounds().width,this->getGlobalBounds().height);
+	
 }
 
 void textBubble::keepInPlace()
@@ -54,6 +55,8 @@ void textBubble::animate()
 			if(scale >= 1.0)
 			{
 				showText = true;
+				text.setPosition(posx - this->getGlobalBounds().width/2 + (this->getGlobalBounds().width * 0.01) , posy - this->getGlobalBounds().height / 2 + (this->getGlobalBounds().height * 0.01));
+				text.setSize(this->getGlobalBounds().width * 0.98,this->getGlobalBounds().height * 0.98);
 				appearing = false;
 			}
 		}
@@ -72,11 +75,11 @@ void textBubble::animate()
 	}
 }
 
-void textBubble::draw(sf::RenderTarget& target, sf::RenderStates states) const
+void textBubble::draw(sf::RenderWindow& win) 
 {
-	target.draw((sf::Sprite)*this,states);
+	win.draw(*this);
 	if(showText)
-		target.draw(text);
+		text.draw(win);
 }
 
 void textBubble::closeBubble()
@@ -93,11 +96,10 @@ void textBubble::showBubble()
 	appearing = true;
 }
 
-void textBubble::changeText(std::string str)
+void textBubble::changeText(sf::String str)
 {
-	text.setTextString(sf::String(str));
+	text.setTextString(str);
 }
-
 
 
 

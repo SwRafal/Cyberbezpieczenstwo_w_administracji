@@ -156,8 +156,8 @@ void GameState::init()
 
 	gm::Assets::LoadTexture("text bubble",TEXTURE_TEXT_BUBBLE);
 	test = new textBubble(gm::Assets::getTexture("text bubble"));
-	sf::String hejka("maciek to kozak");
-	test->changeText(hejka);
+	
+	test->changeText(L"Maciekdsadas  dasdasiudjsaioudjasiduahsjdiuash duoashdoasuydghasuoiydhasouidhasio dyhasouydiahs sda dasdsadhasjuidh asiuhdiasudhasiu dhasi saoidjhsaioudjsaioud jhasioudhiasu hdiasudhiuash diuasdhio ddsidsiuahdi hsiaudhuias dhsa");
 	test->setBubblePosition(300,400);
 
 }
@@ -295,7 +295,7 @@ void GameState::draw(sf::RenderWindow& win)
 	if (book->isOpened())
 		openedbook->draw(win);
 
-	win.draw(*test);
+	test->draw(win);
 
 	//dayShowScreen->draw(win,sf::RenderStates::Default);
 

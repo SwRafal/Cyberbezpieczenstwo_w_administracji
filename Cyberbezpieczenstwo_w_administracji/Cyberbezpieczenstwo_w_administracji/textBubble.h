@@ -23,7 +23,7 @@ public:
 
 	void closeBubble();
 	void showBubble();
-	void changeText(std::string);
+	void changeText(sf::String);
 
 	float scale;
 
@@ -33,7 +33,8 @@ public:
 	int posx;
 	int posy;
 
-	//virtual void draw(sf::RenderTarget &target, sf::RenderStates states) = delete;
-	void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
+	virtual void draw(sf::RenderTarget &target, sf::RenderStates states) = delete;
+	//void draw(sf::RenderTarget& target, sf::RenderStates states) const override = delete;
+	void draw(sf::RenderWindow& win);
 };
 
