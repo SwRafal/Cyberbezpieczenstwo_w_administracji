@@ -8,6 +8,7 @@
 #include "PauseState.h"
 #include "dayx.h"
 #include "textBubble.h"
+#include "OfficeFriend.h"
 
 void error_win_close();
 
@@ -27,6 +28,8 @@ private:
 	dayx *dayShowScreen;
 
 	textBubble *test;
+
+	OfficeFriend *officeLady;
 
 	/*Settings*/
 	unsigned int day;

@@ -157,8 +157,15 @@ void GameState::init()
 	gm::Assets::LoadTexture("text bubble",TEXTURE_TEXT_BUBBLE);
 	test = new textBubble(gm::Assets::getTexture("text bubble"));
 	
-	test->changeText(L"Maciekdsadas  dasdasiudjsaioudjasiduahsjdiuash duoashdoasuydghasuoiydhasouidhasio dyhasouydiahs sda dasdsadhasjuidh asiuhdiasudhasiu dhasi saoidjhsaioudjsaioud jhasioudhiasu hdiasudhiuash diuasdhio ddsidsiuahdi hsiaudhuias dhsa");
+	test->changeText(L"Maciekdsadas  dasdasiudjsaioudjasiduahsjdiuash duoashdoasuydghasuoiydhasouidhasio aoidjhsaioudjsaioud jhasioudhiasu hdiasudhiuash diuasdhio ddsidsiuahdi hsiaudhuias dhsa");
 	test->setBubblePosition(300,400);
+
+
+	gm::Assets::LoadTexture("friend", TEXTURE_OFFICE_FRIEND);
+	gm::Assets::LoadTexture("chat bubble",TEXTURE_CHAT_BUBBLE);
+
+	officeLady = new OfficeFriend(gm::Assets::getTexture("friend"));
+	officeLady->show();
 
 }
 
@@ -203,9 +210,11 @@ void GameState::handleInput()
 		data->machine.addState(gm::StateRef(new MenuState (this->data))); 
 	}
 	if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D))
-		test->showBubble();
+		officeLady->show();
+		//test->showBubble();
 	if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::F))
-		test->closeBubble();
+		officeLady->hide();
+		//test->closeBubble();
 }
 
 void GameState::update(sf::RenderWindow &win)
@@ -258,8 +267,12 @@ void GameState::update(sf::RenderWindow &win)
 			no_stamp->setInactive();
 
 	}
+
+
+
 	dayShowScreen->update();
 	test->animate();
+	officeLady->animate();
 }
 
 void GameState::draw(sf::RenderWindow& win)
@@ -296,6 +309,7 @@ void GameState::draw(sf::RenderWindow& win)
 		openedbook->draw(win);
 
 	test->draw(win);
+	officeLady->draw(win);
 
 	//dayShowScreen->draw(win,sf::RenderStates::Default);
 

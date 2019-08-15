@@ -49,6 +49,9 @@
 #define TEXTURE_BIN "resources/textures/bin.png"
 
 #define TEXTURE_TEXT_BUBBLE "resources/textures/textbubble.png"
+#define TEXTURE_CHAT_BUBBLE "resources/textures/chat bubble.png"
+
+#define TEXTURE_OFFICE_FRIEND "resources/textures/friend.png"
 
 /* intro state */
 
