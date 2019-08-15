@@ -48,6 +48,8 @@
 #define TEXTURE_OPENEDBOOK "resources/textures/openedbook.png"
 #define TEXTURE_BIN "resources/textures/bin.png"
 
+#define TEXTURE_TEXT_BUBBLE "resources/textures/textbubble.png"
+
 /* intro state */
 
 #define INTRO_TEXT_1 "resources/text/intro/1.txt"

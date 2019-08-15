@@ -7,6 +7,7 @@
 #include "GameStateItems.h"
 #include "PauseState.h"
 #include "dayx.h"
+#include "textBubble.h"
 
 void error_win_close();
 
@@ -24,6 +25,8 @@ private:
 	gm::gameDataRef data;
 
 	dayx *dayShowScreen;
+
+	textBubble *test;
 
 	/*Settings*/
 	unsigned int day;

@@ -153,6 +153,13 @@ void GameState::init()
 
 	dayShowScreen = new dayx(this->data->day);
 
+
+	gm::Assets::LoadTexture("text bubble",TEXTURE_TEXT_BUBBLE);
+	test = new textBubble(gm::Assets::getTexture("text bubble"));
+	sf::String hejka("maciek to kozak");
+	test->changeText(hejka);
+	test->setBubblePosition(300,400);
+
 }
 
 void GameState::handleInput()
@@ -195,6 +202,10 @@ void GameState::handleInput()
 		data->returnToMenu = false;
 		data->machine.addState(gm::StateRef(new MenuState (this->data))); 
 	}
+	if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D))
+		test->showBubble();
+	if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::F))
+		test->closeBubble();
 }
 
 void GameState::update(sf::RenderWindow &win)
@@ -248,6 +259,7 @@ void GameState::update(sf::RenderWindow &win)
 
 	}
 	dayShowScreen->update();
+	test->animate();
 }
 
 void GameState::draw(sf::RenderWindow& win)
@@ -283,7 +295,9 @@ void GameState::draw(sf::RenderWindow& win)
 	if (book->isOpened())
 		openedbook->draw(win);
 
-	dayShowScreen->draw(win,sf::RenderStates::Default);
+	win.draw(*test);
+
+	//dayShowScreen->draw(win,sf::RenderStates::Default);
 
 	win.display();
 }

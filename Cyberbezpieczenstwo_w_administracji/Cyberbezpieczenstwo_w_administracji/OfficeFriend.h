@@ -4,7 +4,7 @@
 
 /*DETAILS (position...)*/
 
-class OfficeFriend
+class OfficeFriend : public sf::Sprite
 {
 public:
 	OfficeFriend();

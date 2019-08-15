@@ -176,6 +176,7 @@
     <ClCompile Include="Shredder.cpp" />
     <ClCompile Include="SplashScreen.cpp" />
     <ClCompile Include="MenuState.cpp" />
+    <ClCompile Include="textBubble.cpp" />
     <ClCompile Include="Watch.cpp" />
     <ClCompile Include="Stamp.cpp" />
   </ItemGroup>
@@ -224,6 +225,7 @@
     <ClInclude Include="Shredder.h" />
     <ClInclude Include="SplashScreen.h" />
     <ClInclude Include="MenuState.h" />
+    <ClInclude Include="textBubble.h" />
     <ClInclude Include="Watch.h" />
     <ClInclude Include="Stamp.h" />
   </ItemGroup>
