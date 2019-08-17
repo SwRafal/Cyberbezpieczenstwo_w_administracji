@@ -289,7 +289,24 @@ void GameState::update(sf::RenderWindow &win)
 	{
 		if(day == 0) //intro
 		{
-			officeLady->addToQueue(L"Wita")
+			switch (this->data->characterChoice)
+			{
+			case 0:
+				std::cout << "nie przeszedles intro ";
+				break;
+			case 1:
+				officeLady->addToQueue(L"Czeœæ Halina!");
+				officeLady->addToQueue(L"Mi³o mi Ciê poznaæ! Wiele o Tobie s³ysza³am");
+				officeLady->addToQueue(L"Jestem zaszczycona, ¿e bêdê pracowaæ z takim ekspertem do spraw cyberbezpieczeñstwa! Pozwól, ¿e poka¿ê ci twoje miejsce pracy!");
+				break;
+			case 2:
+				officeLady->addToQueue(L"Witaj! Powiedziano mi");
+			case 3:
+				if()
+				officeLady->addToQueue(L"Witaj! Powiedziano mi tylko, ¿e jestes wybitnym" + L"hakerem");
+				break;
+
+			}
 		}
 
 
