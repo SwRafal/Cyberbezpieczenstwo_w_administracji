@@ -144,6 +144,7 @@
     <ClCompile Include="ChoiceButton.cpp" />
     <ClCompile Include="Coffee.cpp" />
     <ClCompile Include="dayx.cpp" />
+    <ClCompile Include="Day_1.cpp" />
     <ClCompile Include="Engine\Assets.cpp" />
     <ClCompile Include="Engine\Button.cpp" />
     <ClCompile Include="Engine\CheckBox.cpp" />
@@ -191,6 +192,7 @@
     <ClInclude Include="ChoiceButton.h" />
     <ClInclude Include="Coffee.h" />
     <ClInclude Include="dayx.h" />
+    <ClInclude Include="Day_1.h" />
     <ClInclude Include="Definitions.h" />
     <ClInclude Include="Engine\Assets.h" />
     <ClInclude Include="Engine\Button.h" />

@@ -330,8 +330,7 @@ void GameState::update(sf::RenderWindow &win)
 				closed_eyes_level++;
 
 			if (closed_eyes_level == FULL_CLOSED_EYES)
-				;//Przegrana
-			
+				std::cout << "PRZEGRALES";//Przegrana
 		}
 		else
 		{
