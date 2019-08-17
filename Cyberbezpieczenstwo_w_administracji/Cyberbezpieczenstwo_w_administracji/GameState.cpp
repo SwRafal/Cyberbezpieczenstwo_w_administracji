@@ -225,6 +225,16 @@ void GameState::handleInput()
 	if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::F))
 		officeLady->hide();
 		//test->closeBubble();
+
+	if(gm::Core::getEnteredChar() == 0x0000007A)
+	{
+		nextDay = true;
+		day++;
+		dayShowScreen->nextDay();
+		this->data->day++;
+	}
+
+	
 }
 
 void GameState::update(sf::RenderWindow &win)
@@ -376,7 +386,7 @@ void GameState::draw(sf::RenderWindow& win)
 	//tutorial
 	officeLady->draw(win);
 
-	//dayShowScreen->draw(win,sf::RenderStates::Default);
+	dayShowScreen->draw(win,sf::RenderStates::Default);
 	
 	win.display();
 }

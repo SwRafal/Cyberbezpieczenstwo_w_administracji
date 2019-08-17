@@ -64,3 +64,11 @@ void dayx::reset()
 	timer = 0;
 	opacity = 0;
 }
+
+void dayx::nextDay()
+{
+	this->reset();
+	dayNumber++;
+	title.setString(L"Dzieñ  ");
+	title.setString(title.getString() + std::to_string(dayNumber));
+}
