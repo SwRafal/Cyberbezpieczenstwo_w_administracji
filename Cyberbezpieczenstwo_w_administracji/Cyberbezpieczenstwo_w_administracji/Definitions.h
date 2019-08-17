@@ -52,6 +52,7 @@
 #define TEXTURE_CHAT_BUBBLE "resources/textures/chat bubble.png"
 
 #define TEXTURE_OFFICE_FRIEND "resources/textures/friend.png"
+#define TEXTURE_ARROW_BUTTON "resources/textures/arrow.png"
 
 /* intro state */
 

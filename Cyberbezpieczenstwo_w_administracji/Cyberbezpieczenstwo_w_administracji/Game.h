@@ -16,6 +16,8 @@ namespace gm
 
 		int characterChoice = 0;
 
+		sf::String name = "";
+
 		int day = 0;
 	};
 

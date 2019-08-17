@@ -36,6 +36,11 @@ public:
 	sf::Sprite chat;
 	gm::Information text;
 
+	gm::Button button;
+	sf::Sprite img;
+	bool clicked;
+	
+
 	
 
 	OfficeFriend(sf::Texture *texture);

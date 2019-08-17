@@ -141,13 +141,13 @@ void IntroState::update(sf::RenderWindow& win)
 		{
 			message.loadNewText(INTRO_TEXT_4);
 			message.setStyle(sf::Text::Style::Regular);
-			choice1.setTextString("Haker");
+			choice1.setTextString("Pani Halina");
 			choice1.setPosition(SCREEN_WIDTH * 0.2 - choice1.getGlobalBounds().width / 2,SCREEN_HEIGHT * 0.75);
 			choice1.setTextSize(30);
-			choice2.setTextString("Mag");
+			choice2.setTextString("Haker");
 			choice2.setPosition(SCREEN_WIDTH * 0.5 - choice1.getGlobalBounds().width / 2,SCREEN_HEIGHT * 0.75);
 			choice2.setTextSize(30);
-			choice3.setTextString("Pani Halina");
+			choice3.setTextString("Mag");
 			choice3.setPosition(SCREEN_WIDTH * 0.8 - choice1.getGlobalBounds().width / 2,SCREEN_HEIGHT * 0.75);
 			choice3.setTextSize(30);
 		}

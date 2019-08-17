@@ -150,7 +150,8 @@ void GameState::init()
 
 	gm::Assets::LoadTexture("friend", TEXTURE_OFFICE_FRIEND);
 	gm::Assets::LoadTexture("chat bubble",TEXTURE_CHAT_BUBBLE);
-	if(gm::Assets::getTexture("friend") == nullptr || gm::Assets::getTexture("chat bubble") == nullptr)
+	gm::Assets::LoadTexture("arrow",TEXTURE_ARROW_BUTTON);
+	if(gm::Assets::getTexture("friend") == nullptr || gm::Assets::getTexture("chat bubble") == nullptr || gm::Assets::getTexture("arrow") == nullptr )
 		error_win_close();
 	else
 	{
@@ -289,6 +290,7 @@ void GameState::update(sf::RenderWindow &win)
 	{
 		if(day == 0) //intro
 		{
+			
 			switch (this->data->characterChoice)
 			{
 			case 0:
@@ -297,16 +299,26 @@ void GameState::update(sf::RenderWindow &win)
 			case 1:
 				officeLady->addToQueue(L"Czeœæ Halina!");
 				officeLady->addToQueue(L"Mi³o mi Ciê poznaæ! Wiele o Tobie s³ysza³am");
-				officeLady->addToQueue(L"Jestem zaszczycona, ¿e bêdê pracowaæ z takim ekspertem do spraw cyberbezpieczeñstwa! Pozwól, ¿e poka¿ê ci twoje miejsce pracy!");
+				officeLady->addToQueue(L"Jestem zaszczycona, ¿e bêdê pracowaæ z takim ekspertem do spraw cyberbezpieczeñstwa!");
+				officeLady->addToQueue(L"Pozwól, ¿e poka¿ê ci twoje miejsce pracy!");
 				break;
 			case 2:
-				officeLady->addToQueue(L"Witaj! Powiedziano mi");
+				officeLady->addToQueue(L"Witaj! Powiedziano mi tylko, ¿e jesteœ wybitnym hakerem.");
 			case 3:
-				if()
-				officeLady->addToQueue(L"Witaj! Powiedziano mi tylko, ¿e jestes wybitnym" + L"hakerem");
-				break;
+				if(this->data->characterChoice != 2)
+					officeLady->addToQueue(L"Witaj! Powiedziano mi tylko, ¿e jesteœ wybitnym magiem.");
+				officeLady->addToQueue(L"Jak mam siê do Ciebie zwracaæ?");
+				officeLady->addToQueue(L"Masz œwietne poczucie humoru! Cieszê siê, ¿e bêdziemy razem pracowaæ!");
 
+				sf::String s = L"Mi³o mi Ciê poznaæ .";
+				s = s + this->data->name + sf::String(L" Wiele o tobie s³ysza³am");
+
+				officeLady->addToQueue(s);
+				officeLady->addToQueue(L"Jestem zaszczycona, ¿e bêdê pracowaæ z takim ekspertem do spraw cyberbezpieczeñstwa!");
+				officeLady->addToQueue(L"Pozwól, ¿e poka¿ê ci twoje miejsce pracy!");
+				break;
 			}
+			officeLady->nextLine();
 		}
 
 
@@ -364,7 +376,7 @@ void GameState::draw(sf::RenderWindow& win)
 	//tutorial
 	officeLady->draw(win);
 
-	dayShowScreen->draw(win,sf::RenderStates::Default);
+	//dayShowScreen->draw(win,sf::RenderStates::Default);
 	
 	win.display();
 }
