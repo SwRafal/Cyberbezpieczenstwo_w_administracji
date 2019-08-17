@@ -25,6 +25,12 @@
     <Filter Include="Pliki źródłowe\GameStateItems">
       <UniqueIdentifier>{75dfcd5b-6c43-44f1-bdc3-564da4e29bc6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Pliki nagłówkowe\Days">
+      <UniqueIdentifier>{e00a848a-7f00-48c9-a044-1df5fbb24e6f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pliki źródłowe\Days">
+      <UniqueIdentifier>{70180a0f-bd1a-47f1-a3e7-8b85a8709cbd}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine\Assets.cpp">
@@ -161,6 +167,9 @@
     </ClCompile>
     <ClCompile Include="ChoiceButton.cpp">
       <Filter>Pliki źródłowe</Filter>
+    </ClCompile>
+    <ClCompile Include="Day_1.cpp">
+      <Filter>Pliki źródłowe\Days</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -307,6 +316,12 @@
     </ClInclude>
     <ClInclude Include="ChoiceButton.h">
       <Filter>Pliki nagłówkowe</Filter>
+    </ClInclude>
+    <ClInclude Include="Day.h">
+      <Filter>Pliki nagłówkowe\Days</Filter>
+    </ClInclude>
+    <ClInclude Include="Day_1.h">
+      <Filter>Pliki nagłówkowe\Days</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
