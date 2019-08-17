@@ -171,7 +171,7 @@
     <ClCompile Include="Day_1.cpp">
       <Filter>Pliki źródłowe\Days</Filter>
     </ClCompile>
-    <ClCompile Include="Day_0.cpp">
+    <ClCompile Include="Days_2.cpp">
       <Filter>Pliki źródłowe\Days</Filter>
     </ClCompile>
   </ItemGroup>
@@ -329,7 +329,7 @@
     <ClInclude Include="Days.h">
       <Filter>Pliki nagłówkowe\Days</Filter>
     </ClInclude>
-    <ClInclude Include="Day_0.h">
+    <ClInclude Include="Day_2.h">
       <Filter>Pliki nagłówkowe\Days</Filter>
     </ClInclude>
   </ItemGroup>

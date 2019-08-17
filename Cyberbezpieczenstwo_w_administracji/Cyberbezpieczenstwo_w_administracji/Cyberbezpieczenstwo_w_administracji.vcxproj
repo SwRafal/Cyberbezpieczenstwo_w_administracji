@@ -143,6 +143,7 @@
     <ClCompile Include="Calendar.cpp" />
     <ClCompile Include="ChoiceButton.cpp" />
     <ClCompile Include="Coffee.cpp" />
+    <ClCompile Include="Days_2.cpp" />
     <ClCompile Include="dayx.cpp" />
     <ClCompile Include="Day_0.cpp" />
     <ClCompile Include="Day_1.cpp" />
@@ -197,6 +198,7 @@
     <ClInclude Include="dayx.h" />
     <ClInclude Include="Day_0.h" />
     <ClInclude Include="Day_1.h" />
+    <ClInclude Include="Day_2.h" />
     <ClInclude Include="Definitions.h" />
     <ClInclude Include="Engine\Assets.h" />
     <ClInclude Include="Engine\Button.h" />

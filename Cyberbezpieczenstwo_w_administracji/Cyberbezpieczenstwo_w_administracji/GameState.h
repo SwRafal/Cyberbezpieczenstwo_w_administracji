@@ -5,16 +5,12 @@
 #include "Game.h"
 #include "Functions.h"
 #include "GameStateItems.h"
-//#include "Days.h"
+#include "Days.h"
 #include "PauseState.h"
 #include "dayx.h"
 #include "textBubble.h"
 #include "OfficeFriend.h"
 #include "ChoiceButton.h"
-
-/* Days */
-#include "Day_0.h"
-#include "Day_1.h"
 
 #define FULL_CLOSED_EYES 3
 
@@ -66,9 +62,8 @@ private:
 
 	ChoiceButton *choice1,*choice2,*choice3,*choice4;
 
-	
-	Day_0 siema;
-	Day_1 siema1;
+	Day_1 *wsk = nullptr;/*!!!to musi byc wskaznik jezeli wzajemnie klasy sie includuja!!!*/
+
 public:
 	GameState(gm::gameDataRef data);
 	~GameState();

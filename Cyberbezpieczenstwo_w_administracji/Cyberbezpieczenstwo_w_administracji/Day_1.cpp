@@ -5,7 +5,7 @@ Day_1::Day_1()
 
 }
 
-void Day_1::update(GameState &gs)
+void Day_1::update(GameState *gs)
 {
 
 }
