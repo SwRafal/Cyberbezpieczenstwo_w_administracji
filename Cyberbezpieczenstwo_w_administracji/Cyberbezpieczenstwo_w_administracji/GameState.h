@@ -10,6 +10,8 @@
 #include "textBubble.h"
 #include "OfficeFriend.h"
 
+#define FULL_CLOSED_EYES 3
+
 void error_win_close();
 
 struct ItemsComparator/*Comparator for priority_queues in draw and update*/
@@ -30,6 +32,7 @@ private:
 	textBubble *test;
 
 	OfficeFriend *officeLady;
+	unsigned short closed_eyes_level;
 
 	/*Settings*/
 	unsigned int day;

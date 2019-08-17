@@ -12,6 +12,7 @@
 class Battery : public sf::Sprite
 {
 private:
+	bool _active;
 	unsigned short _level;
 	float _time;
 	sf::RectangleShape _level_display;
@@ -23,7 +24,9 @@ public:
 	void draw(sf::RenderWindow &win);
 	bool update_empty(sf::Clock &clk);//Returns bool value, so GameState knows if we ran out of energy
 
+	void setActivation(bool flag);
 	void setLevel(unsigned short level = MAX_BATTERY_LEVEL);
 
 	unsigned short getLevel() { return _level; }
+	bool getActivation() { return _active; }
 };
