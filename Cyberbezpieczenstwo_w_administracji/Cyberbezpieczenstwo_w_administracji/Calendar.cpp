@@ -251,7 +251,7 @@ Calendar::MONTHS operator++(Calendar::MONTHS& m, int)
 
 Calendar::MONTHS operator+(Calendar::MONTHS& m, unsigned int n)
 {
-	for (int i = 0; i < n; i++)
+	for (unsigned int i = 0; i < n; i++)
 	{
 		m++;
 	}
@@ -293,7 +293,7 @@ Calendar::WEEKDAYS operator++(Calendar::WEEKDAYS& w, int)
 
 Calendar::WEEKDAYS operator+(Calendar::WEEKDAYS& w, unsigned int n)
 {
-	for (int i = 0; i < n; i++)
+	for (unsigned int i = 0; i < n; i++)
 	{
 		w++;
 	}
