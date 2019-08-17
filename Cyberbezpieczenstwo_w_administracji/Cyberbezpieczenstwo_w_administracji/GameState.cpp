@@ -336,6 +336,8 @@ void GameState::update(sf::RenderWindow &win)
 	{
 		if(dayShowScreen->finished)
 			officeLady->show();
+
+		//hi
 	}
 	else if (day == 1)
 	{
