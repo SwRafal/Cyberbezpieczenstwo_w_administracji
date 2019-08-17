@@ -192,6 +192,7 @@
     <ClInclude Include="ChoiceButton.h" />
     <ClInclude Include="Coffee.h" />
     <ClInclude Include="Day.h" />
+    <ClInclude Include="Days.h" />
     <ClInclude Include="dayx.h" />
     <ClInclude Include="Day_1.h" />
     <ClInclude Include="Definitions.h" />

@@ -5,6 +5,7 @@
 #include "Game.h"
 #include "Functions.h"
 #include "GameStateItems.h"
+#include "Days.h"
 #include "PauseState.h"
 #include "dayx.h"
 #include "textBubble.h"
@@ -68,4 +69,6 @@ public:
 	void handleInput() override;
 	void update(sf::RenderWindow &win) override;
 	void draw(sf::RenderWindow& win) override;
+
+	friend class Day;
 };
