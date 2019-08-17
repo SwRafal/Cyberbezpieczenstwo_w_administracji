@@ -167,6 +167,7 @@ void GameState::init()
 
 	/*Starting settings*/
 	//...
+	closed_eyes_level = 0;
 
 	dayShowScreen = new dayx(this->data->day);
 	initialized = false;
@@ -227,6 +228,9 @@ void GameState::handleInput()
 
 void GameState::update(sf::RenderWindow &win)
 {
+	calendar->update(win);
+	watch->update(gm::Core::getClock());
+
 	if (book->isOpened())
 	{
 		if (openedbook->update(win))
@@ -235,34 +239,7 @@ void GameState::update(sf::RenderWindow &win)
 		return;
 	}
 
-	calendar->update(win);
-	watch->update(gm::Core::getClock());
-
-	if (!yes_stamp->isActive() && !no_stamp->isActive())
-	{
-		if (coffee->update_drunk(win))
-		{
-			battery->setLevel(battery->getLevel() + 20);
-		}
-		if (battery->update_empty(gm::Core::getClock()))
-		{
-			//GameOver
-		}
-		book->update(win);
-
-		if (bell->update_rung(win))
-		{
-			//Call the client
-		}
-
-		if (true/*œmieæ podniesiony*/)
-		{
-			if (bin->clicked(win))
-				;//Œmieæ znika
-		}
-	}
-
-	yes_stamp->update(win);
+/*	yes_stamp->update(win);
 	no_stamp->update(win);
 	if (yes_stamp->getPosition().y < no_stamp->getPosition().y)
 	{
@@ -274,8 +251,7 @@ void GameState::update(sf::RenderWindow &win)
 		if (yes_stamp->isActive())
 			no_stamp->setInactive();
 
-	}
-
+	}*/
 
 
 	dayShowScreen->update();
@@ -308,6 +284,11 @@ void GameState::update(sf::RenderWindow &win)
 
 			}
 		}
+		else if (day == 1)
+		{
+			openedbook->setInfoL(L"1. Zabezpiecz dane logowania");
+			openedbook->setInfoR("");
+		}
 
 
 		initialized = true;
@@ -316,6 +297,25 @@ void GameState::update(sf::RenderWindow &win)
 	/* do smth in this day */
 	if(day == 0)
 		;
+	else if (day == 1)
+	{
+		if (!battery->getActivation())
+		{
+			if (coffee->update_drunk(win))
+				battery->setActivation(true);
+			else if (book->clicked(win) || bell->clicked(win) || bin->clicked(win) || no_stamp->clicked(win) || yes_stamp->clicked(win))
+				closed_eyes_level++;
+
+			if (closed_eyes_level == FULL_CLOSED_EYES)
+				;//Przegrana
+			
+		}
+		else
+		{
+			book->setFillColor(sf::Color(230, 230, 230));
+			book->update(win);
+		}
+	}
 
 	if(nextDay)
 	{

@@ -13,6 +13,7 @@ Battery::Battery(sf::Texture *texture)
 
 	setLevel();
 	_time = 0;
+	_active = false;
 }
 
 void Battery::setLevel(unsigned short level)
@@ -42,10 +43,14 @@ bool Battery::update_empty(sf::Clock &clk)
 	if (_level == 0)
 		return true;
 
-	if (clk.getElapsedTime().asSeconds() >= _time + 1)
+	/*if (clk.getElapsedTime().asSeconds() >= _time + 1)
 	{
 		_time = clk.getElapsedTime().asSeconds();
 		setLevel(_level-1);
-	}
-	
+	}*/
+}
+
+void Battery::setActivation(bool flag)
+{
+	_active = flag;
 }
