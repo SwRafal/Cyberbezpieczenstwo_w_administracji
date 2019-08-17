@@ -173,7 +173,9 @@ void GameState::init()
 	dayShowScreen = new dayx(this->data->day);
 	initialized = false;
 	nextDay = false;
-	day = this->data->day;
+	day = 0;
+
+
 
 
 	
@@ -229,7 +231,6 @@ void GameState::handleInput()
 	if(gm::Core::getEnteredChar() == 0x0000007A)
 	{
 		nextDay = true;
-		day++;
 		dayShowScreen->nextDay();
 		this->data->day++;
 	}
