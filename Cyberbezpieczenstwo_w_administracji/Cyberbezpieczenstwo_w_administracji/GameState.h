@@ -62,7 +62,7 @@ private:
 
 	ChoiceButton *choice1,*choice2,*choice3,*choice4;
 
-	
+	Day_1 *wsk = nullptr;/*!!!to musi byc wskaznik jezeli wzajemnie klasy sie includuja!!!*/
 
 public:
 	GameState(gm::gameDataRef data);
