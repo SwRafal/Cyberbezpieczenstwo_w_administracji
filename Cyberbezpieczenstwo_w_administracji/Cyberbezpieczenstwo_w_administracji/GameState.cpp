@@ -176,7 +176,8 @@ void GameState::init()
 	day = 0;
 
 
-
+	przycisk = new ChoiceButton;
+	
 
 	
 }
@@ -387,6 +388,9 @@ void GameState::draw(sf::RenderWindow& win)
 	officeLady->draw(win);
 
 	dayShowScreen->draw(win,sf::RenderStates::Default);
+	przycisk->clicked(win);
+	win.draw(przycisk->background);
+	win.draw(przycisk->text);
 	
 	win.display();
 }

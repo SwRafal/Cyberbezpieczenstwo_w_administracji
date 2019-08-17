@@ -9,6 +9,7 @@
 #include "dayx.h"
 #include "textBubble.h"
 #include "OfficeFriend.h"
+#include "ChoiceButton.h"
 
 #define FULL_CLOSED_EYES 3
 
@@ -57,6 +58,8 @@ private:
 	OpenedBook *openedbook = nullptr;
 
 	Bin *bin = nullptr;
+
+	ChoiceButton *przycisk;
 
 	
 
