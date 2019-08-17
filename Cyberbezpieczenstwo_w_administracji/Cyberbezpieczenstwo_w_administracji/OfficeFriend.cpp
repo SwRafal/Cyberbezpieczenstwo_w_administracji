@@ -8,6 +8,8 @@ OfficeFriend::OfficeFriend(sf::Texture *texture) : text(*gm::Assets::getFont())
 	disappearing = false;
 	ready = false;
 
+	state = 0;
+
 	clicked = false;
 
 	if (texture == nullptr)
@@ -71,19 +73,23 @@ void OfficeFriend::animate()
 			disappearing = false;
 	}
 
-	if(button.clicked(gm::Core::getWindow()))
+	if(ready)
 	{
-		img.setColor(sf::Color::Black);
-		this->nextLine();
+		if(button.clicked(gm::Core::getWindow()))
+		{
+			img.setColor(sf::Color::Black);
+			this->nextLine();
+		}
+		else if(button.aimed(gm::Core::getWindow()))
+		{
+			img.setColor(sf::Color(0, 255, 85,255));
+		}
+		else
+		{
+			img.setColor(sf::Color(0, 255, 162,255));
+		}
 	}
-	else if(button.aimed(gm::Core::getWindow()))
-	{
-		img.setColor(sf::Color(0, 255, 85,255));
-	}
-	else
-	{
-		img.setColor(sf::Color(0, 255, 162,255));
-	}
+	
 	
 }
 

@@ -39,6 +39,8 @@ public:
 	gm::Button button;
 	sf::Sprite img;
 	bool clicked;
+
+	int state;
 	
 
 	

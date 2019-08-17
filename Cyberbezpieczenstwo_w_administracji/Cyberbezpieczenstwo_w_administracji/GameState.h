@@ -59,7 +59,7 @@ private:
 
 	Bin *bin = nullptr;
 
-	ChoiceButton *przycisk;
+	ChoiceButton *choice1,*choice2,*choice3,*choice4;
 
 	
 

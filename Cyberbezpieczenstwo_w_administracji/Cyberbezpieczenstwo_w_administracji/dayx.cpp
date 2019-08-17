@@ -5,6 +5,7 @@
 
 dayx::dayx(int _dayNumber)
 {
+	finished = false;
 	opacitySpeed = 5;
 	show = false;
 	timer = 0;
@@ -44,6 +45,9 @@ void dayx::update()
 			this->setFillColor(sf::Color(0,0,0,opacity));
 
 		}
+
+		if(opacity == 0)
+			finished = true;
 	}
 
 	if(opacity < 255 && timer!= 200)
@@ -63,6 +67,7 @@ void dayx::reset()
 	show = false;
 	timer = 0;
 	opacity = 0;
+	finished = false;
 }
 
 void dayx::nextDay()

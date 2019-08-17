@@ -176,7 +176,10 @@ void GameState::init()
 	day = 0;
 
 
-	przycisk = new ChoiceButton;
+	choice1 = new ChoiceButton;
+	choice2 = new ChoiceButton;
+	choice3 = new ChoiceButton;
+	choice4 = new ChoiceButton;
 	
 
 	
@@ -306,6 +309,16 @@ void GameState::update(sf::RenderWindow &win)
 				officeLady->addToQueue(L"Pozwól, ¿e poka¿ê ci twoje miejsce pracy!");
 				break;
 			}
+
+			choice1->setPosition(officeLady->chat.getPosition().x ,officeLady->chat.getPosition().y + officeLady->chat.getGlobalBounds().height);
+			choice2->setPosition(choice1->background.getPosition().x + choice1->background.getGlobalBounds().width - 10,choice1->background.getPosition().y );
+
+			choice1->setScale(0.37,0.37);
+			choice2->setScale(0.37,0.37);
+
+			choice1->setText(L"Ujawnij swoje dane osobowe");
+			choice2->setText(L"Powo³aj siê na RODO");
+
 			officeLady->nextLine();
 		}
 		else if (day == 1)
@@ -320,7 +333,10 @@ void GameState::update(sf::RenderWindow &win)
 
 	/* do smth in this day */
 	if(day == 0)
-		;
+	{
+		if(dayShowScreen->finished)
+			officeLady->show();
+	}
 	else if (day == 1)
 	{
 		if (!battery->getActivation())
@@ -387,10 +403,18 @@ void GameState::draw(sf::RenderWindow& win)
 	//tutorial
 	officeLady->draw(win);
 
+	choice1->clicked(win);
+	choice2->clicked(win);
+	choice1->draw(win);
+	choice2->draw(win);
+
+
 	dayShowScreen->draw(win,sf::RenderStates::Default);
-	przycisk->clicked(win);
-	win.draw(przycisk->background);
-	win.draw(przycisk->text);
 	
+
+	
+
+	
+
 	win.display();
 }
