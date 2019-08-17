@@ -19,6 +19,8 @@ public:
 	void draw(sf::RenderTarget &target, sf::RenderStates states) const;
 	void reset();
 	void nextDay();
+
+	bool finished;
 	
 };
 

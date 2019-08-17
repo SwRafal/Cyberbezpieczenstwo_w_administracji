@@ -24,8 +24,8 @@ ChoiceButton::ChoiceButton() : text(*gm::Assets::getFont())
 	text.setTextPressColor(sf::Color(157, 199, 197,255));
 	
 	text.setSize(background.getGlobalBounds().width,background.getGlobalBounds().height);
-	text.setTextSize(background.getScale().x * 40);
-	text.setTextString("");
+	text.setTextSize(background.getScale().x * 45);
+	text.setTextString("abc");
 
 	background.setPosition(100,100);
 	text.setPosition(background.getPosition());
@@ -66,6 +66,6 @@ void ChoiceButton::setText(sf::String str)
 void ChoiceButton::draw(sf::RenderWindow& win)
 {
 	win.draw(background);
-	win.draw((sf::RectangleShape)text);
+	win.draw(text);
 }
 
