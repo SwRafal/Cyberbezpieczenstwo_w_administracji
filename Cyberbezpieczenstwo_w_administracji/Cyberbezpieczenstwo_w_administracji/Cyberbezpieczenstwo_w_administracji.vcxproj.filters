@@ -317,7 +317,13 @@
     <ClInclude Include="ChoiceButton.h">
       <Filter>Pliki nagłówkowe</Filter>
     </ClInclude>
+    <ClInclude Include="Day.h">
+      <Filter>Pliki nagłówkowe\Days</Filter>
+    </ClInclude>
     <ClInclude Include="Day_1.h">
+      <Filter>Pliki nagłówkowe\Days</Filter>
+    </ClInclude>
+    <ClInclude Include="Days.h">
       <Filter>Pliki nagłówkowe\Days</Filter>
     </ClInclude>
   </ItemGroup>
