@@ -27,11 +27,10 @@ public:
 
 	void draw(sf::RenderWindow &win);
 
-	//dodamy tu kolejke tekstu
 	std::queue<sf::String> text_queue;
 
-	void addText(sf::String);
-	void nextText();
+	bool nextLine();
+	void addToQueue(sf::String str);
 
 	
 	sf::Sprite chat;

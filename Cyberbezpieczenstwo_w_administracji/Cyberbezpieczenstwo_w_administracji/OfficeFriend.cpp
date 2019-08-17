@@ -74,12 +74,6 @@ void OfficeFriend::hide()
 	disappearing = true;
 }
 
-//void OfficeFriend::draw(sf::RenderTarget& target, sf::RenderStates states) const
-//{
-//	target.draw((sf::Sprite)*this,states);
-//	if(ready)
-//		target.draw(chat);
-//}
 
 void OfficeFriend::draw(sf::RenderWindow &win)
 {
@@ -91,4 +85,20 @@ void OfficeFriend::draw(sf::RenderWindow &win)
 		sf::RenderWindow * w = &win;
 		text.draw(*w);
 	}
+}
+
+bool OfficeFriend::nextLine()
+{	
+	if(!text_queue.empty())
+	{
+	    text.setTextString(text_queue.front());
+		text_queue.pop();
+		return true;
+	}
+	return false;
+}
+
+void OfficeFriend::addToQueue(sf::String str)
+{
+	text_queue.push(str);
 }

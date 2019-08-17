@@ -148,25 +148,30 @@ void GameState::init()
 	//if (gm::Assets::getTexture("TELEPHONE") == nullptr)
 		//error_win_close();
 
+	gm::Assets::LoadTexture("friend", TEXTURE_OFFICE_FRIEND);
+	gm::Assets::LoadTexture("chat bubble",TEXTURE_CHAT_BUBBLE);
+	if(gm::Assets::getTexture("friend") == nullptr || gm::Assets::getTexture("chat bubble") == nullptr)
+		error_win_close();
+	else
+	{
+		officeLady = new OfficeFriend(gm::Assets::getTexture("friend"));
+	}
+
+	gm::Assets::LoadTexture("text bubble",TEXTURE_TEXT_BUBBLE);
+	if(gm::Assets::getTexture("text bubble") == nullptr)
+		error_win_close();
+	else
+	{
+		test = new textBubble(gm::Assets::getTexture("text bubble"));
+	}
+
 	/*Starting settings*/
 	//...
 
 	dayShowScreen = new dayx(this->data->day);
 
 
-	gm::Assets::LoadTexture("text bubble",TEXTURE_TEXT_BUBBLE);
-	test = new textBubble(gm::Assets::getTexture("text bubble"));
 	
-	test->changeText(L"Maciekdsadas  dasdasiudjsaioudjasiduahsjdiuash duoashdoasuydghasuoiydhasouidhasio aoidjhsaioudjsaioud jhasioudhiasu hdiasudhiuash diuasdhio ddsidsiuahdi hsiaudhuias dhsa");
-	test->setBubblePosition(300,400);
-
-
-	gm::Assets::LoadTexture("friend", TEXTURE_OFFICE_FRIEND);
-	gm::Assets::LoadTexture("chat bubble",TEXTURE_CHAT_BUBBLE);
-
-	officeLady = new OfficeFriend(gm::Assets::getTexture("friend"));
-	officeLady->show();
-
 }
 
 void GameState::handleInput()
@@ -308,10 +313,11 @@ void GameState::draw(sf::RenderWindow& win)
 	if (book->isOpened())
 		openedbook->draw(win);
 
-	test->draw(win);
-	officeLady->draw(win);
-
 	//dayShowScreen->draw(win,sf::RenderStates::Default);
 
+	//tutorial
+	officeLady->draw(win);
+
+	
 	win.display();
 }
