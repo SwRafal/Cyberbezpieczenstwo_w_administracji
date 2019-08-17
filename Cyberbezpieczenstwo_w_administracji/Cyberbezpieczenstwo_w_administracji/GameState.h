@@ -33,6 +33,8 @@ private:
 
 	/*Settings*/
 	unsigned int day;
+	bool initialized;
+	bool nextDay;
 
 	/*Environment*/
 	sf::Sprite wall;
@@ -52,6 +54,9 @@ private:
 	OpenedBook *openedbook = nullptr;
 
 	Bin *bin = nullptr;
+
+	
+
 public:
 	GameState(gm::gameDataRef data);
 	~GameState();

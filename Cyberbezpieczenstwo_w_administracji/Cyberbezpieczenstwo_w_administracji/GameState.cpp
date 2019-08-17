@@ -169,6 +169,9 @@ void GameState::init()
 	//...
 
 	dayShowScreen = new dayx(this->data->day);
+	initialized = false;
+	nextDay = false;
+	day = this->data->day;
 
 
 	
@@ -278,6 +281,32 @@ void GameState::update(sf::RenderWindow &win)
 	dayShowScreen->update();
 	test->animate();
 	officeLady->animate();
+
+	/* days management */
+
+	/* Initialize day */
+	if(!initialized)
+	{
+		if(day == 0) //intro
+		{
+			officeLady->addToQueue(L"Wita")
+		}
+
+
+		initialized = true;
+	}
+
+	/* do smth in this day */
+	if(day == 0)
+		;
+
+	if(nextDay)
+	{
+		day++;
+		nextDay = false;
+		initialized = false;
+	}
+	
 }
 
 void GameState::draw(sf::RenderWindow& win)
@@ -313,11 +342,12 @@ void GameState::draw(sf::RenderWindow& win)
 	if (book->isOpened())
 		openedbook->draw(win);
 
-	//dayShowScreen->draw(win,sf::RenderStates::Default);
+	
 
 	//tutorial
 	officeLady->draw(win);
 
+	dayShowScreen->draw(win,sf::RenderStates::Default);
 	
 	win.display();
 }
