@@ -143,7 +143,7 @@
     <ClCompile Include="Calendar.cpp" />
     <ClCompile Include="ChoiceButton.cpp" />
     <ClCompile Include="Coffee.cpp" />
-    <ClCompile Include="Days_2.cpp" />
+    <ClCompile Include="Day_2.cpp" />
     <ClCompile Include="dayx.cpp" />
     <ClCompile Include="Day_0.cpp" />
     <ClCompile Include="Day_1.cpp" />

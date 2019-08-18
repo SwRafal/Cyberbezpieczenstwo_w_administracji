@@ -171,7 +171,10 @@
     <ClCompile Include="Day_1.cpp">
       <Filter>Pliki źródłowe\Days</Filter>
     </ClCompile>
-    <ClCompile Include="Days_2.cpp">
+    <ClCompile Include="Day_2.cpp">
+      <Filter>Pliki źródłowe\Days</Filter>
+    </ClCompile>
+    <ClCompile Include="Day_0.cpp">
       <Filter>Pliki źródłowe\Days</Filter>
     </ClCompile>
   </ItemGroup>
@@ -330,6 +333,9 @@
       <Filter>Pliki nagłówkowe\Days</Filter>
     </ClInclude>
     <ClInclude Include="Day_2.h">
+      <Filter>Pliki nagłówkowe\Days</Filter>
+    </ClInclude>
+    <ClInclude Include="Day_0.h">
       <Filter>Pliki nagłówkowe\Days</Filter>
     </ClInclude>
   </ItemGroup>

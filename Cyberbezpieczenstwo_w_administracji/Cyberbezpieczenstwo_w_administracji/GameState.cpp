@@ -163,7 +163,7 @@ void GameState::init()
 		error_win_close();
 	else
 	{
-		test = new textBubble(gm::Assets::getTexture("text bubble"));
+		popUpText = new textBubble(gm::Assets::getTexture("text bubble"));
 	}
 
 	/*Starting settings*/
@@ -180,6 +180,19 @@ void GameState::init()
 	choice2 = new ChoiceButton;
 	choice3 = new ChoiceButton;
 	choice4 = new ChoiceButton;
+
+	textField = new gm::TextField(*gm::Assets::getFont());
+	textField->setIdleColor(sf::Color::White);
+	textField->setAimedColor(sf::Color(189, 189, 189,255));
+	textField->setPressColor(sf::Color::White);
+	textField->setPosition(100,100);
+	textField->setSize(250,60);
+	textField->setTextSize(25);
+	textField->setTextString(L"");
+	
+
+	/* Days */
+	day0 = new Day_0;
 	
 
 	
@@ -204,9 +217,6 @@ void GameState::handleInput()
 				break;
 			case sf::Event::TextEntered:
 				gm::Core::setEnteredChar(gm::Core::getEvent().text.unicode);
-				
-				
-				
 				break;
 			}
 		}
@@ -271,8 +281,9 @@ void GameState::update(sf::RenderWindow &win)
 
 
 	dayShowScreen->update();
-	test->animate();
+	popUpText->animate();
 	officeLady->animate();
+	textField->update(gm::Core::getWindow(),gm::Core::getEnteredChar());
 
 	/* days management */
 
@@ -331,15 +342,11 @@ void GameState::update(sf::RenderWindow &win)
 		initialized = true;
 	}
 
-	/* do smth in this day */
-	if(day == 0)
-	{
-		if(dayShowScreen->finished)
-			officeLady->show();
+	/* Days */
+		day0->update(this);
 
-		//hi
-	}
-	else if (day == 1)
+		
+	if (day == 1)
 	{
 		if (!battery->getActivation())
 		{
@@ -412,6 +419,8 @@ void GameState::draw(sf::RenderWindow& win)
 
 
 	dayShowScreen->draw(win,sf::RenderStates::Default);
+
+	win.draw(*textField);
 	
 
 	

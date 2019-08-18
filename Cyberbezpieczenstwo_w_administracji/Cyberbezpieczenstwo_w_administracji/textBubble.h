@@ -34,7 +34,7 @@ public:
 	int posy;
 
 	virtual void draw(sf::RenderTarget &target, sf::RenderStates states) = delete;
-	//void draw(sf::RenderTarget& target, sf::RenderStates states) const override = delete;
+	
 	void draw(sf::RenderWindow& win);
 };
 

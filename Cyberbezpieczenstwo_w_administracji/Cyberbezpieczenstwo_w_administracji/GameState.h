@@ -31,7 +31,10 @@ private:
 
 	dayx *dayShowScreen;
 
-	textBubble *test;
+	gm::TextField *textField;
+
+	textBubble *popUpText;
+	int time;
 
 	OfficeFriend *officeLady;
 	unsigned short closed_eyes_level;
@@ -63,6 +66,7 @@ private:
 	ChoiceButton *choice1,*choice2,*choice3,*choice4;
 
 	Day_1 *wsk = nullptr;/*!!!to musi byc wskaznik jezeli wzajemnie klasy sie includuja!!!*/
+	Day_0 *day0;
 
 public:
 	GameState(gm::gameDataRef data);
@@ -74,4 +78,5 @@ public:
 	void draw(sf::RenderWindow& win) override;
 
 	friend class Day;
+	friend class Day_0;
 };
