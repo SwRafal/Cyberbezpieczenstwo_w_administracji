@@ -57,6 +57,8 @@ namespace gm
 		is_active = false;
 		hasLimit = false;
 		limit = 20;
+
+		setPosition(0,-300);
 	}
 
 	TextField::~TextField() {};

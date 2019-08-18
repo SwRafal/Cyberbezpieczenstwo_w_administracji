@@ -185,16 +185,15 @@ void GameState::init()
 	textField->setIdleColor(sf::Color::White);
 	textField->setAimedColor(sf::Color(189, 189, 189,255));
 	textField->setPressColor(sf::Color::White);
-	textField->setPosition(100,100);
-	textField->setSize(250,60);
+	textField->setSize(293,60);
 	textField->setTextSize(25);
 	textField->setTextString(L"");
 	
 
 	/* Days */
 	day0 = new Day_0;
-	
 
+	
 	
 }
 
@@ -321,14 +320,18 @@ void GameState::update(sf::RenderWindow &win)
 				break;
 			}
 
-			choice1->setPosition(officeLady->chat.getPosition().x ,officeLady->chat.getPosition().y + officeLady->chat.getGlobalBounds().height);
-			choice2->setPosition(choice1->background.getPosition().x + choice1->background.getGlobalBounds().width - 10,choice1->background.getPosition().y );
+			choice1->setPosition(0,-300);
+			choice2->setPosition(0,-300);
 
 			choice1->setScale(0.37,0.37);
 			choice2->setScale(0.37,0.37);
 
 			choice1->setText(L"Ujawnij swoje dane osobowe");
 			choice2->setText(L"Powo³aj siê na RODO");
+
+			
+			popUpText->changeText(L"Niestety RODO nie uchroni³o Ciê przed podaniem swoich danych osobowych.");
+			popUpText->setBubblePosition(0,-300);
 
 			officeLady->nextLine();
 		}
@@ -412,15 +415,17 @@ void GameState::draw(sf::RenderWindow& win)
 	//tutorial
 	officeLady->draw(win);
 
-	choice1->clicked(win);
-	choice2->clicked(win);
-	choice1->draw(win);
-	choice2->draw(win);
+	if(day0->state == 2)
+	{
+		choice1->draw(win);
+		choice2->draw(win);
+	}
 
 
 	dayShowScreen->draw(win,sf::RenderStates::Default);
 
 	win.draw(*textField);
+	popUpText->draw(win);
 	
 
 	

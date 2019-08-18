@@ -12,10 +12,13 @@ textBubble::textBubble(sf::Texture *tex) : text(*gm::Assets::getFont())
 
 	text.setTextSize(20);
 	text.setTextColor(sf::Color::Black);
-	text.setFillColor(sf::Color(255,0,0,100));
+	text.setFillColor(sf::Color::Transparent);
 
-	appearing = true;
-	disappearing = false;
+	text.setSize(this->getGlobalBounds().width * 0.98,this->getGlobalBounds().height * 96);
+
+
+	appearing = false;
+	disappearing = true;
 	showText = false;
 
 	
@@ -31,7 +34,7 @@ void textBubble::setBubblePosition(int x, int y)
 	posx = x;
 	posy = y;
 	this->setPosition(x,y);
-	text.setPosition(x,y);
+	text.setPosition(x + 5,y + 1);
 	
 }
 

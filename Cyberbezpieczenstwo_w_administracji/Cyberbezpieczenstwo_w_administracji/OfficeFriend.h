@@ -20,6 +20,7 @@ public:
 	bool appearing;
 	bool disappearing;
 	bool ready;
+	bool active;
 
 	void animate();
 	void show();
@@ -31,6 +32,9 @@ public:
 
 	bool nextLine();
 	void addToQueue(sf::String str);
+
+	void setButtonActive();
+	void setButtonInactive();
 
 	
 	sf::Sprite chat;
