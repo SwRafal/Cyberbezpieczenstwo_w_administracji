@@ -24,6 +24,7 @@ struct ItemsComparator/*Comparator for priority_queues in draw and update*/
 	}
 };
 
+
 class GameState : public gm::SlideFrame
 {
 private:
@@ -65,8 +66,8 @@ private:
 
 	ChoiceButton *choice1,*choice2,*choice3,*choice4;
 
-	Day_1 *wsk = nullptr;/*!!!to musi byc wskaznik jezeli wzajemnie klasy sie includuja!!!*/
-	Day_0 *day0;
+	Day_0 *day0 = nullptr;
+	Day_1 *day1 = nullptr;/*!!!to musi byc wskaznik jezeli wzajemnie klasy sie includuja!!!*/
 
 public:
 	GameState(gm::gameDataRef data);
@@ -79,4 +80,5 @@ public:
 
 	friend class Day;
 	friend class Day_0;
+	friend class Day_1;
 };

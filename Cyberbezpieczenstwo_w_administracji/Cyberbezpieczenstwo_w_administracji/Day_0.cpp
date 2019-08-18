@@ -1,5 +1,4 @@
 #include "Day_0.h"
-#include "Engine/Core.h"
 #include "GameState.h"
 
 Day_0::Day_0()

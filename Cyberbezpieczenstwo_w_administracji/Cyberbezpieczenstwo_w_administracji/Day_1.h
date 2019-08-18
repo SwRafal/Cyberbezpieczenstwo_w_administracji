@@ -27,5 +27,6 @@ public:
 	bool refused_email;
 
 	Day_1();
-	void update(GameState *gs);
+	void update(GameState *gs) override;
+	void update(GameState *gs, sf::RenderWindow &win);
 };

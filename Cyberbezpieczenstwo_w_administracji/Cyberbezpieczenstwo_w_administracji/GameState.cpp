@@ -8,6 +8,11 @@ GameState::GameState(gm::gameDataRef data) : data(data)
 }
 GameState::~GameState()
 {
+	delete day0;
+	day0 = nullptr;
+	delete day1;
+	day1 = nullptr;
+
 	delete calendar;
 	calendar = nullptr;
 	delete watch;
@@ -337,6 +342,8 @@ void GameState::update(sf::RenderWindow &win)
 		}
 		else if (day == 1)
 		{
+			day1 = new Day_1;
+
 			openedbook->setInfoL(L"1. Zabezpiecz dane logowania");
 			openedbook->setInfoR("");
 		}
@@ -346,27 +353,10 @@ void GameState::update(sf::RenderWindow &win)
 	}
 
 	/* Days */
+	if (day == 0)
 		day0->update(this);
-
-		
-	if (day == 1)
-	{
-		if (!battery->getActivation())
-		{
-			if (coffee->update_drunk(win))
-				battery->setActivation(true);
-			else if (book->clicked(win) || bell->clicked(win) || bin->clicked(win) || no_stamp->clicked(win) || yes_stamp->clicked(win))
-				closed_eyes_level++;
-
-			if (closed_eyes_level == FULL_CLOSED_EYES)
-				std::cout << "PRZEGRALES";//Przegrana
-		}
-		else
-		{
-			book->setFillColor(sf::Color(230, 230, 230));
-			book->update(win);
-		}
-	}
+	else if (day == 1)
+		day1->update(this, win);
 
 	if(nextDay)
 	{
