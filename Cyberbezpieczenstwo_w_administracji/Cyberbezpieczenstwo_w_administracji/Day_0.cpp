@@ -1,4 +1,5 @@
 #include "Day_0.h"
+#include "Engine/Core.h"
 #include "GameState.h"
 
 Day_0::Day_0()
@@ -7,6 +8,11 @@ Day_0::Day_0()
 	showTextField = false;
 	showButtons = false;
 	part1Over = false;
+	reset = false;
+	init = false;
+
+	background.setSize(sf::Vector2f(SCREEN_WIDTH,SCREEN_HEIGHT));
+	background.setFillColor(sf::Color(0,0,0,200));
 }
 
 void Day_0::update(GameState* gs)
@@ -125,8 +131,167 @@ void Day_0::update(GameState* gs)
 
 	if(part1Over)
 	{
+		if (!reset)
+		{
+			state = -1;
+			gs->officeLady->state = 0;
+			reset = true;
+		}
+		if (!init)
+		{
+			
+			//kawa 0
+			gs->officeLady->addToQueue(L"Nale¿y zacz¹æ od podstaw. Kawa to podstawa. Takie mamy tu zasady. Niewa¿ne czy lubisz kawê – codziennie rano musisz j¹ wypiæ. ");
+			gs->officeLady->addToQueue(L"To fundament utrzymania cyberbezpieczeñstwa na wysokim poziomie. Nie mo¿emy ryzykowaæ, ¿e niewyspany, zmêczony pracownik pope³ni b³êdy.");
+			gs->officeLady->addToQueue(L"Pamiêtaj, aby monitorowaæ poziom swojej kawowej baterii. Gdy zaœwieci siê na pomarañczowo masz niewiele czasu aby uzupe³niæ kofeinê, jeœli tego nie zrobisz – zaœniesz. ");
+			gs->officeLady->addToQueue(L"Spanie w pracy jest niedopuszczalne. Szef nienawidzi japoñskich zwyczajów. Nie radzê te¿ jeœæ sushi na lunch. ");
+
+
+			// KSI¥¯KA INFO/ EKRAN KOMPUTERA/ TELEFON S£U¯BOWY 1
+			gs->officeLady->addToQueue(L"Szef kontaktuje siê z nami na wiele sposobów. Najwa¿niejszym jest, aby codziennie rano sprawdziæ najnowsze wytyczne w Ksi¹¿ce informacyjnej.");
+			gs->officeLady->addToQueue(L"Bezwzglêdnie ich przestrzegaj. Na bie¿¹co te¿ sprawdzaj e-maile i odbieraj telefon s³u¿bowy.Szef nie lubi byæ ignorowany.");
+
+			//monitor
+			gs->officeLady->addToQueue(L"Po porannym ³yku kawy i zapoznaniu siê z wytycznymi z ksi¹¿ki logujesz siê na swoje konto w systemie.");
+			gs->officeLady->addToQueue(L"Twoim podstawowym narzêdziem pracy jest system e-mailowy. Przed wyjœciem wyloguj siê i zgaœ komputer. To proste.");
+
+			//Telefon sluzbowy
+			gs->officeLady->addToQueue(L"Fajny, prawda? Szef lubi na niego dzwoniæ. Mo¿esz te¿ œmia³o u¿ywaæ go do kontaktu z dzia³em IT – s¹ bardzo pomocni.");
+
+			//okienko z petentem
+			gs->officeLady->addToQueue(L"Podstaw¹ twojej pracy bêdzie na razie komputer. Do czasu ukoñczenia szkolenia petentami zasadniczo zajmujê siê tylko ja. Mo¿e siê jednak zdarzyæ, ¿e ktoœ przyjdzie do ciebie.Obs³u¿ go. ");
+
+			//puste miejsce na stole
+			gs->officeLady->addToQueue(L"To twój stó³ operacyjny. To tu petenci sk³adaj¹ dokumenty - Zapoznawaj siê z nimi dok³adnie, ludzie s¹ przebiegli, tylko czyhaj¹ aby naruszyæ nasze zasady bezpieczeñstwa.");
+			gs->officeLady->addToQueue(L"W tym miejscu, w niektóre poranki bêdê ci te¿ podrzucaæ gazetê, Nasze Ministerstwo czêsto trafia na nag³ówki, wiêc warto j¹ przeczytaæ.");
+			gs->officeLady->addToQueue(L"Nasi informatycy s¹ niereformowalni zwykle k³ad¹ w to miejsce ró¿ne wa¿ne dla nas rzeczy. Pamiêtaj, ¿eby mieæ je na oku a najlepiej zabraæ je w inne miejsce.");
+
+			//pieczatki
+			gs->officeLady->addToQueue(L"Niegdyœ g³ówny orê¿ w rêku ka¿dego urzêdnika. Dziœ stopniowo wypierany przez klawiaturê i myszkê.Có¿ szef kaza³ ci je daæ, wiêc mo¿liwe, ¿e kiedyœ ci siê przydadz¹.");
+
+			//niszczarka , kosz na smieci
+			gs->officeLady->addToQueue(L"Jeœli dokument nie mo¿e zostaæ zatwierdzony nasz¹ piecz¹tk¹ pamiêtaj, aby umieœciæ go w niszczarce.Do kosza wyrzucasz wszystkie inne niepotrzebne rzeczy. Segregacja to podstawa, musisz siê jej nauczyæ.");
+
+			//zegar i kalendars
+			gs->officeLady->addToQueue(L"Co wiêcej mogê powiedzieæ. Zegar i kalendarz ju¿ pewnie zosta³ przez Ciebie zauwa¿ony.Pilnuj czasu.Jak to mówi¹ spóŸnienia to pierwszy stopieñ na dywanik u Szefa. ");
+
+			//telefon prywatny
+			sf::String s = L"O! Widzê, ¿e masz najnowszego smartfona! Poka¿! ... O NIE!";
+			s = s + gs->data->name + "! To produkcja japoñskiej firmy! Wiesz co to oznacza!";
+			gs->officeLady->addToQueue(s);
+			gs->officeLady->addToQueue(L"W dodatku Szef nie uznaje u¿ywania prywatnych telefonów w pracy. Mówi, ¿e zagra¿a to bezpieczeñstwu firmy. Gdy siê tu pojawi radzê Ci go schowaæ, inaczej mo¿esz mieæ k³opoty!");
 		
+			init = true;
+		}
+
+		if(gs->officeLady->state == 1)
+			state = 0;
+		if(gs->officeLady->state == 5)
+			state = 1;
+		if(gs->officeLady->state == 8)
+			state = 2;
 	}
+
+}
+
+void Day_0::draw(GameState* gs)
+{
+	if(gs->day==0)
+	{
+	sf::RenderWindow& win = gm::Core::getWindow();
+
+	switch (state)
+	{
+	case -1:
+		win.clear();
+
+		/*Background*/
+		win.draw(gs->wall);
+		gs->calendar->draw(win);
+		gs->bell->draw(win);
+		gs->watch->draw(win);
+
+		
+		gs->book->draw(win);
+		gs->no_stamp->draw(win);
+		gs->yes_stamp->draw(win);
+
+		gs->bin->draw(win);
+		gs->battery->draw(win);
+
+		
+
+		gs->coffee->draw(win);
+
+		
+
+		gs->officeLady->draw(win);
+
+		win.display();
+		break;
+	case 0:
+		win.clear();
+
+		/*Background*/
+		win.draw(gs->wall);
+		gs->calendar->draw(win);
+		gs->bell->draw(win);
+		gs->watch->draw(win);
+
+		
+		gs->book->draw(win);
+		
+		gs->no_stamp->draw(win);
+		gs->yes_stamp->draw(win);
+
+		gs->bin->draw(win);
+		gs->battery->draw(win);
+
+		//border
+		win.draw(background);
+
+		gs->coffee->draw(win);
+
+		
+
+		gs->officeLady->draw(win);
+
+		win.display();
+		break;
+	case 1:
+		win.clear();
+
+		/*Background*/
+		win.draw(gs->wall);
+		gs->calendar->draw(win);
+		gs->bell->draw(win);
+		gs->watch->draw(win);
+
+		
+		gs->coffee->draw(win);
 	
+		gs->no_stamp->draw(win);
+		gs->yes_stamp->draw(win);
+
+		gs->bin->draw(win);
+		gs->battery->draw(win);
+
+		//border
+		win.draw(background);
+
+		gs->book->draw(win);
+
+		gs->officeLady->draw(win);
+
+		win.display();
+		break;
 	
+	case 2:
+		gs->nextDay = true;
+		gs->dayShowScreen->nextDay();
+		gs->data->day++;
+		gs->officeLady->hide();
+		break;
+	}
+	}
 }

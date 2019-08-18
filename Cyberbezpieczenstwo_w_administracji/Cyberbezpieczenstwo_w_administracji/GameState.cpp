@@ -417,10 +417,11 @@ void GameState::draw(sf::RenderWindow& win)
 	win.draw(*textField);
 	popUpText->draw(win);
 	
-
 	
 
 	
-
+	if(day0->part1Over && day == 0)
+		day0->draw(this);
+	else
 	win.display();
 }
