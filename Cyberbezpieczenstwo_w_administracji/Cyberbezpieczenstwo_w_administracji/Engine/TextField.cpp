@@ -36,9 +36,9 @@ namespace gm
 			setFillColor(getPressColor());
 			if (!hasLimit || (hasLimit && getTextString().getSize() < limit))
 			{
-				if (char_entered >= 32 && char_entered <= 126)
+				if ((char_entered >= 32 && char_entered <= 126) || char_entered == 243 || char_entered == 322 || char_entered == 380 || char_entered == 243 || char_entered == 281 || char_entered == 347)
 				{
-					setTextString(getTextString() + static_cast<char>(char_entered));
+					setTextString(getTextString() + static_cast<wchar_t>(char_entered));
 				}
 			}
 			if (char_entered == BACKSPACE && !getTextString().toAnsiString().empty())//Backspace
