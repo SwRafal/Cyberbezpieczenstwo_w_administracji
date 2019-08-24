@@ -14,7 +14,12 @@ public:
 	bool reset;
 	bool init;
 
+	int time;
+
 	sf::RectangleShape background;
+
+	sf::Sprite screen;
+	sf::Sprite table;
 
 	Day_0();
 	void update(GameState* gs) override;

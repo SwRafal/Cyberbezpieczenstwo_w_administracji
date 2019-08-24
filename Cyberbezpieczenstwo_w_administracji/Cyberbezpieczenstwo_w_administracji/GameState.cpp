@@ -249,8 +249,6 @@ void GameState::handleInput()
 	if(gm::Core::getEnteredChar() == 0x0000007A)
 	{
 		nextDay = true;
-		dayShowScreen->nextDay();
-		this->data->day++;
 	}
 
 	
@@ -363,6 +361,9 @@ void GameState::update(sf::RenderWindow &win)
 		day++;
 		nextDay = false;
 		initialized = false;
+		dayShowScreen->nextDay();
+		this->data->day++;
+		watch->setHour(8,0);
 	}
 	
 }
@@ -418,7 +419,6 @@ void GameState::draw(sf::RenderWindow& win)
 	popUpText->draw(win);
 	
 	
-
 	
 	if(day0->part1Over && day == 0)
 		day0->draw(this);

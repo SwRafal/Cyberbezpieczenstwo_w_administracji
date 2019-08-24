@@ -65,3 +65,8 @@
 #define INTRO_TEXT_7 "resources/text/intro/7.txt"
 #define INTRO_TEXT_SPACE "resources/text/intro/spacja.txt"
 #define INTRO_TEXT_CHOICE "resources/text/intro/choice.txt"
+
+/* day 0 */
+
+#define PC_SCREEN_TEXTURE "resources/textures/screen.png"
+#define EMPTY_TABLE_TEXTURE "resources/textures/empty table.png"
