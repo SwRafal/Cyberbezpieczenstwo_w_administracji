@@ -3,7 +3,7 @@
 
 
 
-Phone::Phone() 
+Phone::Phone() : arrow(15,3), text(*gm::Assets::getFont()), arrowButton(*gm::Assets::getFont())
 {
 	/* set textures */
 	gm::Assets::LoadSound("ringtone", PHONE_RINGING_FILEPATH);
@@ -21,16 +21,8 @@ Phone::Phone()
 	textBackground.setTexture(*gm::Assets::getTexture("text bubble"));
 
 
-	/* set pointers */
-	arrowButton = new gm::TextButton(*gm::Assets::getFont());
-	text = new gm::Information(*gm::Assets::getFont());
-
-	
-	
 	
 
-	
-	
 
 	/* set position */
 
@@ -59,14 +51,12 @@ Phone::Phone()
 	arrowButton->setPosition(textBackground.getPosition());
 
 	
+	text.setPosition(textBackground.getPosition().x + 5, textBackground.getPosition().y);
 	
-	text->setSize(textBackground.getGlobalBounds().width * 0.98, textBackground.getGlobalBounds().height * 0.98);
-	text->setTextSize(20);
-	text->setFillColor(sf::Color(255,0,0,100));
-	text->setTextColor(sf::Color::Black);
-	//text->setPosition(textBackground.getPosition());
-	text->setPosition(textBackground.getPosition().x + 3, textBackground.getPosition().y);
-	
+	arrow.setPosition(text.getPosition());
+
+	arrow.rotate(90);
+	arrow.setPosition(textBackground.getPosition().x ,textBackground.getPosition().y);
 
 	/* variables */
 
@@ -132,7 +122,7 @@ void Phone::update(sf::RenderWindow& win)
 		calling = false;
 	}
 
-	if(arrowButton->clicked(win))
+	if(arrowButton.clicked(win))
 	{
 		if(!nextLine())
 		{
@@ -156,11 +146,10 @@ void Phone::draw(sf::RenderWindow& win)
 	if(pickedUp)
 	{
 		win.draw(textBackground);
-		text->draw(win);
-		win.draw(*arrowButton);
+		text.draw(win);
+		win.draw(arrowButton);
+		win.draw(arrow);
 	}
-		
-	
 }
 
 void Phone::call()
@@ -177,7 +166,7 @@ bool Phone::nextLine()
 {
 	if(!text_queue.empty())
 	{
-		text->setTextString(text_queue.front());
+		text.setTextString(text_queue.front());
 		text_queue.pop();
 		return true;
 	}

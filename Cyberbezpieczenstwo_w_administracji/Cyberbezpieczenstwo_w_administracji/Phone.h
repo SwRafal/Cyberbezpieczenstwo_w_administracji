@@ -2,7 +2,7 @@
 #include "Engine/Engine.h"
 #include "Functions.h"
 #include <queue>
-#include "textBubble.h"
+
 
 #define PHONE_POS_X 10
 #define PHONE_POS_Y 460
@@ -16,9 +16,10 @@ class Phone : public gm::Button
 public:
 	sf::Sound ringtone;
 
-	gm::Information *text;
+	gm::Information text;
 	sf::Sprite textBackground;
-	gm::TextButton *arrowButton;
+	gm::TextButton arrowButton;
+	sf::CircleShape arrow;
 	
 	;
 	bool calling;
