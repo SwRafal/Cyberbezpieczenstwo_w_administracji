@@ -243,6 +243,8 @@ void GameState::handleInput()
 	if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::F))
 		officeLady->hide();
 		//test->closeBubble();
+	if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::M))
+		phone->call();
 
 	if(gm::Core::getEnteredChar() == 0x0000007A)
 	{
@@ -383,10 +385,14 @@ void GameState::draw(sf::RenderWindow& win)
 	button_items.push(coffee);
 	button_items.push(yes_stamp);
 	button_items.push(no_stamp);
-	button_items.push(phone);
+	//button_items.push(phone);
 	//...more
 	
+	
 	/*--------------------------------*/
+
+	phone->draw(win);
+	
 
 	/*Drawing*/
 	while (!button_items.empty())
@@ -394,6 +400,8 @@ void GameState::draw(sf::RenderWindow& win)
 		win.draw(*button_items.top());
 		button_items.pop();
 	}
+
+	
 
 	bin->draw(win);
 	battery->draw(win);

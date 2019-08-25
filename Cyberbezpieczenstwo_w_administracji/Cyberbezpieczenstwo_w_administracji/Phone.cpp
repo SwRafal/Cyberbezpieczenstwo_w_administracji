@@ -3,7 +3,7 @@
 
 
 
-Phone::Phone() : text(*gm::Assets::getFont())
+Phone::Phone() 
 {
 	/* set textures */
 	gm::Assets::LoadSound("ringtone", PHONE_RINGING_FILEPATH);
@@ -15,24 +15,58 @@ Phone::Phone() : text(*gm::Assets::getFont())
 	
 	this->setTexture(gm::Assets::getTexture("phone"));
 
-	gm::Assets::LoadTexture("text bubble", TEXTURE_TEXT_BUBBLE);
-	if (gm::Assets::getTexture("text bubble") == nullptr)
-		error_win_close();
+	if(gm::Assets::getTexture("text bubble") == nullptr)
+		gm::Assets::LoadTexture("text bubble", TEXTURE_TEXT_BUBBLE);
+	
+	textBackground.setTexture(*gm::Assets::getTexture("text bubble"));
 
-	bubble.setTexture(*gm::Assets::getTexture("text bubble"));
+
+	/* set pointers */
+	arrowButton = new gm::TextButton(*gm::Assets::getFont());
+	text = new gm::Information(*gm::Assets::getFont());
+
+	
+	
+	
+
+	
+	
 
 	/* set position */
 
-	setSize(sf::Vector2f(PHONE_WIDTH, PHONE_HEIGHT));
-	setIdleColor(sf::Color::White);
-	setAimedColor(sf::Color(190, 200, 190));
-	setPressColor(sf::Color(120, 150, 120));
+	this->setSize(sf::Vector2f(PHONE_WIDTH, PHONE_HEIGHT));
+	this->setIdleColor(sf::Color::White);
+	this->setAimedColor(sf::Color(190, 200, 190));
+	this->setPressColor(sf::Color(120, 150, 120));
 	this->setPosition(sf::Vector2f(PHONE_POS_X, PHONE_POS_Y));
 
-	if(gm::Assets::getTexture("text bubble") == nullptr)
-		gm::Assets::LoadTexture("text bubble", TEXTURE_TEXT_BUBBLE);
-	bubble.setTexture(*gm::Assets::getTexture("text bubble"));
-	bubble.setPosition(0,-300);
+
+	textBackground.setPosition(SCREEN_WIDTH / 2 - textBackground.getGlobalBounds().width / 2, SCREEN_HEIGHT / 2 - textBackground.getGlobalBounds().height / 2);
+
+	arrowButton->setTextIdleColor(sf::Color::Red);
+	arrowButton->setTextAimedColor(sf::Color(230, 120, 255,255));
+	arrowButton->setTextPressColor(sf::Color(216, 46, 255,255));
+	arrowButton->setIdleColor(sf::Color::Transparent);
+	arrowButton->setAimedColor(sf::Color::Transparent);
+	arrowButton->setPressColor(sf::Color::Transparent);
+	
+	arrowButton->setTextSize(30);
+	
+
+	arrowButton->setTextString(L">");
+	arrowButton->setSize(100,100);
+	
+	arrowButton->setPosition(textBackground.getPosition());
+
+	
+	
+	text->setSize(textBackground.getGlobalBounds().width * 0.98, textBackground.getGlobalBounds().height * 0.98);
+	text->setTextSize(20);
+	text->setFillColor(sf::Color(255,0,0,100));
+	text->setTextColor(sf::Color::Black);
+	//text->setPosition(textBackground.getPosition());
+	text->setPosition(textBackground.getPosition().x + 3, textBackground.getPosition().y);
+	
 
 	/* variables */
 
@@ -41,14 +75,16 @@ Phone::Phone() : text(*gm::Assets::getFont())
 
 	showText = false;
 	showButtons = false;
+	showArrowButton = false;
+
+	
 
 	choice = 0;
 
 	text_queue.push(L"siema nie moge teraz rozmawiac");
 	text_queue.push(L"przeciez to ty zadzwoniles");
 
-	bubble.setScale(0.5,0.5);
-	bubble.setPosition(50,50);
+	
 
 
 
@@ -64,14 +100,8 @@ Phone::~Phone()
 
 void Phone::update(sf::RenderWindow& win)
 {
-	if(clicked(win))
-	{
-		if(calling)
-			pickedUp = true;
 
-		calling = false;
-		
-	}
+	
 
 	if(calling)
 	{
@@ -91,17 +121,46 @@ void Phone::update(sf::RenderWindow& win)
 	else
 		ringtone.stop();
 
+	if(clicked(win))
+	{
+		if(calling)
+		{
+			nextLine();
+			showText = true;
+			pickedUp = true;
+		}
+		calling = false;
+	}
 
+	if(arrowButton->clicked(win))
+	{
+		if(!nextLine())
+		{
+			pickedUp = false;
+		}
+	}
+	
+
+	
+	
 	
 
 	
 }
 
+
+
 void Phone::draw(sf::RenderWindow& win)
 {
 	win.draw((sf::RectangleShape)*this);
-	win.draw((sf::Sprite)bubble);
-	//win.draw(text);
+	if(pickedUp)
+	{
+		win.draw(textBackground);
+		text->draw(win);
+		win.draw(*arrowButton);
+	}
+		
+	
 }
 
 void Phone::call()
@@ -112,4 +171,15 @@ void Phone::call()
 void Phone::addToQueue(sf::String str)
 {
 	text_queue.push(str);
+}
+
+bool Phone::nextLine()
+{
+	if(!text_queue.empty())
+	{
+		text->setTextString(text_queue.front());
+		text_queue.pop();
+		return true;
+	}
+	return false;
 }
