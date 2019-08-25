@@ -5,4 +5,5 @@ class Day_2 : public Day
 {
 public:
 	void update(GameState *gs);
+	void draw(GameState* gs);
 };

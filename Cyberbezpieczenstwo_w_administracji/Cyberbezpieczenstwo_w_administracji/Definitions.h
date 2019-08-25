@@ -4,6 +4,7 @@
 
 #define CLICK_SOUND_FILEPATH "resources/sounds/ClickSoundLong.wav"
 #define BELL_SOUND_FILEPATH "resources/sounds/bell_sound.wav"
+#define PHONE_RINGING_FILEPATH "resources/sounds/phone ringing.wav"
 
 /* Fonts */
 
@@ -37,7 +38,7 @@
 /* Game Textures*/
 #define TEXTURE_WALL "resources/textures/wall.png"
 #define TEXTURE_CALENDAR "resources/textures/calendar.png"
-#define TEXTURE_TELEPHONE "resources/textures/telephone.png"
+#define TEXTURE_TELEPHONE "resources/textures/phone.png"
 #define TEXTURE_WATCH "resources/textures/watch.png"
 #define TEXTURE_COFFEE "resources/textures/coffee.png"
 #define TEXTURE_BATTERY "resources/textures/battery.png"

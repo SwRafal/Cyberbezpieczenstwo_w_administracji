@@ -338,5 +338,8 @@
     <ClInclude Include="Day_0.h">
       <Filter>Pliki nagłówkowe\Days</Filter>
     </ClInclude>
+    <ClInclude Include="Day_3.h">
+      <Filter>Pliki nagłówkowe\Days</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

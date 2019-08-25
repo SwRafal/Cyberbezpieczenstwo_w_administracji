@@ -53,6 +53,7 @@ private:
 	Coffee *coffee = nullptr;
 	Battery *battery = nullptr;
 	Bell *bell = nullptr;
+	Phone *phone = nullptr;
 
 	const sf::Vector2f yes_stamp_pos = sf::Vector2f(250,490);
 	Stamp *yes_stamp = nullptr;

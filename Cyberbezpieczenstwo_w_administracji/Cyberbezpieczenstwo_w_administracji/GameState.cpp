@@ -148,10 +148,8 @@ void GameState::init()
 		bin = new Bin(gm::Assets::getTexture("BIN"));
 	}
 
-	//Telephone
-	//gm::Assets::LoadTexture("TELEPHONE", TEXTURE_TELEPHONE);
-	//if (gm::Assets::getTexture("TELEPHONE") == nullptr)
-		//error_win_close();
+	//phone
+	phone = new Phone;
 
 	gm::Assets::LoadTexture("friend", TEXTURE_OFFICE_FRIEND);
 	gm::Assets::LoadTexture("chat bubble",TEXTURE_CHAT_BUBBLE);
@@ -256,6 +254,7 @@ void GameState::handleInput()
 
 void GameState::update(sf::RenderWindow &win)
 {
+	phone->update(win);
 	calendar->update(win);
 	watch->update(gm::Core::getClock());
 
@@ -384,6 +383,7 @@ void GameState::draw(sf::RenderWindow& win)
 	button_items.push(coffee);
 	button_items.push(yes_stamp);
 	button_items.push(no_stamp);
+	button_items.push(phone);
 	//...more
 	
 	/*--------------------------------*/

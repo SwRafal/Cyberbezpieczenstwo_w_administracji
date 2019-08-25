@@ -18,6 +18,8 @@ namespace gm
 
 		sf::String name = "";
 
+		int nagany = 0;
+
 		int day = 0;
 	};
 

@@ -7,3 +7,4 @@
 #include "Stamp.h"
 #include "Book.h"
 #include "Bin.h"
+#include "Phone.h"
