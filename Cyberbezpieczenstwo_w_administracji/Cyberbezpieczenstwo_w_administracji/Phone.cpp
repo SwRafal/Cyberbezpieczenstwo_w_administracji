@@ -50,12 +50,12 @@ Phone::Phone()
 	arrowButton->setAimedColor(sf::Color::Transparent);
 	arrowButton->setPressColor(sf::Color::Transparent);
 	
-	arrowButton->setTextSize(30);
+	
 	
 
 	arrowButton->setTextString(L">");
 	arrowButton->setSize(100,100);
-	
+	arrowButton->setTextSize(30);
 	arrowButton->setPosition(textBackground.getPosition());
 
 	
