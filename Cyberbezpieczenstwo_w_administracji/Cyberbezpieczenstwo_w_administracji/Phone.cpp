@@ -35,20 +35,20 @@ Phone::Phone() : arrow(15,3), text(*gm::Assets::getFont()), arrowButton(*gm::Ass
 
 	textBackground.setPosition(SCREEN_WIDTH / 2 - textBackground.getGlobalBounds().width / 2, SCREEN_HEIGHT / 2 - textBackground.getGlobalBounds().height / 2);
 
-	arrowButton->setTextIdleColor(sf::Color::Red);
-	arrowButton->setTextAimedColor(sf::Color(230, 120, 255,255));
-	arrowButton->setTextPressColor(sf::Color(216, 46, 255,255));
-	arrowButton->setIdleColor(sf::Color::Transparent);
-	arrowButton->setAimedColor(sf::Color::Transparent);
-	arrowButton->setPressColor(sf::Color::Transparent);
+	arrowButton.setTextIdleColor(sf::Color::Red);
+	arrowButton.setTextAimedColor(sf::Color(230, 120, 255,255));
+	arrowButton.setTextPressColor(sf::Color(216, 46, 255,255));
+	arrowButton.setIdleColor(sf::Color::Transparent);
+	arrowButton.setAimedColor(sf::Color::Transparent);
+	arrowButton.setPressColor(sf::Color::Transparent);
 	
 	
 	
 
-	arrowButton->setTextString(L">");
-	arrowButton->setSize(100,100);
-	arrowButton->setTextSize(30);
-	arrowButton->setPosition(textBackground.getPosition());
+	arrowButton.setTextString(L">");
+	arrowButton.setSize(100,100);
+	arrowButton.setTextSize(30);
+	arrowButton.setPosition(textBackground.getPosition());
 
 	
 	text.setPosition(textBackground.getPosition().x + 5, textBackground.getPosition().y);
