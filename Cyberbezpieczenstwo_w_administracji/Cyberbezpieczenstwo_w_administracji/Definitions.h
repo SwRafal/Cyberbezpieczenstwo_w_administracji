@@ -51,6 +51,7 @@
 
 #define TEXTURE_TEXT_BUBBLE "resources/textures/textbubble.png"
 #define TEXTURE_CHAT_BUBBLE "resources/textures/chat bubble.png"
+#define BUBBLE2 "resources/textures/bubble2.png"
 
 #define TEXTURE_OFFICE_FRIEND "resources/textures/friend.png"
 #define TEXTURE_ARROW_BUTTON "resources/textures/arrow.png"

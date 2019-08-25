@@ -268,6 +268,7 @@ void Day_0::draw(GameState* gs)
 		gs->book->draw(win);
 		gs->no_stamp->draw(win);
 		gs->yes_stamp->draw(win);
+		gs->phone->draw(win);
 
 		gs->bin->draw(win);
 		gs->battery->draw(win);
@@ -296,7 +297,7 @@ void Day_0::draw(GameState* gs)
 		
 		gs->no_stamp->draw(win);
 		gs->yes_stamp->draw(win);
-
+		gs->phone->draw(win);
 		gs->bin->draw(win);
 		gs->battery->draw(win);
 
@@ -325,7 +326,7 @@ void Day_0::draw(GameState* gs)
 	
 		gs->no_stamp->draw(win);
 		gs->yes_stamp->draw(win);
-
+		gs->phone->draw(win);
 		gs->bin->draw(win);
 		gs->battery->draw(win);
 
@@ -349,7 +350,7 @@ void Day_0::draw(GameState* gs)
 		gs->book->draw(win);
 		gs->no_stamp->draw(win);
 		gs->yes_stamp->draw(win);
-
+		gs->phone->draw(win);
 		gs->bin->draw(win);
 		gs->battery->draw(win);
 
@@ -386,8 +387,8 @@ void Day_0::draw(GameState* gs)
 		gs->coffee->draw(win);
 
 		win.draw(background); //border
-
-		//telefon sluzbowy
+		gs->phone->draw(win);
+		
 
 		gs->officeLady->draw(win);
 
@@ -404,7 +405,7 @@ void Day_0::draw(GameState* gs)
 		gs->book->draw(win);
 		gs->no_stamp->draw(win);
 		gs->yes_stamp->draw(win);
-
+		gs->phone->draw(win);
 		gs->bin->draw(win);
 		gs->battery->draw(win);
 
@@ -431,7 +432,7 @@ void Day_0::draw(GameState* gs)
 		gs->book->draw(win);
 		gs->no_stamp->draw(win);
 		gs->yes_stamp->draw(win);
-
+		gs->phone->draw(win);
 		gs->bin->draw(win);
 		gs->battery->draw(win);
 
@@ -458,7 +459,7 @@ void Day_0::draw(GameState* gs)
 		gs->book->draw(win);
 		gs->no_stamp->draw(win);
 		gs->yes_stamp->draw(win);
-
+		gs->phone->draw(win);
 		gs->bin->draw(win);
 		gs->battery->draw(win);
 
@@ -486,7 +487,7 @@ void Day_0::draw(GameState* gs)
 		gs->book->draw(win);
 		gs->no_stamp->draw(win);
 		gs->yes_stamp->draw(win);
-
+		gs->phone->draw(win);
 		gs->bin->draw(win);
 		gs->battery->draw(win);
 
@@ -513,7 +514,7 @@ void Day_0::draw(GameState* gs)
 		gs->book->draw(win);
 		gs->no_stamp->draw(win);
 		gs->yes_stamp->draw(win);
-
+		gs->phone->draw(win);
 		gs->bin->draw(win);
 		gs->battery->draw(win);
 
@@ -543,7 +544,7 @@ void Day_0::draw(GameState* gs)
 		
 		gs->no_stamp->draw(win);
 		gs->yes_stamp->draw(win);
-
+		gs->phone->draw(win);
 		gs->bin->draw(win);
 		gs->battery->draw(win);
 
@@ -574,7 +575,7 @@ void Day_0::draw(GameState* gs)
 		gs->book->draw(win);
 		gs->no_stamp->draw(win);
 		gs->yes_stamp->draw(win);
-
+		gs->phone->draw(win);
 		gs->bin->draw(win);
 		gs->battery->draw(win);
 

@@ -3,7 +3,7 @@
 
 
 
-Phone::Phone() : arrow(15,3), text(*gm::Assets::getFont()), arrowButton(*gm::Assets::getFont())
+Phone::Phone() : text(*gm::Assets::getFont()), arrowButton(*gm::Assets::getFont())
 {
 	/* set textures */
 	gm::Assets::LoadSound("ringtone", PHONE_RINGING_FILEPATH);
@@ -15,10 +15,10 @@ Phone::Phone() : arrow(15,3), text(*gm::Assets::getFont()), arrowButton(*gm::Ass
 	
 	this->setTexture(gm::Assets::getTexture("phone"));
 
-	if(gm::Assets::getTexture("text bubble") == nullptr)
-		gm::Assets::LoadTexture("text bubble", TEXTURE_TEXT_BUBBLE);
+	gm::Assets::LoadTexture("bubble2", TEXTURE_TEXT_BUBBLE);
+
+	textBackground.setTexture(*gm::Assets::getTexture("bubble2"));
 	
-	textBackground.setTexture(*gm::Assets::getTexture("text bubble"));
 
 
 	
@@ -32,53 +32,41 @@ Phone::Phone() : arrow(15,3), text(*gm::Assets::getFont()), arrowButton(*gm::Ass
 	this->setPressColor(sf::Color(120, 150, 120));
 	this->setPosition(sf::Vector2f(PHONE_POS_X, PHONE_POS_Y));
 
+	textBackground.setPosition(SCREEN_WIDTH / 2 - textBackground.getGlobalBounds().width / 2, SCREEN_HEIGHT / 2 - textBackground.getGlobalBounds().height / 2 - 100);
 
-	textBackground.setPosition(SCREEN_WIDTH / 2 - textBackground.getGlobalBounds().width / 2, SCREEN_HEIGHT / 2 - textBackground.getGlobalBounds().height / 2);
-
-	arrowButton.setTextIdleColor(sf::Color::Red);
-	arrowButton.setTextAimedColor(sf::Color(230, 120, 255,255));
-	arrowButton.setTextPressColor(sf::Color(216, 46, 255,255));
+	arrowButton.setTextIdleColor(sf::Color::Black);
+	arrowButton.setTextAimedColor(sf::Color(50, 50, 50,255));
+	arrowButton.setTextPressColor(sf::Color::White);
 	arrowButton.setIdleColor(sf::Color::Transparent);
 	arrowButton.setAimedColor(sf::Color::Transparent);
 	arrowButton.setPressColor(sf::Color::Transparent);
 	
-	
-	
-
 	arrowButton.setTextString(L">");
-	arrowButton.setSize(100,100);
+	arrowButton.setSize(50,50);
 	arrowButton.setTextSize(30);
-	arrowButton.setPosition(textBackground.getPosition());
+	arrowButton.setPosition(785,285);
+
+	text.setSize(textBackground.getGlobalBounds().width * 0.98,textBackground.getGlobalBounds().height * 0.98);
+	text.setPosition(textBackground.getPosition().x + 4, textBackground.getPosition().y);
+	text.setTextColor(sf::Color::Black);
+	text.setFillColor(sf::Color::Transparent);
+	text.setTextSize(20);
 
 	
-	text.setPosition(textBackground.getPosition().x + 5, textBackground.getPosition().y);
-	
-	arrow.setPosition(text.getPosition());
-
-	arrow.rotate(90);
-	arrow.setPosition(textBackground.getPosition().x ,textBackground.getPosition().y);
 
 	/* variables */
 
-	calling = true;
+	calling = false;
 	pickedUp = false;
 
 	showText = false;
 	showButtons = false;
 	showArrowButton = false;
 
-	
-
 	choice = 0;
 
 	text_queue.push(L"siema nie moge teraz rozmawiac");
 	text_queue.push(L"przeciez to ty zadzwoniles");
-
-	
-
-
-
-
 }
 
 
@@ -90,9 +78,6 @@ Phone::~Phone()
 
 void Phone::update(sf::RenderWindow& win)
 {
-
-	
-
 	if(calling)
 	{
 		if(ringtone.getStatus() == sf::Sound::Stopped)
@@ -129,13 +114,7 @@ void Phone::update(sf::RenderWindow& win)
 			pickedUp = false;
 		}
 	}
-	
 
-	
-	
-	
-
-	
 }
 
 
@@ -148,7 +127,6 @@ void Phone::draw(sf::RenderWindow& win)
 		win.draw(textBackground);
 		text.draw(win);
 		win.draw(arrowButton);
-		win.draw(arrow);
 	}
 }
 
