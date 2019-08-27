@@ -58,6 +58,16 @@ void GameState::init()
 		wall.setPosition(sf::Vector2f(0, 0));
 	}
 
+	//Desk
+	gm::Assets::LoadTexture("DESK", TEXTURE_DESK);
+	if (gm::Assets::getTexture("DESK") == nullptr)
+		error_win_close();
+	else
+	{
+		desk.setTexture(*gm::Assets::getTexture("DESK"));
+		desk.setPosition(sf::Vector2f(0, 466));
+	}
+
 	//Calendar
 	gm::Assets::LoadTexture("CALENDAR", TEXTURE_CALENDAR);
 	if (gm::Assets::getTexture("CALENDAR") == nullptr)
@@ -375,6 +385,7 @@ void GameState::draw(sf::RenderWindow& win)
 
 	/*Background*/
 	win.draw(wall);
+	win.draw(desk);
 	calendar->draw(win);
 	bell->draw(win);
 	watch->draw(win);

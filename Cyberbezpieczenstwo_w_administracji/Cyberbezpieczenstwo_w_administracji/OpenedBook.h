@@ -2,18 +2,18 @@
 #include "Engine/Engine.h"
 #include "Functions.h"
 
-#define BOOK_OPENED_POS_X 385
-#define BOOK_OPENED_POS_Y 180
-#define BOOK_OPENED_WIDTH 510
-#define BOOK_OPENDE_HEIGHT 362
+#define BOOK_OPENED_POS_X 182
+#define BOOK_OPENED_POS_Y 24
+#define BOOK_OPENED_WIDTH 915
+#define BOOK_OPENDE_HEIGHT 672
 
-#define BOOK_PAGE_WIDTH 210
-#define BOOK_PAGE_HEIGHT 325
+#define BOOK_PAGE_WIDTH 405
+#define BOOK_PAGE_HEIGHT 620
 
-#define BOOK_PAGE1_POS_X 410
-#define BOOK_PAGE1_POS_Y 190
+#define BOOK_PAGE1_POS_X 222
+#define BOOK_PAGE1_POS_Y 45
 #define BOOK_PAGE2_POS_X 650
-#define BOOK_PAGE2_POS_Y 190
+#define BOOK_PAGE2_POS_Y 45
 
 class OpenedBook : public sf::Sprite
 {

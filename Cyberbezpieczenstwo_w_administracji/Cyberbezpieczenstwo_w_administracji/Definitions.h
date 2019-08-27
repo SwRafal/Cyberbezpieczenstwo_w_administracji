@@ -37,10 +37,26 @@
 
 /* Game Textures*/
 #define TEXTURE_WALL "resources/textures/wall.png"
+#define TEXTURE_DESK "resources/textures/desk.png"
 #define TEXTURE_CALENDAR "resources/textures/calendar.png"
 #define TEXTURE_TELEPHONE "resources/textures/phone.png"
 #define TEXTURE_WATCH "resources/textures/watch.png"
+
 #define TEXTURE_COFFEE "resources/textures/coffee.png"
+#define TEXTURE_COFFEE2 "resources/textures/coffee2.png"
+#define TEXTURE_COFFEE3 "resources/textures/coffee3.png"
+#define TEXTURE_COFFEE4 "resources/textures/coffee4.png"
+
+#define PC_SCREEN_ON "resources/textures/screen on.png"
+#define PC_SCREEN_OFF "resources/textures/screen off.png"
+#define PC_SCREEN_ON_SMALL "resources/textures/screen on small.png"
+#define PC_SCREEN_OFF_SMALL "resources/textures/screen off small.png"
+#define PC_SCREEN_CRACKED "resources/textures/screen broken.png"
+#define PC_SCREEN_FRAME "resources/textures/screen frame.png"
+#define PC_SCREEN_EXPLOSION "resources/textures/screen explosion.png"
+
+
+
 #define TEXTURE_BATTERY "resources/textures/battery.png"
 #define TEXTURE_BELL "resources/textures/bell.png"
 #define TEXTURE_YESSTAMP "resources/textures/yesstamp.png"
@@ -71,4 +87,4 @@
 /* day 0 */
 
 #define PC_SCREEN_TEXTURE "resources/textures/screen.png"
-#define EMPTY_TABLE_TEXTURE "resources/textures/empty table.png"
+#define EMPTY_TABLE_TEXTURE "resources/textures/desk highlight.png"

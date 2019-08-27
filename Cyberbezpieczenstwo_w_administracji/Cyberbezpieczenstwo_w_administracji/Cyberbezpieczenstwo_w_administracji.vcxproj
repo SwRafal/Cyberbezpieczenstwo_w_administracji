@@ -172,6 +172,7 @@
     <ClCompile Include="OfficeFriend.cpp" />
     <ClCompile Include="OpenedBook.cpp" />
     <ClCompile Include="PauseState.cpp" />
+    <ClCompile Include="pc.cpp" />
     <ClCompile Include="PersonalID.cpp" />
     <ClCompile Include="Phone.cpp" />
     <ClCompile Include="Rubbish.cpp" />
@@ -228,6 +229,7 @@
     <ClInclude Include="OfficeFriend.h" />
     <ClInclude Include="OpenedBook.h" />
     <ClInclude Include="PauseState.h" />
+    <ClInclude Include="pc.h" />
     <ClInclude Include="PersonalID.h" />
     <ClInclude Include="Phone.h" />
     <ClInclude Include="Rubbish.h" />

@@ -20,7 +20,7 @@ Day_0::Day_0()
 	table.setTexture(*gm::Assets::getTexture("table"));
 
 	screen.setPosition(23,23);
-	table.setPosition(683,466);
+	table.setPosition(725,481);
 
 	background.setSize(sf::Vector2f(SCREEN_WIDTH,SCREEN_HEIGHT));
 	background.setFillColor(sf::Color(0,0,0,200));
@@ -160,7 +160,7 @@ void Day_0::update(GameState* gs)
 			gs->officeLady->addToQueue(L"Spanie w pracy jest niedopuszczalne. Szef nienawidzi japoñskich zwyczajów. Nie radzê te¿ jeœæ sushi na lunch. ");
 
 
-			// KSI¥¯KA INFO/ EKRAN KOMPUTERA/ TELEFON S£U¯BOWY 1
+			// KSI¥¯KA INFO/ 
 			gs->officeLady->addToQueue(L"Szef kontaktuje siê z nami na wiele sposobów.");
 			gs->officeLady->addToQueue(L"Najwa¿niejszym jest, aby codziennie rano sprawdziæ najnowsze wytyczne w Ksi¹¿ce informacyjnej.");
 			gs->officeLady->addToQueue(L"Bezwzglêdnie ich przestrzegaj. Na bie¿¹co te¿ sprawdzaj e-maile i odbieraj telefon s³u¿bowy. Szef nie lubi byæ ignorowany.");

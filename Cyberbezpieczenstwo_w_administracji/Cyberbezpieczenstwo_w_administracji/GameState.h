@@ -47,6 +47,7 @@ private:
 
 	/*Environment*/
 	sf::Sprite wall;
+	sf::Sprite desk;
 	Calendar *calendar = nullptr;
 	//sf::Sprite telephone;
 	Watch *watch = nullptr;
