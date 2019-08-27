@@ -161,6 +161,9 @@ void GameState::init()
 	//phone
 	phone = new Phone;
 
+	//pc
+	computer = new pc;
+
 	gm::Assets::LoadTexture("friend", TEXTURE_OFFICE_FRIEND);
 	gm::Assets::LoadTexture("chat bubble",TEXTURE_CHAT_BUBBLE);
 	gm::Assets::LoadTexture("arrow",TEXTURE_ARROW_BUTTON);
@@ -268,6 +271,7 @@ void GameState::update(sf::RenderWindow &win)
 {
 	//phone->update(win);
 	calendar->update(win);
+	computer->update(win);
 	watch->update(gm::Core::getClock());
 
 	if (book->isOpened())
@@ -402,7 +406,9 @@ void GameState::draw(sf::RenderWindow& win)
 	
 	/*--------------------------------*/
 
+	computer->draw(win);
 	phone->draw(win);
+	
 	
 
 	/*Drawing*/
