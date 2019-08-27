@@ -6,5 +6,5 @@ class GameState;
 class Day
 {
 public:
-	virtual void update(GameState *gs) = 0;
+	virtual void update(GameState *gs, sf::RenderWindow &win) = 0;
 };

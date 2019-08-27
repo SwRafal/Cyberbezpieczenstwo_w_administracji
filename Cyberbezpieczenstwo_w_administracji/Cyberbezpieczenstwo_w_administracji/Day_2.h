@@ -4,6 +4,6 @@
 class Day_2 : public Day
 {
 public:
-	void update(GameState *gs);
+	void update(GameState *gs, sf::RenderWindow &win) override;
 	void draw(GameState* gs);
 };

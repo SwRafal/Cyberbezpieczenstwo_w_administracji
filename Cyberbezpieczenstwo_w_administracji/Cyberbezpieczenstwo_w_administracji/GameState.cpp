@@ -363,7 +363,7 @@ void GameState::update(sf::RenderWindow &win)
 
 	/* Days */
 	if (day == 0)
-		day0->update(this);
+		day0->update(this, win);
 	else if (day == 1)
 		day1->update(this, win);
 

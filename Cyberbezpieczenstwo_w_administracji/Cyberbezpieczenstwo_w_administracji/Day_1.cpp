@@ -26,8 +26,6 @@ Day_1::Day_1()
 	refused_email = false;
 }
 
-void Day_1::update(GameState *gs) {}
-
 void Day_1::update(GameState *gs, sf::RenderWindow &win)
 {
 	if (gs->battery->getActivation())

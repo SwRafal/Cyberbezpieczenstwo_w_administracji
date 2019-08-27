@@ -22,7 +22,7 @@ public:
 	sf::Sprite table;
 
 	Day_0();
-	void update(GameState* gs) override;
+	void update(GameState* gs, sf::RenderWindow &win) override;
 	void draw(GameState* gs);
 	
 	

@@ -37,7 +37,7 @@ void pc::update(sf::RenderWindow& win)
 	else
 		this->setTexture(gm::Assets::getTexture("power off small"));
 
-	if
+	//if			<-tu skoñczy³eœ
 
 
 }

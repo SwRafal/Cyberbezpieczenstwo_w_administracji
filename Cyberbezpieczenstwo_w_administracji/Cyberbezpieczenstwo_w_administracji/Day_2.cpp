@@ -1,6 +1,6 @@
 #include "Day_2.h"
 
-void Day_2::update(GameState *gs)
+void Day_2::update(GameState *gs, sf::RenderWindow &win)
 {
 
 }

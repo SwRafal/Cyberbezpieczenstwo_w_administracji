@@ -26,7 +26,7 @@ Day_0::Day_0()
 	background.setFillColor(sf::Color(0,0,0,200));
 }
 
-void Day_0::update(GameState* gs)
+void Day_0::update(GameState* gs, sf::RenderWindow &win)
 {
 	
 
