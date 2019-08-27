@@ -4,6 +4,8 @@
 class Day_1 : public Day
 {
 public:
+	int state;
+
 	//Quest 1
 	bool coffee_clicked;
 	bool open_book;
@@ -28,4 +30,5 @@ public:
 
 	Day_1();
 	void update(GameState *gs, sf::RenderWindow &win) override;
+	void draw(GameState *gs, sf::RenderWindow &win);
 };

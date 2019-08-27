@@ -3,6 +3,8 @@
 
 Day_1::Day_1()
 {
+	state = 0;
+
 	//Quest 1
 	coffee_clicked = false;
 	open_book = false;
@@ -28,19 +30,128 @@ Day_1::Day_1()
 
 void Day_1::update(GameState *gs, sf::RenderWindow &win)
 {
-	if (gs->battery->getActivation())
+	switch (state)
 	{
+	case 0://Drink coffee
+
 		if (gs->coffee->update_drunk(win))
+		{
 			gs->battery->setActivation(true);
+			coffee_clicked = true;
+			state++;
+			gs->book->setFillColor(sf::Color(230, 230, 230));
+		}
 		else if (gs->book->clicked(win) || gs->bell->clicked(win) || gs->bin->clicked(win) || gs->no_stamp->clicked(win) || gs->yes_stamp->clicked(win))
 			gs->closed_eyes_level++;
 
 		if (gs->closed_eyes_level == FULL_CLOSED_EYES)
 			std::cout << "PRZEGRALES";//Przegrana
+
+		break;
+	case 1://Open book
+
+		if (gs->book->clicked(win))
+		{
+			gs->book->open();
+			open_book = true;
+			state++;
+		}
+
+		break;
+	case 2://Close book
+
+		if (!gs->book->isOpened())
+		{
+			close_book = true;
+			state++;
+
+			gs->phone->call();
+		}
+
+		break;
+	case 3://Click telephone
+
+		gs->phone->update(win);
+		if (gs->phone->pickedUp)
+		{
+			click_telephone = true;
+			state++;
+		}
+
+		break;
+	case 4://Finish telephone
+
+		gs->phone->update(win);
+
+		break;
+	case 5://Finish thought
+
+
+
+		break;
+	case 6://Choose user
+
+
+
+		break;
+	case 7://Login
+
+
+
+		break;
+	case 8://Finish dialog
+
+
+
+		break;
+	case 9:
+
+
+
+		break;
+	case 10:
+
+
+
+		break;
+	case 11:
+
+
+
+		break;
+	case 12:
+
+
+
+		break;
+	case 13:
+
+
+
+		break;
+	case 14:
+
+
+
+		break;
+	case 15:
+
+
+
+		break;
+	case 16:
+
+
+
+		break;
+	default:
+		break;
 	}
-	else
-	{
-		gs->book->setFillColor(sf::Color(230, 230, 230));
-		gs->book->update(win);
-	}
+}
+
+void Day_1::draw(GameState *gs, sf::RenderWindow &win)
+{
+
+
+	win.display();
 }

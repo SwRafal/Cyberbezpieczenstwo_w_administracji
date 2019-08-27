@@ -266,7 +266,7 @@ void GameState::handleInput()
 
 void GameState::update(sf::RenderWindow &win)
 {
-	phone->update(win);
+	//phone->update(win);
 	calendar->update(win);
 	watch->update(gm::Core::getClock());
 
