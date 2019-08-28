@@ -28,24 +28,34 @@ Day_1::Day_1()
 	refused_email = false;
 }
 
+Day_1::~Day_1()
+{
+	
+}
+
 void Day_1::update(GameState *gs, sf::RenderWindow &win)
 {
 	switch (state)
 	{
 	case 0://Drink coffee
 
+		gs->eyelids->update();
 		if (gs->coffee->update_drunk(win))
 		{
 			gs->battery->setActivation(true);
 			coffee_clicked = true;
 			state++;
 			gs->book->setFillColor(sf::Color(230, 230, 230));
+			gs->eyelids->open();
 		}
 		else if (gs->book->clicked(win) || gs->bell->clicked(win) || gs->bin->clicked(win) || gs->no_stamp->clicked(win) || gs->yes_stamp->clicked(win))
-			gs->closed_eyes_level++;
+		{
+			gs->eyelids->increaseLvl();
+		}
 
-		if (gs->closed_eyes_level == FULL_CLOSED_EYES)
+		if (gs->eyelids->getLvl() == FULL_CLOSED_EYES)
 			std::cout << "PRZEGRALES";//Przegrana
+
 
 		break;
 	case 1://Open book
@@ -151,7 +161,7 @@ void Day_1::update(GameState *gs, sf::RenderWindow &win)
 
 void Day_1::draw(GameState *gs, sf::RenderWindow &win)
 {
-
+	gs->eyelids->draw(win);
 
 	win.display();
 }

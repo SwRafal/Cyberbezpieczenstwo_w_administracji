@@ -13,6 +13,8 @@ GameState::~GameState()
 	delete day1;
 	day1 = nullptr;
 
+	delete eyelids;
+
 	delete calendar;
 	calendar = nullptr;
 	delete watch;
@@ -183,9 +185,6 @@ void GameState::init()
 	}
 
 	/*Starting settings*/
-	//...
-	closed_eyes_level = 0;
-
 	dayShowScreen = new dayx(this->data->day);
 	initialized = false;
 	nextDay = false;
@@ -205,10 +204,12 @@ void GameState::init()
 	textField->setTextSize(25);
 	textField->setTextString(L"");
 	
+	eyelids = new Eyelids;
+
 
 	/* Days */
 	day0 = new Day_0;
-
+	day1 = new Day_1;
 	
 	
 }
@@ -355,8 +356,6 @@ void GameState::update(sf::RenderWindow &win)
 		}
 		else if (day == 1)
 		{
-			day1 = new Day_1;
-
 			openedbook->setInfoL(L"1. Zabezpiecz dane logowania");
 			openedbook->setInfoR("");
 		}
@@ -445,8 +444,10 @@ void GameState::draw(sf::RenderWindow& win)
 	
 	
 	
-	if(day0->part1Over && day == 0)
+	if (day0->part1Over && day == 0)
 		day0->draw(this);
+	else if (day == 1)
+		day1->draw(this, win);
 	else
 	win.display();
 }

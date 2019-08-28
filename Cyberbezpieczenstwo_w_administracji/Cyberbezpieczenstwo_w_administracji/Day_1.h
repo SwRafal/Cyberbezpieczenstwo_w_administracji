@@ -1,6 +1,8 @@
 #pragma once
 #include "Day.h"
 
+
+
 class Day_1 : public Day
 {
 public:
@@ -29,6 +31,7 @@ public:
 	bool refused_email;
 
 	Day_1();
+	~Day_1();
 	void update(GameState *gs, sf::RenderWindow &win) override;
 	void draw(GameState *gs, sf::RenderWindow &win);
 };

@@ -11,8 +11,7 @@
 #include "textBubble.h"
 #include "OfficeFriend.h"
 #include "ChoiceButton.h"
-
-#define FULL_CLOSED_EYES 3
+#include "Eyelids.h"
 
 void error_win_close();
 
@@ -38,7 +37,8 @@ private:
 	int time;
 
 	OfficeFriend *officeLady;
-	unsigned short closed_eyes_level;
+
+	Eyelids *eyelids = nullptr;
 
 	/*Settings*/
 	unsigned int day;
