@@ -302,6 +302,7 @@ void GameState::update(sf::RenderWindow &win)
 	popUpText->animate();
 	officeLady->animate();
 	textField->update(gm::Core::getWindow(),gm::Core::getEnteredChar());
+	eyelids->update();
 
 	/* days management */
 

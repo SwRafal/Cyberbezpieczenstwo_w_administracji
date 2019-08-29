@@ -39,7 +39,6 @@ void Day_1::update(GameState *gs, sf::RenderWindow &win)
 	{
 	case 0://Drink coffee
 
-		gs->eyelids->update();
 		if (gs->coffee->update_drunk(win))
 		{
 			gs->battery->setActivation(true);
@@ -55,7 +54,6 @@ void Day_1::update(GameState *gs, sf::RenderWindow &win)
 
 		if (gs->eyelids->getLvl() == FULL_CLOSED_EYES)
 			std::cout << "PRZEGRALES";//Przegrana
-
 
 		break;
 	case 1://Open book

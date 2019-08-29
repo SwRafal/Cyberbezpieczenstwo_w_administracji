@@ -71,16 +71,33 @@ void Eyelids::setLvl(unsigned short lvl)
 
 void Eyelids::update()
 {
+	std::cout << "gorna_height:" << up_eyelid_height << "   " << "gorna_destination:" << up_eyelid_destination << std::endl;
 	if (up_eyelid_height < up_eyelid_destination)
-		up_eyelid_height+=5;
-	if (up_eyelid_height > up_eyelid_destination)
-		up_eyelid_height = up_eyelid_destination;
+	{
+		up_eyelid_height += 5;
+		if (up_eyelid_height > up_eyelid_destination)
+			up_eyelid_height = up_eyelid_destination;
+	}
+	else if (up_eyelid_height > up_eyelid_destination)
+	{
+		up_eyelid_height -= 10;
+		if (up_eyelid_height < up_eyelid_destination)
+			up_eyelid_height = up_eyelid_destination;
+	}
 	eyelids[0].setPosition(sf::Vector2f(0, up_eyelid_height));
 
 	if (down_eyelid_height > down_eyelid_destination)
-		down_eyelid_height-=5;
-	if (down_eyelid_height < down_eyelid_destination)
-		down_eyelid_height = down_eyelid_destination;
+	{
+		down_eyelid_height -= 5;
+		if (down_eyelid_height < down_eyelid_destination)
+			down_eyelid_height = down_eyelid_destination;
+	}	
+	else if (down_eyelid_height < down_eyelid_destination)
+	{
+		down_eyelid_height += 10;
+		if (down_eyelid_height > down_eyelid_destination)
+			down_eyelid_height = down_eyelid_destination;
+	}
 	eyelids[1].setPosition(sf::Vector2f(0, down_eyelid_height));
 }
 
