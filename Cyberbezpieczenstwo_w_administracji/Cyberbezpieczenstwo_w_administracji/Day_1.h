@@ -1,12 +1,16 @@
 #pragma once
 #include "Day.h"
+#include "textBubble.h"
 
+#define THOUGHT_TIME 3000
 
 
 class Day_1 : public Day
 {
 public:
 	int state;
+	textBubble *thought = nullptr;
+	sf::Int32 thought_time;
 
 	//Quest 1
 	bool coffee_clicked;

@@ -355,8 +355,17 @@ void GameState::update(sf::RenderWindow &win)
 
 			officeLady->nextLine();
 		}
-		else if (day == 1)
+		else if (day == 1)//Day1
 		{
+			eyelids->open();
+			watch->setHour(8, 0);
+			while (!phone->text_queue.empty())
+			{
+				phone->text_queue.pop();
+			}
+			phone->addToQueue(L"Czeœæ " + data->name + L"! Jestem z dzia³u IT. Twoje dane logowania to:\nUser: Admin\nHas³o: Admin");
+			phone->addToQueue(L"Pamiêtaj, aby je zmieniæ po zalogowaniu!");
+
 			openedbook->setInfoL(L"1. Zabezpiecz dane logowania");
 			openedbook->setInfoR("");
 		}
@@ -442,7 +451,10 @@ void GameState::draw(sf::RenderWindow& win)
 
 	win.draw(*textField);
 	popUpText->draw(win);
-	
+
+	eyelids->draw(win);
+	if (lost)
+		win.draw(*gamelost_info);
 	
 	
 	if (day0->part1Over && day == 0)

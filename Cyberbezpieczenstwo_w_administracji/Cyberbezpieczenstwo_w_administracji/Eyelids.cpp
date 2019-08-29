@@ -71,7 +71,6 @@ void Eyelids::setLvl(unsigned short lvl)
 
 void Eyelids::update()
 {
-	std::cout << "gorna_height:" << up_eyelid_height << "   " << "gorna_destination:" << up_eyelid_destination << std::endl;
 	if (up_eyelid_height < up_eyelid_destination)
 	{
 		up_eyelid_height += 5;

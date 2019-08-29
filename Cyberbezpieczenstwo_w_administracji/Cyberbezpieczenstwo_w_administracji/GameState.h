@@ -13,6 +13,8 @@
 #include "ChoiceButton.h"
 #include "Eyelids.h"
 
+#define GAMELOST_INFO_TIME 5000
+
 void error_win_close();
 
 struct ItemsComparator/*Comparator for priority_queues in draw and update*/
@@ -69,6 +71,12 @@ private:
 
 	ChoiceButton *choice1,*choice2,*choice3,*choice4;
 
+	/*LOST GAME*/
+	bool lost = false;
+	sf::Int32 info_time;
+	sf::Text *gamelost_info = nullptr;
+
+	/*CUSTOM DAYS*/
 	Day_0 *day0 = nullptr;
 	Day_1 *day1 = nullptr;/*!!!to musi byc wskaznik jezeli wzajemnie klasy sie includuja!!!*/
 
