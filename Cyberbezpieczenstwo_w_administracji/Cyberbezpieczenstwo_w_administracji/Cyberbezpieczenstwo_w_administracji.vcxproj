@@ -172,6 +172,7 @@
     <ClCompile Include="OfficeApplicant.cpp" />
     <ClCompile Include="OfficeFriend.cpp" />
     <ClCompile Include="OpenedBook.cpp" />
+    <ClCompile Include="OpenPC.cpp" />
     <ClCompile Include="PauseState.cpp" />
     <ClCompile Include="pc.cpp" />
     <ClCompile Include="PersonalID.cpp" />
@@ -230,6 +231,7 @@
     <ClInclude Include="OfficeApplicant.h" />
     <ClInclude Include="OfficeFriend.h" />
     <ClInclude Include="OpenedBook.h" />
+    <ClInclude Include="OpenPC.h" />
     <ClInclude Include="PauseState.h" />
     <ClInclude Include="pc.h" />
     <ClInclude Include="PersonalID.h" />
