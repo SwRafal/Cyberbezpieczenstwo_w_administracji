@@ -54,7 +54,7 @@ void MenuState::init()
 	exitButton.setTextString(L"Wyjœcie");
 
 	/* intro button */
-	intro.setPosition(0,0);
+	/*intro.setPosition(0,0);
 	intro.setTextIdleColor(sf::Color::White);
 	intro.setTextAimedColor(sf::Color(230, 120, 255,255));
 	intro.setTextPressColor(sf::Color(216, 46, 255,255));
@@ -63,7 +63,7 @@ void MenuState::init()
 	intro.setPressColor(sf::Color::Transparent);
 	intro.setSize(200,40);
 	intro.setTextSize(70);
-	intro.setTextString("intro");
+	intro.setTextString("intro");*/
 
 	/* animated background */
 	animationCounteri = 0;
@@ -104,7 +104,7 @@ void MenuState::handleInput()
 	{
 		clickSound.play();
 		Sleep(100);
-		data->machine.addState(gm::StateRef(new GameState (this->data)));
+		data->machine.addState(gm::StateRef(new IntroState(this->data)));
 	}
 
 	if (loadGameButton.clicked(gm::Core::getWindow()))
@@ -121,13 +121,12 @@ void MenuState::handleInput()
 		exit(EXIT_SUCCESS);
 	}
 
-	if(intro.clicked(gm::Core::getWindow()))
+	/*if (intro.clicked(gm::Core::getWindow()))
 	{
 		clickSound.play();
 		Sleep(100);
-		data->machine.addState(gm::StateRef(new IntroState (this->data))); 
-		
-	}
+		data->machine.addState(gm::StateRef(new IntroState(this->data)));
+	}*/
 		
 }
 
@@ -157,7 +156,7 @@ void MenuState::draw(sf::RenderWindow& win)
 	win.draw(playButton);
 	win.draw(loadGameButton);
 	win.draw(exitButton);
-	win.draw(intro);
+	//win.draw(intro);
 	
 	win.display();
 }

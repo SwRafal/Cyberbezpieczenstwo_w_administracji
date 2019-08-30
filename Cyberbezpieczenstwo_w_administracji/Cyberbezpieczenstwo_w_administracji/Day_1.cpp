@@ -143,12 +143,19 @@ void Day_1::update(GameState *gs, sf::RenderWindow &win)
 			break;
 		case 6://Choose user
 
-
+			gs->computer->update(win);
+			gs->openedcomputer->update(win);
+			if (gs->openedcomputer->getState() == OpenPC::DESKTOP)
+			{
+				choose_user = true;
+				state++;
+			}
 
 			break;
 		case 7://Login
 
-
+			log_in = true;
+			state++;
 
 			break;
 		case 8://Finish dialog
@@ -156,42 +163,42 @@ void Day_1::update(GameState *gs, sf::RenderWindow &win)
 
 
 			break;
-		case 9:
+		case 9://Click mobile
 
 
 
 			break;
-		case 10:
+		case 10://Put mobile
 
 
 
 			break;
-		case 11:
+		case 11://Change_login
 
 
 
 			break;
-		case 12:
+		case 12://Change_password
 
 
 
 			break;
-		case 13:
+		case 13://Remember password
 
 
 
 			break;
-		case 14:
+		case 14://Write down password
 
 
 
 			break;
-		case 15:
+		case 15://Login wifi
 
 
 
 			break;
-		case 16:
+		case 16://Click email
 
 
 

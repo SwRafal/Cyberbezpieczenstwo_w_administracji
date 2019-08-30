@@ -277,9 +277,8 @@ void GameState::handleInput()
 
 void GameState::update(sf::RenderWindow &win)
 {
-	//phone->update(win);
+	
 	calendar->update(win);
-	computer->update(win);
 	watch->update(gm::Core::getClock());
 
 	if (book->isOpened())
@@ -297,19 +296,6 @@ void GameState::update(sf::RenderWindow &win)
 		return;
 	}
 
-/*	yes_stamp->update(win);
-	no_stamp->update(win);
-	if (yes_stamp->getPosition().y < no_stamp->getPosition().y)
-	{
-		if (no_stamp->isActive())
-			yes_stamp->setInactive();
-	}
-	else
-	{
-		if (yes_stamp->isActive())
-			no_stamp->setInactive();
-
-	}*/
 
 
 	dayShowScreen->update();
@@ -393,6 +379,25 @@ void GameState::update(sf::RenderWindow &win)
 		day0->update(this, win);
 	else if (day == 1)
 		day1->update(this, win);
+	else//W inne dni
+	{
+		computer->update(win);
+		phone->update(win);
+
+		yes_stamp->update(win);
+		no_stamp->update(win);
+		if (yes_stamp->getPosition().y < no_stamp->getPosition().y)
+		{
+			if (no_stamp->isActive())
+				yes_stamp->setInactive();
+		}
+		else
+		{
+			if (yes_stamp->isActive())
+				no_stamp->setInactive();
+
+		}
+	}
 
 	if(nextDay)
 	{
