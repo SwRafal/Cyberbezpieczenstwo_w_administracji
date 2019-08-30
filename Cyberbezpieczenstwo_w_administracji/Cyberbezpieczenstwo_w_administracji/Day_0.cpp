@@ -194,7 +194,7 @@ void Day_0::update(GameState* gs, sf::RenderWindow &win)
 
 			//telefon prywatny
 			sf::String s = L"O! Widzê, ¿e masz najnowszego smartfona! Poka¿! ... O NIE!";
-			s = s + gs->data->name + "! To produkcja japoñskiej firmy! Wiesz co to oznacza!";
+			s = s + gs->data->name + L"! To produkcja japoñskiej firmy! Wiesz co to oznacza!";
 			gs->officeLady->addToQueue(s);
 			gs->officeLady->addToQueue(L"W dodatku Szef nie uznaje u¿ywania prywatnych telefonów w pracy. Mówi, ¿e zagra¿a to bezpieczeñstwu firmy.");
 			gs->officeLady->addToQueue(L"Gdy siê tu pojawi radzê Ci go schowaæ, inaczej mo¿esz mieæ k³opoty!");

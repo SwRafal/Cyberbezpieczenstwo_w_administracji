@@ -165,6 +165,13 @@ void GameState::init()
 
 	//pc
 	computer = new pc;
+	gm::Assets::LoadTexture("OPENEDCOMPUTER", TEXTURE_OPENEDCOMPUTER);
+	if (gm::Assets::getTexture("OPENEDCOMPUTER") == nullptr)
+		error_win_close();
+	else
+	{
+		openedcomputer = new OpenPC(gm::Assets::getTexture("OPENEDCOMPUTER"), gm::Assets::getFont());
+	}
 
 	gm::Assets::LoadTexture("friend", TEXTURE_OFFICE_FRIEND);
 	gm::Assets::LoadTexture("chat bubble",TEXTURE_CHAT_BUBBLE);
@@ -279,6 +286,13 @@ void GameState::update(sf::RenderWindow &win)
 	{
 		if (openedbook->update(win))
 			book->close();
+
+		return;
+	}
+	if (computer->isOpened())
+	{
+		if(openedcomputer->update(win))
+			computer->close();
 
 		return;
 	}
@@ -434,6 +448,8 @@ void GameState::draw(sf::RenderWindow& win)
 
 	if (book->isOpened())
 		openedbook->draw(win);
+	if (computer->isOpened())
+		openedcomputer->draw(win);
 
 	
 

@@ -55,6 +55,11 @@
 #define PC_SCREEN_FRAME "resources/textures/screen frame.png"
 #define PC_SCREEN_EXPLOSION "resources/textures/screen explosion.png"
 
+#define TEXTURE_OPENEDCOMPUTER "resources/textures/openedcomputer.png"
+#define TEXTURE_EXIT_BUTTON "resources/textures/exit button.png"
+#define TEXTURE_WIFI_BUTTON "resources/textures/wifi button.png"
+#define TEXTURE_ACCOUNT_BUTTON "resources/textures/account button.png"
+
 
 
 #define TEXTURE_BATTERY "resources/textures/battery.png"

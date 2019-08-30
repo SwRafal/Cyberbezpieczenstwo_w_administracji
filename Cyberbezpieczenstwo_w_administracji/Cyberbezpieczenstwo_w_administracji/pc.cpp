@@ -28,7 +28,7 @@ pc::pc()
 
 	powerOn = false;
 	showBlackScreen = true;
-
+	_opened = false;
 
 }
 
@@ -49,7 +49,7 @@ void pc::update(sf::RenderWindow& win)
 		blackScreen.setColor(sf::Color(120, 150, 120));
 		if(powerOn)
 		{
-			//pokaz ekran
+			open();
 		}
 		else if(!powerOn)
 		{
@@ -89,3 +89,12 @@ void pc::turnOn()
 	powerOn = true;
 }
 
+void pc::open()
+{
+	_opened = true;
+}
+
+void pc::close()
+{
+	_opened = false;
+}

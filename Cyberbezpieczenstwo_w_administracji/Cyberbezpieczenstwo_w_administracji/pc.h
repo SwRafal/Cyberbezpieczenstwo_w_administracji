@@ -13,6 +13,8 @@
 
 class pc : public gm::Button
 {
+private:
+	bool _opened;
 	
 public:
 	pc();
@@ -30,4 +32,8 @@ public:
 
 	void update(sf::RenderWindow &win);
 	void draw(sf::RenderWindow &win);
+
+	void open();
+	void close();
+	bool isOpened() { return _opened; }
 };
