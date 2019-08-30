@@ -45,7 +45,13 @@ void Day_1::update(GameState *gs, sf::RenderWindow &win)
 	if (!init)
 	{
 		//TU PISZ LINIJKI ASIA!!!
-		gs->officeApplicant->addToQueue(L"NO wiec");
+		gs->officeApplicant->addToQueue(L"Petent: Czeœæ! Marek dziœ nie w pracy?");
+		gs->officeApplicant->addToQueue(L"Ja: Jego stanowisko zosta³o zajête.");
+		gs->officeApplicant->addToQueue(L"Petent: Szkoda, dobrze nam siê z nim pracowa³o…");
+		gs->officeApplicant->addToQueue(L"Ja: Nie spe³nia³ wymogów bezpieczeñstwa. ");
+		gs->officeApplicant->addToQueue(L"Petent: Wiesz co siê sta³o?");
+		gs->officeApplicant->addToQueue(L"Ja:  Nie mogê Ci tego powiedzieæ.");
+		gs->officeApplicant->addToQueue(L"Petent: Có¿, witaj w naszym zespole. Masz to dla Ciebie.");
 
 		init = true;
 	}
