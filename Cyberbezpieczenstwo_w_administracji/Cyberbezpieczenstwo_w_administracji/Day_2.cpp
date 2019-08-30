@@ -18,6 +18,7 @@ Day_2::Day_2()
 	initDelay = false;
 
 	coffeeClicked = false;
+	bookOpened = false;
 }
 
 Day_2::~Day_2()
@@ -46,7 +47,7 @@ void Day_2::update(GameState *gs, sf::RenderWindow &win)
 		itGuy->addToQueue(L"Mo¿esz zaczynaæ pracê. \nMi³ego dnia.");
 		itGuy->addToQueue(L" ");
 		
-		
+		gs->openedbook->setInfoR(L"2 Uwierzytelnianie dwusk³adnikowe.");
 
 
 		
@@ -109,9 +110,19 @@ void Day_2::update(GameState *gs, sf::RenderWindow &win)
 		}
 		break;
 	case 3:
+		gs->book->update(win);
+		gs->openedbook->update(win);
+
+		if(gs->book->clicked(win))
+			bookOpened = true;
+
+		if(bookOpened && !gs->book->isOpened())
+			state++;
 		
 
-
+		break;
+	case 4:
+	
 		break;
 	}
 

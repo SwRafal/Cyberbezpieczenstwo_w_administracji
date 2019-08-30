@@ -283,14 +283,7 @@ void GameState::handleInput()
 		data->returnToMenu = false;
 		data->machine.addState(gm::StateRef(new MenuState (this->data))); 
 	}
-	if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D))
-		officeLady->show();
-		//test->showBubble();
-	if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::F))
-		officeLady->hide();
-		//test->closeBubble();
-	if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::M))
-		phone->call();
+	
 
 	if(gm::Core::getEnteredChar() == 0x0000007A)
 	{
@@ -405,9 +398,19 @@ void GameState::update(sf::RenderWindow &win)
 		day1->update(this, win);
 	}
 	else if(day == 2)
+	{
+		if (book->isOpened())
 		{
-		day2->update(this,win);
+			if (openedbook->update(win))
+				book->close();
 		}
+		if (computer->isOpened())
+		{
+			if (openedcomputer->update(win))
+				computer->close();
+		}
+		day2->update(this,win);
+	}
 	else//W inne dni
 	{
 		if (book->isOpened())

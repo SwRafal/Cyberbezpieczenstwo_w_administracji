@@ -19,6 +19,7 @@ public:
 	bool initDelay;
 
 	bool coffeeClicked;
+	bool bookOpened;
 
 	OfficeFriend *itGuy;
 
