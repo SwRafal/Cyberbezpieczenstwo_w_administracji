@@ -25,5 +25,7 @@ public:
 	void setLevel(unsigned short level=MAX_COFFEE_LEVEL);
 
 	unsigned short getLevel() { return _level; }
+
+	void reset();
 };
 

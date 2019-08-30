@@ -99,4 +99,5 @@ public:
 	friend class Day;
 	friend class Day_0;
 	friend class Day_1;
+	friend class Day_2;
 };

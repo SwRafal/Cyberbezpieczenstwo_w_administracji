@@ -3,16 +3,23 @@
 #include "OfficeFriend.h"
 
 
+#define THOUGHT_TIME 3000
+
 class Day_2 : public Day
 {
 public:
-	
+	textBubble *thought = nullptr;
+	sf::Int32 thought_time;
 
 	int time;
 
 	int state;
 
 	bool init;
+	bool initDelay;
+
+	bool coffeeClicked;
+	bool bookOpened;
 
 	OfficeFriend *itGuy;
 
