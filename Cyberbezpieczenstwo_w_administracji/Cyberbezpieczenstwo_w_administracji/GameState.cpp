@@ -12,6 +12,8 @@ GameState::~GameState()
 	day0 = nullptr;
 	delete day1;
 	day1 = nullptr;
+	delete day2;
+	day2 = nullptr;
 
 	delete eyelids;
 
@@ -206,6 +208,7 @@ void GameState::init()
 	initialized = false;
 	nextDay = false;
 	day = 0;
+	data->day = day;
 
 
 	choice1 = new ChoiceButton;
@@ -227,6 +230,7 @@ void GameState::init()
 	/* Days */
 	day0 = new Day_0;
 	day1 = new Day_1;
+	day2 = new Day_2;
 	
 	
 }
@@ -390,6 +394,8 @@ void GameState::update(sf::RenderWindow &win)
 		day0->update(this, win);
 	else if (day == 1)
 		day1->update(this, win);
+	else if(day == 2)
+		day2->update(this,win);
 	else//W inne dni
 	{
 		computer->update(win);
@@ -493,6 +499,8 @@ void GameState::draw(sf::RenderWindow& win)
 		day0->draw(this);
 	else if (day == 1)
 		day1->draw(this, win);
+	else if(day == 2)
+		day2->draw(this,win);
 	else
 	win.display();
 }

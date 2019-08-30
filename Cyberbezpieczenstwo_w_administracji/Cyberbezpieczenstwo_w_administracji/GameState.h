@@ -83,6 +83,7 @@ private:
 	/*CUSTOM DAYS*/
 	Day_0 *day0 = nullptr;
 	Day_1 *day1 = nullptr;/*!!!to musi byc wskaznik jezeli wzajemnie klasy sie includuja!!!*/
+	Day_2 *day2 = nullptr;
 
 public:
 	GameState(gm::gameDataRef data);
