@@ -9,9 +9,9 @@
 #define SIZE_Y 133
 
 #define POS_X 1390
-#define POS_Y 260
+#define POS_Y 17
 
-#define FINAL_POS_X 1160
+#define FINAL_POS_X 800
 
 class OfficeApplicant : public sf::Sprite
 {

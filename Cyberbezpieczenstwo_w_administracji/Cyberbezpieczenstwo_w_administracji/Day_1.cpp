@@ -42,7 +42,6 @@ Day_1::~Day_1()
 
 void Day_1::update(GameState *gs, sf::RenderWindow &win)
 {
-	std::cout << state << std::endl;
 	if (!init)
 	{
 		gs->officeApplicant->nextLine();
@@ -51,8 +50,8 @@ void Day_1::update(GameState *gs, sf::RenderWindow &win)
 		gs->officeApplicant->addToQueue(L"Petent: Szkoda, dobrze nam siê z nim pracowa³o…");
 		gs->officeApplicant->addToQueue(L"Ja: Nie spe³nia³ wymogów bezpieczeñstwa. ");
 		gs->officeApplicant->addToQueue(L"Petent: Wiesz co siê sta³o?");
-		gs->officeApplicant->addToQueue(L"Ja:  Nie mogê Ci tego powiedzieæ.");
-		gs->officeApplicant->addToQueue(L"Petent: Có¿, witaj w naszym zespole. Masz to dla Ciebie.");
+		gs->officeApplicant->addToQueue(L"Ja: Nie mogê Ci tego powiedzieæ.");
+		gs->officeApplicant->addToQueue(L"Petent: Có¿, witaj w naszym zespole. Masz, to dla Ciebie.");
 
 		init = true;
 	}
@@ -171,6 +170,7 @@ void Day_1::update(GameState *gs, sf::RenderWindow &win)
 		case 7://Login
 
 			log_in = true;
+			gs->computer->close();
 			state++;
 
 			break;
