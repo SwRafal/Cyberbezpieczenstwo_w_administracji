@@ -1,6 +1,7 @@
 #pragma once
 #include "Day.h"
 #include "OfficeFriend.h"
+#include "OfficeApplicant.h"
 
 
 #define THOUGHT_TIME 3000
@@ -22,6 +23,8 @@ public:
 	bool bookOpened;
 
 	OfficeFriend *itGuy;
+
+	OfficeApplicant *boss;
 
 	Day_2();
 	~Day_2();
