@@ -367,10 +367,10 @@ void GameState::update(sf::RenderWindow &win)
 			computer->turnOff();
 			officeApplicant->state = 0;
 			openedcomputer->setState(OpenPC::USERS);
-			openedcomputer->setLogin("Admin");
-			openedcomputer->setPassword("Admin");
 			data->login = "Admin";
 			data->password = "Admin";
+			openedcomputer->setLogin("Admin");
+			openedcomputer->setPassword("Admin");
 			watch->setHour(8, 0);
 			while (!phone->text_queue.empty())
 			{
@@ -474,6 +474,7 @@ void GameState::update(sf::RenderWindow &win)
 		dayShowScreen->nextDay();
 		this->data->day++;
 		watch->setHour(8,0);
+		calendar->setDay(calendar->getDay() + 1);
 	}
 	
 }
