@@ -75,6 +75,7 @@
 #define BUBBLE2 "resources/textures/bubble2.png"
 
 #define TEXTURE_OFFICE_FRIEND "resources/textures/friend.png"
+#define TEXTURE_APPLICANT "resources/textures/applicant.png"
 #define TEXTURE_ARROW_BUTTON "resources/textures/arrow.png"
 
 /* intro state */

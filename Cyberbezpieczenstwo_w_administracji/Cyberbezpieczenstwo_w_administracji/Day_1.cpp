@@ -3,6 +3,7 @@
 
 Day_1::Day_1()
 {
+	init = false;
 	state = 0;
 	thought = new textBubble(gm::Assets::getTexture("text bubble"));
 	thought->changeText("Hmmm... Takie informacje przez telefon? To niezbyt bezpieczne...");
@@ -41,6 +42,14 @@ Day_1::~Day_1()
 
 void Day_1::update(GameState *gs, sf::RenderWindow &win)
 {
+	if (!init)
+	{
+		//TU PISZ LINIJKI ASIA!!!
+		gs->officeApplicant->addToQueue(L"NO wiec");
+
+		init = true;
+	}
+
 	if (gs->lost)
 	{
 		if (gm::Core::getClock().getElapsedTime().asMilliseconds() > gs->info_time)
@@ -159,8 +168,8 @@ void Day_1::update(GameState *gs, sf::RenderWindow &win)
 
 			break;
 		case 8://Finish dialog
-
-
+			gs->officeApplicant->show();
+			
 
 			break;
 		case 9://Click mobile

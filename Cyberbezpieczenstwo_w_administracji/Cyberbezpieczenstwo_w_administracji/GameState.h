@@ -40,6 +40,7 @@ private:
 	int time;
 
 	OfficeFriend *officeLady;
+	OfficeApplicant *officeApplicant = nullptr;
 
 	Eyelids *eyelids = nullptr;
 

@@ -33,6 +33,8 @@ GameState::~GameState()
 	book = nullptr;
 	delete openedbook;
 	openedbook = nullptr;
+	delete officeApplicant;
+	officeApplicant = nullptr;
 
 	gm::Assets::EraseTexture("BIN");
 	gm::Assets::EraseTexture("BOOK");
@@ -183,6 +185,14 @@ void GameState::init()
 		officeLady = new OfficeFriend(gm::Assets::getTexture("friend"));
 	}
 
+	gm::Assets::LoadTexture("APPLICANT", TEXTURE_APPLICANT);
+	if (gm::Assets::getTexture("APPLICANT") == nullptr)
+		error_win_close();
+	else
+	{
+		officeApplicant = new OfficeApplicant(gm::Assets::getTexture("APPLICANT"));
+	}
+
 	gm::Assets::LoadTexture("text bubble",TEXTURE_TEXT_BUBBLE);
 	if(gm::Assets::getTexture("text bubble") == nullptr)
 		error_win_close();
@@ -301,6 +311,7 @@ void GameState::update(sf::RenderWindow &win)
 	dayShowScreen->update();
 	popUpText->animate();
 	officeLady->animate();
+	officeApplicant->animate();
 	textField->update(gm::Core::getWindow(),gm::Core::getEnteredChar());
 	eyelids->update();
 

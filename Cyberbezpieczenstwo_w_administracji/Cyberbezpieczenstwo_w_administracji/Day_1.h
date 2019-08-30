@@ -9,6 +9,8 @@ class Day_1 : public Day
 {
 public:
 	int state;
+	bool init;
+
 	textBubble *thought = nullptr;
 	sf::Int32 thought_time;
 
