@@ -3,6 +3,7 @@
 
 Day_1::Day_1()
 {
+	showButtons = false;
 	init = false;
 	state = 0;
 	thought = new textBubble(gm::Assets::getTexture("text bubble"));
@@ -41,6 +42,18 @@ Day_1::~Day_1()
 
 void Day_1::update(GameState *gs, sf::RenderWindow &win)
 {
+	if(showButtons)
+	{
+		gs->choice1->setPosition(gs->officeLady->chat.getPosition().x ,gs->officeLady->chat.getPosition().y + gs->officeLady->chat.getGlobalBounds().height);
+		gs->choice2->setPosition(gs->choice1->background.getPosition().x + gs->choice1->background.getGlobalBounds().width ,gs->choice1->background.getPosition().y );
+	}
+	else
+	{
+		gs->choice1->setPosition(0,-300);
+		gs->choice2->setPosition(0,-300);
+	}
+
+
 	if (!init)
 	{
 		gs->officeApplicant->text.setTextString(L"Petent: Czeœæ! Marek dziœ nie w pracy?");
@@ -50,6 +63,9 @@ void Day_1::update(GameState *gs, sf::RenderWindow &win)
 		gs->officeApplicant->addToQueue(L"Petent: Wiesz co siê sta³o?");
 		gs->officeApplicant->addToQueue(L"Ja: Nie mogê Ci tego powiedzieæ.");
 		gs->officeApplicant->addToQueue(L"Petent: Có¿, witaj w naszym zespole. Masz, to dla Ciebie.");
+
+		gs->choice1->setText(L"zapisz has³o");
+		gs->choice2->setText(L"nie zapisuj");
 
 		init = true;
 	}
@@ -247,8 +263,22 @@ void Day_1::update(GameState *gs, sf::RenderWindow &win)
 
 			break;
 		case 13://Write down password
+			if(gs->officeLady->ready)
+				showButtons = true;
 
-			//TUTAJ CHOICEBUTTONY
+			if(gs->choice1->clicked(gm::Core::getWindow()))
+			{
+				showButtons = false;
+
+				//state++ zeby sie nie pojawily znowu
+				//cos sie dzieje
+			}
+			else if(gs->choice2->clicked(gm::Core::getWindow()))
+			{
+				showButtons = false;
+				
+				//cos sie dzieje
+			}
 
 			break;
 		case 14://Login wifi

@@ -11,6 +11,8 @@ public:
 	int state;
 	bool init;
 
+	bool showButtons;
+
 	textBubble *thought = nullptr;
 	sf::Int32 thought_time;
 
