@@ -249,7 +249,7 @@ void Day_1::update(GameState *gs, sf::RenderWindow &win)
 				gs->info_time = gm::Core::getClock().getElapsedTime().asMilliseconds() + GAMELOST_INFO_TIME;
 				gs->gamelost_info = new sf::Text;
 				gs->gamelost_info->setFont(*gm::Assets::getFont());
-				gs->gamelost_info->setString(L"Nie zmieni³eœ has³a i ktoœ siê wkrad³ na konto!");
+				gs->gamelost_info->setString(L"Nie zmieni³eœ has³a i ktoœ wkrad³ siê na konto!");
 				gs->gamelost_info->setCharacterSize(48);
 				sf::Vector2f info_pos;
 				info_pos.x = SCREEN_WIDTH / 2 - (gs->gamelost_info->getLocalBounds().left + gs->gamelost_info->getLocalBounds().width) / 2;

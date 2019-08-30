@@ -55,6 +55,8 @@ GameState::~GameState()
 
 void GameState::init()
 {
+	data->password= L"Admin";
+
 	//Wall
 	gm::Assets::LoadTexture("WALL", TEXTURE_WALL);
 	if (gm::Assets::getTexture("WALL") == nullptr)
