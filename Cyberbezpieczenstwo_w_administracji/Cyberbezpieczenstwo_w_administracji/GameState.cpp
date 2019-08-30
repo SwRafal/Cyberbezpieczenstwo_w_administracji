@@ -392,8 +392,11 @@ void GameState::update(sf::RenderWindow &win)
 				computer->close();
 		}
 		day1->update(this, win);
+	}
 	else if(day == 2)
+		{
 		day2->update(this,win);
+		}
 	else//W inne dni
 	{
 		if (book->isOpened())
