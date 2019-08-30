@@ -295,21 +295,6 @@ void GameState::update(sf::RenderWindow &win)
 	calendar->update(win);
 	watch->update(gm::Core::getClock());
 
-	if (book->isOpened())
-	{
-		if (openedbook->update(win))
-			book->close();
-
-		return;
-	}
-	if (computer->isOpened())
-	{
-		if(openedcomputer->update(win))
-			computer->close();
-
-		return;
-	}
-
 
 
 	dayShowScreen->update();
@@ -389,15 +374,41 @@ void GameState::update(sf::RenderWindow &win)
 		initialized = true;
 	}
 
+
+
 	/* Days */
 	if (day == 0)
 		day0->update(this, win);
 	else if (day == 1)
+	{
+		if (book->isOpened())
+		{
+			if (openedbook->update(win))
+				book->close();
+		}
+		if (computer->isOpened())
+		{
+			if (openedcomputer->update(win))
+				computer->close();
+		}
 		day1->update(this, win);
 	else if(day == 2)
 		day2->update(this,win);
 	else//W inne dni
 	{
+		if (book->isOpened())
+		{
+			if (openedbook->update(win))
+				book->close();
+			return;
+		}
+		if (computer->isOpened())
+		{
+			if (openedcomputer->update(win))
+				computer->close();
+			return;
+		}
+
 		computer->update(win);
 		phone->update(win);
 
@@ -445,7 +456,7 @@ void GameState::draw(sf::RenderWindow& win)
 	button_items.push(coffee);
 	button_items.push(yes_stamp);
 	button_items.push(no_stamp);
-	//button_items.push(phone);
+	button_items.push(phone);
 	//...more
 	
 	
