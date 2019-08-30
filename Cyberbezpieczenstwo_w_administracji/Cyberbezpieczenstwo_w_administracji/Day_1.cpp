@@ -45,7 +45,7 @@ void Day_1::update(GameState *gs, sf::RenderWindow &win)
 	std::cout << state << std::endl;
 	if (!init)
 	{
-		//TU PISZ LINIJKI ASIA!!!
+		gs->officeApplicant->nextLine();
 		gs->officeApplicant->addToQueue(L"Petent: Czeœæ! Marek dziœ nie w pracy?");
 		gs->officeApplicant->addToQueue(L"Ja: Jego stanowisko zosta³o zajête.");
 		gs->officeApplicant->addToQueue(L"Petent: Szkoda, dobrze nam siê z nim pracowa³o…");
@@ -228,6 +228,7 @@ void Day_1::update(GameState *gs, sf::RenderWindow &win)
 void Day_1::draw(GameState *gs, sf::RenderWindow &win)
 {
 	thought->draw(win);
+	gs->officeApplicant->draw(win);
 
 	win.display();
 }
