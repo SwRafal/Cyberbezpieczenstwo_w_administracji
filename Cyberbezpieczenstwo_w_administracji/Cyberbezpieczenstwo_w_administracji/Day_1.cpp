@@ -22,8 +22,7 @@ Day_1::Day_1()
 	finish_dialog = false;
 	click_mobile = false;
 	put_mobile = false;
-	change_login = false;
-	change_password = false;
+	change_lines = false;
 	remember_password = false;
 	write_down_password = false;
 	login_wifi = false;
@@ -42,17 +41,15 @@ Day_1::~Day_1()
 
 void Day_1::update(GameState *gs, sf::RenderWindow &win)
 {
-	std::cout << state << std::endl;
 	if (!init)
 	{
-		gs->officeApplicant->nextLine();
-		gs->officeApplicant->addToQueue(L"Petent: Czeœæ! Marek dziœ nie w pracy?");
+		gs->officeApplicant->text.setTextString(L"Petent: Czeœæ! Marek dziœ nie w pracy?");
 		gs->officeApplicant->addToQueue(L"Ja: Jego stanowisko zosta³o zajête.");
 		gs->officeApplicant->addToQueue(L"Petent: Szkoda, dobrze nam siê z nim pracowa³o…");
 		gs->officeApplicant->addToQueue(L"Ja: Nie spe³nia³ wymogów bezpieczeñstwa. ");
 		gs->officeApplicant->addToQueue(L"Petent: Wiesz co siê sta³o?");
-		gs->officeApplicant->addToQueue(L"Ja:  Nie mogê Ci tego powiedzieæ.");
-		gs->officeApplicant->addToQueue(L"Petent: Có¿, witaj w naszym zespole. Masz to dla Ciebie.");
+		gs->officeApplicant->addToQueue(L"Ja: Nie mogê Ci tego powiedzieæ.");
+		gs->officeApplicant->addToQueue(L"Petent: Có¿, witaj w naszym zespole. Masz, to dla Ciebie.");
 
 		init = true;
 	}
@@ -171,50 +168,55 @@ void Day_1::update(GameState *gs, sf::RenderWindow &win)
 		case 7://Login
 
 			log_in = true;
+			gs->computer->close();
+			gs->officeApplicant->show();
 			state++;
 
 			break;
 		case 8://Finish dialog
-			gs->officeApplicant->show();
-			
+
+			if (gs->officeApplicant->state >= 6)
+			{
+				gs->officeApplicant->hide();
+				finish_dialog = true;
+				state++;
+			}
 
 			break;
 		case 9://Click mobile
 
-
+			click_mobile = true;
+			state++;
 
 			break;
 		case 10://Put mobile
 
+			put_mobile = true;
+			state++;
+
+			break;
+		case 11://Change_lines
+
+			gs->computer->update(win);
 
 
 			break;
-		case 11://Change_login
-
-
-
-			break;
-		case 12://Change_password
-
-
-
-			break;
-		case 13://Remember password
+		case 12://Remember password
 
 
 
 			break;
-		case 14://Write down password
+		case 13://Write down password
 
 
 
 			break;
-		case 15://Login wifi
+		case 14://Login wifi
 
 
 
 			break;
-		case 16://Click email
+		case 15://Click email
 
 
 

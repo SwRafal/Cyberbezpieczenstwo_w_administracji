@@ -22,12 +22,12 @@ OfficeApplicant::OfficeApplicant(sf::Texture *texture) : text(*gm::Assets::getFo
 
 
 	chat.setTexture(*gm::Assets::getTexture("chat bubble"));
-	chat.setPosition(FINAL_POS_X - chat.getGlobalBounds().width + 15, POS_Y - 40);
+	chat.setPosition(FINAL_POS_X - chat.getGlobalBounds().width + 15, POS_Y + 10);
 
 	text.setTextSize(20);
 	text.setTextColor(sf::Color::Black);
 	text.setFillColor(sf::Color::Transparent);
-	text.setPosition(FINAL_POS_X - chat.getGlobalBounds().width + 15 + 3, POS_Y - 40 + 2);
+	text.setPosition(FINAL_POS_X - chat.getGlobalBounds().width + 15 + 3, POS_Y + 12);
 	text.setSize(chat.getGlobalBounds().width * 0.9, chat.getGlobalBounds().height * 0.97);
 
 

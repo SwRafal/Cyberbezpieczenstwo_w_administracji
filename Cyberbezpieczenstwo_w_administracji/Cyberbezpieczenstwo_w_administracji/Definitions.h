@@ -95,3 +95,6 @@
 
 #define PC_SCREEN_TEXTURE "resources/textures/screen.png"
 #define EMPTY_TABLE_TEXTURE "resources/textures/desk highlight.png"
+
+/* Day 2 */
+#define IT_GUY_TEXTURE "resources/textures/itGuy.png"
