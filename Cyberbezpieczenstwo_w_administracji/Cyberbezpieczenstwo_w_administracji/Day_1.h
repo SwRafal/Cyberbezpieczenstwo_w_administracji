@@ -27,8 +27,7 @@ public:
 	bool finish_dialog;
 	bool click_mobile;
 	bool put_mobile;
-	bool change_login;
-	bool change_password;
+	bool change_lines;
 	bool remember_password;
 	bool write_down_password;
 	bool login_wifi;

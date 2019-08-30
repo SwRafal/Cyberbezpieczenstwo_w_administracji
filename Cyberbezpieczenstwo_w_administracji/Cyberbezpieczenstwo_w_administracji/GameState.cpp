@@ -48,6 +48,7 @@ GameState::~GameState()
 	gm::Assets::EraseTexture("COFFEE");
 	gm::Assets::EraseTexture("WATCH");
 	gm::Assets::EraseTexture("TELEPHONE");
+	gm::Assets::EraseTexture("PRIVATE_PHONE");
 	gm::Assets::EraseTexture("CALENDAR");
 	gm::Assets::EraseTexture("WALL");
 }
@@ -146,6 +147,7 @@ void GameState::init()
 	{
 		book = new Book(gm::Assets::getTexture("BOOK"));
 	}
+
 	//OpenedBook
 	gm::Assets::LoadTexture("OPENEDBOOK", TEXTURE_OPENEDBOOK);
 	if (gm::Assets::getTexture("OPENEDBOOK") == nullptr)
@@ -166,6 +168,15 @@ void GameState::init()
 
 	//phone
 	phone = new Phone;
+
+	//Private Phone
+	gm::Assets::LoadTexture("PRIVATE_PHONE", TEXTURE_PRIVATE_PHONE);
+	if (gm::Assets::getTexture("PRIVATE_PHONE") == nullptr)
+		error_win_close();
+	else
+	{
+		mobile = new Mobile(gm::Assets::getTexture("PRIVATE_PHONE"));
+	}
 
 	//pc
 	computer = new pc;
@@ -459,6 +470,7 @@ void GameState::draw(sf::RenderWindow& win)
 	button_items.push(coffee);
 	button_items.push(yes_stamp);
 	button_items.push(no_stamp);
+	button_items.push(mobile);
 	button_items.push(phone);
 	//...more
 	

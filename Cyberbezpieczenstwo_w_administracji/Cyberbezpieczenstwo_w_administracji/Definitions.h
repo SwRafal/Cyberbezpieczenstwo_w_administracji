@@ -41,6 +41,7 @@
 #define TEXTURE_CALENDAR "resources/textures/calendar.png"
 #define TEXTURE_TELEPHONE "resources/textures/phone.png"
 #define TEXTURE_WATCH "resources/textures/watch.png"
+#define TEXTURE_PRIVATE_PHONE "resources/textures/smartfon1.png"
 
 #define TEXTURE_COFFEE "resources/textures/coffee.png"
 #define TEXTURE_COFFEE2 "resources/textures/coffee2.png"

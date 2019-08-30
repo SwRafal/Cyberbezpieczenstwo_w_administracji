@@ -13,6 +13,7 @@
 #include "ChoiceButton.h"
 #include "Eyelids.h"
 #include "OfficeApplicant.h"
+#include "Mobile.h"
 
 #define GAMELOST_INFO_TIME 5000
 
@@ -59,6 +60,7 @@ private:
 	Battery *battery = nullptr;
 	Bell *bell = nullptr;
 	Phone *phone = nullptr;
+	Mobile *mobile = nullptr;
 
 	pc *computer = nullptr;
 	OpenPC *openedcomputer = nullptr;
