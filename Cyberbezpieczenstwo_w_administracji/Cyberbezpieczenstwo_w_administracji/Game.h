@@ -17,7 +17,8 @@ namespace gm
 		int characterChoice = 0;
 
 		sf::String name = "";
-		sf::String password ="admin";
+		sf::String login = "Admin";
+		sf::String password ="Admin";
 
 		int nagany = 0;
 

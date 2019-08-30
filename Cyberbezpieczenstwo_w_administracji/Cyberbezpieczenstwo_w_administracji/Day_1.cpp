@@ -42,6 +42,7 @@ Day_1::~Day_1()
 
 void Day_1::update(GameState *gs, sf::RenderWindow &win)
 {
+	std::cout << state << std::endl;
 	if (!init)
 	{
 		//TU PISZ LINIJKI ASIA!!!
