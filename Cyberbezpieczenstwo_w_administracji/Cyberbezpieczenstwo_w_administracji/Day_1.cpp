@@ -191,7 +191,7 @@ void Day_1::update(GameState *gs, sf::RenderWindow &win)
 			break;
 		case 11://Change_login
 
-
+			gs->computer->update(win);
 
 			break;
 		case 12://Change_password
