@@ -91,4 +91,9 @@ public:
 
 	void setState(PC_STATE state);
 	PC_STATE getState() { return state; }
+
+	void setLogin(sf::String login);
+	void setPassword(sf::String password);
+	sf::String getLogin() { return login->getTextString(); }
+	sf::String getPassword() { return password->getTextString(); }
 };

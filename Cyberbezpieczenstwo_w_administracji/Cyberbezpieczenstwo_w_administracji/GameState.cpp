@@ -365,8 +365,11 @@ void GameState::update(sf::RenderWindow &win)
 			coffee->reset();
 			computer->close();
 			computer->turnOff();
+			officeApplicant->state = 0;
 			openedcomputer->setState(OpenPC::USERS);
-			//
+			openedcomputer->setLogin("Admin");
+			openedcomputer->setPassword("Admin");
+			data->login = "Admin";
 			data->password = "Admin";
 			watch->setHour(8, 0);
 			while (!phone->text_queue.empty())
@@ -407,6 +410,9 @@ void GameState::update(sf::RenderWindow &win)
 		{
 			if (openedcomputer->update(win))
 				computer->close();
+
+			data->login = openedcomputer->getLogin();
+			data->password = openedcomputer->getPassword();
 		}
 		day1->update(this, win);
 	}
@@ -436,6 +442,9 @@ void GameState::update(sf::RenderWindow &win)
 		{
 			if (openedcomputer->update(win))
 				computer->close();
+
+			data->login = openedcomputer->getLogin();
+			data->password = openedcomputer->getPassword();
 			return;
 		}
 

@@ -56,6 +56,8 @@ void Day_1::update(GameState *gs, sf::RenderWindow &win)
 
 	if (!init)
 	{
+		gs->computer->update(win);
+
 		gs->officeApplicant->text.setTextString(L"Petent: Czeœæ! Marek dziœ nie w pracy?");
 		gs->officeApplicant->addToQueue(L"Ja: Jego stanowisko zosta³o zajête.");
 		gs->officeApplicant->addToQueue(L"Petent: Szkoda, dobrze nam siê z nim pracowa³o…");
@@ -72,6 +74,7 @@ void Day_1::update(GameState *gs, sf::RenderWindow &win)
 
 	if (gs->lost)
 	{
+		init = false;
 		if (gm::Core::getClock().getElapsedTime().asMilliseconds() > gs->info_time)
 		{
 			state = 0;
@@ -95,7 +98,7 @@ void Day_1::update(GameState *gs, sf::RenderWindow &win)
 				gs->book->setFillColor(sf::Color(230, 230, 230));
 				gs->eyelids->open();
 			}
-			else if (gs->book->clicked(win) || gs->bell->clicked(win) || gs->bin->clicked(win) || gs->no_stamp->clicked(win) || gs->yes_stamp->clicked(win))
+			else if (gs->computer->clicked(win) || gs->book->clicked(win) || gs->bell->clicked(win) || gs->bin->clicked(win) || gs->no_stamp->clicked(win) || gs->yes_stamp->clicked(win))
 			{
 				gs->eyelids->increaseLvl();
 			}
@@ -239,22 +242,19 @@ void Day_1::update(GameState *gs, sf::RenderWindow &win)
 			break;
 		case 12://Remember password
 
-			if (gs->openedcomputer->getState() == OpenPC::SET_PASSWORD && gs->computer->isOpened())
+			if (gs->openedcomputer->getState() != OpenPC::SET_PASSWORD && gs->data->password == "Admin")
 			{
-				if (gs->data->password == "Admin")
-				{
-					gs->lost = true;
-					gs->eyelids->close();
-					gs->info_time = gm::Core::getClock().getElapsedTime().asMilliseconds() + GAMELOST_INFO_TIME;
-					gs->gamelost_info = new sf::Text;
-					gs->gamelost_info->setFont(*gm::Assets::getFont());
-					gs->gamelost_info->setString(L"Nie zmieni³eœ has³a i ktoœ siê wkrad³ na konto!");
-					gs->gamelost_info->setCharacterSize(48);
-					sf::Vector2f info_pos;
-					info_pos.x = SCREEN_WIDTH / 2 - (gs->gamelost_info->getLocalBounds().left + gs->gamelost_info->getLocalBounds().width) / 2;
-					info_pos.y = SCREEN_HEIGHT / 2 - (gs->gamelost_info->getLocalBounds().top + gs->gamelost_info->getLocalBounds().height) / 2;
-					gs->gamelost_info->setPosition(sf::Vector2f(info_pos));
-				}
+				gs->lost = true;
+				gs->eyelids->close();
+				gs->info_time = gm::Core::getClock().getElapsedTime().asMilliseconds() + GAMELOST_INFO_TIME;
+				gs->gamelost_info = new sf::Text;
+				gs->gamelost_info->setFont(*gm::Assets::getFont());
+				gs->gamelost_info->setString(L"Nie zmieni³eœ has³a i ktoœ siê wkrad³ na konto!");
+				gs->gamelost_info->setCharacterSize(48);
+				sf::Vector2f info_pos;
+				info_pos.x = SCREEN_WIDTH / 2 - (gs->gamelost_info->getLocalBounds().left + gs->gamelost_info->getLocalBounds().width) / 2;
+				info_pos.y = SCREEN_HEIGHT / 2 - (gs->gamelost_info->getLocalBounds().top + gs->gamelost_info->getLocalBounds().height) / 2;
+				gs->gamelost_info->setPosition(sf::Vector2f(info_pos));
 			}
 			if(!gs->computer->isOpened())
 			{
@@ -272,15 +272,26 @@ void Day_1::update(GameState *gs, sf::RenderWindow &win)
 			if(gs->choice1->clicked(gm::Core::getWindow()))
 			{
 				showButtons = false;
-
-				//state++ zeby sie nie pojawily znowu
-				//cos sie dzieje
+				gs->officeLady->hide();
+				
+				gs->lost = true;
+				gs->eyelids->close();
+				gs->info_time = gm::Core::getClock().getElapsedTime().asMilliseconds() + GAMELOST_INFO_TIME;
+				gs->gamelost_info = new sf::Text;
+				gs->gamelost_info->setFont(*gm::Assets::getFont());
+				gs->gamelost_info->setString(L"Firma sprz¹taj¹ca Ministerstwo znalaz³a twoje has³o do systemu!");
+				gs->gamelost_info->setCharacterSize(48);
+				sf::Vector2f info_pos;
+				info_pos.x = SCREEN_WIDTH / 2 - (gs->gamelost_info->getLocalBounds().left + gs->gamelost_info->getLocalBounds().width) / 2;
+				info_pos.y = SCREEN_HEIGHT / 2 - (gs->gamelost_info->getLocalBounds().top + gs->gamelost_info->getLocalBounds().height) / 2;
+				gs->gamelost_info->setPosition(sf::Vector2f(info_pos));
 			}
 			else if(gs->choice2->clicked(gm::Core::getWindow()))
 			{
 				showButtons = false;
+				gs->officeLady->hide();
 				
-				//cos sie dzieje
+				gs->nextDay = true;
 			}
 
 			break;

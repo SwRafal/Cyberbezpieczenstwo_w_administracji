@@ -224,7 +224,7 @@ bool OpenPC::update(sf::RenderWindow &win)
 		break;
 	case LOGIN_WIFI:
 		if (wifi_mindswszelakich->clicked(win) || wifi_mindswszelakich_gov->clicked(win) || wifi_mindswszelakich_p1->clicked(win));
-			//certyfikat
+		//certyfikat
 		else if (wifi_Xfon_zosi->clicked(win))
 		{
 			info->changeText(L"Nie znam has³a do tej sieci...");
@@ -239,14 +239,16 @@ bool OpenPC::update(sf::RenderWindow &win)
 			info->showBubble();
 			info_time = gm::Core::getClock().getElapsedTime().asMilliseconds() + INFO_DELAY;
 		}
-		else if(ok->clicked(win))
+		else if (ok->clicked(win))
 			setState(DESKTOP);
 		break;
 	case SET_PASSWORD:
 		login->update(win, gm::Core::getEnteredChar());
 		password->update(win, gm::Core::getEnteredChar());
 		if (ok->clicked(win))
+		{
 			setState(DESKTOP);
+		}
 		break;
 	default:
 		break;
@@ -262,4 +264,14 @@ bool OpenPC::update(sf::RenderWindow &win)
 void OpenPC::setState(PC_STATE state)
 {
 	this->state = state;
+}
+
+void OpenPC::setLogin(sf::String login)
+{
+	this->login->setTextString(login);
+}
+
+void OpenPC::setPassword(sf::String password)
+{
+	this->login->setTextString(password);
 }
