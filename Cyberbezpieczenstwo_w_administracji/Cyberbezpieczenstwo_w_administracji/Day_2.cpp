@@ -31,6 +31,8 @@ void Day_2::update(GameState *gs, sf::RenderWindow &win)
 
 	if(!init)
 	{
+		gs->coffee->reset();
+
 		time = gm::Core::getClock().getElapsedTime().asSeconds();
 		
 
