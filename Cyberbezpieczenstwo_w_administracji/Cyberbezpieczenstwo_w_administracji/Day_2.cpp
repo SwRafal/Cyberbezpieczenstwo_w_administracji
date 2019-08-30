@@ -61,6 +61,12 @@ void Day_2::update(GameState *gs, sf::RenderWindow &win)
 
 		boss->move(0,11);
 
+		s = gs->data->name +L": co siê sta³o?";
+		gs->officeLady->text.setTextString(s);
+		gs->officeLady->addToQueue(L"Kole¿anka : Dosta³am naganê za zapisywanie hase³ na kartkach. Jeszcze jedna wtopa i wylatujê.");
+		gs->officeLady->addToQueue(L" ");
+		gs->officeLady->state = 0;
+
 		
 		init = true;
 	}
@@ -146,6 +152,16 @@ void Day_2::update(GameState *gs, sf::RenderWindow &win)
 			boss->hide();
 
 		if(boss->getPosition().x == 1390)
+		{
+			state++;
+			gs->officeLady->show();
+		}
+		break;
+	case 6:
+		gs->officeLady->animate();
+		if(gs->officeLady->state == 2)
+			gs->officeLady->hide();
+		if(gs->officeLady->getPosition().x == 1390)
 			state++;
 		break;
 	}
