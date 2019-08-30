@@ -374,8 +374,15 @@ void GameState::update(sf::RenderWindow &win)
 			{
 				phone->text_queue.pop();
 			}
+			while (!officeLady->text_queue.empty())
+			{
+				officeLady->text_queue.pop();
+			}
+
 			phone->addToQueue(L"Czeœæ " + data->name + L"! Jestem z dzia³u IT. Twoje dane logowania to:\nUser: Admin\nHas³o: Admin");
 			phone->addToQueue(L"Pamiêtaj, aby je zmieniæ po zalogowaniu!");
+
+			officeLady->text.setTextString(L"Mocne has³a ciê¿ko zapamiêtaæ, lepiej zapisz je na kartce. Ja tak robiê.");
 
 			openedbook->setInfoL(L"1. Zabezpiecz dane logowania");
 			openedbook->setInfoR("");

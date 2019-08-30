@@ -197,18 +197,58 @@ void Day_1::update(GameState *gs, sf::RenderWindow &win)
 			break;
 		case 11://Change_lines
 
+			gs->book->update(win);
 			gs->computer->update(win);
-
+			if (gs->openedcomputer->getState() == OpenPC::SET_PASSWORD)
+			{
+				change_lines = true;
+				state++;
+			}
+			else if (gs->openedcomputer->getState() == OpenPC::LOGIN_WIFI)
+			{
+				gs->lost = true;
+				gs->info_time = gm::Core::getClock().getElapsedTime().asMilliseconds() + GAMELOST_INFO_TIME;
+				gs->gamelost_info = new sf::Text;
+				gs->gamelost_info->setFont(*gm::Assets::getFont());
+				gs->gamelost_info->setString(L"Po³¹czy³eœ siê z internetem nie zmieniwszy wczeœniej danych logowania!");
+				gs->gamelost_info->setCharacterSize(48);
+				sf::Vector2f info_pos;
+				info_pos.x = SCREEN_WIDTH / 2 - (gs->gamelost_info->getLocalBounds().left + gs->gamelost_info->getLocalBounds().width) / 2;
+				info_pos.y = SCREEN_HEIGHT / 2 - (gs->gamelost_info->getLocalBounds().top + gs->gamelost_info->getLocalBounds().height) / 2;
+				gs->gamelost_info->setPosition(sf::Vector2f(info_pos));
+			}
 
 			break;
 		case 12://Remember password
 
+			if (gs->openedcomputer->getState() == OpenPC::SET_PASSWORD && gs->computer->isOpened())
+			{
+				if (gs->data->password == "Admin")
+				{
+					gs->lost = true;
+					gs->info_time = gm::Core::getClock().getElapsedTime().asMilliseconds() + GAMELOST_INFO_TIME;
+					gs->gamelost_info = new sf::Text;
+					gs->gamelost_info->setFont(*gm::Assets::getFont());
+					gs->gamelost_info->setString(L"Nie zmieni³eœ has³a i ktoœ siê wkrad³ na konto!");
+					gs->gamelost_info->setCharacterSize(48);
+					sf::Vector2f info_pos;
+					info_pos.x = SCREEN_WIDTH / 2 - (gs->gamelost_info->getLocalBounds().left + gs->gamelost_info->getLocalBounds().width) / 2;
+					info_pos.y = SCREEN_HEIGHT / 2 - (gs->gamelost_info->getLocalBounds().top + gs->gamelost_info->getLocalBounds().height) / 2;
+					gs->gamelost_info->setPosition(sf::Vector2f(info_pos));
+				}
+			}
+			if(!gs->computer->isOpened())
+			{
+				gs->officeLady->show();
+				remember_password = true;
+				state++;
+			}
 
 
 			break;
 		case 13://Write down password
 
-
+			//TUTAJ CHOICEBUTTONY
 
 			break;
 		case 14://Login wifi
