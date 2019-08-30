@@ -273,5 +273,5 @@ void OpenPC::setLogin(sf::String login)
 
 void OpenPC::setPassword(sf::String password)
 {
-	this->login->setTextString(password);
+	this->password->setTextString(password);
 }

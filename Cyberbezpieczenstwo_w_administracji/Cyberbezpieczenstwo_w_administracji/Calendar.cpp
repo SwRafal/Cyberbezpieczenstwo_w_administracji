@@ -196,10 +196,7 @@ void Calendar::draw(sf::RenderWindow &win)
 
 void Calendar::update(sf::RenderWindow &win)
 {
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
-	{
-		setDay(_day+1);
-	}
+	//...
 }
 
 Calendar::MONTHS operator++(Calendar::MONTHS& m, int)
