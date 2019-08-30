@@ -47,7 +47,7 @@ public:
 	int state;
 
 
-
+	void moveChatBox(int x, int y);
 
 	OfficeApplicant(sf::Texture *texture);
 	~OfficeApplicant();

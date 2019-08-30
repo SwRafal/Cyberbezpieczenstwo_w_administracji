@@ -59,6 +59,7 @@ void Day_2::update(GameState *gs, sf::RenderWindow &win)
 		boss->addToQueue(L" ");
 		boss->state = 0;
 
+		boss->move(0,11);
 
 		
 		init = true;
@@ -123,11 +124,15 @@ void Day_2::update(GameState *gs, sf::RenderWindow &win)
 		gs->book->update(win);
 		gs->openedbook->update(win);
 
-		if(gs->book->clicked(win))
+		if(gs->book->isOpened())
 			bookOpened = true;
 
+		
 		if(bookOpened && !gs->book->isOpened())
 			state++;
+		
+			
+		std::cout << std::endl << "book opened: " << bookOpened << "book isopened: " << gs->book->isOpened() << std::endl;
 		
 
 		break;

@@ -13,6 +13,8 @@ Mobile::Mobile(sf::Texture *tex) : text(*gm::Assets::getFont()), arrowButton(*gm
 	this->setAimedColor(sf::Color(190, 200, 190));
 	this->setPressColor(sf::Color(120, 150, 120));
 	this->setPosition(sf::Vector2f(MOBILE_POS_X, MOBILE_POS_Y));
+
+	
 }
 
 

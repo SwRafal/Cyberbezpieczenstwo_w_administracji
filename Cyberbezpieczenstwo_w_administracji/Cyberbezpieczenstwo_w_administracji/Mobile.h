@@ -4,10 +4,10 @@
 #include <queue>
 
 
-#define MOBILE_POS_X 800
-#define MOBILE_POS_Y 480
-#define MOBILE_WIDTH 101
-#define MOBILE_HEIGHT 212
+#define MOBILE_POS_X 740
+#define MOBILE_POS_Y 550
+#define MOBILE_WIDTH 77
+#define MOBILE_HEIGHT 162
 
 
 
