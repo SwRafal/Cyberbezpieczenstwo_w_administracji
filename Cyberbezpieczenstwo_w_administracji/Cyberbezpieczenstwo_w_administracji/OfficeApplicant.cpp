@@ -153,3 +153,11 @@ void OfficeApplicant::setButtonInactive()
 	active = false;
 }
 
+void OfficeApplicant::moveChatBox(int x, int y)
+{
+	chat.setPosition(chat.getPosition().x + x,chat.getPosition().y + y);
+	text.setPosition(text.getPosition().x + x , text.getPosition().y + y);
+	img.setPosition(img.getPosition().x + x , img.getPosition().y + y);
+	button.setPosition(button.getPosition().x + x , button.getPosition().y + y);
+
+}

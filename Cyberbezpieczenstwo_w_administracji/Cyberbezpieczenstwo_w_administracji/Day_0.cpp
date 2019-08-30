@@ -196,7 +196,7 @@ void Day_0::update(GameState* gs, sf::RenderWindow &win)
 			gs->officeLady->addToQueue(L"Pilnuj czasu. Jak to mówi¹ spóŸnienia to pierwszy stopieñ na dywanik u Szefa.");
 
 			//telefon prywatny
-			sf::String s = L"O! Widzê, ¿e masz najnowszego smartfona! Poka¿! ... O NIE!";
+			sf::String s = L"O! Widzê, ¿e masz najnowszego smartfona! Poka¿! ... O NIE! ";
 			s = s + gs->data->name + L"! To produkcja japoñskiej firmy! Wiesz co to oznacza!";
 			gs->officeLady->addToQueue(s);
 			gs->officeLady->addToQueue(L"W dodatku Szef nie uznaje u¿ywania prywatnych telefonów w pracy. Mówi, ¿e zagra¿a to bezpieczeñstwu firmy.");
@@ -273,6 +273,7 @@ void Day_0::draw(GameState* gs)
 		gs->no_stamp->draw(win);
 		gs->yes_stamp->draw(win);
 		gs->phone->draw(win);
+		gs->mobile->draw(win);
 		
 
 		gs->bin->draw(win);
@@ -303,7 +304,8 @@ void Day_0::draw(GameState* gs)
 		gs->no_stamp->draw(win);
 		gs->yes_stamp->draw(win);
 		gs->phone->draw(win);
-		
+		gs->mobile->draw(win);
+
 		gs->bin->draw(win);
 		gs->battery->draw(win);
 
@@ -333,6 +335,7 @@ void Day_0::draw(GameState* gs)
 		gs->no_stamp->draw(win);
 		gs->yes_stamp->draw(win);
 		gs->phone->draw(win);
+		gs->mobile->draw(win);
 		
 		gs->bin->draw(win);
 		gs->battery->draw(win);
@@ -359,7 +362,7 @@ void Day_0::draw(GameState* gs)
 		gs->no_stamp->draw(win);
 		gs->yes_stamp->draw(win);
 		gs->phone->draw(win);
-		
+		gs->mobile->draw(win);
 		gs->bin->draw(win);
 		gs->battery->draw(win);
 
@@ -388,7 +391,7 @@ void Day_0::draw(GameState* gs)
 		gs->computer->draw(win);
 		gs->no_stamp->draw(win);
 		gs->yes_stamp->draw(win);
-		
+		gs->mobile->draw(win);
 		gs->bin->draw(win);
 		gs->battery->draw(win);
 
@@ -417,7 +420,7 @@ void Day_0::draw(GameState* gs)
 		gs->no_stamp->draw(win);
 		gs->yes_stamp->draw(win);
 		gs->phone->draw(win);
-		
+		gs->mobile->draw(win);
 		gs->bin->draw(win);
 		gs->battery->draw(win);
 
@@ -446,7 +449,7 @@ void Day_0::draw(GameState* gs)
 		gs->no_stamp->draw(win);
 		gs->yes_stamp->draw(win);
 		gs->phone->draw(win);
-		
+		gs->mobile->draw(win);
 		gs->bin->draw(win);
 		gs->battery->draw(win);
 
@@ -475,7 +478,7 @@ void Day_0::draw(GameState* gs)
 		gs->no_stamp->draw(win);
 		gs->yes_stamp->draw(win);
 		gs->phone->draw(win);
-		
+		gs->mobile->draw(win);
 		gs->bin->draw(win);
 		gs->battery->draw(win);
 
@@ -505,7 +508,7 @@ void Day_0::draw(GameState* gs)
 		gs->no_stamp->draw(win);
 		gs->yes_stamp->draw(win);
 		gs->phone->draw(win);
-		
+		gs->mobile->draw(win);
 		gs->bin->draw(win);
 		gs->battery->draw(win);
 
@@ -543,7 +546,7 @@ void Day_0::draw(GameState* gs)
 		gs->coffee->draw(win);
 
 		win.draw(background); //border
-
+		gs->mobile->draw(win);
 		//telefon prywatny
 
 		gs->officeLady->draw(win);
@@ -565,7 +568,7 @@ void Day_0::draw(GameState* gs)
 		gs->no_stamp->draw(win);
 		gs->yes_stamp->draw(win);
 		gs->phone->draw(win);
-		
+		gs->mobile->draw(win);
 		gs->bin->draw(win);
 		gs->battery->draw(win);
 
@@ -598,7 +601,7 @@ void Day_0::draw(GameState* gs)
 		gs->no_stamp->draw(win);
 		gs->yes_stamp->draw(win);
 		gs->phone->draw(win);
-		
+		gs->mobile->draw(win);
 		gs->bin->draw(win);
 		gs->battery->draw(win);
 
