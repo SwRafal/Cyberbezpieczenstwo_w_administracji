@@ -31,16 +31,7 @@ bool Coffee::update_drunk(sf::RenderWindow &win)
 {
 	if (clicked(win))
 	{
-		if (_level > 0)
-		{
-			_level--;
-			//Drink sound
-			return true;
-		}
-		else
-		{
-			//Denied drinking sound
-		}
+		return true;
 	}
 	return false;
 }

@@ -140,6 +140,9 @@ void Day_0::update(GameState* gs, sf::RenderWindow &win)
 		if((gs->data->characterChoice == 2 || gs->data->characterChoice == 3) && gs->officeLady->state == 6)
 			part1Over = true;
 
+	if(gs->data->characterChoice == 1)
+		gs->data->name = L"Halina";
+
 	if(part1Over)
 	{
 		if (!reset)
