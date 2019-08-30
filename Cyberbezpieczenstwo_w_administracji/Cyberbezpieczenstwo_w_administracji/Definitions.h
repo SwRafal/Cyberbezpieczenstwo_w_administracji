@@ -98,3 +98,4 @@
 
 /* Day 2 */
 #define IT_GUY_TEXTURE "resources/textures/itGuy.png"
+#define BOSS_TEXTURE "resources/textures/boss.png"

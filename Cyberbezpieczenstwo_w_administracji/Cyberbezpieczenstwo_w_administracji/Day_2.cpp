@@ -6,6 +6,8 @@ Day_2::Day_2()
 	gm::Assets::LoadTexture("itGuy",IT_GUY_TEXTURE);
  	itGuy = new OfficeFriend(gm::Assets::getTexture("itGuy"));
 
+	gm::Assets::LoadTexture("boss",BOSS_TEXTURE);
+	boss = new OfficeApplicant(gm::Assets::getTexture("boss"));
 
 	thought = new textBubble(gm::Assets::getTexture("text bubble"));
 	thought->changeText(L"Nie œpij w pracy!!!");
@@ -48,6 +50,14 @@ void Day_2::update(GameState *gs, sf::RenderWindow &win)
 		itGuy->addToQueue(L" ");
 		
 		gs->openedbook->setInfoR(L"2 Uwierzytelnianie dwusk³adnikowe.");
+
+		s = L"Witaj ";
+		s = s + gs->data->name + "!";
+		boss->text.setTextString(s);
+		boss->addToQueue(L"Nasze Ministerstwo bierze udzia³ w konkursie na najbezpieczniejsze ministerstwo œwiata.");
+		boss->addToQueue(L"Od dziœ ka¿de logowanie musi byæ dwusk³adnikowe. Dalsze instrukcje w emailu.");
+		boss->addToQueue(L" ");
+		boss->state = 0;
 
 
 		
@@ -122,7 +132,16 @@ void Day_2::update(GameState *gs, sf::RenderWindow &win)
 
 		break;
 	case 4:
-	
+		boss->show();
+		state++;
+		break;
+	case 5:
+		boss->animate();
+		if(boss->state == 3)
+			boss->hide();
+
+		if(boss->getPosition().x == 1390)
+			state++;
 		break;
 	}
 
@@ -133,6 +152,7 @@ void Day_2::draw(GameState *gs, sf::RenderWindow &win)
 {
 	itGuy->draw(win);
 	thought->draw(win);
+	boss->draw(win);
 
 	win.display();
 }

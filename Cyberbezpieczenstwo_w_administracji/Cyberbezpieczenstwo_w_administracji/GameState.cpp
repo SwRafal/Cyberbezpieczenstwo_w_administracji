@@ -525,6 +525,11 @@ void GameState::draw(sf::RenderWindow& win)
 		choice1->draw(win);
 		choice2->draw(win);
 	}
+	if(day == 1) //tuitfdsjfsdjfuis
+	{
+		choice1->draw(win);
+		choice2->draw(win);
+	}
 
 
 	dayShowScreen->draw(win,sf::RenderStates::Default);
