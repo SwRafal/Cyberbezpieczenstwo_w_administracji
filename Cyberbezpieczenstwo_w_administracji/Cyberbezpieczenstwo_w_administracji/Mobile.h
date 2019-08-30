@@ -39,7 +39,7 @@ public:
 	bool nextLine();
 	void addToQueue(sf::String str);
 
-	Mobile();
+	Mobile(sf::Texture *tex);
 	~Mobile();
 
 

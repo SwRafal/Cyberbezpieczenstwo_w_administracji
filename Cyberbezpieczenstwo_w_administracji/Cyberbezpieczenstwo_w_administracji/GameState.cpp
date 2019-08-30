@@ -170,14 +170,13 @@ void GameState::init()
 	phone = new Phone;
 
 	//Private Phone
-	mobile = new Mobile;
 	gm::Assets::LoadTexture("PRIVATE_PHONE", TEXTURE_PRIVATE_PHONE);
 	if (gm::Assets::getTexture("PRIVATE_PHONE") == nullptr)
 		error_win_close();
-	/*else
+	else
 	{
 		mobile = new Mobile(gm::Assets::getTexture("PRIVATE_PHONE"));
-	}*/
+	}
 
 	//pc
 	computer = new pc;

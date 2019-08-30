@@ -2,13 +2,9 @@
 
 /*Maintenance(?)*/
 
-Mobile::Mobile() : text(*gm::Assets::getFont()), arrowButton(*gm::Assets::getFont())
+Mobile::Mobile(sf::Texture *tex) : text(*gm::Assets::getFont()), arrowButton(*gm::Assets::getFont())
 {
-	gm::Assets::LoadTexture("PRIVATE_PHONE", TEXTURE_PRIVATE_PHONE);
-	if (gm::Assets::getTexture("PRIVATE_PHONE") == nullptr)
-		error_win_close();
-
-	this->setTexture(gm::Assets::getTexture("PRIVATE_PHONE"));
+	this->setTexture(tex);
 
 	/* set position */
 
