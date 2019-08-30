@@ -58,6 +58,7 @@ void Day_1::update(GameState *gs, sf::RenderWindow &win)
 	{
 		if (gm::Core::getClock().getElapsedTime().asMilliseconds() > gs->info_time)
 		{
+			state = 0;
 			gs->lost = false;
 			gs->initialized = false;
 			delete gs->gamelost_info;
@@ -207,10 +208,11 @@ void Day_1::update(GameState *gs, sf::RenderWindow &win)
 			else if (gs->openedcomputer->getState() == OpenPC::LOGIN_WIFI)
 			{
 				gs->lost = true;
+				gs->eyelids->close();
 				gs->info_time = gm::Core::getClock().getElapsedTime().asMilliseconds() + GAMELOST_INFO_TIME;
 				gs->gamelost_info = new sf::Text;
 				gs->gamelost_info->setFont(*gm::Assets::getFont());
-				gs->gamelost_info->setString(L"Po³¹czy³eœ siê z internetem nie zmieniwszy wczeœniej danych logowania!");
+				gs->gamelost_info->setString(L"Po³¹czy³eœ siê z internetem nie\nzmieniwszy wczeœniej danych logowania!");
 				gs->gamelost_info->setCharacterSize(48);
 				sf::Vector2f info_pos;
 				info_pos.x = SCREEN_WIDTH / 2 - (gs->gamelost_info->getLocalBounds().left + gs->gamelost_info->getLocalBounds().width) / 2;
@@ -226,6 +228,7 @@ void Day_1::update(GameState *gs, sf::RenderWindow &win)
 				if (gs->data->password == "Admin")
 				{
 					gs->lost = true;
+					gs->eyelids->close();
 					gs->info_time = gm::Core::getClock().getElapsedTime().asMilliseconds() + GAMELOST_INFO_TIME;
 					gs->gamelost_info = new sf::Text;
 					gs->gamelost_info->setFont(*gm::Assets::getFont());

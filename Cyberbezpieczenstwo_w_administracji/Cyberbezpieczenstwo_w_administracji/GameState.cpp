@@ -362,6 +362,12 @@ void GameState::update(sf::RenderWindow &win)
 		else if (day == 1)//Day1
 		{
 			eyelids->open();
+			coffee->reset();
+			computer->close();
+			computer->turnOff();
+			openedcomputer->setState(OpenPC::USERS);
+			//
+			data->password = "Admin";
 			watch->setHour(8, 0);
 			while (!phone->text_queue.empty())
 			{
