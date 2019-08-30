@@ -12,6 +12,7 @@
 #include "OfficeFriend.h"
 #include "ChoiceButton.h"
 #include "Eyelids.h"
+#include "OfficeApplicant.h"
 
 #define GAMELOST_INFO_TIME 5000
 
