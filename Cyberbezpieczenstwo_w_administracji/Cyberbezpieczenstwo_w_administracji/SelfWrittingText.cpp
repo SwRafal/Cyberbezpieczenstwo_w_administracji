@@ -10,9 +10,12 @@ bool SelfWrittingText::loadNewText(std::string fileName)
 		text_queue.pop();
 	this->setString("");
 
+	
 	std::wfstream file;
+	
 	file.open(fileName,std::ios::in | std::ios::binary);
-	file.imbue(std::locale("zh_CN.UTF-8"));
+	
+	file.imbue(std::locale("en_US.UTF-8"));
 
 	if(file.good())
 	{

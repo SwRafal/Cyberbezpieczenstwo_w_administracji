@@ -82,7 +82,7 @@ void Day_0::update(GameState* gs, sf::RenderWindow &win)
 					showButtons = false;
 					showTextField = true;
 					state = 5;
-					gs->officeLady->setButtonActive();
+					//gs->officeLady->setButtonActive();
 				}
 				else if(gs->choice2->clicked(gm::Core::getWindow()))
 				{

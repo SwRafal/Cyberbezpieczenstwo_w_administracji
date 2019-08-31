@@ -82,7 +82,7 @@ void Day_2::update(GameState *gs, sf::RenderWindow &win)
 		}
 	}
 
-	std::cout << state << std::endl;
+	
 
 	switch (state)
 	{
@@ -138,7 +138,7 @@ void Day_2::update(GameState *gs, sf::RenderWindow &win)
 			state++;
 		
 			
-		std::cout << std::endl << "book opened: " << bookOpened << "book isopened: " << gs->book->isOpened() << std::endl;
+		
 		
 
 		break;
