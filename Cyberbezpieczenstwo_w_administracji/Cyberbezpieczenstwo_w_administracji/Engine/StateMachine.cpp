@@ -6,7 +6,7 @@ namespace gm
 	{
 		this->isAdding = true;
 		this->isReplacing = isReplacing;
-
+		
 		this->newState = std::move(newState);
 	}
 

@@ -79,6 +79,10 @@ void MenuState::init()
 	/* click sound */
 	gm::Assets::LoadSound("click", CLICK_SOUND_FILEPATH);
 	clickSound.setBuffer(*gm::Assets::getSound("click"));
+
+	
+
+	
 }
 
 void MenuState::handleInput()
@@ -104,7 +108,9 @@ void MenuState::handleInput()
 	{
 		clickSound.play();
 		Sleep(100);
+		std::cout << "before click" << std::endl;
 		data->machine.addState(gm::StateRef(new IntroState(this->data)));
+		std::cout << "after new state" << std::endl;
 	}
 
 	if (loadGameButton.clicked(gm::Core::getWindow()))

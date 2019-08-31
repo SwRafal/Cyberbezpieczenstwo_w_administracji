@@ -14,6 +14,8 @@ public:
 	bool reset;
 	bool init;
 
+	bool reseText;
+
 	int time;
 
 	sf::RectangleShape background;

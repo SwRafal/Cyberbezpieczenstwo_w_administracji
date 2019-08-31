@@ -5,7 +5,7 @@
 IntroState::IntroState(gm::gameDataRef data) : data(data), message(INTRO_TEXT_1,gm::Assets::getFont()), space(INTRO_TEXT_SPACE,gm::Assets::getFont()),
 choice1(*gm::Assets::getFont()),choice2(*gm::Assets::getFont()),choice3(*gm::Assets::getFont()), message2(INTRO_TEXT_6,gm::Assets::getFont())
 {
-	
+	std::cout << "konstruktor" << std::endl;
 }
 
 
@@ -15,7 +15,7 @@ IntroState::~IntroState()
 
 void IntroState::init()
 {
-	
+	std::cout << "10" << std::endl;
 	state = 0;
 	initialized = false;
 	nextState = false;
@@ -28,7 +28,7 @@ void IntroState::init()
 	title.setPosition(SCREEN_WIDTH / 2 - title.getGlobalBounds().width / 2, SCREEN_HEIGHT * 0.3);
 
 	//choice buttons
-
+	std::cout << "11" << std::endl;
 	choice1.setTextIdleColor(sf::Color::White);
 	choice1.setTextAimedColor(sf::Color(230, 120, 255,255));
 	choice1.setTextPressColor(sf::Color(216, 46, 255,255));
@@ -66,12 +66,13 @@ void IntroState::init()
 
 	space.setPosition(SCREEN_WIDTH/2 - space.getGlobalBounds().width/2, SCREEN_HEIGHT - (space.getGlobalBounds().height * 2));
 
-
+	std::cout << "12" << std::endl;
 	//sound
 	gm::Assets::LoadSound("click", CLICK_SOUND_FILEPATH);
 	click.setBuffer(*gm::Assets::getSound("click"));
 
 	delay = true;
+	std::cout << "14" << std::endl;
 }
 
 void IntroState::handleInput()
@@ -95,7 +96,7 @@ void IntroState::handleInput()
 			}
 		}
 
-		
+		std::cout << "15" << std::endl;
 
 	if(gm::Core::getEnteredChar() == 0x00000020 && (state == 0 || state == 1))
 	{
@@ -110,7 +111,7 @@ void IntroState::handleInput()
 
 void IntroState::update(sf::RenderWindow& win)
 {
-	
+	std::cout << "16" << std::endl;
 	/* Initialize state */
 	if(!initialized)
 	{

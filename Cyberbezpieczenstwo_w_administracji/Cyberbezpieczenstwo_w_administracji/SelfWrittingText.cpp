@@ -1,5 +1,6 @@
 #include "SelfWrittingText.h"
 #include <stdio.h>
+#include <codecvt>
 
 namespace gm
 {
@@ -14,8 +15,8 @@ bool SelfWrittingText::loadNewText(std::string fileName)
 	std::wfstream file;
 	
 	file.open(fileName,std::ios::in | std::ios::binary);
-	
-	file.imbue(std::locale("en_US.UTF-8"));
+
+	//file.imbue(std::locale("pl_PL.UTF-8"));
 
 	if(file.good())
 	{
@@ -44,9 +45,21 @@ bool SelfWrittingText::loadNewText(std::string fileName)
 
 SelfWrittingText::SelfWrittingText(std::string fileName,sf::Font* font)
 {
+	std::locale::global(std::locale(std::locale::empty(), new std::codecvt_utf8<wchar_t>));
+
 	std::wfstream file;
+	
 	file.open(fileName,std::ios::in | std::ios::binary);
-	file.imbue(std::locale("en_US.UTF-8"));
+	
+
+	
+	
+	
+	
+
+
+	
+	
 	
 	if(file.good())
 	{

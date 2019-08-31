@@ -10,6 +10,7 @@ Day_0::Day_0()
 	part1Over = false;
 	reset = false;
 	init = false;
+	reseText = false;
 
 
 	//sprites
@@ -24,6 +25,8 @@ Day_0::Day_0()
 
 	background.setSize(sf::Vector2f(SCREEN_WIDTH,SCREEN_HEIGHT));
 	background.setFillColor(sf::Color(0,0,0,200));
+
+	
 }
 
 void Day_0::update(GameState* gs, sf::RenderWindow &win)
@@ -82,6 +85,7 @@ void Day_0::update(GameState* gs, sf::RenderWindow &win)
 					showButtons = false;
 					showTextField = true;
 					state = 5;
+					gs->textField->setTextString(L"Wpisz imiê i zatwierdŸ klawiszem enter");
 					//gs->officeLady->setButtonActive();
 				}
 				else if(gs->choice2->clicked(gm::Core::getWindow()))
@@ -102,6 +106,16 @@ void Day_0::update(GameState* gs, sf::RenderWindow &win)
 					gs->popUpText->closeBubble();
 					state = 5;
 					showTextField = true;
+					gs->textField->setTextString(L"Wpisz imiê i zatwierdŸ klawiszem enter");
+				}
+			}
+
+			if(!reseText)
+			{
+				if(gs->textField->isActive())
+				{
+					gs->textField->setTextString(L"");
+					reseText = true;
 				}
 			}
 
