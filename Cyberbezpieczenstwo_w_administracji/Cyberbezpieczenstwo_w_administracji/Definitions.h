@@ -61,6 +61,9 @@
 #define TEXTURE_WIFI_BUTTON "resources/textures/wifi button.png"
 #define TEXTURE_ACCOUNT_BUTTON "resources/textures/account button.png"
 
+#define TEXTURE_EMAIL_EXIT_BUTTON "resources/textures/emailExit.png"
+#define TEXTURE_EMAIL_TEMPLATE "resources/textures/emailTemplate.png"
+
 
 
 #define TEXTURE_BATTERY "resources/textures/battery.png"

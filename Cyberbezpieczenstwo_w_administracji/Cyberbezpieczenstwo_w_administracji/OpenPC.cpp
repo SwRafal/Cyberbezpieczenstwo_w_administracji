@@ -1,6 +1,6 @@
 #include "OpenPC.h"
 
-OpenPC::OpenPC(sf::Texture *texture, sf::Font *font)
+OpenPC::OpenPC(sf::Texture *texture, sf::Font *font) : content(*gm::Assets::getFont())
 {
 	
 
@@ -123,7 +123,48 @@ OpenPC::OpenPC(sf::Texture *texture, sf::Font *font)
 	{
 		info = new textBubble(gm::Assets::getTexture("THOUGHT_BUBBLE"));
 		info->setBubblePosition(0, -300);
-	}	
+	}
+
+	// email
+
+	gm::Assets::LoadTexture("emailTemplate", TEXTURE_EMAIL_TEMPLATE);
+	if (gm::Assets::getTexture("emailTemplate") == nullptr)
+		error_win_close();
+	email.setTexture(*gm::Assets::getTexture("emailTemplate"));
+	email.setPosition(EMAIL_POS_X,EMAIL_POS_Y);
+
+	gm::Assets::LoadTexture("exitEmail", TEXTURE_EMAIL_EXIT_BUTTON);
+	if (gm::Assets::getTexture("exitEmail") == nullptr)
+		error_win_close();
+
+	emailExit.setSize(EMAIL_EXIT_BUTTON_SIZE, EMAIL_EXIT_BUTTON_SIZE);
+	emailExit.setPosition(EMAIL_EXIT_BUTTON_POS_X - 52,EMAIL_EXIT_BUTTON_POS_Y + 52);
+	emailExit.setTexture(gm::Assets::getTexture("exitEmail"));
+
+	title.setFont(*gm::Assets::getFont());
+	title.setCharacterSize(20);
+	title.setStyle(sf::Text::Style::Regular);
+	title.setFillColor(sf::Color::Black);
+	title.setString(L"Tytu³");
+	title.setPosition(EMAIL_POS_X + 58 - 52, EMAIL_POS_Y + 115 - 52);
+
+	sender.setFont(*gm::Assets::getFont());
+	sender.setCharacterSize(20);
+	sender.setStyle(sf::Text::Style::Regular);
+	sender.setFillColor(sf::Color::Black);
+	sender.setString(L"Nadawca");
+	sender.setPosition(EMAIL_POS_X + 58 - 52, EMAIL_POS_Y + 166 - 52);
+
+	content.setSize(685,326);
+	content.setPosition(EMAIL_POS_X + 58 - 52, EMAIL_POS_Y + 217 - 52);
+	content.setTextSize(18);
+	content.setTextColor(sf::Color::Black);
+	content.setFillColor(sf::Color::Transparent);
+	content.setTextString(L"Treœæ maila");
+	
+
+	
+
 }
 OpenPC::~OpenPC()
 {
@@ -198,13 +239,20 @@ void OpenPC::draw(sf::RenderWindow &win)
 		win.draw(*password);
 		win.draw(*ok);
 		break;
+	case MAIL:
+		win.draw(email);
+		win.draw(title);
+		win.draw(sender);
+		win.draw(content);
+		win.draw((sf::RectangleShape)emailExit);
 	default:
 		break;
 	}
 
 	info->draw(win);
 
-	win.draw(*exit);
+	if(state != MAIL) //przy emailu nie widac wylacznika kompa
+		win.draw(*exit);
 }
 
 bool OpenPC::update(sf::RenderWindow &win)

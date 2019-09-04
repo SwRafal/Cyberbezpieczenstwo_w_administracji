@@ -175,7 +175,6 @@ void Day_1::update(GameState *gs, sf::RenderWindow &win)
 
 			break;
 		case 6://Choose user
-
 			gs->computer->update(win);
 			gs->openedcomputer->update(win);
 			if (gs->openedcomputer->getState() == OpenPC::DESKTOP)
