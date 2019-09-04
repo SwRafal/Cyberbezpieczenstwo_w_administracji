@@ -53,7 +53,7 @@
 #define PC_SCREEN_ON_SMALL "resources/textures/screen on small.png"
 #define PC_SCREEN_OFF_SMALL "resources/textures/screen off small.png"
 #define PC_SCREEN_CRACKED "resources/textures/screen broken.png"
-#define PC_SCREEN_FRAME "resources/textures/screen frame.png"
+#define PC_SCREEN_FRAME "resources/textures/frame2.png"
 #define PC_SCREEN_EXPLOSION "resources/textures/screen explosion.png"
 
 #define TEXTURE_OPENEDCOMPUTER "resources/textures/openedcomputer.png"

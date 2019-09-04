@@ -164,6 +164,9 @@ void Day_2::update(GameState *gs, sf::RenderWindow &win)
 		if(gs->officeLady->getPosition().x == 1390)
 			state++;
 		break;
+	case 7:
+
+		break;
 	}
 
 	

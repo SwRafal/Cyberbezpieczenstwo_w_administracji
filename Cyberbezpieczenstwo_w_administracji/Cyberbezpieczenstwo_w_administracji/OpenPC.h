@@ -43,6 +43,9 @@
 
 #define INFO_DELAY 3000
 
+#define SCREEN_FRAME_POS_X 177
+#define SCREEN_FRAME_POS_Y 17
+
 class OpenPC : public sf::Sprite
 {
 public:
@@ -78,6 +81,8 @@ private:
 	gm::TextButton *wifi_stolowka_wiesi = nullptr;
 	
 	gm::TextButton *ok = nullptr;
+
+	Sprite screenFrame;
 
 	textBubble *info = nullptr;
 	sf::Int32 info_time;

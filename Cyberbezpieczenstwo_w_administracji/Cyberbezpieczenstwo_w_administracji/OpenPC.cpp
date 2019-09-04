@@ -2,6 +2,8 @@
 
 OpenPC::OpenPC(sf::Texture *texture, sf::Font *font)
 {
+	
+
 	this->setTexture(*texture);
 	this->setPosition(PC_OPENED_POS_X, PC_OPENED_POS_Y);
 	state = USERS;
@@ -13,9 +15,21 @@ OpenPC::OpenPC(sf::Texture *texture, sf::Font *font)
 	{
 		exit = new gm::Button;
 		exit->setSize(EXIT_SIZE, EXIT_SIZE);
-		exit->setPosition(sf::Vector2f(PC_OPENED_POS_X + PC_OPENED_WIDTH - EXIT_SIZE, PC_OPENED_POS_Y));
+		exit->setPosition(sf::Vector2f(PC_OPENED_POS_X + PC_OPENED_WIDTH - EXIT_SIZE - 7, PC_OPENED_POS_Y + 10));
 		exit->setTexture(gm::Assets::getTexture("EXIT_BUTTON"));
 	}
+
+	/*screen frame */
+
+	
+	sf::Texture temp;
+	temp.loadFromFile(PC_SCREEN_FRAME);
+
+	gm::Assets::LoadTexture("frame",PC_SCREEN_FRAME);
+	
+	screenFrame.setTexture(*gm::Assets::getTexture("frame"));
+	screenFrame.setPosition(SCREEN_FRAME_POS_X,SCREEN_FRAME_POS_Y);
+
 
 	/*USERS*/
 	user_marek = new gm::TextButton(*gm::Assets::getFont());
@@ -157,6 +171,8 @@ OpenPC::~OpenPC()
 void OpenPC::draw(sf::RenderWindow &win)
 {
 	win.draw((sf::Sprite)*this);
+
+	win.draw(screenFrame);
 
 	switch (state)
 	{
