@@ -11,4 +11,5 @@
 #include "pc.h"
 #include "email.h"
 #include "OpenPC.h"
+#include "card.h"
 

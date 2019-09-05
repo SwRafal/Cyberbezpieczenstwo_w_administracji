@@ -36,6 +36,11 @@
 
 #define ROUNDED_RECT_SHAPE_FILEPATH "resources/textures/rect shape.png"
 
+/* osoby */
+
+#define IT_GUY_HAND_TEXTURE "resources/textures/itGuyHand.png"
+
+
 /* Game Textures*/
 #define TEXTURE_WALL "resources/textures/wall.png"
 #define TEXTURE_DESK "resources/textures/desk.png"
@@ -44,6 +49,8 @@
 #define TEXTURE_WATCH "resources/textures/watch.png"
 #define TEXTURE_PRIVATE_PHONE "resources/textures/smartfon1.png"
 #define TEXTURE_MOBILE_VIEW "resources/textures/mobile_view.png"
+
+#define ID_CARD_TEXTURE "resources/textures/karta.png"
 
 #define TEXTURE_COFFEE "resources/textures/coffee.png"
 #define TEXTURE_COFFEE2 "resources/textures/coffee2.png"
