@@ -125,6 +125,11 @@ OpenPC::OpenPC(sf::Texture *texture, sf::Font *font) //: content(*gm::Assets::ge
 		info->setBubblePosition(0, -300);
 	}
 
+	communique = new gm::Information(*gm::Assets::getFont());
+	communique->setSize(sf::Vector2f(PC_OPENED_WIDTH / 2, PC_OPENED_HEIGHT / 2));
+	communique->setFillColor(sf::Color(128, 128, 128));
+	communique->setTextColor(sf::Color::White);
+	communique->setPosition(sf::Vector2f(PC_OPENED_POS_X + PC_OPENED_WIDTH / 4, PC_OPENED_POS_Y + PC_OPENED_HEIGHT / 4));
 
 }
 OpenPC::~OpenPC()
@@ -168,6 +173,9 @@ OpenPC::~OpenPC()
 
 	delete info;
 	info = nullptr;
+
+	delete communique;
+	communique = nullptr;
 }
 
 void OpenPC::draw(sf::RenderWindow &win)
@@ -206,6 +214,8 @@ void OpenPC::draw(sf::RenderWindow &win)
 		break;
 	}
 
+	if(show_communique)
+		communique->draw(win);
 	info->draw(win);
 
 	if(state != MAIL) //przy emailu nie widac wylacznika kompa
@@ -262,8 +272,11 @@ bool OpenPC::update(sf::RenderWindow &win)
 			setState(SET_PASSWORD);
 		break;
 	case LOGIN_WIFI:
-		if (wifi_mindswszelakich->clicked(win) || wifi_mindswszelakich_gov->clicked(win) || wifi_mindswszelakich_p1->clicked(win));
-		//certyfikat
+		if (wifi_mindswszelakich->clicked(win) || wifi_mindswszelakich_gov->clicked(win) || wifi_mindswszelakich_p1->clicked(win))
+		{
+			communique->setTextString(L"Aby pod³¹czyæ siê do sieci potrzebny jest certyfikat. Pobraæ?");
+			show_communique = true;
+		}
 		else if (wifi_Xfon_zosi->clicked(win))
 		{
 			info->changeText(L"Nie znam has³a do tej sieci...");

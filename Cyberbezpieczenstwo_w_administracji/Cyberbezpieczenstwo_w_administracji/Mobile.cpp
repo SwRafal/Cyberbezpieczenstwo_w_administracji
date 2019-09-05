@@ -66,11 +66,12 @@ void Mobile::update(sf::RenderWindow& win)
 		}
 		calling = false;
 	}
-
+	/*
 	if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && pickedUp)
 	{
 			pickedUp = false;
 	}
+	*/
 
 }
 

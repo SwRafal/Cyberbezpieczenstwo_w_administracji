@@ -44,8 +44,16 @@ void Day_1::update(GameState *gs, sf::RenderWindow &win)
 {
 	if(showButtons)
 	{
-		gs->choice1->setPosition(gs->officeLady->chat.getPosition().x ,gs->officeLady->chat.getPosition().y + gs->officeLady->chat.getGlobalBounds().height);
-		gs->choice2->setPosition(gs->choice1->background.getPosition().x + gs->choice1->background.getGlobalBounds().width ,gs->choice1->background.getPosition().y );
+		if (state == 10)
+		{
+			gs->choice1->setPosition(MOBILE_POS_X - 300, MOBILE_POS_Y + 115);
+			gs->choice2->setPosition(MOBILE_POS_X - 150, MOBILE_POS_Y + 115);
+		}
+		else
+		{
+			gs->choice1->setPosition(gs->officeLady->chat.getPosition().x, gs->officeLady->chat.getPosition().y + gs->officeLady->chat.getGlobalBounds().height);
+			gs->choice2->setPosition(gs->choice1->background.getPosition().x + gs->choice1->background.getGlobalBounds().width, gs->choice1->background.getPosition().y);
+		}
 	}
 	else
 	{
@@ -243,19 +251,42 @@ void Day_1::update(GameState *gs, sf::RenderWindow &win)
 			if (gs->mobile->pickedUp)
 			{
 				click_mobile = true;
+				showButtons = true;
+				gs->choice1->setText(L"Wyœlij");
+				gs->choice2->setText(L"Nie wysy³aj");
+
 				state++;
-			}
+			}				
 
 			break;
 		case 10://Put mobile
 
 			gs->mobile->update(win);
+			if (showButtons)
+			{
+				if (gs->choice1->clicked(gm::Core::getWindow()))
+				{
+					thought_time = gm::Core::getClock().getElapsedTime().asMilliseconds() + THOUGHT_TIME;
+					gs->mobile->text.setTextString(L"WYS£ANO!\nKoszt wiadomoœci to 450z³.");
+					gs->data->sms_sent = true;
+					showButtons = false;
+				}
+				else if (gs->choice2->clicked(gm::Core::getWindow()))
+				{
+					showButtons = false;
+					gs->mobile->pickedUp = false;
+				}
+			}
+			else if (thought_time < gm::Core::getClock().getElapsedTime().asMilliseconds())
+			{
+				gs->mobile->pickedUp = false;
+			}
+
 			if (!gs->mobile->pickedUp)
 			{
+
 				put_mobile = true;
 				state++;
-
-				gs->computer->open();
 
 				gs->computer->setFillColor(gs->computer->getPressColor());
 				gs->coffee->setFillColor(gs->coffee->getPressColor());
@@ -271,6 +302,8 @@ void Day_1::update(GameState *gs, sf::RenderWindow &win)
 			break;
 		case 11://Change_lines
 
+			if (!gs->computer->isOpened())
+				gs->computer->update(win);
 			if (gs->openedcomputer->getState() == OpenPC::SET_PASSWORD)
 			{
 				change_lines = true;
@@ -332,9 +365,10 @@ void Day_1::update(GameState *gs, sf::RenderWindow &win)
 			{
 				gs->officeLady->show();
 				remember_password = true;
+				gs->choice1->setText(L"Zapisz");
+				gs->choice2->setText(L"Nie zapisuj");
 				state++;
 			}
-
 
 			break;
 		case 13://Write down password
@@ -366,7 +400,6 @@ void Day_1::update(GameState *gs, sf::RenderWindow &win)
 				state++;
 				
 				gs->openedcomputer->setState(OpenPC::DESKTOP);
-				gs->computer->open();
 			}
 
 			break;
@@ -379,10 +412,11 @@ void Day_1::update(GameState *gs, sf::RenderWindow &win)
 				if (thought->scale <= 0.0)
 					thought->setBubblePosition(0, -300);
 			}
-			if (gs->openedcomputer->getState() == OpenPC::SET_PASSWORD || !gs->computer->isOpened())
+			if (!gs->computer->isOpened())
+				gs->computer->update(win);
+			if (gs->openedcomputer->getState() == OpenPC::SET_PASSWORD)
 			{
 				gs->openedcomputer->setState(OpenPC::DESKTOP);
-				gs->computer->open();
 				thought->changeText(L"Czas pod³¹czyæ siê do sieci...");
 				thought->setBubblePosition(200, 100);
 				thought->showBubble();
@@ -397,8 +431,31 @@ void Day_1::update(GameState *gs, sf::RenderWindow &win)
 			break;
 		case 15://Choose wifi
 
-			//....
-			gs->nextDay = true;
+			thought->animate();
+			if (thought_time < gm::Core::getClock().getElapsedTime().asMilliseconds())
+			{
+				thought->closeBubble();
+				if (thought->scale <= 0.0)
+					thought->setBubblePosition(0, -300);
+			}
+			if (gs->openedcomputer->show_communique)
+			{
+				showButtons = true;
+			}
+			else
+			{
+				if (!gs->computer->isOpened())
+					gs->computer->update(win);
+				if (gs->openedcomputer->getState() == OpenPC::DESKTOP)
+				{
+					gs->openedcomputer->setState(OpenPC::LOGIN_WIFI);
+					thought->changeText(L"Czas pod³¹czyæ siê do sieci...");
+					thought->setBubblePosition(200, 100);
+					thought->showBubble();
+					thought_time = gm::Core::getClock().getElapsedTime().asMilliseconds() + THOUGHT_TIME;
+				}
+			}
+			//gs->nextDay = true;
 
 			break;
 		case 16://Click email

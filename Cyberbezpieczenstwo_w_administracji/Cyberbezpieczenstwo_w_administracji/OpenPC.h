@@ -62,6 +62,9 @@ public:
 		MAIL
 	};
 
+	gm::Information *communique = nullptr;
+	bool show_communique = false;
+
 	void newMail(sf::String title,sf::String sender,sf::String content);
 	void setMailButtonActive();
 	void setMailButtonInactive();
@@ -90,6 +93,8 @@ private:
 	gm::TextButton *wifi_stolowka_wiesi = nullptr;
 	
 	gm::TextButton *ok = nullptr;
+
+	
 
 	//frame
 

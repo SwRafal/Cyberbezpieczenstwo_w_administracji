@@ -20,6 +20,8 @@ namespace gm
 		sf::String login = "Admin";
 		sf::String password ="Admin";
 
+		bool sms_sent = false;
+
 		int nagany = 0;
 
 		int day = 0;
