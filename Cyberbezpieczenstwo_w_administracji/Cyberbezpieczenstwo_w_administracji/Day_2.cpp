@@ -164,13 +164,13 @@ void Day_2::update(GameState *gs, sf::RenderWindow &win)
 		break;
 	case 7:
 		gs->computer->open();
-		gs->openedcomputer->newMail(L"cze",L"hej",L"siema");
-		gs->openedcomputer->setMailButtonInactive();
+		gs->openedcomputer->newMail(L"Silne uwierzytelnianie",L"IT@mdsw.gov.pl",L"Ochrona poufnoœci danych jest naszym priorytetem. Musimy zastosowaæ co najmniej dwa elementy nale¿¹ce do kategorii: \n1 Wiedza (czyli coœ o czym wiesz tylko Ty). \n2 Posiadanie (coœ co tylko Ty posiadasz). \n3 Cechy charakterystyczne u¿ytkownika. \nElementy te s¹ integraln¹ czêœci¹ uwierzytelnienia - Naruszenie jednego z nich nie os³abia ochrony gwarantowanej przez pozosta³e. \nWiedzê o danych logowania ju¿ masz. \nPrywatnie mo¿esz wybraæ z jakiego urz¹dzenia dodatkowego chcesz korzystaæ: SMS, TOKEN, LISTA HASE£ (AKA ZDRAPKA), Generator hase³ jednorazowych w twoim telefonie, s³u¿bowym, Karta kryptograficzna, Odcisk palca. \nAle my w ministerstwie wybraliœmy za ciebie. Otrzymujesz kartê s³u¿bow¹ – musisz ni¹ potwierdzaæ ka¿de logowanie do systemu. Dbaj o ni¹. ");
 		gs->openedcomputer->setState(OpenPC::MAIL);
 		state++;
 		break;
 	case 8:
-		//czyta maila
+		if(gs->openedcomputer->getState() != OpenPC::MAIL)
+			gs->computer->close();
 		break;
 	}
 
