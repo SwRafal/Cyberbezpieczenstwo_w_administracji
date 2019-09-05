@@ -172,6 +172,9 @@ void GameState::init()
 	phone = new Phone;
 
 	//Private Phone
+	gm::Assets::LoadTexture("MOBILE_VIEW", TEXTURE_MOBILE_VIEW);
+	if (gm::Assets::getTexture("MOBILE_VIEW") == nullptr)
+		error_win_close();
 	gm::Assets::LoadTexture("PRIVATE_PHONE", TEXTURE_PRIVATE_PHONE);
 	if (gm::Assets::getTexture("PRIVATE_PHONE") == nullptr)
 		error_win_close();
@@ -386,6 +389,11 @@ void GameState::update(sf::RenderWindow &win)
 			phone->addToQueue(L"Czeœæ " + data->name + L"! Jestem z dzia³u IT. Twoje dane logowania to:\nUser: Admin\nHas³o: Admin");
 			phone->addToQueue(L"Pamiêtaj, aby je zmieniæ po zalogowaniu!");
 
+			mobile->text.setTextString( L"Nadawca: 7780\n\n"
+										L"Gratulujemy! Jesteœ jednym z 10 szczêœliwców maj¹cych szansê na wygranie XMobile15 lub XTab Pro sponsorowanych"
+										L"przez naszych partnerów. Liczba prezentów jest ograniczona, decyduje kolejnoœæ zg³oszeñ. Aby otrzymaæ prezent"
+										L"wyœlij SMS o treœci JESTEM ZWYCIEZCA na numer 7780.");
+
 			officeLady->text.setTextString(L"Mocne has³a ciê¿ko zapamiêtaæ, lepiej zapisz je na kartce. Ja tak robiê.");
 
 			openedbook->setInfoL(L"1. Zabezpiecz dane logowania");
@@ -526,7 +534,8 @@ void GameState::draw(sf::RenderWindow& win)
 		openedbook->draw(win);
 	if (computer->isOpened())
 		openedcomputer->draw(win);
-
+	if (mobile->pickedUp)
+		mobile->draw_view(win);
 	
 
 	//tutorial
@@ -537,7 +546,7 @@ void GameState::draw(sf::RenderWindow& win)
 		choice1->draw(win);
 		choice2->draw(win);
 	}
-	if(day == 1) //tuitfdsjfsdjfuis
+	if(day == 1) //day1
 	{
 		choice1->draw(win);
 		choice2->draw(win);

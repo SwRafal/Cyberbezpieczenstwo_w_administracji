@@ -33,6 +33,7 @@ public:
 	bool remember_password;
 	bool write_down_password;
 	bool login_wifi;
+	bool choose_wifi;
 	//Quest 4
 	bool click_email;
 	bool refused_email;

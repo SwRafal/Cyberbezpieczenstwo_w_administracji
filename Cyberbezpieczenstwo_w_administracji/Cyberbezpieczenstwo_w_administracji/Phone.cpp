@@ -64,9 +64,6 @@ Phone::Phone() : text(*gm::Assets::getFont()), arrowButton(*gm::Assets::getFont(
 	showArrowButton = false;
 
 	choice = 0;
-
-	text_queue.push(L"siema nie moge teraz rozmawiac");
-	text_queue.push(L"przeciez to ty zadzwoniles");
 }
 
 

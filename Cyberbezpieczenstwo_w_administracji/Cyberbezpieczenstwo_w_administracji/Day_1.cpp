@@ -97,8 +97,18 @@ void Day_1::update(GameState *gs, sf::RenderWindow &win)
 				state++;
 				gs->book->setFillColor(sf::Color(230, 230, 230));
 				gs->eyelids->open();
+
+				gs->computer->setFillColor(gs->computer->getPressColor());
+				gs->coffee->setFillColor(gs->coffee->getPressColor());
+				gs->bell->setFillColor(gs->bell->getPressColor());
+				gs->bin->setFillColor(gs->bin->getPressColor());
+				gs->no_stamp->setFillColor(gs->no_stamp->getPressColor());
+				gs->yes_stamp->setFillColor(gs->yes_stamp->getPressColor());
+				gs->phone->setFillColor(gs->phone->getPressColor());
+				gs->mobile->setFillColor(gs->mobile->getPressColor());
 			}
-			else if (gs->computer->clicked(win) || gs->book->clicked(win) || gs->bell->clicked(win) || gs->bin->clicked(win) || gs->no_stamp->clicked(win) || gs->yes_stamp->clicked(win))
+			else if (gs->computer->clicked(win) || gs->book->clicked(win) || gs->bell->clicked(win) || gs->bin->clicked(win) || gs->no_stamp->clicked(win) || gs->yes_stamp->clicked(win) ||
+					gs->phone->clicked(win) || gs->mobile->clicked(win))
 			{
 				gs->eyelids->increaseLvl();
 			}
@@ -125,6 +135,15 @@ void Day_1::update(GameState *gs, sf::RenderWindow &win)
 				gs->book->open();
 				open_book = true;
 				state++;
+
+				gs->computer->setFillColor(gs->computer->getPressColor());
+				gs->coffee->setFillColor(gs->coffee->getPressColor());
+				gs->bell->setFillColor(gs->bell->getPressColor());
+				gs->bin->setFillColor(gs->bin->getPressColor());
+				gs->no_stamp->setFillColor(gs->no_stamp->getPressColor());
+				gs->yes_stamp->setFillColor(gs->yes_stamp->getPressColor());
+				gs->book->setFillColor(gs->book->getPressColor());
+				gs->mobile->setFillColor(gs->mobile->getPressColor());
 			}
 
 			break;
@@ -159,6 +178,16 @@ void Day_1::update(GameState *gs, sf::RenderWindow &win)
 				thought->showBubble();
 				thought_time = gm::Core::getClock().getElapsedTime().asMilliseconds() + THOUGHT_TIME;
 				state++;
+
+				gs->computer->setFillColor(gs->computer->getPressColor());
+				gs->coffee->setFillColor(gs->coffee->getPressColor());
+				gs->bell->setFillColor(gs->bell->getPressColor());
+				gs->bin->setFillColor(gs->bin->getPressColor());
+				gs->no_stamp->setFillColor(gs->no_stamp->getPressColor());
+				gs->yes_stamp->setFillColor(gs->yes_stamp->getPressColor());
+				gs->phone->setFillColor(gs->phone->getPressColor());
+				gs->mobile->setFillColor(gs->mobile->getPressColor());
+				gs->book->setFillColor(gs->book->getPressColor());
 			}
 
 			break;
@@ -167,14 +196,18 @@ void Day_1::update(GameState *gs, sf::RenderWindow &win)
 			thought->animate();
 			if (thought_time < gm::Core::getClock().getElapsedTime().asMilliseconds())
 			{
-				finish_thought = true;
 				thought->closeBubble();
-				thought->setBubblePosition(0, -300);
+				finish_thought = true;
 				state++;
 			}
 
 			break;
 		case 6://Choose user
+
+			thought->animate();
+			if(!thought->appearing && !thought->disappearing)
+				thought->setBubblePosition(0, -300);
+
 			gs->computer->update(win);
 			gs->openedcomputer->update(win);
 			if (gs->openedcomputer->getState() == OpenPC::DESKTOP)
@@ -199,25 +232,45 @@ void Day_1::update(GameState *gs, sf::RenderWindow &win)
 				gs->officeApplicant->hide();
 				finish_dialog = true;
 				state++;
+
+				gs->mobile->call();
 			}
 
 			break;
 		case 9://Click mobile
 
-			click_mobile = true;
-			state++;
+			gs->mobile->update(win);
+			if (gs->mobile->pickedUp)
+			{
+				click_mobile = true;
+				state++;
+			}
 
 			break;
 		case 10://Put mobile
 
-			put_mobile = true;
-			state++;
+			gs->mobile->update(win);
+			if (!gs->mobile->pickedUp)
+			{
+				put_mobile = true;
+				state++;
+
+				gs->computer->open();
+
+				gs->computer->setFillColor(gs->computer->getPressColor());
+				gs->coffee->setFillColor(gs->coffee->getPressColor());
+				gs->bell->setFillColor(gs->bell->getPressColor());
+				gs->bin->setFillColor(gs->bin->getPressColor());
+				gs->no_stamp->setFillColor(gs->no_stamp->getPressColor());
+				gs->yes_stamp->setFillColor(gs->yes_stamp->getPressColor());
+				gs->phone->setFillColor(gs->phone->getPressColor());
+				gs->mobile->setFillColor(gs->mobile->getPressColor());
+				gs->book->setFillColor(gs->book->getPressColor());
+			}
 
 			break;
 		case 11://Change_lines
 
-			gs->book->update(win);
-			gs->computer->update(win);
 			if (gs->openedcomputer->getState() == OpenPC::SET_PASSWORD)
 			{
 				change_lines = true;
@@ -241,6 +294,14 @@ void Day_1::update(GameState *gs, sf::RenderWindow &win)
 			break;
 		case 12://Remember password
 
+			gs->computer->open();
+			thought->animate();
+			if (thought_time < gm::Core::getClock().getElapsedTime().asMilliseconds())
+			{
+				thought->closeBubble();
+				if (thought->scale <= 0.0)
+					thought->setBubblePosition(0, -300);
+			}
 			if (gs->openedcomputer->getState() != OpenPC::SET_PASSWORD && gs->data->password == "Admin")
 			{
 				gs->lost = true;
@@ -254,6 +315,18 @@ void Day_1::update(GameState *gs, sf::RenderWindow &win)
 				info_pos.x = SCREEN_WIDTH / 2 - (gs->gamelost_info->getLocalBounds().left + gs->gamelost_info->getLocalBounds().width) / 2;
 				info_pos.y = SCREEN_HEIGHT / 2 - (gs->gamelost_info->getLocalBounds().top + gs->gamelost_info->getLocalBounds().height) / 2;
 				gs->gamelost_info->setPosition(sf::Vector2f(info_pos));
+			}
+			else if (gs->openedcomputer->getState() != OpenPC::SET_PASSWORD && gs->data->login != gs->data->name)
+			{
+				gs->openedcomputer->setState(OpenPC::SET_PASSWORD);
+				thought->changeText(L"Login powinien byæ taki sam jak moje imiê...");
+				thought->setBubblePosition(200,100);
+				thought->showBubble();
+				thought_time = gm::Core::getClock().getElapsedTime().asMilliseconds() + THOUGHT_TIME;
+			}
+			else if (gs->openedcomputer->getState() != OpenPC::SET_PASSWORD)
+			{
+				gs->computer->close();
 			}
 			if(!gs->computer->isOpened())
 			{
@@ -289,17 +362,51 @@ void Day_1::update(GameState *gs, sf::RenderWindow &win)
 			{
 				showButtons = false;
 				gs->officeLady->hide();
+				write_down_password = true;
+				state++;
 				
-				gs->nextDay = true;
+				gs->openedcomputer->setState(OpenPC::DESKTOP);
+				gs->computer->open();
 			}
 
 			break;
 		case 14://Login wifi
 
+			thought->animate();
+			if (thought_time < gm::Core::getClock().getElapsedTime().asMilliseconds())
+			{
+				thought->closeBubble();
+				if (thought->scale <= 0.0)
+					thought->setBubblePosition(0, -300);
+			}
+			if (gs->openedcomputer->getState() == OpenPC::SET_PASSWORD || !gs->computer->isOpened())
+			{
+				gs->openedcomputer->setState(OpenPC::DESKTOP);
+				gs->computer->open();
+				thought->changeText(L"Czas pod³¹czyæ siê do sieci...");
+				thought->setBubblePosition(200, 100);
+				thought->showBubble();
+				thought_time = gm::Core::getClock().getElapsedTime().asMilliseconds() + THOUGHT_TIME;
+			}
+			else if (gs->openedcomputer->getState() == OpenPC::LOGIN_WIFI)
+			{
+				login_wifi = true;
+				state++;
+			}
+
+			break;
+		case 15://Choose wifi
+
+			//....
+			gs->nextDay = true;
+
+			break;
+		case 16://Click email
+
 
 
 			break;
-		case 15://Click email
+		case 17://Refuse email
 
 
 

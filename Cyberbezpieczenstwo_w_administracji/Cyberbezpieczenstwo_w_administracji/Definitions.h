@@ -5,6 +5,7 @@
 #define CLICK_SOUND_FILEPATH "resources/sounds/ClickSoundLong.wav"
 #define BELL_SOUND_FILEPATH "resources/sounds/bell_sound.wav"
 #define PHONE_RINGING_FILEPATH "resources/sounds/phone ringing.wav"
+#define MOBILE_VIBRATION_FILEPATH "resources/sounds/mobile_vibration.wav"
 
 /* Fonts */
 
@@ -42,6 +43,7 @@
 #define TEXTURE_TELEPHONE "resources/textures/phone.png"
 #define TEXTURE_WATCH "resources/textures/watch.png"
 #define TEXTURE_PRIVATE_PHONE "resources/textures/smartfon1.png"
+#define TEXTURE_MOBILE_VIEW "resources/textures/mobile_view.png"
 
 #define TEXTURE_COFFEE "resources/textures/coffee.png"
 #define TEXTURE_COFFEE2 "resources/textures/coffee2.png"

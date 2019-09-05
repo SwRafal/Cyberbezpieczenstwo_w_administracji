@@ -9,35 +9,25 @@
 #define MOBILE_WIDTH 77
 #define MOBILE_HEIGHT 162
 
+#define MOBILE_VIEW_POS_X 400
+#define MOBILE_VIEW_POS_Y 60
+#define MOBILE_VIEW_WIDTH 400
+#define MOBILE_VIEW_HEIGHT 600
+
 
 
 class Mobile : public gm::Button
 {
 public:
-	sf::Sound ringtone;
+	sf::Sound vibration;
 
+	sf::Sprite mobile_view;
 	gm::Information text;
-	sf::Sprite textBackground;
-	gm::TextButton arrowButton;
-	sf::CircleShape arrow;
 
-	;
 	bool calling;
 	bool pickedUp;
 
-	bool showText;
-	bool showButtons;
-	bool showArrowButton;
-
-
-
-	int choice;
-
-	std::queue<sf::String> text_queue;
-
 	void call();
-	bool nextLine();
-	void addToQueue(sf::String str);
 
 	Mobile(sf::Texture *tex);
 	~Mobile();
@@ -45,10 +35,8 @@ public:
 
 	//bool clicked(sf::RenderWindow &win);
 	void update(sf::RenderWindow &win);
-
-
-
 	void draw(sf::RenderWindow& win);
 
+	void draw_view(sf::RenderWindow &win);
 };
 
