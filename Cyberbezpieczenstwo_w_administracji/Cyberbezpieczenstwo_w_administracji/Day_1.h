@@ -1,6 +1,7 @@
 #pragma once
 #include "Day.h"
 #include "textBubble.h"
+#include "OfficeApplicant.h"
 
 #define THOUGHT_TIME 3000
 
@@ -15,6 +16,8 @@ public:
 
 	textBubble *thought = nullptr;
 	sf::Int32 thought_time;
+
+	OfficeApplicant *ITguy = nullptr;
 
 	//Quest 1
 	bool coffee_clicked;

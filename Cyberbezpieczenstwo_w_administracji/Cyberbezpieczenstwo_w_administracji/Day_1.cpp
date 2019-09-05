@@ -37,12 +37,16 @@ Day_1::Day_1()
 	refused_email = false;
 
 	//Initialize
+	ITguy = new OfficeApplicant(gm::Assets::getTexture("itGuy"));
+
 }
 
 Day_1::~Day_1()
 {
 	delete thought;
 	thought = nullptr;
+	delete ITguy;
+	ITguy = nullptr;
 }
 
 void Day_1::update(GameState *gs, sf::RenderWindow &win)
@@ -84,6 +88,9 @@ void Day_1::update(GameState *gs, sf::RenderWindow &win)
 		gs->officeApplicant->addToQueue(L"Ja: Nie mogê Ci tego powiedzieæ.");
 		gs->officeApplicant->addToQueue(L"Petent: Có¿, witaj w naszym zespole. Masz, to dla Ciebie.");
 
+		ITguy->text.setTextString(L"Tym ciê pod³¹czymy do sieci.");
+		ITguy->addToQueue(L"Tym ciê pod³¹czymy do sieci.");
+
 		gs->choice1->setText(L"zapisz has³o");
 		gs->choice2->setText(L"nie zapisuj");
 
@@ -105,6 +112,8 @@ void Day_1::update(GameState *gs, sf::RenderWindow &win)
 	}
 	else
 	{
+		ITguy->animate();
+
 		switch (state)
 		{
 		case 0://Drink coffee
@@ -244,7 +253,7 @@ void Day_1::update(GameState *gs, sf::RenderWindow &win)
 			state++;
 
 			break;
-		case 8://Finish dialog
+		case 8://Finish dialog !!!WSTAWIC SUSHI!!!
 
 			if (gs->officeApplicant->state >= 6)
 			{
@@ -493,7 +502,7 @@ void Day_1::update(GameState *gs, sf::RenderWindow &win)
 					gs->openedcomputer->internet_works = true;
 					state+=3;
 
-					//...informatyk
+					ITguy->show();
 				}
 			}
 			else
@@ -563,20 +572,42 @@ void Day_1::update(GameState *gs, sf::RenderWindow &win)
 				gs->phone->update(win);
 			else
 			{
-				//...informatyk
+				ITguy->show();
 
 				state++;
 			}
 
 			break;
-		case 19://RJ45
+		case 19://RJ45 WSTAWIC KABEL!!!!
 
-
+			if (gs->naganiony)
+			{
+				if (gs->info_time < gm::Core::getClock().getElapsedTime().asMilliseconds())
+				{
+					gs->naganiony = false;
+					rj45 = true;
+					state++;
+				}
+			}
+			else if (ITguy->state >= 1)
+			{
+				ITguy->hide();
+				gs->naganiony = true;
+				gs->nagana_info = new sf::Text;
+				gs->nagana_info->setFont(*gm::Assets::getFont());
+				gs->nagana_info->setString(L"Dostêp do sieci przyznany!");
+				gs->nagana_info->setFillColor(sf::Color::Green);
+				gs->info_time = gm::Core::getClock().getElapsedTime().asMilliseconds() + GAMELOST_INFO_TIME;
+				sf::Vector2f info_pos;
+				info_pos.x = SCREEN_WIDTH / 2 - (gs->nagana_info->getLocalBounds().left + gs->nagana_info->getLocalBounds().width) / 2;
+				info_pos.y = SCREEN_HEIGHT / 2 - (gs->nagana_info->getLocalBounds().top + gs->nagana_info->getLocalBounds().height) / 2;
+				gs->nagana_info->setPosition(sf::Vector2f(info_pos));
+			}
 
 			break;
 		case 20://Click email
 
-
+			gs->nextDay = true;
 
 			break;
 		case 21://Refuse email
@@ -594,6 +625,7 @@ void Day_1::draw(GameState *gs, sf::RenderWindow &win)
 {
 	thought->draw(win);
 	gs->officeApplicant->draw(win);
+	ITguy->draw(win);
 
 	win.display();
 }

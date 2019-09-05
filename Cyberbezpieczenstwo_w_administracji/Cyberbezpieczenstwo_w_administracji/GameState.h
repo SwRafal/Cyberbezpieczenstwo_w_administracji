@@ -44,6 +44,7 @@ private:
 	OfficeApplicant *officeLady;
 	OfficeApplicant *officeApplicant = nullptr;
 
+
 	Eyelids *eyelids = nullptr;
 
 	/*Settings*/

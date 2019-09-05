@@ -232,6 +232,16 @@ void GameState::init()
 		popUpText = new textBubble(gm::Assets::getTexture("text bubble"));
 	}
 
+	//IT guy
+	gm::Assets::LoadTexture("itGuy", IT_GUY_TEXTURE);
+	if (gm::Assets::getTexture("itGuy") == nullptr)
+		error_win_close();
+
+	gm::Assets::LoadTexture("itGuyHand", IT_GUY_HAND_TEXTURE);
+	if (gm::Assets::getTexture("itGuyHand") == nullptr)
+		error_win_close();
+
+
 	/*Starting settings*/
 	dayShowScreen = new dayx(this->data->day);
 	initialized = false;
@@ -384,6 +394,7 @@ void GameState::update(sf::RenderWindow &win)
 			computer->close();
 			computer->turnOff();
 			officeApplicant->state = 0;
+			day1->ITguy->state = 0;
 			openedcomputer->setState(OpenPC::USERS);
 			data->login = "Admin";
 			data->password = "Admin";

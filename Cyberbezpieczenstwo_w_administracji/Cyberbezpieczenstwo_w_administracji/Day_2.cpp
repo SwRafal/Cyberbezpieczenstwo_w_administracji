@@ -3,8 +3,6 @@
 
 Day_2::Day_2()
 {
-	gm::Assets::LoadTexture("itGuy",IT_GUY_TEXTURE);
-	gm::Assets::LoadTexture("itGuyHand", IT_GUY_HAND_TEXTURE);
  	itGuy = new OfficeApplicant(gm::Assets::getTexture("itGuy"));
 	itGuy->move(0,10);
 	offset = 20;
