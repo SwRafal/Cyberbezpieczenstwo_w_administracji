@@ -87,7 +87,6 @@ void Day_2::update(GameState *gs, sf::RenderWindow &win)
 	switch (state)
 	{
 	case 0:
-		
 		itGuy->animate();
 
 		
@@ -100,7 +99,6 @@ void Day_2::update(GameState *gs, sf::RenderWindow &win)
 
 		break;
 	case 1:
-		
 		if (gs->coffee->update_drunk(win))
 		{
 			gs->battery->setActivation(true);
@@ -165,7 +163,14 @@ void Day_2::update(GameState *gs, sf::RenderWindow &win)
 			state++;
 		break;
 	case 7:
-
+		gs->computer->open();
+		gs->openedcomputer->newMail(L"cze",L"hej",L"siema");
+		gs->openedcomputer->setMailButtonInactive();
+		gs->openedcomputer->setState(OpenPC::MAIL);
+		state++;
+		break;
+	case 8:
+		//czyta maila
 		break;
 	}
 

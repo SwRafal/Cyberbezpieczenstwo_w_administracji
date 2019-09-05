@@ -149,6 +149,7 @@
     <ClCompile Include="dayx.cpp" />
     <ClCompile Include="Day_0.cpp" />
     <ClCompile Include="Day_1.cpp" />
+    <ClCompile Include="email.cpp" />
     <ClCompile Include="Engine\Assets.cpp" />
     <ClCompile Include="Engine\Button.cpp" />
     <ClCompile Include="Engine\CheckBox.cpp" />
@@ -206,6 +207,7 @@
     <ClInclude Include="Day_2.h" />
     <ClInclude Include="Day_3.h" />
     <ClInclude Include="Definitions.h" />
+    <ClInclude Include="email.h" />
     <ClInclude Include="Engine\Assets.h" />
     <ClInclude Include="Engine\Button.h" />
     <ClInclude Include="Engine\CheckBox.h" />

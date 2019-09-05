@@ -9,4 +9,6 @@
 #include "Bin.h"
 #include "Phone.h"
 #include "pc.h"
+#include "email.h"
 #include "OpenPC.h"
+

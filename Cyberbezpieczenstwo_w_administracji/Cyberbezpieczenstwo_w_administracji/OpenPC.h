@@ -2,6 +2,7 @@
 #include "Engine/Engine.h"
 #include "Functions.h"
 #include "textBubble.h"
+#include "email.h"
 
 #define PC_OPENED_POS_X 200
 #define PC_OPENED_POS_Y 60
@@ -46,13 +47,7 @@
 #define SCREEN_FRAME_POS_X 177
 #define SCREEN_FRAME_POS_Y 17
 
-#define EMAIL_POS_X 252
-#define EMAIL_POS_Y 112
 
-#define EMAIL_EXIT_BUTTON_POS_X 955
-#define EMAIL_EXIT_BUTTON_POS_Y 69
-
-#define EMAIL_EXIT_BUTTON_SIZE 36
 
 class OpenPC : public sf::Sprite
 {
@@ -66,6 +61,11 @@ public:
 		OUTLOOK,
 		MAIL
 	};
+
+	void newMail(sf::String title,sf::String sender,sf::String content);
+	void setMailButtonActive();
+	void setMailButtonInactive();
+	
 
 private:
 	//Rzeczy w komputerze
@@ -96,16 +96,7 @@ private:
 	Sprite screenFrame;
 	
 	//email
-
-	Sprite email;
-
-	gm::Button emailExit;
-
-	sf::Text title;
-	sf::Text sender;
-	gm::Information content;
-
-
+	mail email;
 
 	textBubble *info = nullptr;
 	sf::Int32 info_time;
