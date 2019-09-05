@@ -12,6 +12,8 @@ public:
 	textBubble *thought = nullptr;
 	sf::Int32 thought_time;
 
+	int offset;
+
 	int time;
 
 	int state;
@@ -22,7 +24,7 @@ public:
 	bool coffeeClicked;
 	bool bookOpened;
 
-	OfficeFriend *itGuy;
+	OfficeApplicant *itGuy;
 
 	OfficeApplicant *boss;
 

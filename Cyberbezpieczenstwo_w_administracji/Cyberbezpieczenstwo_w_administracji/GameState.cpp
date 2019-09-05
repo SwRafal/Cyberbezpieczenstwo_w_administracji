@@ -193,6 +193,18 @@ void GameState::init()
 		openedcomputer = new OpenPC(gm::Assets::getTexture("OPENEDCOMPUTER"), gm::Assets::getFont());
 	}
 
+	//card
+
+	gm::Assets::LoadTexture("idCard", ID_CARD_TEXTURE);
+	if (gm::Assets::getTexture("idCard") == nullptr)
+		error_win_close();
+	else
+	{
+		card = new Card(gm::Assets::getTexture("idCard"));
+	}
+
+	card->setPosition(-200,0);
+
 	gm::Assets::LoadTexture("friend", TEXTURE_OFFICE_FRIEND);
 	gm::Assets::LoadTexture("chat bubble",TEXTURE_CHAT_BUBBLE);
 	gm::Assets::LoadTexture("arrow",TEXTURE_ARROW_BUTTON);
@@ -200,7 +212,8 @@ void GameState::init()
 		error_win_close();
 	else
 	{
-		officeLady = new OfficeFriend(gm::Assets::getTexture("friend"));
+		officeLady = new OfficeApplicant(gm::Assets::getTexture("friend"));
+		officeLady->move(0,7);
 	}
 
 	gm::Assets::LoadTexture("APPLICANT", TEXTURE_APPLICANT);
@@ -438,6 +451,9 @@ void GameState::update(sf::RenderWindow &win)
 			if (openedcomputer->update(win))
 				computer->close();
 		}
+
+		card->update(win);
+
 		day2->update(this,win);
 	}
 	else//W inne dni
@@ -474,6 +490,7 @@ void GameState::update(sf::RenderWindow &win)
 				no_stamp->setInactive();
 
 		}
+		card->update(win);
 	}
 
 	if(nextDay)
@@ -508,6 +525,7 @@ void GameState::draw(sf::RenderWindow& win)
 	button_items.push(no_stamp);
 	button_items.push(mobile);
 	button_items.push(phone);
+	button_items.push(card);
 	//...more
 	
 	

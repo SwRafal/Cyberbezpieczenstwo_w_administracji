@@ -40,7 +40,8 @@ private:
 	textBubble *popUpText;
 	int time;
 
-	OfficeFriend *officeLady;
+	//OfficeFriend *officeLady;
+	OfficeApplicant *officeLady;
 	OfficeApplicant *officeApplicant = nullptr;
 
 	Eyelids *eyelids = nullptr;
@@ -61,6 +62,7 @@ private:
 	Bell *bell = nullptr;
 	Phone *phone = nullptr;
 	Mobile *mobile = nullptr;
+	Card *card = nullptr;
 
 	pc *computer = nullptr;
 	OpenPC *openedcomputer = nullptr;
