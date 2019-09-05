@@ -3,10 +3,10 @@
 #include "Functions.h"
 #include "OpenedBook.h"
 
-#define BOOK_POS_X 530
-#define BOOK_POS_Y 425
-#define BOOK_WIDTH 203
-#define BOOK_HEIGHT 183
+#define BOOK_POS_X 550
+#define BOOK_POS_Y 445
+#define BOOK_WIDTH 162 //203
+#define BOOK_HEIGHT 146 //183
 
 class Book : public gm::Button
 {

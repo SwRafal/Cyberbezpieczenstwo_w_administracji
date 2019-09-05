@@ -5,7 +5,7 @@
 
 
 #define PHONE_POS_X 10
-#define PHONE_POS_Y 460
+#define PHONE_POS_Y 520
 #define PHONE_WIDTH 122
 #define PHONE_HEIGHT 196
 

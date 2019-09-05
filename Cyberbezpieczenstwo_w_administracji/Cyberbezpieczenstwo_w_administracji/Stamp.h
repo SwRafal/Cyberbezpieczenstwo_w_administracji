@@ -2,8 +2,8 @@
 #include "Engine/Engine.h"
 #include "Functions.h"
 
-#define STAMP_WIDTH 109
-#define STAMP_HEIGHT 141
+#define STAMP_WIDTH 75 //109
+#define STAMP_HEIGHT 99 //141
 
 #define STAMP_GRAVITY 20
 #define DESK_BEGIN 520 //The height level (from top) desk starts at

@@ -68,9 +68,9 @@ private:
 	pc *computer = nullptr;
 	OpenPC *openedcomputer = nullptr;
 
-	const sf::Vector2f yes_stamp_pos = sf::Vector2f(250,490);
+	const sf::Vector2f yes_stamp_pos = sf::Vector2f(360,490);
 	Stamp *yes_stamp = nullptr;
-	const sf::Vector2f no_stamp_pos = sf::Vector2f(220, 460);
+	const sf::Vector2f no_stamp_pos = sf::Vector2f(330, 460);
 	Stamp *no_stamp = nullptr;
 
 	Book *book = nullptr;

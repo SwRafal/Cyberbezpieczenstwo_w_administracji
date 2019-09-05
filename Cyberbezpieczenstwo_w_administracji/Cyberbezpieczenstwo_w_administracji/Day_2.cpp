@@ -188,7 +188,7 @@ void Day_2::update(GameState *gs, sf::RenderWindow &win)
 		delete itGuy;
 		itGuy = new OfficeApplicant(gm::Assets::getTexture("itGuyHand"));
 		itGuy->move(0,10);
-		offset = 20;
+		offset = 70;
 		itGuy->chat.move(offset,0);
 		itGuy->text.move(offset,0);
 		itGuy->button.move(offset,0);
@@ -201,17 +201,28 @@ void Day_2::update(GameState *gs, sf::RenderWindow &win)
 		break;
 	case 10:
 		itGuy->animate();
+		
+		gs->card->setPosition(itGuy->getPosition().x - 45,290);
 		if(itGuy->state > 0)
+		{
 			itGuy->hide();
-		if(itGuy->getPosition().x >= 1390)
 			state++;
+		}
 		break;
 	case 11:
-		//pojawia sie karta i czytnik;
-		gs->card->setPosition(400,300);
-		state++;
+		
+		
+		if(itGuy->getPosition().x >= 1390)
+			state++;
+
+		itGuy->animate();
 		break;
 	case 12:
+		//pojawia sie karta i czytnik;
+		
+		
+		break;
+	case 13:
 		break;
 	}
 
@@ -223,6 +234,9 @@ void Day_2::draw(GameState *gs, sf::RenderWindow &win)
 	itGuy->draw(win);
 	thought->draw(win);
 	boss->draw(win);
+
+	if(state== 10 || state == 11)
+		win.draw(*gs->card);
 
 	win.display();
 }
