@@ -27,6 +27,11 @@ Day_1::Day_1()
 	remember_password = false;
 	write_down_password = false;
 	login_wifi = false;
+	choose_wifi = false;
+	refuse_wifi = false;
+	phone_it = false;
+	finish_phone_it = false;
+	rj45 = false;
 	//Quest 4
 	click_email = false;
 	refused_email = false;
@@ -48,6 +53,11 @@ void Day_1::update(GameState *gs, sf::RenderWindow &win)
 		{
 			gs->choice1->setPosition(MOBILE_POS_X - 300, MOBILE_POS_Y + 115);
 			gs->choice2->setPosition(MOBILE_POS_X - 150, MOBILE_POS_Y + 115);
+		}
+		else if (state == 16)
+		{
+			gs->choice1->setPosition(MOBILE_POS_X - 300, MOBILE_POS_Y + 100);
+			gs->choice2->setPosition(MOBILE_POS_X - 150, MOBILE_POS_Y + 100);
 		}
 		else
 		{
@@ -86,6 +96,7 @@ void Day_1::update(GameState *gs, sf::RenderWindow &win)
 		if (gm::Core::getClock().getElapsedTime().asMilliseconds() > gs->info_time)
 		{
 			state = 0;
+			gs->officeLady->hide();
 			gs->lost = false;
 			gs->initialized = false;
 			delete gs->gamelost_info;
@@ -116,7 +127,7 @@ void Day_1::update(GameState *gs, sf::RenderWindow &win)
 				gs->mobile->setFillColor(gs->mobile->getPressColor());
 			}
 			else if (gs->computer->clicked(win) || gs->book->clicked(win) || gs->bell->clicked(win) || gs->bin->clicked(win) || gs->no_stamp->clicked(win) || gs->yes_stamp->clicked(win) ||
-					gs->phone->clicked(win) || gs->mobile->clicked(win))
+				gs->phone->clicked(win) || gs->mobile->clicked(win))
 			{
 				gs->eyelids->increaseLvl();
 			}
@@ -213,7 +224,7 @@ void Day_1::update(GameState *gs, sf::RenderWindow &win)
 		case 6://Choose user
 
 			thought->animate();
-			if(!thought->appearing && !thought->disappearing)
+			if (!thought->appearing && !thought->disappearing)
 				thought->setBubblePosition(0, -300);
 
 			gs->computer->update(win);
@@ -256,7 +267,7 @@ void Day_1::update(GameState *gs, sf::RenderWindow &win)
 				gs->choice2->setText(L"Nie wysy³aj");
 
 				state++;
-			}				
+			}
 
 			break;
 		case 10://Put mobile
@@ -353,7 +364,7 @@ void Day_1::update(GameState *gs, sf::RenderWindow &win)
 			{
 				gs->openedcomputer->setState(OpenPC::SET_PASSWORD);
 				thought->changeText(L"Login powinien byæ taki sam jak moje imiê...");
-				thought->setBubblePosition(200,100);
+				thought->setBubblePosition(200, 100);
 				thought->showBubble();
 				thought_time = gm::Core::getClock().getElapsedTime().asMilliseconds() + THOUGHT_TIME;
 			}
@@ -361,7 +372,7 @@ void Day_1::update(GameState *gs, sf::RenderWindow &win)
 			{
 				gs->computer->close();
 			}
-			if(!gs->computer->isOpened())
+			if (!gs->computer->isOpened())
 			{
 				gs->officeLady->show();
 				remember_password = true;
@@ -372,14 +383,14 @@ void Day_1::update(GameState *gs, sf::RenderWindow &win)
 
 			break;
 		case 13://Write down password
-			if(gs->officeLady->ready)
+			if (gs->officeLady->ready)
 				showButtons = true;
 
-			if(gs->choice1->clicked(gm::Core::getWindow()))
+			if (gs->choice1->clicked(gm::Core::getWindow()))
 			{
 				showButtons = false;
 				gs->officeLady->hide();
-				
+
 				gs->lost = true;
 				gs->eyelids->close();
 				gs->info_time = gm::Core::getClock().getElapsedTime().asMilliseconds() + GAMELOST_INFO_TIME;
@@ -392,13 +403,13 @@ void Day_1::update(GameState *gs, sf::RenderWindow &win)
 				info_pos.y = SCREEN_HEIGHT / 2 - (gs->gamelost_info->getLocalBounds().top + gs->gamelost_info->getLocalBounds().height) / 2;
 				gs->gamelost_info->setPosition(sf::Vector2f(info_pos));
 			}
-			else if(gs->choice2->clicked(gm::Core::getWindow()))
+			else if (gs->choice2->clicked(gm::Core::getWindow()))
 			{
 				showButtons = false;
 				gs->officeLady->hide();
 				write_down_password = true;
 				state++;
-				
+
 				gs->openedcomputer->setState(OpenPC::DESKTOP);
 			}
 
@@ -441,6 +452,10 @@ void Day_1::update(GameState *gs, sf::RenderWindow &win)
 			if (gs->openedcomputer->show_communique)
 			{
 				showButtons = true;
+				gs->choice1->setText(L"Pobierz");
+				gs->choice2->setText(L"Anuluj");
+				choose_wifi = true;
+				state++;
 			}
 			else
 			{
@@ -458,12 +473,113 @@ void Day_1::update(GameState *gs, sf::RenderWindow &win)
 			//gs->nextDay = true;
 
 			break;
-		case 16://Click email
+		case 16://Refuse wifi
+
+			thought->animate();
+			if (thought_time < gm::Core::getClock().getElapsedTime().asMilliseconds())
+			{
+				thought->closeBubble();
+				if (thought->scale <= 0.0)
+					thought->setBubblePosition(0, -300);
+			}
+			if (gs->naganiony)
+			{
+				gs->computer->close();
+				if (gs->info_time < gm::Core::getClock().getElapsedTime().asMilliseconds())
+				{
+					gs->naganiony = false;
+					refuse_wifi = true;
+					gs->openedcomputer->setState(OpenPC::DESKTOP);
+					gs->openedcomputer->internet_works = true;
+					state+=3;
+
+					//...informatyk
+				}
+			}
+			else
+			{
+				if (gs->choice1->clicked(gm::Core::getWindow()))
+				{
+					showButtons = false;
+					gs->openedcomputer->show_communique = false;
+					gs->naganiony = true;
+					gs->data->nagany++;
+					gs->nagana_info = new sf::Text;
+					gs->nagana_info->setFont(*gm::Assets::getFont());
+					gs->nagana_info->setString(L"NAGANA OD SZEFA: Zainstalowa³eœ certyfikat z niepewnego Ÿród³a. Skontaktuj siê z dzia³em IT!");
+					gs->nagana_info->setFillColor(sf::Color::Red);
+					gs->info_time = gm::Core::getClock().getElapsedTime().asMilliseconds() + GAMELOST_INFO_TIME;
+					sf::Vector2f info_pos;
+					info_pos.x = SCREEN_WIDTH / 2 - (gs->nagana_info->getLocalBounds().left + gs->nagana_info->getLocalBounds().width) / 2;
+					info_pos.y = SCREEN_HEIGHT / 2 - (gs->nagana_info->getLocalBounds().top + gs->nagana_info->getLocalBounds().height) / 2;
+					gs->nagana_info->setPosition(sf::Vector2f(info_pos));
+
+				}
+				else if (gs->choice2->clicked(gm::Core::getWindow()))
+				{
+					showButtons = false;
+					refuse_wifi = true;
+					gs->openedcomputer->setState(OpenPC::DESKTOP);
+					gs->computer->close();
+					gs->openedcomputer->internet_works = true;
+					state++;
+
+					while (!gs->phone->text_queue.empty())
+					{
+						gs->phone->text_queue.pop();
+					}
+
+					gs->phone->addToQueue(L"Ja: Czeœæ tu " + gs->data->name + L"! Nie mogê po³¹czyæ siê z sieci¹, pomo¿ecie?");
+					gs->phone->addToQueue(L"Pracownik dzia³u IT: Pomo¿emy!!!");
+					gs->phone->call();
+
+					gs->computer->setFillColor(gs->computer->getPressColor());
+					gs->coffee->setFillColor(gs->coffee->getPressColor());
+					gs->bell->setFillColor(gs->bell->getPressColor());
+					gs->bin->setFillColor(gs->bin->getPressColor());
+					gs->no_stamp->setFillColor(gs->no_stamp->getPressColor());
+					gs->yes_stamp->setFillColor(gs->yes_stamp->getPressColor());
+					gs->phone->setFillColor(gs->phone->getPressColor());
+					gs->mobile->setFillColor(gs->mobile->getPressColor());
+					gs->book->setFillColor(gs->book->getPressColor());
+				}
+			}
+
+			break;
+		case 17://PhoneIT
+
+			if (gs->phone->pickedUp)
+			{
+				phone_it = true;
+				state++;
+			}
+			else
+				gs->phone->update(win);
+
+			break;
+		case 18://Finish ITphone
+
+			if (gs->phone->pickedUp)
+				gs->phone->update(win);
+			else
+			{
+				//...informatyk
+
+				state++;
+			}
+
+			break;
+		case 19://RJ45
 
 
 
 			break;
-		case 17://Refuse email
+		case 20://Click email
+
+
+
+			break;
+		case 21://Refuse email
 
 
 

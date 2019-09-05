@@ -266,33 +266,36 @@ bool OpenPC::update(sf::RenderWindow &win)
 			setState(DESKTOP);
 		break;
 	case DESKTOP:
-		if (wifis->clicked(win))
+		if (wifis->clicked(win) && !internet_works)
 			setState(LOGIN_WIFI);
 		else if (account_manager->clicked(win))
 			setState(SET_PASSWORD);
 		break;
 	case LOGIN_WIFI:
-		if (wifi_mindswszelakich->clicked(win) || wifi_mindswszelakich_gov->clicked(win) || wifi_mindswszelakich_p1->clicked(win))
+		if (!show_communique)
 		{
-			communique->setTextString(L"Aby pod³¹czyæ siê do sieci potrzebny jest certyfikat. Pobraæ?");
-			show_communique = true;
+			if (wifi_mindswszelakich->clicked(win) || wifi_mindswszelakich_gov->clicked(win) || wifi_mindswszelakich_p1->clicked(win))
+			{
+				communique->setTextString(L"Aby pod³¹czyæ siê do sieci potrzebny jest certyfikat. Pobraæ?");
+				show_communique = true;
+			}
+			else if (wifi_Xfon_zosi->clicked(win))
+			{
+				info->changeText(L"Nie znam has³a do tej sieci...");
+				info->setBubblePosition(400, 100);
+				info->showBubble();
+				info_time = gm::Core::getClock().getElapsedTime().asMilliseconds() + INFO_DELAY;
+			}
+			else if (wifi_stolowka_wiesi->clicked(win))
+			{
+				info->changeText(L"Nie powinienem siê pod³¹czaæ do sieci publicznych...");
+				info->setBubblePosition(400, 100);
+				info->showBubble();
+				info_time = gm::Core::getClock().getElapsedTime().asMilliseconds() + INFO_DELAY;
+			}
+			else if (ok->clicked(win))
+				setState(DESKTOP);
 		}
-		else if (wifi_Xfon_zosi->clicked(win))
-		{
-			info->changeText(L"Nie znam has³a do tej sieci...");
-			info->setBubblePosition(400, 100);
-			info->showBubble();
-			info_time = gm::Core::getClock().getElapsedTime().asMilliseconds() + INFO_DELAY;
-		}
-		else if (wifi_stolowka_wiesi->clicked(win))
-		{
-			info->changeText(L"Nie powinienem siê pod³¹czaæ do sieci publicznych...");
-			info->setBubblePosition(400, 100);
-			info->showBubble();
-			info_time = gm::Core::getClock().getElapsedTime().asMilliseconds() + INFO_DELAY;
-		}
-		else if (ok->clicked(win))
-			setState(DESKTOP);
 		break;
 	case SET_PASSWORD:
 		login->update(win, gm::Core::getEnteredChar());

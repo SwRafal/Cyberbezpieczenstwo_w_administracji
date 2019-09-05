@@ -561,6 +561,8 @@ void GameState::draw(sf::RenderWindow& win)
 	eyelids->draw(win);
 	if (lost)
 		win.draw(*gamelost_info);
+	if (naganiony)
+		win.draw(*nagana_info);
 	
 	
 	if (day0->part1Over && day == 0)

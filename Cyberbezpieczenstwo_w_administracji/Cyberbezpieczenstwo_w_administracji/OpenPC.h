@@ -62,6 +62,8 @@ public:
 		MAIL
 	};
 
+	bool internet_works = false;
+
 	gm::Information *communique = nullptr;
 	bool show_communique = false;
 

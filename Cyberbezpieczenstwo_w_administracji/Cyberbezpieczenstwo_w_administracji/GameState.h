@@ -79,8 +79,10 @@ private:
 
 	/*LOST GAME*/
 	bool lost = false;
+	bool naganiony = false;
 	sf::Int32 info_time;
 	sf::Text *gamelost_info = nullptr;
+	sf::Text *nagana_info = nullptr;
 
 	/*CUSTOM DAYS*/
 	Day_0 *day0 = nullptr;
