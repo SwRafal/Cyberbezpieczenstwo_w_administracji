@@ -2,10 +2,10 @@
 #include "Engine/Engine.h"
 #include "Functions.h"
 
-#define COFFEE_POS_X 385
-#define COFFEE_POS_Y 450
-#define COFFEE_WIDTH 137
-#define COFFEE_HEIGHT 165
+#define COFFEE_POS_X 455
+#define COFFEE_POS_Y 570
+#define COFFEE_WIDTH 110 //137
+#define COFFEE_HEIGHT 132 //165
 
 #define MAX_COFFEE_LEVEL 39
 
