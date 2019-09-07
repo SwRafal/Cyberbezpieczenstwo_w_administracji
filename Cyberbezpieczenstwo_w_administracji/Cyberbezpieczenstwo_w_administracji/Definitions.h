@@ -82,6 +82,8 @@
 #define TEXTURE_BOOK "resources/textures/book.png"
 #define TEXTURE_OPENEDBOOK "resources/textures/openedbook.png"
 #define TEXTURE_BIN "resources/textures/bin.png"
+#define TEXTURE_SUSHI "resources/textures/sushi.png"
+#define TEXTURE_RJ45 "resources/textures/kabel.png"
 
 #define TEXTURE_TEXT_BUBBLE "resources/textures/textbubble.png"
 #define TEXTURE_CHAT_BUBBLE "resources/textures/chat bubble.png"

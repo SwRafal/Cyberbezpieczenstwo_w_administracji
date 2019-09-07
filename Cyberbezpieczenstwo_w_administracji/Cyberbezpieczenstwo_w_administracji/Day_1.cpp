@@ -53,15 +53,15 @@ void Day_1::update(GameState *gs, sf::RenderWindow &win)
 {
 	if(showButtons)
 	{
-		if (state == 10)
+		if (state == 10)//Put mobile
 		{
 			gs->choice1->setPosition(MOBILE_POS_X - 300, MOBILE_POS_Y + 115);
 			gs->choice2->setPosition(MOBILE_POS_X - 150, MOBILE_POS_Y + 115);
 		}
-		else if (state == 16)
+		else if (state == 16)//Refuse wifi
 		{
-			gs->choice1->setPosition(MOBILE_POS_X - 300, MOBILE_POS_Y + 100);
-			gs->choice2->setPosition(MOBILE_POS_X - 150, MOBILE_POS_Y + 100);
+			gs->choice1->setPosition(MOBILE_POS_X - 300, MOBILE_POS_Y - 80);
+			gs->choice2->setPosition(MOBILE_POS_X - 150, MOBILE_POS_Y - 80);
 		}
 		else
 		{
@@ -87,9 +87,10 @@ void Day_1::update(GameState *gs, sf::RenderWindow &win)
 		gs->officeApplicant->addToQueue(L"Petent: Wiesz co siê sta³o?");
 		gs->officeApplicant->addToQueue(L"Ja: Nie mogê Ci tego powiedzieæ.");
 		gs->officeApplicant->addToQueue(L"Petent: Có¿, witaj w naszym zespole. Masz, to dla Ciebie.");
-
-		ITguy->text.setTextString(L"Tym ciê pod³¹czymy do sieci.");
-		ITguy->addToQueue(L"Tym ciê pod³¹czymy do sieci.");
+		gs->officeApplicant->addToQueue(L"EOT");//Dodatkowa linijka potrzebna
+		
+		ITguy->text.setTextString(L"Tym Ciê pod³¹czymy do sieci.");
+		ITguy->addToQueue(L"EOT");//Dodatkowa linijka potrzebna
 
 		gs->choice1->setText(L"zapisz has³o");
 		gs->choice2->setText(L"nie zapisuj");
@@ -253,21 +254,24 @@ void Day_1::update(GameState *gs, sf::RenderWindow &win)
 			state++;
 
 			break;
-		case 8://Finish dialog !!!WSTAWIC SUSHI!!!
+		case 8://Finish dialog
 
-			if (gs->officeApplicant->state >= 6)
+			if (gs->officeApplicant->state >= 7)
 			{
 				gs->officeApplicant->hide();
 				finish_dialog = true;
 				state++;
 
 				gs->mobile->call();
+				gs->sushi.setPosition(830, 400);
 			}
 
 			break;
 		case 9://Click mobile
 
 			gs->mobile->update(win);
+			if (gs->sushi.getPosition().y < 500)
+				gs->sushi.move(0, 2);
 			if (gs->mobile->pickedUp)
 			{
 				click_mobile = true;
@@ -573,15 +577,18 @@ void Day_1::update(GameState *gs, sf::RenderWindow &win)
 			else
 			{
 				ITguy->show();
+				gs->rj45.setPosition(830, 400);
 
 				state++;
 			}
 
 			break;
-		case 19://RJ45 WSTAWIC KABEL!!!!
-
+		case 19://RJ45
+			
 			if (gs->naganiony)
 			{
+				gs->rj45.setPosition(-300, 0);
+
 				if (gs->info_time < gm::Core::getClock().getElapsedTime().asMilliseconds())
 				{
 					gs->naganiony = false;
@@ -601,13 +608,26 @@ void Day_1::update(GameState *gs, sf::RenderWindow &win)
 				sf::Vector2f info_pos;
 				info_pos.x = SCREEN_WIDTH / 2 - (gs->nagana_info->getLocalBounds().left + gs->nagana_info->getLocalBounds().width) / 2;
 				info_pos.y = SCREEN_HEIGHT / 2 - (gs->nagana_info->getLocalBounds().top + gs->nagana_info->getLocalBounds().height) / 2;
-				gs->nagana_info->setPosition(sf::Vector2f(info_pos));
+				gs->nagana_info->setPosition(sf::Vector2f(info_pos));					
+			}
+			else if(gs->rj45.getPosition().y < 500)
+			{	
+					gs->rj45.move(0, 2);
+			}
+			else
+			{
+				if (gs->rj45.getPosition().x > 280)
+				{
+					gs->rj45.move(-20, 0);
+				}
 			}
 
 			break;
 		case 20://Click email
 
+			
 			gs->nextDay = true;
+
 
 			break;
 		case 21://Refuse email

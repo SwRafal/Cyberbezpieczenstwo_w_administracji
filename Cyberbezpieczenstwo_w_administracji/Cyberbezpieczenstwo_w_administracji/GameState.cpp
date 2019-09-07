@@ -38,6 +38,8 @@ GameState::~GameState()
 	delete officeApplicant;
 	officeApplicant = nullptr;
 
+	gm::Assets::EraseTexture("RJ45");
+	gm::Assets::EraseTexture("SUSHI");
 	gm::Assets::EraseTexture("BIN");
 	gm::Assets::EraseTexture("BOOK");
 	gm::Assets::EraseTexture("OPENEDBOOK");
@@ -241,6 +243,24 @@ void GameState::init()
 	if (gm::Assets::getTexture("itGuyHand") == nullptr)
 		error_win_close();
 
+	gm::Assets::LoadTexture("SUSHI", TEXTURE_SUSHI);
+	if(gm::Assets::getTexture("SUSHI") == nullptr)
+		error_win_close();
+	else
+	{
+		sushi.setTexture(*gm::Assets::getTexture("SUSHI"));
+		sushi.setScale(sf::Vector2f(0.3,0.3));
+		sushi.setPosition(sf::Vector2f(-300, 0));
+	}
+
+	gm::Assets::LoadTexture("RJ45", TEXTURE_RJ45);
+	if (gm::Assets::getTexture("RJ45") == nullptr)
+		error_win_close();
+	else
+	{
+		rj45.setTexture(*gm::Assets::getTexture("RJ45"));
+		rj45.setPosition(sf::Vector2f(-300, 0));
+	}
 
 	/*Starting settings*/
 	dayShowScreen = new dayx(this->data->day);
@@ -270,8 +290,6 @@ void GameState::init()
 	day0 = new Day_0;
 	day1 = new Day_1;
 	day2 = new Day_2;
-	
-	
 }
 
 void GameState::handleInput()
@@ -529,6 +547,8 @@ void GameState::draw(sf::RenderWindow& win)
 	watch->draw(win);
 
 	/*Items*/
+	win.draw(sushi);
+	win.draw(rj45);
 	std::priority_queue<gm::Button*, std::vector<gm::Button*>, ItemsComparator> button_items;
 	button_items.push(book);
 	button_items.push(coffee);
