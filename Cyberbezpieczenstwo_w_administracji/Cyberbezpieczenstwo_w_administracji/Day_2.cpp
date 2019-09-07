@@ -32,6 +32,22 @@ Day_2::Day_2()
 
 	coffeeClicked = false;
 	bookOpened = false;
+
+	displayPhoneText  = false;
+	
+	bg.setTexture(*gm::Assets::getTexture("chat bubble"));
+	bg.setPosition(540,500);
+	bg.setScale(0.6,0.6);
+	phoneText.setFont(*gm::Assets::getFont());
+	phoneText.setCharacterSize(15);
+	phoneText.setFillColor(sf::Color::Black);
+	phoneText.setStyle(sf::Text::Style::Regular);
+	phoneText.setString(L"Dzwoni numer prywatny...");
+	phoneText.setPosition(545,520);
+
+	thiefTex.loadFromFile("resources/textures/thief.png");
+	thief.setTexture(thiefTex);
+	thief.setPosition(799,90);
 }
 
 Day_2::~Day_2()
@@ -230,15 +246,27 @@ void Day_2::update(GameState *gs, sf::RenderWindow &win)
 	case 13:
 		gs->mobile->update(gm::Core::getWindow());
 		if(gs->cardReader->isCardInside())
-			;//keep game going
+		{
+			state = 21;
+			break;
+		}
+		if(gs->mobile->aimed(win))
+		{
+			displayPhoneText = true;
+		}
+		else
+			displayPhoneText = false;
+
 		if(gs->mobile->pickedUp)
 		{
 			gs->mobile->pickedUp = false;
+			//gs->card->setPosition(0,520);
 			state++;
 		}
 		break;
 	case 14: //odebranie telefonu 
 		//init text
+		displayPhoneText = false;
 		thought->setBubblePosition(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);
 		thought->changeText(L"Dzieñ dobry, tu sklep zoologiczny...");
 		thought->showBubble();
@@ -266,7 +294,7 @@ void Day_2::update(GameState *gs, sf::RenderWindow &win)
 		if(thought_time < gm::Core::getClock().getElapsedTime().asMilliseconds())
 		{
 			thought->changeText(L"bla bla...");
-			thought_time = gm::Core::getClock().getElapsedTime().asMilliseconds() + 500;
+			thought_time = gm::Core::getClock().getElapsedTime().asMilliseconds() + 1000;
 			state++;
 		}
 		break;
@@ -274,6 +302,7 @@ void Day_2::update(GameState *gs, sf::RenderWindow &win)
 		thought->animate();
 		if(thought_time < gm::Core::getClock().getElapsedTime().asMilliseconds())
 		{
+			gs->card->setPosition(-300,520);
 			thought->changeText(L"bla bla bla...");
 			thought_time = gm::Core::getClock().getElapsedTime().asMilliseconds() + THOUGHT_TIME;
 			state++;
@@ -291,8 +320,25 @@ void Day_2::update(GameState *gs, sf::RenderWindow &win)
 		thought->animate();
 		if(!thought->appearing && !thought->disappearing)
 		{
-			//przegrales
+			gs->lost = true;
+			gs->eyelids->close();
+			gs->info_time = gm::Core::getClock().getElapsedTime().asMilliseconds() + GAMELOST_INFO_TIME;
+			gs->gamelost_info = new sf::Text;
+			gs->gamelost_info->setFont(*gm::Assets::getFont());
+			gs->gamelost_info->setString(L"    Nie pilnowa³eœ nale¿ycie swojej karty uwierzytelniaj¹cej.\nSkradziona karta umo¿liwi³a kradzie¿ funduszy Ministerstwa.\nZostajesz zwolniony dyscyplinarnie w trybie natychmiastowym.");
+			gs->gamelost_info->setCharacterSize(48);
+			sf::Vector2f info_pos;
+			info_pos.x = SCREEN_WIDTH / 2 - (gs->gamelost_info->getLocalBounds().left + gs->gamelost_info->getLocalBounds().width) / 2;
+			info_pos.y = SCREEN_HEIGHT / 2 - (gs->gamelost_info->getLocalBounds().top + gs->gamelost_info->getLocalBounds().height) / 2;
+			gs->gamelost_info->setPosition(sf::Vector2f(info_pos));
+
+			//gs->data->returnToMenu = true;
 		}
+	case 21:
+		//game keeps going
+		break;
+
+
 	}
 
 	
@@ -306,6 +352,16 @@ void Day_2::draw(GameState *gs, sf::RenderWindow &win)
 
 	if(state== 10 || state == 11)
 		win.draw(*gs->card);
+
+	if(displayPhoneText)
+	{
+		win.draw(bg);
+		win.draw(phoneText);
+	}
+
+	if(state == 17 || state == 18)
+		win.draw(thief);
+	
 
 	win.display();
 }

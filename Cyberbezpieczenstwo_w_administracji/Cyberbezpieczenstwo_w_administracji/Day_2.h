@@ -24,6 +24,13 @@ public:
 	bool coffeeClicked;
 	bool bookOpened;
 
+	bool displayPhoneText;
+	sf::Sprite bg;
+	sf::Text phoneText;
+
+	sf::Sprite thief;
+	sf::Texture thiefTex;
+
 	OfficeApplicant *itGuy;
 
 	OfficeApplicant *boss;
