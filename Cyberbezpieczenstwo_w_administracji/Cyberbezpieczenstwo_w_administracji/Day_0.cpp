@@ -512,7 +512,7 @@ void Day_0::draw(GameState* gs)
 	case 7:
 		/*Background*/
 		win.draw(gs->wall);
-		gs->calendar->draw(win);
+		//gs->calendar->draw(win);
 		gs->bell->draw(win);
 		gs->watch->draw(win);
 
@@ -533,6 +533,7 @@ void Day_0::draw(GameState* gs)
 		win.draw(background); //border
 
 		gs->watch->draw(win);
+		gs->calendar->draw(win);
 
 		gs->officeLady->draw(win);
 

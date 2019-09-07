@@ -4,10 +4,10 @@
 #include <queue>
 
 
-#define PHONE_POS_X 10
-#define PHONE_POS_Y 520
-#define PHONE_WIDTH 122
-#define PHONE_HEIGHT 196
+#define PHONE_POS_X 140
+#define PHONE_POS_Y 540
+#define PHONE_WIDTH 105
+#define PHONE_HEIGHT 170
 
 
 

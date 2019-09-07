@@ -206,6 +206,9 @@ void GameState::init()
 	}
 
 	card->setPosition(-200,0);
+	//card reader
+	cardReader = new CardReader(card);
+
 
 	gm::Assets::LoadTexture("friend", TEXTURE_OFFICE_FRIEND);
 	gm::Assets::LoadTexture("chat bubble",TEXTURE_CHAT_BUBBLE);
@@ -482,6 +485,7 @@ void GameState::update(sf::RenderWindow &win)
 		}
 
 		card->update(win);
+		cardReader->update();
 
 		day2->update(this,win);
 	}
@@ -545,6 +549,7 @@ void GameState::draw(sf::RenderWindow& win)
 	calendar->draw(win);
 	bell->draw(win);
 	watch->draw(win);
+	cardReader->draw(win);
 
 	/*Items*/
 	win.draw(sushi);

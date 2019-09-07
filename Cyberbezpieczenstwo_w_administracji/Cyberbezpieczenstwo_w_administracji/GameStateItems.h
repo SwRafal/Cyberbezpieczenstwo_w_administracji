@@ -12,4 +12,5 @@
 #include "email.h"
 #include "OpenPC.h"
 #include "card.h"
+#include "CardReader.h"
 

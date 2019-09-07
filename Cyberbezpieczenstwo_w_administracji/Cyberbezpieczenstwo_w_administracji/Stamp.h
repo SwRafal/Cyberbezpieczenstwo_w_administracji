@@ -2,7 +2,7 @@
 #include "Engine/Engine.h"
 #include "Functions.h"
 
-#define STAMP_WIDTH 75 //109
+#define STAMP_WIDTH 76 //109
 #define STAMP_HEIGHT 99 //141
 
 #define STAMP_GRAVITY 20

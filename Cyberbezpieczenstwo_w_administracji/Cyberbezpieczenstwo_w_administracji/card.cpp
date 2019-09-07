@@ -48,7 +48,7 @@ void Card::update(sf::RenderWindow &win)
 	if (_active)
 	{
 		sf::Vector2f next_pos = sf::Vector2f(sf::Mouse::getPosition(win).x - CARD_WIDTH/2, sf::Mouse::getPosition(win).y - CARD_HEIGHT/2);
-		setPosition(win.mapPixelToCoords((sf::Vector2i)next_pos));
+		setPosition(win.mapPixelToCoords((sf::Vector2i)next_pos)); 
 	}
 	else
 	{

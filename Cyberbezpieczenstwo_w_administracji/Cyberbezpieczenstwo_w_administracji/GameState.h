@@ -64,6 +64,7 @@ private:
 	Phone *phone = nullptr;
 	Mobile *mobile = nullptr;
 	Card *card = nullptr;
+	CardReader *cardReader = nullptr;
 
 	pc *computer = nullptr;
 	OpenPC *openedcomputer = nullptr;

@@ -144,6 +144,7 @@
     <ClCompile Include="Book.cpp" />
     <ClCompile Include="Calendar.cpp" />
     <ClCompile Include="card.cpp" />
+    <ClCompile Include="CardReader.cpp" />
     <ClCompile Include="ChoiceButton.cpp" />
     <ClCompile Include="Coffee.cpp" />
     <ClCompile Include="Day_2.cpp" />
@@ -199,6 +200,7 @@
     <ClInclude Include="Book.h" />
     <ClInclude Include="Calendar.h" />
     <ClInclude Include="card.h" />
+    <ClInclude Include="CardReader.h" />
     <ClInclude Include="ChoiceButton.h" />
     <ClInclude Include="Coffee.h" />
     <ClInclude Include="Day.h" />

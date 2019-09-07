@@ -5,8 +5,8 @@
 
 #define BOOK_POS_X 550
 #define BOOK_POS_Y 445
-#define BOOK_WIDTH 162 //203
-#define BOOK_HEIGHT 146 //183
+#define BOOK_WIDTH 170 //203
+#define BOOK_HEIGHT 153 //183
 
 class Book : public gm::Button
 {

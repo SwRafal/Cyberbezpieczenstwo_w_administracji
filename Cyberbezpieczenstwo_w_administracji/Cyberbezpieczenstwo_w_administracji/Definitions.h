@@ -93,6 +93,10 @@
 #define TEXTURE_APPLICANT "resources/textures/applicant.png"
 #define TEXTURE_ARROW_BUTTON "resources/textures/arrow.png"
 
+#define CARD_READER_CARD_IN "resources/textures/readerIn.png"
+#define CARD_READER_CARD_OUT "resources/textures/readerOut.png"
+#define CARD_READER_LIGHT "resources/textures/dioda.png"
+
 /* intro state */
 
 #define INTRO_TEXT_1 "resources/text/intro/1.txt"

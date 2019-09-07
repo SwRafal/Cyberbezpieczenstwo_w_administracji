@@ -203,6 +203,7 @@ void Day_2::update(GameState *gs, sf::RenderWindow &win)
 		itGuy->animate();
 		
 		gs->card->setPosition(itGuy->getPosition().x - 45,290);
+		gs->cardReader->hidden = false;
 		if(itGuy->state > 0)
 		{
 			itGuy->hide();
