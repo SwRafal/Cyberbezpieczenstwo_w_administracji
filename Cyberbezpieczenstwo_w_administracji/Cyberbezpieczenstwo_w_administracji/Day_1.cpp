@@ -531,6 +531,7 @@ void Day_1::update(GameState *gs, sf::RenderWindow &win)
 				else if (gs->choice2->clicked(gm::Core::getWindow()))
 				{
 					showButtons = false;
+					gs->openedcomputer->show_communique = false;
 					refuse_wifi = true;
 					gs->openedcomputer->setState(OpenPC::DESKTOP);
 					gs->computer->close();

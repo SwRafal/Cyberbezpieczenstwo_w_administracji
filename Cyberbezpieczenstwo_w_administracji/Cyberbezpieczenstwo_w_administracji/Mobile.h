@@ -29,6 +29,7 @@ public:
 
 	void call();
 
+
 	Mobile(sf::Texture *tex);
 	~Mobile();
 

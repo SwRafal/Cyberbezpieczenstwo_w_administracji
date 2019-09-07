@@ -45,6 +45,8 @@ void Day_2::update(GameState *gs, sf::RenderWindow &win)
 
 	if(!init)
 	{
+		
+
 		gs->coffee->reset();
 
 		time = gm::Core::getClock().getElapsedTime().asSeconds();
@@ -160,15 +162,16 @@ void Day_2::update(GameState *gs, sf::RenderWindow &win)
 
 		if(boss->getPosition().x == 1390)
 		{
-			state++;
+			gs->officeLady->state = 0;
 			gs->officeLady->show();
+			state++;
 		}
 		break;
 	case 6: //wpada ziomalka
 		gs->officeLady->animate();
 		if(gs->officeLady->state == 2)
 			gs->officeLady->hide();
-		if(gs->officeLady->getPosition().x >= 1390)
+		if(gs->officeLady->hidden)
 			state++;
 		break;
 	case 7: //wpada mail z it
@@ -211,20 +214,85 @@ void Day_2::update(GameState *gs, sf::RenderWindow &win)
 		}
 		break;
 	case 11:
+		gs->mobile->update(gm::Core::getWindow());
 		
-		
-		if(itGuy->getPosition().x >= 1390)
+		if(itGuy->hidden)
 			state++;
 
 		itGuy->animate();
 		break;
 	case 12:
-		//pojawia sie karta i czytnik;
-		
-		
+		gs->mobile->update(gm::Core::getWindow());
+		gs->mobile->pickedUp = false;
+		gs->mobile->call();
+		state++;
 		break;
 	case 13:
+		gs->mobile->update(gm::Core::getWindow());
+		if(gs->cardReader->isCardInside())
+			;//keep game going
+		if(gs->mobile->pickedUp)
+		{
+			gs->mobile->pickedUp = false;
+			state++;
+		}
 		break;
+	case 14: //odebranie telefonu 
+		//init text
+		thought->setBubblePosition(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);
+		thought->changeText(L"Dzieñ dobry, tu sklep zoologiczny...");
+		thought->showBubble();
+		state++;
+		break;
+	case 15:
+		thought->animate();
+		if(thought->showText)
+		{
+			thought_time = gm::Core::getClock().getElapsedTime().asMilliseconds() + THOUGHT_TIME;
+			state++;
+		}
+		break;
+	case 16:
+		thought->animate();
+		if(thought_time < gm::Core::getClock().getElapsedTime().asMilliseconds())
+		{
+			thought->changeText(L"bla...");
+			thought_time = gm::Core::getClock().getElapsedTime().asMilliseconds() + 500;
+			state++;
+		}
+		break;
+	case 17:
+		thought->animate();
+		if(thought_time < gm::Core::getClock().getElapsedTime().asMilliseconds())
+		{
+			thought->changeText(L"bla bla...");
+			thought_time = gm::Core::getClock().getElapsedTime().asMilliseconds() + 500;
+			state++;
+		}
+		break;
+	case 18:
+		thought->animate();
+		if(thought_time < gm::Core::getClock().getElapsedTime().asMilliseconds())
+		{
+			thought->changeText(L"bla bla bla...");
+			thought_time = gm::Core::getClock().getElapsedTime().asMilliseconds() + THOUGHT_TIME;
+			state++;
+		}
+		break;
+	case 19:
+		thought->animate();
+		if(thought_time < gm::Core::getClock().getElapsedTime().asMilliseconds())
+		{
+			thought->closeBubble();
+			state++;
+		}
+		break;
+	case 20:
+		thought->animate();
+		if(!thought->appearing && !thought->disappearing)
+		{
+			//przegrales
+		}
 	}
 
 	

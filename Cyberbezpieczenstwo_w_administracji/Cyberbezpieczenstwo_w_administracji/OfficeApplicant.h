@@ -22,6 +22,8 @@ public:
 	bool ready;
 	bool active;
 
+	bool hidden;
+
 	void animate();
 	void show();
 	void hide();

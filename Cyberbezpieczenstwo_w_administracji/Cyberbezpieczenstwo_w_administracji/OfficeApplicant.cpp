@@ -8,6 +8,7 @@ OfficeApplicant::OfficeApplicant(sf::Texture *texture) : text(*gm::Assets::getFo
 	disappearing = false;
 	ready = false;
 	active = true;
+	hidden = false;
 
 	state = 0;
 
@@ -44,6 +45,7 @@ OfficeApplicant::OfficeApplicant(sf::Texture *texture) : text(*gm::Assets::getFo
 	button.setIdleColor(sf::Color::Transparent);
 	button.setAimedColor(sf::Color::Transparent);
 	button.setPressColor(sf::Color::Transparent);
+
 }
 
 
@@ -69,9 +71,14 @@ void OfficeApplicant::animate()
 		if (this->getPosition().x < SCREEN_WIDTH + this->getGlobalBounds().width)
 		{
 			this->move(10, 0);
+
 		}
 		else
+		{
 			disappearing = false;
+			hidden = true;
+		}
+			
 	}
 
 	if (ready)
@@ -83,14 +90,14 @@ void OfficeApplicant::animate()
 				img.setColor(sf::Color::Black);
 				this->nextLine();
 			}
-		}
-		else if (button.aimed(gm::Core::getWindow()))
-		{
-			img.setColor(sf::Color(0, 255, 85, 255));
-		}
-		else
-		{
-			img.setColor(sf::Color(0, 255, 162, 255));
+			else if (button.aimed(gm::Core::getWindow()))
+			{
+				img.setColor(sf::Color(0, 255, 85, 255));
+			}
+			else
+			{
+				img.setColor(sf::Color(0, 255, 162, 255));
+			}
 		}
 	}
 
