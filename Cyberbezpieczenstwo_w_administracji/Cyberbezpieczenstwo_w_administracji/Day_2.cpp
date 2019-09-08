@@ -33,6 +33,7 @@ Day_2::Day_2()
 	coffeeClicked = false;
 	bookOpened = false;
 
+	//mobile phone text
 	displayPhoneText  = false;
 	
 	bg.setTexture(*gm::Assets::getTexture("chat bubble"));
@@ -45,9 +46,32 @@ Day_2::Day_2()
 	phoneText.setString(L"Dzwoni numer prywatny...");
 	phoneText.setPosition(545,520);
 
+	//work phone text
+	displayWorkPhoneText = false;
+	bgWork.setTexture(*gm::Assets::getTexture("chat bubble"));
+	bgWork.setTextureRect(sf::IntRect(bgWork.getGlobalBounds().width, 0, -bgWork.getGlobalBounds().width, bgWork.getGlobalBounds().height));
+	bgWork.setPosition(PHONE_POS_X + PHONE_WIDTH ,PHONE_POS_Y);
+	bgWork.setScale(0.6,0.6);
+	workPhoneText.setFont(*gm::Assets::getFont());
+	workPhoneText.setCharacterSize(15);
+	workPhoneText.setFillColor(sf::Color::Black);
+	workPhoneText.setStyle(sf::Text::Style::Regular);
+	workPhoneText.setString(L"Zadzwoñ do dzia³u IT.");
+	workPhoneText.setPosition(PHONE_POS_X + PHONE_WIDTH + 30 ,PHONE_POS_Y + 5);
+
+	bool displayWorkPhoneText;
+	sf::Sprite bgWork;
+	sf::Text workPhoneText;
+
 	thiefTex.loadFromFile("resources/textures/thief.png");
 	thief.setTexture(thiefTex);
 	thief.setPosition(799,90);
+
+	showDarkScreen = false;
+	darkScreen.setSize(sf::Vector2f(SCREEN_WIDTH,SCREEN_HEIGHT));
+	darkScreen.setFillColor(sf::Color(0,0,0,200));
+
+	showButtons = false;
 }
 
 Day_2::~Day_2()
@@ -58,6 +82,25 @@ Day_2::~Day_2()
 
 void Day_2::update(GameState *gs, sf::RenderWindow &win)
 {
+	if(showButtons)
+	{
+		if (state == 24)//Put mobile
+		{
+			gs->choice1->setPosition(SCREEN_WIDTH / 2 - (gs->choice1->background.getGlobalBounds().width * 1.5) - (gs->choice1->background.getGlobalBounds().width / 2) , SCREEN_HEIGHT / 2);
+			gs->choice2->setPosition(SCREEN_WIDTH / 2 + (gs->choice2->background.getGlobalBounds().width * 1.5) - (gs->choice2->background.getGlobalBounds().width / 2) , SCREEN_HEIGHT / 2);
+		}
+		else
+		{
+			gs->choice1->setPosition(gs->officeLady->chat.getPosition().x, gs->officeLady->chat.getPosition().y + gs->officeLady->chat.getGlobalBounds().height);
+			gs->choice2->setPosition(gs->choice1->background.getPosition().x + gs->choice1->background.getGlobalBounds().width, gs->choice1->background.getPosition().y);
+		}
+	}
+	else
+	{
+		gs->choice1->setPosition(0,-300);
+		gs->choice2->setPosition(0,-300);
+	}
+
 
 	if(!init)
 	{
@@ -334,9 +377,64 @@ void Day_2::update(GameState *gs, sf::RenderWindow &win)
 
 			//gs->data->returnToMenu = true;
 		}
-	case 21:
-		//game keeps going
+	case 21: //init friend
+		gs->officeLady->state = 0;
+		temp = L"Hej ";
+		temp = temp + gs->data->name + L"!!!";
+		gs->officeLady->text.setTextString(temp);
+		gs->officeLady->addToQueue(L"Dzwoni³a do mnie Krysia, twoja poprzedniczka. Odchodz¹c z pracy zapomnia³a zgraæ swoich zdjêæ z ministerialnego œledzika.");
+		gs->officeLady->addToQueue(L"Czy móg³byœ jej wys³aæ te zdjêcia? Has³o do jej konta to: krysia123");
+		gs->officeLady->addToQueue(L"Dziêki.");
+		gs->officeLady->addToQueue(L" ");
+		//„Ok ju¿ siê lecê siê wylogowaæ i zaraz sprawdzê konto Krysi
+		gs->officeLady->show();
+		state++;
 		break;
+	case 22:
+		//gs->officeLady->animate();
+		if(gs->officeLady->state == 4)
+		{
+			gs->officeLady->state = 0;
+			gs->officeLady->hide();
+		}
+		if(gs->officeLady->hidden)
+			state++;
+		break;
+	case 23: //choice init
+		gs->choice1->setText(L"Skontaktuj siê z dzia³em IT");
+		gs->choice2->setText(L"Zaloguj siê na konto Krysi");
+		showButtons = true;
+		state++;
+		break;
+	case 24: //choice
+		if(gs->choice1->clicked(win)) // it
+		{
+			showButtons = false;
+			state = 25;
+		}
+		if(gs->choice2->clicked(win)) //wyslij
+		{
+			showButtons = false;
+			state = 26;
+		}
+		break;
+	case 25:
+		if(gs->phone->clicked(win))
+			;//rozmowa z it
+		if(gs->phone->aimed(win))
+		{
+			displayWorkPhoneText = true;
+		}
+		else
+			displayWorkPhoneText = false;
+		break;
+	case 26://pc choice + init
+		gs->computer->open();
+		gs->openedcomputer->setState(OpenPC::USERS);
+		
+		break;
+
+
 
 
 	}
@@ -359,9 +457,21 @@ void Day_2::draw(GameState *gs, sf::RenderWindow &win)
 		win.draw(phoneText);
 	}
 
+	if(displayWorkPhoneText)
+	{
+		win.draw(bgWork);
+		win.draw(workPhoneText);
+	}
+
 	if(state == 17 || state == 18)
 		win.draw(thief);
-	
+
+	if(state == 24)
+	{
+		win.draw(darkScreen);
+		gs->choice1->draw(win);
+		gs->choice2->draw(win);
+	}
 
 	win.display();
 }

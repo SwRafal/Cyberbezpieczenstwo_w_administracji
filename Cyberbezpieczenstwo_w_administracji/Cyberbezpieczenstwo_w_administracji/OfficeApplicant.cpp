@@ -57,6 +57,7 @@ void OfficeApplicant::animate()
 {
 	if (appearing)
 	{
+		hidden = false;
 		if (this->getPosition().x > FINAL_POS_X)
 		{
 			this->move(-10, 0);
