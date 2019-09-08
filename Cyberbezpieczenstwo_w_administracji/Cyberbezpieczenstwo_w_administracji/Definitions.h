@@ -49,6 +49,9 @@
 #define TEXTURE_WATCH "resources/textures/watch.png"
 #define TEXTURE_PRIVATE_PHONE "resources/textures/smartfon1.png"
 #define TEXTURE_MOBILE_VIEW "resources/textures/mobile_view.png"
+#define TEXTURE_DOC "resources/textures/dokument.png"
+#define TEXTURE_OPEN_DOC "resources/textures/open_doc.png"
+
 
 #define ID_CARD_TEXTURE "resources/textures/karta.png"
 

@@ -195,6 +195,12 @@
     <ClCompile Include="CardReader.cpp">
       <Filter>Pliki źródłowe\GameStateItems</Filter>
     </ClCompile>
+    <ClCompile Include="Document.cpp">
+      <Filter>Pliki źródłowe\GameStateItems</Filter>
+    </ClCompile>
+    <ClCompile Include="OpenedDoc.cpp">
+      <Filter>Pliki źródłowe\GameStateItems</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\Assets.h">
@@ -375,6 +381,12 @@
       <Filter>Pliki nagłówkowe\GameStateItems</Filter>
     </ClInclude>
     <ClInclude Include="CardReader.h">
+      <Filter>Pliki nagłówkowe\GameStateItems</Filter>
+    </ClInclude>
+    <ClInclude Include="Document.h">
+      <Filter>Pliki nagłówkowe\GameStateItems</Filter>
+    </ClInclude>
+    <ClInclude Include="OpenedDoc.h">
       <Filter>Pliki nagłówkowe\GameStateItems</Filter>
     </ClInclude>
   </ItemGroup>

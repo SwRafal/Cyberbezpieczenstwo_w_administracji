@@ -280,7 +280,7 @@ void Day_0::draw(GameState* gs)
 		gs->calendar->draw(win);
 		gs->bell->draw(win);
 		gs->watch->draw(win);
-
+		gs->doc->draw(win);
 		
 		gs->book->draw(win);
 		gs->computer->draw(win);
@@ -311,7 +311,7 @@ void Day_0::draw(GameState* gs)
 		gs->calendar->draw(win);
 		gs->bell->draw(win);
 		gs->watch->draw(win);
-
+		gs->doc->draw(win);
 		
 		gs->book->draw(win);
 		gs->computer->draw(win);
@@ -342,7 +342,7 @@ void Day_0::draw(GameState* gs)
 		gs->calendar->draw(win);
 		gs->bell->draw(win);
 		gs->watch->draw(win);
-
+		gs->doc->draw(win);
 		
 		gs->coffee->draw(win);
 		gs->computer->draw(win);
@@ -369,7 +369,7 @@ void Day_0::draw(GameState* gs)
 		gs->calendar->draw(win);
 		gs->bell->draw(win);
 		gs->watch->draw(win);
-
+		gs->doc->draw(win);
 		
 		gs->book->draw(win);
 		
@@ -399,7 +399,7 @@ void Day_0::draw(GameState* gs)
 		gs->calendar->draw(win);
 		gs->bell->draw(win);
 		gs->watch->draw(win);
-
+		gs->doc->draw(win);
 		
 		gs->book->draw(win);
 		gs->computer->draw(win);
@@ -427,7 +427,7 @@ void Day_0::draw(GameState* gs)
 		gs->calendar->draw(win);
 		gs->bell->draw(win);
 		gs->watch->draw(win);
-
+		gs->doc->draw(win);
 		
 		gs->book->draw(win);
 		gs->computer->draw(win);
@@ -456,7 +456,7 @@ void Day_0::draw(GameState* gs)
 		gs->calendar->draw(win);
 		gs->bell->draw(win);
 		gs->watch->draw(win);
-
+		gs->doc->draw(win);
 		
 		gs->book->draw(win);
 		gs->computer->draw(win);
@@ -485,7 +485,7 @@ void Day_0::draw(GameState* gs)
 		gs->calendar->draw(win);
 		gs->bell->draw(win);
 		gs->watch->draw(win);
-
+		gs->doc->draw(win);
 		
 		gs->book->draw(win);
 		gs->computer->draw(win);
@@ -515,7 +515,7 @@ void Day_0::draw(GameState* gs)
 		//gs->calendar->draw(win);
 		gs->bell->draw(win);
 		gs->watch->draw(win);
-
+		gs->doc->draw(win);
 		
 		gs->book->draw(win);
 		gs->computer->draw(win);
@@ -545,7 +545,7 @@ void Day_0::draw(GameState* gs)
 		gs->calendar->draw(win);
 		gs->bell->draw(win);
 		gs->watch->draw(win);
-
+		gs->doc->draw(win);
 		
 		gs->book->draw(win);
 		gs->computer->draw(win);
@@ -576,7 +576,7 @@ void Day_0::draw(GameState* gs)
 		gs->calendar->draw(win);
 		gs->bell->draw(win);
 		gs->watch->draw(win);
-
+		//gs->doc->draw(win);
 		
 		gs->book->draw(win);
 		gs->computer->draw(win);
@@ -590,12 +590,12 @@ void Day_0::draw(GameState* gs)
 		gs->coffee->draw(win);
 
 		win.draw(background); //border
-
-		
-		//dokument
+		gs->doc->draw(win);
+		gs->open_doc->draw(win);
 		
 
 		gs->officeLady->draw(win);
+		gs->bin->draw(win);
 
 		win.display();
 		break;
@@ -609,7 +609,7 @@ void Day_0::draw(GameState* gs)
 		gs->calendar->draw(win);
 		gs->bell->draw(win);
 		gs->watch->draw(win);
-
+		gs->doc->draw(win);
 		
 		gs->book->draw(win);
 		gs->computer->draw(win);

@@ -14,6 +14,8 @@
 #include "Eyelids.h"
 #include "OfficeApplicant.h"
 #include "Mobile.h"
+#include "Document.h"
+#include "OpenedDoc.h"
 
 #define GAMELOST_INFO_TIME 5000
 
@@ -65,6 +67,8 @@ private:
 	Mobile *mobile = nullptr;
 	Card *card = nullptr;
 	CardReader *cardReader = nullptr;
+	Document *doc = nullptr;
+	OpenedDoc *open_doc = nullptr;
 
 	pc *computer = nullptr;
 	OpenPC *openedcomputer = nullptr;
@@ -80,6 +84,7 @@ private:
 	Bin *bin = nullptr;
 	sf::Sprite sushi;
 	sf::Sprite rj45;
+	
 
 	ChoiceButton *choice1,*choice2,*choice3,*choice4;
 

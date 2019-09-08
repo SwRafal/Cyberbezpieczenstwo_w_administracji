@@ -37,6 +37,10 @@ GameState::~GameState()
 	openedbook = nullptr;
 	delete officeApplicant;
 	officeApplicant = nullptr;
+	delete doc;
+	doc = nullptr;
+	delete open_doc;
+	open_doc = nullptr;
 
 	gm::Assets::EraseTexture("RJ45");
 	gm::Assets::EraseTexture("SUSHI");
@@ -53,6 +57,8 @@ GameState::~GameState()
 	gm::Assets::EraseTexture("PRIVATE_PHONE");
 	gm::Assets::EraseTexture("CALENDAR");
 	gm::Assets::EraseTexture("WALL");
+	gm::Assets::EraseTexture("DOC");
+	gm::Assets::EraseTexture("OPEN_DOC");
 }
 
 void GameState::init()
@@ -185,6 +191,24 @@ void GameState::init()
 		mobile = new Mobile(gm::Assets::getTexture("PRIVATE_PHONE"));
 	}
 
+	//DOCUMENT
+	gm::Assets::LoadTexture("DOC", TEXTURE_DOC);
+	if (gm::Assets::getTexture("DOC") == nullptr)
+		error_win_close();
+	else
+	{
+		doc = new Document(gm::Assets::getTexture("DOC"));
+	}
+
+	//OPENED DOCUMENT
+	gm::Assets::LoadTexture("OPEN_DOC", TEXTURE_OPEN_DOC);
+	if (gm::Assets::getTexture("OPEN_DOC") == nullptr)
+		error_win_close();
+	else
+	{
+		open_doc = new OpenedDoc(gm::Assets::getTexture("OPEN_DOC"), gm::Assets::getFont());
+	}
+
 	//pc
 	computer = new pc;
 	gm::Assets::LoadTexture("OPENEDCOMPUTER", TEXTURE_OPENEDCOMPUTER);
@@ -297,8 +321,6 @@ void GameState::init()
 
 void GameState::handleInput()
 {
-		
-
 		/*Events*/
 		gm::Core::resetEvent();
 		gm::Core::setEnteredChar(NULL);
@@ -550,6 +572,8 @@ void GameState::draw(sf::RenderWindow& win)
 	bell->draw(win);
 	watch->draw(win);
 	cardReader->draw(win);
+	doc->draw(win);
+	//open_doc->draw(win);
 
 	/*Items*/
 	win.draw(sushi);
@@ -579,8 +603,6 @@ void GameState::draw(sf::RenderWindow& win)
 		button_items.pop();
 	}
 
-	
-
 	bin->draw(win);
 	battery->draw(win);
 
@@ -590,7 +612,7 @@ void GameState::draw(sf::RenderWindow& win)
 		openedcomputer->draw(win);
 	if (mobile->pickedUp)
 		mobile->draw_view(win);
-	
+
 
 	//tutorial
 	officeLady->draw(win);
