@@ -131,6 +131,15 @@ OpenPC::OpenPC(sf::Texture *texture, sf::Font *font) //: content(*gm::Assets::ge
 	communique->setTextColor(sf::Color::White);
 	communique->setPosition(sf::Vector2f(PC_OPENED_POS_X + PC_OPENED_WIDTH / 4, PC_OPENED_POS_Y + PC_OPENED_HEIGHT / 4));
 
+	gm::Assets::LoadTexture("desktop krysia", KRYSIA_DESKTOP_FILES);
+	krysia_folders.setTexture(*gm::Assets::getTexture("desktop krysia"));
+	krysia_folders.setPosition(PC_OPENED_POS_X + PC_OPENED_WIDTH / 2 - krysia_folders.getGlobalBounds().width / 2,PC_OPENED_POS_Y + PC_OPENED_HEIGHT / 2 - krysia_folders.getGlobalBounds().height / 2);
+
+	exitButtonActive = true;
+
+	showExcessUsers = false;
+	krysiaPasswordKnown = false;
+
 }
 OpenPC::~OpenPC()
 {
@@ -210,6 +219,10 @@ void OpenPC::draw(sf::RenderWindow &win)
 		break;
 	case MAIL:
 		email.draw(win);
+		break;
+	case DESKTOP_KRYSIA:
+		win.draw(krysia_folders);
+		break;
 	default:
 		break;
 	}
@@ -237,14 +250,26 @@ void OpenPC::setMailButtonInactive()
 	email.setMailButtonInactive();
 }
 
+void OpenPC::setExitButtonActive()
+{
+	exitButtonActive = true;
+}
+
+void OpenPC::setExitButtonInactive()
+{
+	exitButtonActive = false;
+}
+
 
 
 
 bool OpenPC::update(sf::RenderWindow &win)
 {
 	if (exit->clicked(win))
-		return true;
-
+	{	
+		if(exitButtonActive)
+			return true;
+	}
 	switch (state)
 	{
 	case USERS:
@@ -257,13 +282,31 @@ bool OpenPC::update(sf::RenderWindow &win)
 		}
 		else if (user_krysia->clicked(win))
 		{
-			info->changeText(L"Nie znam has³a do tego konta...");
-			info->setBubblePosition(400, 100);
-			info->showBubble();
-			info_time = gm::Core::getClock().getElapsedTime().asMilliseconds() + INFO_DELAY;
+			if(krysiaPasswordKnown)
+			{
+				state = DESKTOP_KRYSIA;
+			}
+			else
+			{
+				info->changeText(L"Nie znam has³a do tego konta...");
+				info->setBubblePosition(400, 100);
+				info->showBubble();
+				info_time = gm::Core::getClock().getElapsedTime().asMilliseconds() + INFO_DELAY;	
+			}
+			
 		}
 		else if (user_player->clicked(win))
-			setState(DESKTOP);
+		{
+			if(krysiaPasswordKnown)
+			{
+				info->changeText(L"Hmm, mia³em zalogowaæ siê na konto Krysi...");
+				info->setBubblePosition(400, 100);
+				info->showBubble();
+				info_time = gm::Core::getClock().getElapsedTime().asMilliseconds() + INFO_DELAY;
+			}
+			else
+				setState(DESKTOP);
+		}
 		break;
 	case DESKTOP:
 		if (wifis->clicked(win) && !internet_works)
@@ -313,6 +356,8 @@ bool OpenPC::update(sf::RenderWindow &win)
 				setState(DESKTOP);
 			}
 		}
+		break;
+	case DESKTOP_KRYSIA:
 		break;
 	default:
 		break;

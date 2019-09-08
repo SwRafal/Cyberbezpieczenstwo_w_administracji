@@ -9,21 +9,21 @@
 class Day_2 : public Day
 {
 public:
-	textBubble *thought = nullptr;
-	sf::Int32 thought_time;
-
-	int offset;
-
-	int time;
-
 	int state;
 
 	bool init;
 	bool initDelay;
+	bool showButtons;
+	
 
+	//quests / info
 	bool coffeeClicked;
 	bool bookOpened;
+	bool photosSent;
 
+	//other variables
+	int offset;
+	int time;
 
 	//phone text
 	bool displayPhoneText;
@@ -34,24 +34,27 @@ public:
 	sf::Sprite bgWork;
 	sf::Text workPhoneText;
 
-
 	//thief
 	sf::Sprite thief;
 	sf::Texture thiefTex;
-
 
 	//dark screen
 	sf::RectangleShape darkScreen;
 	bool showDarkScreen;
 
-	OfficeApplicant *itGuy;
-
-	OfficeApplicant *boss;
+	//info - blank text
+	sf::Text blankInfo;
+	bool showInfo;
 
 	//used for text with character name;
 	sf::String temp;
 
-	bool showButtons;
+	//characters
+	OfficeApplicant *itGuy;
+	OfficeApplicant *boss;
+
+	textBubble *thought = nullptr;
+	sf::Int32 thought_time;
 
 	Day_2();
 	~Day_2();

@@ -100,6 +100,10 @@
 #define CARD_READER_CARD_OUT "resources/textures/readerOut.png"
 #define CARD_READER_LIGHT "resources/textures/dioda.png"
 
+
+/* computer graphics */
+#define KRYSIA_DESKTOP_FILES "resources/textures/krysia desktop.png"
+
 /* intro state */
 
 #define INTRO_TEXT_1 "resources/text/intro/1.txt"

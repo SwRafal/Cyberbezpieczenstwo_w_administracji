@@ -59,7 +59,9 @@ public:
 		SET_PASSWORD,
 		LOGIN_WIFI,
 		OUTLOOK,
-		MAIL
+		MAIL,
+		LOGIN,
+		DESKTOP_KRYSIA
 	};
 
 	bool internet_works = false;
@@ -70,6 +72,9 @@ public:
 	void newMail(sf::String title,sf::String sender,sf::String content);
 	void setMailButtonActive();
 	void setMailButtonInactive();
+
+	void setExitButtonActive();
+	void setExitButtonInactive();
 	
 
 private:
@@ -96,7 +101,7 @@ private:
 	
 	gm::TextButton *ok = nullptr;
 
-	
+	bool exitButtonActive;
 
 	//frame
 
@@ -107,6 +112,10 @@ private:
 
 	textBubble *info = nullptr;
 	sf::Int32 info_time;
+
+	//krysia desktop
+	sf::Sprite krysia_folders;
+	
 public:
 	virtual void draw(sf::RenderTarget &target, sf::RenderStates states) = delete;
 	OpenPC(sf::Texture *texture, sf::Font *font);
@@ -122,4 +131,9 @@ public:
 	void setPassword(sf::String password);
 	sf::String getLogin() { return login->getTextString(); }
 	sf::String getPassword() { return password->getTextString(); }
+
+
+	//bools
+	bool krysiaPasswordKnown;
+	bool showExcessUsers;
 };

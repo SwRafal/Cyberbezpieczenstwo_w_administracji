@@ -72,6 +72,18 @@ Day_2::Day_2()
 	darkScreen.setFillColor(sf::Color(0,0,0,200));
 
 	showButtons = false;
+
+
+	blankInfo.setFont(*gm::Assets::getFont());
+	blankInfo.setCharacterSize(30);
+	blankInfo.setFillColor(sf::Color::Green);
+	blankInfo.setString(L"Wys³ano");
+	blankInfo.setPosition(SCREEN_WIDTH / 2 - blankInfo.getGlobalBounds().width / 2, SCREEN_HEIGHT * 0.35);
+
+	showInfo = false;
+
+	//info /quests
+	photosSent = false;
 }
 
 Day_2::~Day_2()
@@ -86,13 +98,20 @@ void Day_2::update(GameState *gs, sf::RenderWindow &win)
 	{
 		if (state == 24)//Put mobile
 		{
-			gs->choice1->setPosition(SCREEN_WIDTH / 2 - (gs->choice1->background.getGlobalBounds().width * 1.5) - (gs->choice1->background.getGlobalBounds().width / 2) , SCREEN_HEIGHT / 2);
-			gs->choice2->setPosition(SCREEN_WIDTH / 2 + (gs->choice2->background.getGlobalBounds().width * 1.5) - (gs->choice2->background.getGlobalBounds().width / 2) , SCREEN_HEIGHT / 2);
+			gs->choice1->setPosition(SCREEN_WIDTH / 2 - (gs->choice1->background.getGlobalBounds().width) - (gs->choice1->background.getGlobalBounds().width / 2) , SCREEN_HEIGHT / 2);
+			gs->choice2->setPosition(SCREEN_WIDTH / 2 + (gs->choice2->background.getGlobalBounds().width) - (gs->choice2->background.getGlobalBounds().width / 2) , SCREEN_HEIGHT / 2);
 		}
-		else
+		else if(state == 27)
 		{
-			gs->choice1->setPosition(gs->officeLady->chat.getPosition().x, gs->officeLady->chat.getPosition().y + gs->officeLady->chat.getGlobalBounds().height);
-			gs->choice2->setPosition(gs->choice1->background.getPosition().x + gs->choice1->background.getGlobalBounds().width, gs->choice1->background.getPosition().y);
+			gs->choice1->setText(L"Wyœlij zdjêcia do Krysi.");
+			gs->choice2->setText(L"Wyloguj siê i wróæ na swoje konto.");
+			gs->choice1->setPosition(SCREEN_WIDTH / 2 - (gs->choice1->background.getGlobalBounds().width) - (gs->choice1->background.getGlobalBounds().width / 2) - 30,PC_OPENED_POS_Y + PC_OPENED_HEIGHT * 0.7);
+			gs->choice2->setPosition(SCREEN_WIDTH / 2 + (gs->choice2->background.getGlobalBounds().width) - (gs->choice2->background.getGlobalBounds().width / 2) - 30,PC_OPENED_POS_Y + PC_OPENED_HEIGHT * 0.7);
+		}
+		else if(state == 28)
+		{
+			gs->choice2->setText(L"Wyloguj siê i wróæ na swoje konto.");
+			gs->choice2->setPosition(SCREEN_WIDTH / 2 - gs->choice2->background.getGlobalBounds().width / 2 - 30,PC_OPENED_POS_Y + PC_OPENED_HEIGHT * 0.7);
 		}
 	}
 	else
@@ -429,13 +448,53 @@ void Day_2::update(GameState *gs, sf::RenderWindow &win)
 			displayWorkPhoneText = false;
 		break;
 	case 26://pc choice + init
+		if(gs->openedcomputer->getState() == OpenPC::DESKTOP_KRYSIA)
+		{
+			state++;
+			break;
+		}
+		gs->openedcomputer->krysiaPasswordKnown = true;
 		gs->computer->open();
 		gs->openedcomputer->setState(OpenPC::USERS);
 		
 		break;
+	case 27: //buttons
+		showButtons = true;
+		gs->openedcomputer->setExitButtonInactive();
 
+		if(gs->choice1->clicked(win)) //wyslij
+		{
+			photosSent = true;
+			showInfo = true;
+			thought_time = gm::Core::getClock().getElapsedTime().asMilliseconds() + THOUGHT_TIME;
+			gs->choice1->setPosition(0,-300);
+			state++;
+		}
 
+		if(gs->choice2->clicked(win)) //wyloguj
+		{
+			showButtons = false;
+			gs->computer->close();
+			state = 29;
+		}
+		
+		break;
+	case 28:
+		if(gm::Core::getClock().getElapsedTime().asMilliseconds() > thought_time)
+			showInfo = false;
 
+		if(gs->choice2->clicked(win))
+		{
+			gs->computer->close();
+			showButtons = false;
+			state++;
+		}
+			
+		break;
+	case 29:
+		gs->openedcomputer->setExitButtonActive();
+		gs->openedcomputer->krysiaPasswordKnown = false;
+		break;
 
 	}
 
@@ -472,6 +531,16 @@ void Day_2::draw(GameState *gs, sf::RenderWindow &win)
 		gs->choice1->draw(win);
 		gs->choice2->draw(win);
 	}
+	if(state == 27 || state == 28)
+	{
+		gs->choice1->draw(win);
+		gs->choice2->draw(win);
+	}
+
+
+
+	if(showInfo)
+		win.draw(blankInfo);
 
 	win.display();
 }
