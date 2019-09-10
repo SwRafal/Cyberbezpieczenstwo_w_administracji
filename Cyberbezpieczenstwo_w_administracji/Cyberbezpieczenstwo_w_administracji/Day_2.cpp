@@ -84,6 +84,14 @@ Day_2::Day_2()
 
 	//info /quests
 	photosSent = false;
+
+	//pendrive
+	gm::Assets::LoadTexture("pendrive", TEXTURE_PENDRIVE);
+	pendrive.setTexture(*gm::Assets::getTexture("pendrive"));
+	pendrive.setScale(0.6,0.6);
+
+	gm::Assets::LoadTexture("office friend hand", TEXTURE_OFFICE_FRIEND_HAND);
+
 }
 
 Day_2::~Day_2()
@@ -112,6 +120,13 @@ void Day_2::update(GameState *gs, sf::RenderWindow &win)
 		{
 			gs->choice2->setText(L"Wyloguj siê i wróæ na swoje konto.");
 			gs->choice2->setPosition(SCREEN_WIDTH / 2 - gs->choice2->background.getGlobalBounds().width / 2 - 30,PC_OPENED_POS_Y + PC_OPENED_HEIGHT * 0.7);
+		}
+		else if(state == 33)
+		{
+			gs->choice1->setText(L"SprawdŸ");
+			gs->choice2->setText(L"Od³ó¿ na biurko");
+			gs->choice1->setPosition(SCREEN_WIDTH / 2 - (gs->choice1->background.getGlobalBounds().width) - (gs->choice1->background.getGlobalBounds().width / 2) , SCREEN_HEIGHT / 2);
+			gs->choice2->setPosition(SCREEN_WIDTH / 2 + (gs->choice2->background.getGlobalBounds().width) - (gs->choice2->background.getGlobalBounds().width / 2) , SCREEN_HEIGHT / 2);
 		}
 	}
 	else
@@ -439,7 +454,17 @@ void Day_2::update(GameState *gs, sf::RenderWindow &win)
 		break;
 	case 25:
 		if(gs->phone->clicked(win))
-			;//rozmowa z it
+		{
+			while(!gs->phone->text_queue.empty())
+				gs->phone->text_queue.pop();
+			//player Czeœæ, dzwoni³a do mnie kole¿anka by³ej pracownicy Krysi, chcia³a uzyskaæ dostêp do jej konta. Czy konta by³ych pracowników powinny byæ ci¹gle aktywne i dostêpne?
+			gs->phone->text.setTextString(L"„Masz racje – nie powinny. Nasz b³¹d. Powinniœmy zabezpieczyæ te konta i znajduj¹ce siê na nich dane");
+			gs->phone->addToQueue(L" Do jutra zostanie to naprawione. Skontaktujemy siê te¿ z Krysi¹.");
+			//player Dzia³ IT nie pracuje tu najsprawniej. Ciekawe czy przeprowadzaj¹ regularne audyty i testy bezpieczeñstwa… W koñcu to ich obowi¹zek…” 
+			gs->openedcomputer->showExcessUsers = false;
+			state = 30;
+			break;
+		}
 		if(gs->phone->aimed(win))
 		{
 			displayWorkPhoneText = true;
@@ -494,8 +519,64 @@ void Day_2::update(GameState *gs, sf::RenderWindow &win)
 	case 29:
 		gs->openedcomputer->setExitButtonActive();
 		gs->openedcomputer->krysiaPasswordKnown = false;
+		//kolejny quest
 		break;
+	case 30:
+		displayWorkPhoneText = false;
+		gs->phone->showText = true;
+		gs->phone->pickedUp = true;
+		state++;
+		break;
+	case 31:
+		gs->phone->update(win);
+		if(!gs->phone->pickedUp)
+		{
+			delete gs->officeLady;
+			gs->officeLady = new OfficeApplicant(gm::Assets::getTexture("office friend hand"));
+			gs->officeLady->move(0,8);
+			gs->officeLady->moveChatBox(0,8);
+			gs->officeLady->state = 0;
+			gs->officeLady->text.setTextString(L"Janek z pokoju 102 znalaz³ dziœ pod drzwiami gabinetu tego pendrive'a.");
+			gs->officeLady->addToQueue(L"Na pewno wypad³ jego koledze z pokoju, który wczoraj wyjecha³ na urlop.");
+			gs->officeLady->addToQueue(L"Bartek sprawdza³, ale u niego na komputerze nic siê nie otwiera, u mnie i u Joli te¿ nie.");
+			gs->officeLady->addToQueue(L"Nie chcemy zawracaæ g³owy ch³opakom z IT.");
+			gs->officeLady->addToQueue(L"SprawdŸ proszê co na tym jest, bo mo¿e to byæ coœ istotnego. Dziêki. ");
+			gs->officeLady->addToQueue(L" ");
+			gs->officeLady->show();
+			state++;
+		}
+		break;
+	case 32:
+		gs->officeLady->animate();
 
+		pendrive.setPosition(gs->officeLady->getPosition().x + 25,gs->officeLady->getPosition().y + 280);
+		if(gs->officeLady->state == 5)
+		{ //choice
+			gs->choice1->setText(L"SprawdŸ");
+			gs->choice2->setText(L"Od³ó¿ na biurko");
+			showButtons = true;
+			state++;
+		}
+		break;
+	case 33:
+		gs->officeLady->animate();
+		if(gs->choice1->clicked(win))
+		{
+			showButtons = false;
+			//przegrana
+		}
+		if(gs->choice2->clicked(win))
+		{
+			showButtons = false;
+			pendrive.setPosition(650,620);
+			gs->officeLady->hide();
+			//inicjacja maila
+			state++;
+		}
+		break;
+	case 34:
+		gs->officeLady->hide();
+		break;
 	}
 
 	
@@ -525,7 +606,10 @@ void Day_2::draw(GameState *gs, sf::RenderWindow &win)
 	if(state == 17 || state == 18)
 		win.draw(thief);
 
-	if(state == 24)
+	if(state > 31)
+		win.draw(pendrive);
+
+	if(state == 24 || state == 33)
 	{
 		win.draw(darkScreen);
 		gs->choice1->draw(win);

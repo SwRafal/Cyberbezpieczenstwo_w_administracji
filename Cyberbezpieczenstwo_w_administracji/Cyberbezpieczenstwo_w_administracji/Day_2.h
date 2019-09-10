@@ -53,6 +53,9 @@ public:
 	OfficeApplicant *itGuy;
 	OfficeApplicant *boss;
 
+	//pendrive
+	sf::Sprite pendrive;
+
 	textBubble *thought = nullptr;
 	sf::Int32 thought_time;
 

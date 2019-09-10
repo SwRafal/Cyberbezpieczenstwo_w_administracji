@@ -39,6 +39,7 @@
 /* osoby */
 
 #define IT_GUY_HAND_TEXTURE "resources/textures/itGuyHand.png"
+#define TEXTURE_OFFICE_FRIEND_HAND "resources/textures/friend2.png"
 
 
 /* Game Textures*/
@@ -99,6 +100,8 @@
 #define CARD_READER_CARD_IN "resources/textures/readerIn.png"
 #define CARD_READER_CARD_OUT "resources/textures/readerOut.png"
 #define CARD_READER_LIGHT "resources/textures/dioda.png"
+
+#define TEXTURE_PENDRIVE "resources/textures/pendrive.png"
 
 
 /* computer graphics */
