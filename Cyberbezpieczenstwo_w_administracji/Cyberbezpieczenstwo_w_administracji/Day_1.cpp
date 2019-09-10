@@ -51,6 +51,8 @@ Day_1::~Day_1()
 
 void Day_1::update(GameState *gs, sf::RenderWindow &win)
 {
+	thought->animate();
+
 	if(showButtons)
 	{
 		if (state == 10)//Put mobile
@@ -60,8 +62,16 @@ void Day_1::update(GameState *gs, sf::RenderWindow &win)
 		}
 		else if (state == 16)//Refuse wifi
 		{
-			gs->choice1->setPosition(MOBILE_POS_X - 300, MOBILE_POS_Y - 80);
-			gs->choice2->setPosition(MOBILE_POS_X - 150, MOBILE_POS_Y - 80);
+			if (gs->computer->isOpened())
+			{
+				gs->choice1->setPosition(MOBILE_POS_X - 300, MOBILE_POS_Y - 80);
+				gs->choice2->setPosition(MOBILE_POS_X - 150, MOBILE_POS_Y - 80);
+			}
+			else
+			{
+				gs->choice1->setPosition(-300, 0);
+				gs->choice2->setPosition(-300, 0);
+			}
 		}
 		else
 		{
@@ -222,7 +232,6 @@ void Day_1::update(GameState *gs, sf::RenderWindow &win)
 			break;
 		case 5://Finish thought
 
-			thought->animate();
 			if (thought_time < gm::Core::getClock().getElapsedTime().asMilliseconds())
 			{
 				thought->closeBubble();
@@ -233,7 +242,6 @@ void Day_1::update(GameState *gs, sf::RenderWindow &win)
 			break;
 		case 6://Choose user
 
-			thought->animate();
 			if (!thought->appearing && !thought->disappearing)
 				thought->setBubblePosition(0, -300);
 
@@ -255,6 +263,9 @@ void Day_1::update(GameState *gs, sf::RenderWindow &win)
 
 			break;
 		case 8://Finish dialog
+
+			if(gs->officeApplicant->state == 6)
+				gs->sushi.setPosition(830, 400);
 
 			if (gs->officeApplicant->state >= 7)
 			{
@@ -352,7 +363,6 @@ void Day_1::update(GameState *gs, sf::RenderWindow &win)
 		case 12://Remember password
 
 			gs->computer->open();
-			thought->animate();
 			if (thought_time < gm::Core::getClock().getElapsedTime().asMilliseconds())
 			{
 				thought->closeBubble();
@@ -429,7 +439,6 @@ void Day_1::update(GameState *gs, sf::RenderWindow &win)
 			break;
 		case 14://Login wifi
 
-			thought->animate();
 			if (thought_time < gm::Core::getClock().getElapsedTime().asMilliseconds())
 			{
 				thought->closeBubble();
@@ -455,7 +464,6 @@ void Day_1::update(GameState *gs, sf::RenderWindow &win)
 			break;
 		case 15://Choose wifi
 
-			thought->animate();
 			if (thought_time < gm::Core::getClock().getElapsedTime().asMilliseconds())
 			{
 				thought->closeBubble();
@@ -488,7 +496,6 @@ void Day_1::update(GameState *gs, sf::RenderWindow &win)
 			break;
 		case 16://Refuse wifi
 
-			thought->animate();
 			if (thought_time < gm::Core::getClock().getElapsedTime().asMilliseconds())
 			{
 				thought->closeBubble();

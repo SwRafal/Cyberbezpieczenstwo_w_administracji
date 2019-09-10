@@ -577,7 +577,7 @@ void GameState::draw(sf::RenderWindow& win)
 
 	/*Items*/
 	win.draw(sushi);
-	win.draw(rj45);
+	
 	std::priority_queue<gm::Button*, std::vector<gm::Button*>, ItemsComparator> button_items;
 	button_items.push(book);
 	button_items.push(coffee);
@@ -593,7 +593,6 @@ void GameState::draw(sf::RenderWindow& win)
 
 	computer->draw(win);
 	phone->draw(win);
-	
 	
 
 	/*Drawing*/
@@ -626,6 +625,8 @@ void GameState::draw(sf::RenderWindow& win)
 	{
 		choice1->draw(win);
 		choice2->draw(win);
+
+		win.draw(rj45);
 	}
 
 

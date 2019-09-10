@@ -201,6 +201,9 @@
     <ClCompile Include="OpenedDoc.cpp">
       <Filter>Pliki źródłowe\GameStateItems</Filter>
     </ClCompile>
+    <ClCompile Include="Day_3.cpp">
+      <Filter>Pliki źródłowe\Days</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\Assets.h">

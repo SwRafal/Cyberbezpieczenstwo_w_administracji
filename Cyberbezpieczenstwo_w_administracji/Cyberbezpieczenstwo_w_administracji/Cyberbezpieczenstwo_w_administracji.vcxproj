@@ -151,6 +151,7 @@
     <ClCompile Include="dayx.cpp" />
     <ClCompile Include="Day_0.cpp" />
     <ClCompile Include="Day_1.cpp" />
+    <ClCompile Include="Day_3.cpp" />
     <ClCompile Include="Document.cpp" />
     <ClCompile Include="email.cpp" />
     <ClCompile Include="Engine\Assets.cpp" />
