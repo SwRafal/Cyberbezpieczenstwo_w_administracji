@@ -17,6 +17,7 @@ public:
 	OfficeApplicant *ITguy = nullptr;
 
 	//Quest1
+	bool coffee_clicked = false;
 	bool open_book = false;
 	bool close_book = false;
 	bool finish_thought = false;

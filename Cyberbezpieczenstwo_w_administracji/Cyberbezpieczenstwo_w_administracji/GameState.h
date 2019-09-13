@@ -99,6 +99,7 @@ private:
 	Day_0 *day0 = nullptr;
 	Day_1 *day1 = nullptr;/*!!!to musi byc wskaznik jezeli wzajemnie klasy sie includuja!!!*/
 	Day_2 *day2 = nullptr;
+	Day_3 *day3 = nullptr;
 
 public:
 	GameState(gm::gameDataRef data);
@@ -113,4 +114,5 @@ public:
 	friend class Day_0;
 	friend class Day_1;
 	friend class Day_2;
+	friend class Day_3;
 };
