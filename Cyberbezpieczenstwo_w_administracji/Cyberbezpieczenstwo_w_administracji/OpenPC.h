@@ -61,7 +61,8 @@ public:
 		OUTLOOK,
 		MAIL,
 		LOGIN,
-		DESKTOP_KRYSIA
+		DESKTOP_KRYSIA,
+		INFO_DISPLAY
 	};
 
 	bool internet_works = false;
@@ -115,6 +116,9 @@ private:
 
 	//krysia desktop
 	sf::Sprite krysia_folders;
+
+	//info
+	sf::Sprite info_display;
 	
 public:
 	virtual void draw(sf::RenderTarget &target, sf::RenderStates states) = delete;
