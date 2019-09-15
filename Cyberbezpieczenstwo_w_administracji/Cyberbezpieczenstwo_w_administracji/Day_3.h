@@ -5,6 +5,9 @@
 
 class Day_3 : public Day
 {
+private:
+	const float offset = 13;
+
 public:
 	int state;
 	bool init;
@@ -15,6 +18,7 @@ public:
 	sf::Int32 thought_time;
 
 	OfficeApplicant *ITguy = nullptr;
+	OfficeApplicant *boss = nullptr;
 
 	//Quest1
 	bool coffee_clicked = false;

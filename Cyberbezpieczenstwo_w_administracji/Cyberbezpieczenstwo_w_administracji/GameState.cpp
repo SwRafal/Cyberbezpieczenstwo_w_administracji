@@ -556,6 +556,23 @@ void GameState::update(sf::RenderWindow &win)
 
 		day2->update(this,win);
 	}
+	else if (day == 3)
+	{
+		if (book->isOpened())
+		{
+			if (openedbook->update(win))
+				book->close();
+		}
+		if (computer->isOpened())
+		{
+			if (openedcomputer->update(win))
+				computer->close();
+
+			openedcomputer->getLogin() = data->login;
+			openedcomputer->getPassword() = data->password;
+		}
+		day3->update(this, win);
+	}
 	else//W inne dni
 	{
 		if (book->isOpened())

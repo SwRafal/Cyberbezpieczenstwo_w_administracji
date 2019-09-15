@@ -11,17 +11,37 @@ Day_3::Day_3()
 	thought->changeText(L"W koñcu usunêli konta starych u¿ytkowników...");
 	thought->setBubblePosition(0, -300);
 
+	if (gm::Assets::getTexture("boss") == nullptr)
+	{
+		gm::Assets::LoadTexture("boss", TEXTURE_BELL);
+
+		if (gm::Assets::getTexture("boss") == nullptr)
+			error_win_close();
+	}
+	boss = new OfficeApplicant(gm::Assets::getTexture("boss"));
+
+	boss->text.setTextString(L"Chyba nie chcecie podzieliæ losu Anieli. Dokumenty w wersji papierowej to pieœñ przesz³oœci.");
+	boss->addToQueue(L"Skoro nie potraficie ich upilnowaæ to zeskanuj to i przeœlij do e-repozytorium.");
+	boss->addToQueue(L"Po wszystkim teczki wracaj¹ do archiwum w piwnicy tam bêd¹ bezpieczne.");
+	boss->addToQueue(L"By³bym zapomnia³. Oto twoje urz¹dzenie wielofunkcyjne.");
+	boss->addToQueue(L"Drukarka, Skaner i Xero w jednym. Jest nawet port USB. Nowiutka maszyna za pieni¹dze z Unii.");
+	boss->addToQueue(L"Sam bym chcia³ tak¹ w gabinecie. Daj z siebie wszystko, chcemy chyba wygraæ ten konkurs?");
+	boss->addToQueue("EOT");
+	boss->move(0, offset);
 }
 
 Day_3::~Day_3()
 {
 	delete thought;
 	thought = nullptr;
+	delete boss;
+	boss = nullptr;
 }
 
 void Day_3::update(GameState *gs, sf::RenderWindow &win)
 {
 	thought->animate();
+	boss->animate();
 
 	if (showButtons)
 	{
@@ -55,7 +75,6 @@ void Day_3::update(GameState *gs, sf::RenderWindow &win)
 		gs->choice2->setPosition(0, -300);
 	}
 
-
 	if (!init)
 	{
 		gs->computer->update(win);
@@ -67,14 +86,10 @@ void Day_3::update(GameState *gs, sf::RenderWindow &win)
 		gs->officeApplicant->addToQueue(L"Petent: Wiesz co siê sta³o?");
 		gs->officeApplicant->addToQueue(L"Ja: Nie mogê Ci tego powiedzieæ.");
 		gs->officeApplicant->addToQueue(L"Petent: Có¿, witaj w naszym zespole. Masz, to dla Ciebie.");
-
-		gs->openedbook->setInfoL(L"1. Zabezpiecz dane logowania");
-		gs->openedbook->setInfoR("");
-
 		gs->officeApplicant->addToQueue(L"EOT");//Dodatkowa linijka potrzebna
 
-		ITguy->text.setTextString(L"Tym Ciê pod³¹czymy do sieci.");
-		ITguy->addToQueue(L"EOT");//Dodatkowa linijka potrzebna
+		gs->openedbook->setInfoL(L"1. Zabezpiecz dane logowania");
+		gs->openedbook->setInfoR("");		
 
 		gs->choice1->setText(L"zapisz has³o");
 		gs->choice2->setText(L"nie zapisuj");
@@ -190,21 +205,36 @@ void Day_3::update(GameState *gs, sf::RenderWindow &win)
 				thought->setBubblePosition(0, -300);
 
 
-			if (gs->officeApplicant->state >= 3)
+			if (gs->officeLady->state >= 3)
 			{
 				gs->officeLady->hide();
 				finish_dialog = true;
 				state++;
+
+				boss->show();
 			}
 
 			break;
 		case 5://Finish boss dialog
 
+			if (boss->state >= 6)
+			{
+				boss->hide();
+				finish_boss_dialog = true;
+				state++;
 
+				gs->openedcomputer->communique->setTextString(L"AWARIA FILTRÓW EMAIL. ZALECANA OSTRO¯NOŒÆ");
+				gs->openedcomputer->show_communique = true;
+				gs->computer->open();
+			}
 
 			break;
 		case 6://Uncover xero
 
+			if (!gs->computer->isOpened())
+			{
+				//xero->update();
+			}
 
 
 			break;
@@ -316,11 +346,13 @@ void Day_3::update(GameState *gs, sf::RenderWindow &win)
 
 		}
 	}
+	std::cout << "end\n";
 }
 
 void Day_3::draw(GameState *gs, sf::RenderWindow &win)
 {
-	
+	thought->draw(win);
+	boss->draw(win);
 
 	win.display();
 }
