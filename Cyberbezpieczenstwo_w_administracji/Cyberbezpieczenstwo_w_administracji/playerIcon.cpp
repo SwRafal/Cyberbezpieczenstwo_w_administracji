@@ -24,17 +24,18 @@ PlayerIcon::PlayerIcon(int character) : text(*gm::Assets::getFont())
 		break;
 	}
 
-	icon.setScale(0.45,0.45);
+	icon.setScale(0.35,0.35);
+	icon.setPosition(POS_X,POS_Y);
 
 	gm::Assets::LoadTexture("playerChat", PLAYER_CHAT_BUBBLE);
 	chat.setTexture(*gm::Assets::getTexture("playerChat"));
-	chat.setPosition(FINAL_POS_X + icon.getGlobalBounds().width + 10,POS_Y);
+	chat.setPosition(FINAL_POS_X - 25 + icon.getGlobalBounds().width,POS_Y);
 
 	text.setTextSize(20);
 	text.setTextColor(sf::Color::Black);
-	text.setFillColor(sf::Color(255,0,0,100));
-	text.setPosition(FINAL_POS_X + chat.getPosition().x + 40, POS_Y + 12);
-	text.setSize(chat.getGlobalBounds().width * 0.9, chat.getGlobalBounds().height * 0.97);
+	text.setFillColor(sf::Color::Transparent);
+	text.setPosition(FINAL_POS_X + chat.getPosition().x + 22, POS_Y + 3);
+	text.setSize(chat.getGlobalBounds().width * 0.87, chat.getGlobalBounds().height * 0.95);
 
 
 }

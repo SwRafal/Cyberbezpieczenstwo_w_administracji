@@ -2,7 +2,7 @@
 #include <thread>
 #include "MenuState.h"
 
-GameState::GameState(gm::gameDataRef data) : data(data)
+GameState::GameState(gm::gameDataRef data) : data(data),playerIco(data->characterChoice)
 {
 
 }
@@ -320,6 +320,8 @@ void GameState::init()
 	day1 = new Day_1;
 	day2 = new Day_2;
 	day3 = new Day_3;
+
+	
 }
 
 void GameState::handleInput()
@@ -369,6 +371,7 @@ void GameState::handleInput()
 
 void GameState::update(sf::RenderWindow &win)
 {
+	playerIco.animate();
 	
 	calendar->update(win);
 	watch->update(gm::Core::getClock());
@@ -682,7 +685,8 @@ void GameState::draw(sf::RenderWindow& win)
 		win.draw(*gamelost_info);
 	if (naganiony)
 		win.draw(*nagana_info);
-	
+
+	playerIco.draw(win);
 	
 	if (day0->part1Over && day == 0)
 		day0->draw(this);

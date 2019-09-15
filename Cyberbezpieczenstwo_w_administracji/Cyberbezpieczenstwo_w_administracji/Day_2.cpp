@@ -178,9 +178,7 @@ void Day_2::update(GameState *gs, sf::RenderWindow &win)
 
 		boss->move(0,11);
 
-		s = gs->data->name +L": co siê sta³o?";
-		gs->officeLady->text.setTextString(s);
-		gs->officeLady->addToQueue(L"Kole¿anka : Dosta³am naganê za zapisywanie hase³ na kartkach. Jeszcze jedna wtopa i wylatujê.");
+		gs->officeLady->text.setTextString(L"Dosta³am naganê za zapisywanie hase³ na kartkach. Jeszcze jedna wtopa i wylatujê.");
 		gs->officeLady->addToQueue(L" ");
 		gs->officeLady->state = 0;
 
@@ -193,8 +191,8 @@ void Day_2::update(GameState *gs, sf::RenderWindow &win)
 	if(!initDelay)
 	{
 		//tutaj !!!!
-		state = 31;
-		initDelay = true;
+		/*state = 31;
+		initDelay = true;*/
 		//tutaj wyjebac
 		if(gm::Core::getClock().getElapsedTime().asSeconds() - time >= 5)
 		{
@@ -273,15 +271,21 @@ void Day_2::update(GameState *gs, sf::RenderWindow &win)
 
 		if(boss->getPosition().x == 1390)
 		{
+			gs->playerIco.text.setTextString(L"co siê sta³o?");
+			gs->playerIco.state = 0;
+			gs->playerIco.show();
 			gs->officeLady->state = 0;
 			gs->officeLady->show();
 			state++;
 		}
 		break;
 	case 6: //wpada ziomalka
-		gs->officeLady->animate();
-		if(gs->officeLady->state == 2)
+		
+		if(gs->officeLady->state == 1)
+		{
 			gs->officeLady->hide();
+			gs->playerIco.hide();
+		}
 		if(gs->officeLady->hidden)
 			state++;
 		break;
@@ -438,16 +442,21 @@ void Day_2::update(GameState *gs, sf::RenderWindow &win)
 		gs->officeLady->addToQueue(L"Czy móg³byœ jej wys³aæ te zdjêcia? Has³o do jej konta to: krysia123");
 		gs->officeLady->addToQueue(L"Dziêki.");
 		gs->officeLady->addToQueue(L" ");
-		//„Ok ju¿ siê lecê siê wylogowaæ i zaraz sprawdzê konto Krysi
+		gs->playerIco.text.setTextString(L"Ok ju¿ siê lecê siê wylogowaæ i zaraz sprawdzê konto Krysi");
 		gs->officeLady->show();
 		state++;
 		break;
 	case 22:
-		//gs->officeLady->animate();
-		if(gs->officeLady->state == 4)
+		if(gs->officeLady->state == 3)
+		{
+			gs->playerIco.show();
+			thought_time = gm::Core::getClock().getElapsedTime().asMilliseconds() + 2000;
+		}
+		if(gs->officeLady->state == 4 && thought_time < gm::Core::getClock().getElapsedTime().asMilliseconds())
 		{
 			gs->officeLady->state = 0;
 			gs->officeLady->hide();
+			gs->playerIco.hide();
 		}
 		if(gs->officeLady->hidden)
 			state++;
@@ -475,10 +484,14 @@ void Day_2::update(GameState *gs, sf::RenderWindow &win)
 		{
 			while(!gs->phone->text_queue.empty())
 				gs->phone->text_queue.pop();
-			//player Czeœæ, dzwoni³a do mnie kole¿anka by³ej pracownicy Krysi, chcia³a uzyskaæ dostêp do jej konta. Czy konta by³ych pracowników powinny byæ ci¹gle aktywne i dostêpne?
+			gs->playerIco.text.setTextString(L"Czeœæ, dzwoni³a do mnie kole¿anka by³ej pracownicy Krysi, chcia³a uzyskaæ dostêp do jej konta.");
+			gs->playerIco.addToQueue(L"Czy konta by³ych pracowników powinny byæ ci¹gle aktywne i dostêpne?");
+			gs->playerIco.addToQueue(L"Dzia³ IT nie pracuje tu najsprawniej...");
+			gs->playerIco.addToQueue(L"Ciekawe czy przeprowadzaj¹ regularne audyty i testy bezpieczeñstwa... W koñcu to ich obowi¹zek...");
+
 			gs->phone->text.setTextString(L"„Masz racje – nie powinny. Nasz b³¹d. Powinniœmy zabezpieczyæ te konta i znajduj¹ce siê na nich dane");
 			gs->phone->addToQueue(L" Do jutra zostanie to naprawione. Skontaktujemy siê te¿ z Krysi¹.");
-			//player Dzia³ IT nie pracuje tu najsprawniej. Ciekawe czy przeprowadzaj¹ regularne audyty i testy bezpieczeñstwa… W koñcu to ich obowi¹zek…” 
+			
 			gs->openedcomputer->showExcessUsers = false;
 			state = 30;
 			break;
@@ -566,7 +579,7 @@ void Day_2::update(GameState *gs, sf::RenderWindow &win)
 		}
 		break;
 	case 32:
-		gs->officeLady->animate();
+		
 
 		pendrive.setPosition(gs->officeLady->getPosition().x + 25,gs->officeLady->getPosition().y + 280);
 		if(gs->officeLady->state == 5)
@@ -603,7 +616,6 @@ void Day_2::update(GameState *gs, sf::RenderWindow &win)
 		}
 		break;
 	case 34:
-		gs->officeLady->animate();
 		if(gs->officeLady->hidden)
 		{
 			if(gs->choice1->clicked(win)) //lose
@@ -618,8 +630,9 @@ void Day_2::update(GameState *gs, sf::RenderWindow &win)
 			}
 			if(gs->choice3->clicked(win)) //konsultacja
 			{
-				//kwestia bohatera Czy zamawialiœmy coœ z Kurierexpol?” 
-				//odpowiedz kolezanki
+				gs->computer->close();
+				gs->playerIco.text.setTextString(L"Czy zamawialiœmy coœ z Kurierexpol?");
+				gs->playerIco.show();
 				gs->officeLady->state = 0;
 				gs->officeLady->text.setTextString(L"Nie wiem. Mo¿e skontaktuj siê z ich biurem obs³ugi.");
 				gs->officeLady->addToQueue(L" ");
@@ -635,8 +648,11 @@ void Day_2::update(GameState *gs, sf::RenderWindow &win)
 
 		break;
 	case 37: //prawidlowa sciezka , rozmowa z kolezanka
-		gs->officeLady->animate();
-		
+		if(gs->officeLady->state == 1)
+		{
+			gs->officeLady->hide();
+			gs->playerIco.hide();
+		}
 		break;
 	}
 

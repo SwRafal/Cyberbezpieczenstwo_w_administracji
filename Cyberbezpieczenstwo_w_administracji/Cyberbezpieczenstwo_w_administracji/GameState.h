@@ -84,6 +84,8 @@ private:
 	Bin *bin = nullptr;
 	sf::Sprite sushi;
 	sf::Sprite rj45;
+
+	PlayerIcon playerIco;
 	
 
 	ChoiceButton *choice1,*choice2,*choice3,*choice4;
