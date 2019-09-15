@@ -128,11 +128,22 @@ void Day_2::update(GameState *gs, sf::RenderWindow &win)
 			gs->choice1->setPosition(SCREEN_WIDTH / 2 - (gs->choice1->background.getGlobalBounds().width) - (gs->choice1->background.getGlobalBounds().width / 2) , SCREEN_HEIGHT / 2);
 			gs->choice2->setPosition(SCREEN_WIDTH / 2 + (gs->choice2->background.getGlobalBounds().width) - (gs->choice2->background.getGlobalBounds().width / 2) , SCREEN_HEIGHT / 2);
 		}
+		else if(state == 34)
+		{
+			gs->choice1->setText(L"SprawdŸ plik z\npotwierdzeniem nadania");
+			gs->choice2->setText(L"Zadzwoñ na numer Biura\nObs³ugi Klienta");
+			gs->choice3->setText(L"Skonsultuj siê z kole¿ank¹");
+
+			gs->choice1->setPosition(252 + 60 , 112 + 494 );
+			gs->choice2->setPosition(252 + 60 + 50 + gs->choice2->background.getGlobalBounds().width , 112 + 494 );
+			gs->choice3->setPosition(252 + 60 + 100 + gs->choice2->background.getGlobalBounds().width * 2, 112 + 494 );
+		}
 	}
 	else
 	{
 		gs->choice1->setPosition(0,-300);
 		gs->choice2->setPosition(0,-300);
+		gs->choice3->setPosition(0,-300);
 	}
 
 
@@ -181,6 +192,10 @@ void Day_2::update(GameState *gs, sf::RenderWindow &win)
 
 	if(!initDelay)
 	{
+		//tutaj !!!!
+		state = 31;
+		initDelay = true;
+		//tutaj wyjebac
 		if(gm::Core::getClock().getElapsedTime().asSeconds() - time >= 5)
 		{
 			state = 0;
@@ -188,6 +203,9 @@ void Day_2::update(GameState *gs, sf::RenderWindow &win)
 
 			itGuy->show();
 		}
+
+		gs->choice3->clicked(gm::Core::getWindow());
+		gs->choice4->clicked(gm::Core::getWindow());
 	}
 
 	
@@ -510,6 +528,7 @@ void Day_2::update(GameState *gs, sf::RenderWindow &win)
 
 		if(gs->choice2->clicked(win))
 		{
+			showInfo = false;
 			gs->computer->close();
 			showButtons = false;
 			state++;
@@ -519,7 +538,7 @@ void Day_2::update(GameState *gs, sf::RenderWindow &win)
 	case 29:
 		gs->openedcomputer->setExitButtonActive();
 		gs->openedcomputer->krysiaPasswordKnown = false;
-		//kolejny quest
+		state = 31; //kolejny quest
 		break;
 	case 30:
 		displayWorkPhoneText = false;
@@ -571,11 +590,53 @@ void Day_2::update(GameState *gs, sf::RenderWindow &win)
 			pendrive.setPosition(650,620);
 			gs->officeLady->hide();
 			//inicjacja maila
+
+			gs->computer->open();
+			gs->openedcomputer->setState(OpenPC::MAIL);
+			gs->openedcomputer->newMail(L"Powiadomienie o planowanej wizycie kuriera.",L"no-reply@kurierexpol.pl", L"Wiadomoœæ wygenerowana automatycznie. Prosimy nie odpowiadaæ bezpoœrednio na ten adres e-mail.\nSzanowni Pañstwo, Uprzejmie informujemy, ¿e w dniu dzisiejszym zostanie do Pañstwa dostarczona przesy³ka o numerze: 9847697300141\nW za³¹czniku szczegó³owe potwierdzenie nadania paczki. Has³em potrzebnym do otwarcia potwierdzenia jest numer twojej przesy³ki.KURIEREXPOL – Twój kurier na zawsze\n\nwww.kurierexpol.pl\nBiuro Obs³ugi Klienta\n+48 565 234 234\nZa³¹cznik: Potwierdzenienadania.pdf");
+			showButtons = true;
+			gs->openedcomputer->setMailButtonInactive();
+			//setup buttons
+			
+
 			state++;
 		}
 		break;
 	case 34:
-		gs->officeLady->hide();
+		gs->officeLady->animate();
+		if(gs->officeLady->hidden)
+		{
+			if(gs->choice1->clicked(win)) //lose
+			{
+				gs->computer->close();
+				state++;
+			}
+			if(gs->choice2->clicked(win)) //lose
+			{
+				gs->computer->close();
+				state = 36;
+			}
+			if(gs->choice3->clicked(win)) //konsultacja
+			{
+				//kwestia bohatera Czy zamawialiœmy coœ z Kurierexpol?” 
+				//odpowiedz kolezanki
+				gs->officeLady->state = 0;
+				gs->officeLady->text.setTextString(L"Nie wiem. Mo¿e skontaktuj siê z ich biurem obs³ugi.");
+				gs->officeLady->addToQueue(L" ");
+				gs->officeLady->show();
+				state = 37;
+			}
+		}
+		break;
+	case 35: //przegrana po sprawdzeniu pliku
+
+		break;
+	case 36://przegrana po zadzwonieniu do kurierexpol
+
+		break;
+	case 37: //prawidlowa sciezka , rozmowa z kolezanka
+		gs->officeLady->animate();
+		
 		break;
 	}
 
@@ -607,7 +668,11 @@ void Day_2::draw(GameState *gs, sf::RenderWindow &win)
 		win.draw(thief);
 
 	if(state > 31)
-		win.draw(pendrive);
+	{
+		if(!gs->computer->isOpened())
+			win.draw(pendrive);
+	}
+		
 
 	if(state == 24 || state == 33)
 	{
@@ -619,6 +684,12 @@ void Day_2::draw(GameState *gs, sf::RenderWindow &win)
 	{
 		gs->choice1->draw(win);
 		gs->choice2->draw(win);
+	}
+	if(state == 34)
+	{
+		gs->choice1->draw(win);
+		gs->choice2->draw(win);
+		gs->choice3->draw(win);
 	}
 
 

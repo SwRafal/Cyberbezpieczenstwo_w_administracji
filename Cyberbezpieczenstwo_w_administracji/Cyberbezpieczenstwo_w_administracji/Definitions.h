@@ -28,6 +28,13 @@
 #define SPLASH_STATE_SHOWTIME 2
 #define SPLASH_STATE_BACKGROUND_FILEPATH "resources/splash.png"
 
+/* icons */
+#define HALINA_ICON "resources/textures/halinaIcon.png"
+#define HAKER_ICON "resources/textures/hakerIcon.png"
+#define MAG_ICON "resources/textures/magIcon.png"
+
+#define PLAYER_CHAT_BUBBLE "resources/textures/playerChat.png"
+
 /* Menu State */
 
 #define MENU_BACKGROUND_ANIMATION_FILEPATH "resources/textures/menu_animation.png"

@@ -5,7 +5,7 @@
 IntroState::IntroState(gm::gameDataRef data) : data(data), message(INTRO_TEXT_1,gm::Assets::getFont()), space(INTRO_TEXT_SPACE,gm::Assets::getFont()),
 choice1(*gm::Assets::getFont()),choice2(*gm::Assets::getFont()),choice3(*gm::Assets::getFont()), message2(INTRO_TEXT_6,gm::Assets::getFont())
 {
-	std::cout << "konstruktor" << std::endl;
+	
 }
 
 
@@ -15,7 +15,7 @@ IntroState::~IntroState()
 
 void IntroState::init()
 {
-	std::cout << "10" << std::endl;
+	
 	state = 0;
 	initialized = false;
 	nextState = false;
@@ -28,7 +28,7 @@ void IntroState::init()
 	title.setPosition(SCREEN_WIDTH / 2 - title.getGlobalBounds().width / 2, SCREEN_HEIGHT * 0.3);
 
 	//choice buttons
-	std::cout << "11" << std::endl;
+	
 	choice1.setTextIdleColor(sf::Color::White);
 	choice1.setTextAimedColor(sf::Color(230, 120, 255,255));
 	choice1.setTextPressColor(sf::Color(216, 46, 255,255));
@@ -66,13 +66,26 @@ void IntroState::init()
 
 	space.setPosition(SCREEN_WIDTH/2 - space.getGlobalBounds().width/2, SCREEN_HEIGHT - (space.getGlobalBounds().height * 2));
 
-	std::cout << "12" << std::endl;
+	
 	//sound
 	gm::Assets::LoadSound("click", CLICK_SOUND_FILEPATH);
 	click.setBuffer(*gm::Assets::getSound("click"));
 
 	delay = true;
-	std::cout << "14" << std::endl;
+
+	gm::Assets::LoadTexture("halinaIcon", HALINA_ICON);
+	gm::Assets::LoadTexture("hakerIcon", HAKER_ICON);
+	gm::Assets::LoadTexture("magIcon", MAG_ICON);
+
+	Icon1.setTexture(*gm::Assets::getTexture("halinaIcon"));
+	Icon2.setTexture(*gm::Assets::getTexture("hakerIcon"));
+	Icon3.setTexture(*gm::Assets::getTexture("magIcon"));
+
+	Icon1.setScale(0.5,0.5);
+	Icon2.setScale(0.5,0.5);
+	Icon3.setScale(0.5,0.5);
+
+	
 }
 
 void IntroState::handleInput()
@@ -96,7 +109,7 @@ void IntroState::handleInput()
 			}
 		}
 
-		std::cout << "15" << std::endl;
+		
 
 	if(gm::Core::getEnteredChar() == 0x00000020 && (state == 0 || state == 1))
 	{
@@ -111,7 +124,7 @@ void IntroState::handleInput()
 
 void IntroState::update(sf::RenderWindow& win)
 {
-	std::cout << "16" << std::endl;
+	
 	/* Initialize state */
 	if(!initialized)
 	{
@@ -144,12 +157,15 @@ void IntroState::update(sf::RenderWindow& win)
 			message.setStyle(sf::Text::Style::Regular);
 			choice1.setTextString("Pani Halina");
 			choice1.setPosition(SCREEN_WIDTH * 0.2 - choice1.getGlobalBounds().width / 2,SCREEN_HEIGHT * 0.75);
+			Icon1.setPosition(choice1.getPosition().x + 10,choice1.getPosition().y - Icon1.getGlobalBounds().height - 20);
 			choice1.setTextSize(30);
 			choice2.setTextString("Haker");
 			choice2.setPosition(SCREEN_WIDTH * 0.5 - choice1.getGlobalBounds().width / 2,SCREEN_HEIGHT * 0.75);
+			Icon2.setPosition(choice2.getPosition().x + 10,choice2.getPosition().y - Icon2.getGlobalBounds().height - 20);
 			choice2.setTextSize(30);
 			choice3.setTextString("Mag");
 			choice3.setPosition(SCREEN_WIDTH * 0.8 - choice1.getGlobalBounds().width / 2,SCREEN_HEIGHT * 0.75);
+			Icon3.setPosition(choice3.getPosition().x + 10,choice3.getPosition().y - Icon3.getGlobalBounds().height - 20);
 			choice3.setTextSize(30);
 		}
 
@@ -319,6 +335,13 @@ void IntroState::draw(sf::RenderWindow& win)
 	if(state == 5)
 	{
 		win.draw(message2);
+	}
+
+	if(state == 3)
+	{
+		win.draw(Icon1);
+		win.draw(Icon2);
+		win.draw(Icon3);
 	}
 
 	win.draw(message);

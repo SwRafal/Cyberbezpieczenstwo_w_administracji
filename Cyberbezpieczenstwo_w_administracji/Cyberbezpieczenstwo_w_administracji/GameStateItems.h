@@ -13,4 +13,5 @@
 #include "OpenPC.h"
 #include "card.h"
 #include "CardReader.h"
+#include "playerIcon.h"
 

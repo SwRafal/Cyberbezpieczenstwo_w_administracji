@@ -420,12 +420,18 @@ void GameState::update(sf::RenderWindow &win)
 
 			choice1->setPosition(0,-300);
 			choice2->setPosition(0,-300);
+			choice3->setPosition(0,-300);
+			choice4->setPosition(0,-300);
 
 			choice1->setScale(0.37,0.37);
 			choice2->setScale(0.37,0.37);
+			choice3->setScale(0.37,0.37);
+			choice4->setScale(0.37,0.37);
 
 			choice1->setText(L"Ujawnij swoje dane osobowe");
 			choice2->setText(L"Powo³aj siê na RODO");
+			choice3->setText(L"Powo³aj siê na RODO");
+			choice4->setText(L"Powo³aj siê na RODO");
 
 			
 			popUpText->changeText(L"Niestety RODO nie uchroni³o Ciê przed podaniem swoich danych osobowych.");

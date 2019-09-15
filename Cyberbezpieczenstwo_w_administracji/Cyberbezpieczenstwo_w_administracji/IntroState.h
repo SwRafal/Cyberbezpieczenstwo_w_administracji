@@ -38,5 +38,7 @@ public:
 	bool delay;
 
 	sf::Sound click;
-	
+
+
+	sf::Sprite Icon1,Icon2,Icon3;
 };

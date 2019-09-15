@@ -204,6 +204,9 @@
     <ClCompile Include="Day_3.cpp">
       <Filter>Pliki źródłowe\Days</Filter>
     </ClCompile>
+    <ClCompile Include="playerIcon.cpp">
+      <Filter>Pliki źródłowe\GameStateItems</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\Assets.h">
@@ -390,6 +393,9 @@
       <Filter>Pliki nagłówkowe\GameStateItems</Filter>
     </ClInclude>
     <ClInclude Include="OpenedDoc.h">
+      <Filter>Pliki nagłówkowe\GameStateItems</Filter>
+    </ClInclude>
+    <ClInclude Include="playerIcon.h">
       <Filter>Pliki nagłówkowe\GameStateItems</Filter>
     </ClInclude>
   </ItemGroup>
