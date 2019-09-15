@@ -140,4 +140,6 @@ public:
 	//bools
 	bool krysiaPasswordKnown;
 	bool showExcessUsers;
+
+	sf::Sprite kurierexpol;
 };

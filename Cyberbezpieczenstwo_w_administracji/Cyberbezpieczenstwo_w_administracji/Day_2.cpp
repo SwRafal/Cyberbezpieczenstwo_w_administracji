@@ -140,11 +140,35 @@ void Day_2::update(GameState *gs, sf::RenderWindow &win)
 		}
 		else if(state == 38)
 		{
-			gs->choice1->setText(L"SprawdŸ plik kurierexpol\nw internecie");
+			gs->choice1->setText(L"SprawdŸ kurierexpol\nw internecie");
 			gs->choice2->setText(L"Zadzwoñ na numer Biura\nObs³ugi Klienta");
 
-			gs->choice1->setPosition(252 + 30 + 50 + gs->choice2->background.getGlobalBounds().width , 112 + 494 );
-			gs->choice2->setPosition(252 + 30 + 100 + gs->choice2->background.getGlobalBounds().width * 2, 112 + 494 );
+			gs->choice1->setPosition(252 + 10 + 50 + gs->choice2->background.getGlobalBounds().width , SCREEN_HEIGHT / 2 );
+			gs->choice2->setPosition(252 + 10 + 100 + gs->choice2->background.getGlobalBounds().width * 2,SCREEN_HEIGHT / 2 );
+		}
+		else if(state == 39)
+		{
+			gs->choice1->setText(L"Usuñ maila od kurierexpol");
+			gs->choice2->setText(L"Skontaktuj siê z dzia³em IT");
+
+			gs->choice1->setPosition(252 + 10 + 50 + gs->choice2->background.getGlobalBounds().width , 112 + 494 - 20 );
+			gs->choice2->setPosition(252 + 10 + 100 + gs->choice2->background.getGlobalBounds().width * 2, 112 + 494 - 20 );
+		}
+		else if(state == 43)
+		{
+			gs->choice1->setText(L"Zatrzymaj kole¿ankê i\noddaj pendrive");
+			gs->choice2->setText(L"zajmij siê pendrivem");
+
+			gs->choice1->setPosition(252 + 10 + 50 + gs->choice2->background.getGlobalBounds().width , 112 + 494 - 20 );
+			gs->choice2->setPosition(252 + 10 + 100 + gs->choice2->background.getGlobalBounds().width * 2, 112 + 494 - 20 );
+		}
+		else if(state = 45)
+		{
+			gs->choice1->setText(L"SprawdŸ pendrive");
+			gs->choice2->setText(L"Oddaj pendrive do dzia³u IT");
+
+			gs->choice1->setPosition(252 + 10 + 50 + gs->choice2->background.getGlobalBounds().width , 112 + 494 - 20 );
+			gs->choice2->setPosition(252 + 10 + 100 + gs->choice2->background.getGlobalBounds().width * 2, 112 + 494 - 20 );
 		}
 	}
 	else
@@ -199,8 +223,8 @@ void Day_2::update(GameState *gs, sf::RenderWindow &win)
 	if(!initDelay)
 	{
 		//tutaj !!!!
-		/*state = 31;
-		initDelay = true;*/
+		state = 31;
+		initDelay = true;
 		//tutaj wyjebac
 		if(gm::Core::getClock().getElapsedTime().asSeconds() - time >= 5)
 		{
@@ -689,14 +713,123 @@ void Day_2::update(GameState *gs, sf::RenderWindow &win)
 		if(gs->choice1->clicked(win))
 		{ //prawidlowa sciezka
 			gs->computer->open();
-			//tu koniec
+			gs->openedcomputer->setState(OpenPC::INFO_DISPLAY);
+			state++;
 		}
 		if(gs->choice2->clicked(win))
 		{ //lose
 			state = 36;	
 		}
 		break;
+	case 39:
+		gs->openedcomputer->setExitButtonInactive();
+		if(gs->choice1->clicked(win))
+		{
+			gs->openedcomputer->setExitButtonActive();
+			showButtons = false;
+			state = 41;
+			gs->computer->close();
+			//nagana
+		}
+		if(gs->choice2->clicked(win))
+		{
+			gs->openedcomputer->setExitButtonActive();
+			gs->phone->text.setTextString(L"Kurierexpol przedra³ siê przez nasze filtry?!");
+			gs->phone->addToQueue(L"Dziêki za informacjê wysy³am grupê ratunkow¹. Bez odbioru.");
+			gs->playerIco.text.setTextString(L"W³aœnie dosta³em maila od Kurierexpol. W gazetach pisz¹, ¿e to atak phishingowy...");
+			state++;
+			showButtons = false;
+			thought_time = gm::Core::getClock().getElapsedTime().asMilliseconds() + THOUGHT_TIME;
+			gs->playerIco.show();
+			gs->computer->close();
+			//rozmowa z it
+		}
+		break;
+	case 40:
+		
+		if(thought_time < gm::Core::getClock().getElapsedTime().asMilliseconds())
+		{
+			gs->phone->showText = true;
+			gs->phone->pickedUp = true;
+			gs->phone->update(win);
+			if(!gs->phone->pickedUp)
+			{
+				gs->playerIco.hide();
+				state++;
+			}
+		}
+		break;
+	
+	case 41:
+		gs->officeLady->state = 0;
+		gs->officeLady->text.setTextString(L"Hej! Ja tylko na sekundkê.");
+		gs->officeLady->addToQueue(L"Pamiêta³eœ, ¿eby sprawdziæ co jest na tym pendrive?");
+		gs->officeLady->addToQueue(L"Nie? Nie zapomnij tego zrobiæ, proszê. Lecê dalej, paaa!");
+		gs->officeLady->show();
+		state++;
+	break;
+	case 42:
+		if(gs->officeLady->state == 2)
+		{
+			showButtons = true;
+			state++;
+		}
+		break;
+	case 43: //zatrzymaj kolezanke?
+		if(gs->choice1->clicked(win))
+		{
+			showPendrive = false;
+			gs->playerIco.text.setTextString(L"Przepraszam, nie mam czasu siê dziœ tym zaj¹æ.");
+			gs->playerIco.show();
+			thought_time = gm::Core::getClock().getElapsedTime().asMilliseconds() + THOUGHT_TIME;
+			showButtons = false;
+			state++;
+		}
+		if(gs->choice2->clicked(win))
+		{
+			gs->officeLady->hide();
+			state = 45;
+		}
+		break;
+	case 44:
+		if(thought_time < gm::Core::getClock().getElapsedTime().asMilliseconds())
+		{
+			gs->playerIco.hide();
+			gs->officeLady->hide();
+			//nagana i koniec dnia
+		}
+		break;
+	case 45: //another choice
+		if(gs->choice1->clicked(win))
+		{
+			//lose
+			showButtons = false;
+		}
+		if(gs->choice2->clicked(win))
+		{
+			gs->phone->text.setTextString(L"Tu dzia³ IT, w czym mogê pomóc?");
+			gs->phone->addToQueue(L"Ok zaraz po niego wpadnê. Nie pod³¹czaj go do komputera.");
+			gs->playerIco.text.setTextString(L" Mam tu znalezionego na korytarzu pendrive. Mo¿ecie go sprawdziæ?");
+			gs->phone->showText = true;
+			gs->phone->pickedUp = true;
+			gs->playerIco.show();
+			showButtons = false;
+			state++;
+		}
+		break;
+	case 46:
+		gs->phone->update(win);
+		if(!gs->phone->pickedUp)
+		{
+			gs->playerIco.hide();
+			state++;
+		}
+		break;
+	case 47: //przychodzi janusz haker
+
+		break;
 	}
+	
 
 	
 }
@@ -725,20 +858,20 @@ void Day_2::draw(GameState *gs, sf::RenderWindow &win)
 	if(state == 17 || state == 18)
 		win.draw(thief);
 
-	if(state > 31)
+	if(state > 31 && showPendrive)
 	{
 		if(!gs->computer->isOpened())
 			win.draw(pendrive);
 	}
 		
 
-	if(state == 24 || state == 33)
+	if(state == 24 || state == 33 || state == 38 || state == 43 || state == 45)
 	{
 		win.draw(darkScreen);
 		gs->choice1->draw(win);
 		gs->choice2->draw(win);
 	}
-	if(state == 27 || state == 28 || state == 38)
+	if(state == 27 || state == 28 || state == 39 )
 	{
 		gs->choice1->draw(win);
 		gs->choice2->draw(win);

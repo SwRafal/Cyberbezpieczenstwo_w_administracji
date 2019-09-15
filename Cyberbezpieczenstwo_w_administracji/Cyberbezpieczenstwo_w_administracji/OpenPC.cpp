@@ -1,4 +1,5 @@
 #include "OpenPC.h"
+#include "playerIcon.h"
 
 OpenPC::OpenPC(sf::Texture *texture, sf::Font *font) //: content(*gm::Assets::getFont())
 {
@@ -140,6 +141,10 @@ OpenPC::OpenPC(sf::Texture *texture, sf::Font *font) //: content(*gm::Assets::ge
 	showExcessUsers = false;
 	krysiaPasswordKnown = false;
 
+	gm::Assets::LoadTexture("kurierexpol",INFO_KURIEREXPOL);
+	kurierexpol.setTexture(*gm::Assets::getTexture("kurierexpol"));
+	kurierexpol.setPosition(PC_OPENED_POS_X + 100, PC_OPENED_POS_Y + 200);
+
 }
 OpenPC::~OpenPC()
 {
@@ -222,6 +227,9 @@ void OpenPC::draw(sf::RenderWindow &win)
 		break;
 	case DESKTOP_KRYSIA:
 		win.draw(krysia_folders);
+		break;
+	case INFO_DISPLAY:
+		win.draw(kurierexpol);
 		break;
 	default:
 		break;

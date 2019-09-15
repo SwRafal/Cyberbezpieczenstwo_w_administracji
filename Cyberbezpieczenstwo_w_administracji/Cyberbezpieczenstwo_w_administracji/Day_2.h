@@ -16,6 +16,7 @@ public:
 	bool showButtons;
 
 	bool singleActivity = false;
+	bool showPendrive = true;
 	
 
 	//quests / info
