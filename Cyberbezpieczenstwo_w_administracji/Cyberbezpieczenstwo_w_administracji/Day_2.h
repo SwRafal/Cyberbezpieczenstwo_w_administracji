@@ -14,6 +14,8 @@ public:
 	bool init;
 	bool initDelay;
 	bool showButtons;
+
+	bool singleActivity = false;
 	
 
 	//quests / info
