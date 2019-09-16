@@ -145,6 +145,12 @@ OpenPC::OpenPC(sf::Texture *texture, sf::Font *font) //: content(*gm::Assets::ge
 	kurierexpol.setTexture(*gm::Assets::getTexture("kurierexpol"));
 	kurierexpol.setPosition(PC_OPENED_POS_X + 100, PC_OPENED_POS_Y + 200);
 
+	gm::Assets::LoadTexture("info2",INFO_WORKERS_102);
+	bonusInfo = new sf::Sprite;
+	bonusInfo->setTexture(*gm::Assets::getTexture("info2"));
+	bonusInfo->setPosition(PC_OPENED_POS_X + 40,PC_OPENED_POS_Y + 30);
+
+
 }
 OpenPC::~OpenPC()
 {
@@ -229,7 +235,10 @@ void OpenPC::draw(sf::RenderWindow &win)
 		win.draw(krysia_folders);
 		break;
 	case INFO_DISPLAY:
-		win.draw(kurierexpol);
+		if(!newInfo)
+			win.draw(kurierexpol);
+		else
+			win.draw(*bonusInfo);
 		break;
 	default:
 		break;

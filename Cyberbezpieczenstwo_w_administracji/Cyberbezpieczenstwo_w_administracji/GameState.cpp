@@ -677,6 +677,7 @@ void GameState::draw(sf::RenderWindow& win)
 
 	//tutorial
 	officeLady->draw(win);
+	officeApplicant->draw(win);
 
 	if(day0->state == 2)
 	{

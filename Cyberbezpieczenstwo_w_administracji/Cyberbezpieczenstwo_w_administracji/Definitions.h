@@ -114,6 +114,7 @@
 /* computer graphics */
 #define KRYSIA_DESKTOP_FILES "resources/textures/krysia desktop.png"
 #define INFO_KURIEREXPOL "resources/textures/info1.png"
+#define INFO_WORKERS_102 "resources/textures/infoWorkers.png"
 
 /* intro state */
 

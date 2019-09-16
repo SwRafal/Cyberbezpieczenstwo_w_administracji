@@ -128,8 +128,12 @@ void OfficeApplicant::draw(sf::RenderWindow &win)
 		win.draw(chat);
 		sf::RenderWindow * w = &win;
 		text.draw(*w);
-		win.draw(img);
-		win.draw((sf::RectangleShape)button);
+		if(active)
+		{
+			win.draw(img);
+			win.draw((sf::RectangleShape)button);	
+		}
+		
 	}
 }
 

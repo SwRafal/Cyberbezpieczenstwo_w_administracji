@@ -162,13 +162,55 @@ void Day_2::update(GameState *gs, sf::RenderWindow &win)
 			gs->choice1->setPosition(252 + 10 + 50 + gs->choice2->background.getGlobalBounds().width , 112 + 494 - 20 );
 			gs->choice2->setPosition(252 + 10 + 100 + gs->choice2->background.getGlobalBounds().width * 2, 112 + 494 - 20 );
 		}
-		else if(state = 45)
+		else if(state == 45)
 		{
 			gs->choice1->setText(L"SprawdŸ pendrive");
 			gs->choice2->setText(L"Oddaj pendrive do dzia³u IT");
 
 			gs->choice1->setPosition(252 + 10 + 50 + gs->choice2->background.getGlobalBounds().width , 112 + 494 - 20 );
 			gs->choice2->setPosition(252 + 10 + 100 + gs->choice2->background.getGlobalBounds().width * 2, 112 + 494 - 20 );
+		}
+		else if(state == 48)
+		{
+			gs->choice1->setScale(0.5,0.5);
+			gs->choice2->setScale(0.5,0.5);
+			gs->choice1->setText(L"Aaaa, jesteœ koleg¹ Bartka?\nWróci³eœ ju¿ z urlopu?");
+			gs->choice2->setText(L"Dzieñ Dobry Panu.\nCzy mogê prosiæ Pana Godnoœæ?");
+
+			gs->choice1->setPosition(SCREEN_WIDTH / 2 - gs->choice1->background.getGlobalBounds().width - 4, SCREEN_HEIGHT * 0.7);
+			gs->choice2->setPosition(SCREEN_WIDTH / 2 + 4 , SCREEN_HEIGHT * 0.7);
+		}
+		else if(state == 50)
+		{
+			gs->choice1->setText(L"Ok. Proszê oto twój pendrive");
+			gs->choice2->setText(L"Daj mi chwilê...");
+
+			gs->choice1->setPosition(SCREEN_WIDTH / 2 - gs->choice1->background.getGlobalBounds().width - 4, SCREEN_HEIGHT * 0.7);
+			gs->choice2->setPosition(SCREEN_WIDTH / 2 + 4 , SCREEN_HEIGHT * 0.7);
+		}
+		else if(state == 51)
+		{
+			gs->choice1->setText(L"Oddaj Pendrive");
+			gs->choice2->setText(L"Wygl¹dasz inaczej ni¿\nna zdjêciach Krzysiek.");
+
+			gs->choice1->setPosition(SCREEN_WIDTH / 2 - gs->choice1->background.getGlobalBounds().width - 4 - 80, SCREEN_HEIGHT * 0.8);
+			gs->choice2->setPosition(SCREEN_WIDTH / 2 + 4 - 80, SCREEN_HEIGHT * 0.8);
+		}
+		else if(state == 52)
+		{
+			gs->choice1->setText(L"Zg³oœ do dzia³u kadr przestarza³e\nzdjêcia w bazie pracowników.");
+			gs->choice2->setText(L"Skontaktuj siê z prze³o¿onym w celu\ndalszej weryfikacji podejrzanej osoby.");
+
+			gs->choice1->setPosition(SCREEN_WIDTH / 2 - gs->choice1->background.getGlobalBounds().width - 4, SCREEN_HEIGHT * 0.7);
+			gs->choice2->setPosition(SCREEN_WIDTH / 2 + 4 , SCREEN_HEIGHT * 0.7);
+		}
+		else if(state == 53)
+		{
+			gs->choice1->setText(L"Oddaj Pendrive");
+			gs->choice2->setText(L"PrzyjdŸ jutro");
+
+			gs->choice1->setPosition(SCREEN_WIDTH / 2 - gs->choice1->background.getGlobalBounds().width - 4, SCREEN_HEIGHT * 0.7);
+			gs->choice2->setPosition(SCREEN_WIDTH / 2 + 4 , SCREEN_HEIGHT * 0.7);
 		}
 	}
 	else
@@ -223,8 +265,10 @@ void Day_2::update(GameState *gs, sf::RenderWindow &win)
 	if(!initDelay)
 	{
 		//tutaj !!!!
-		state = 31;
+		state = 47;
 		initDelay = true;
+		while(!gs->officeApplicant->text_queue.empty())
+			gs->officeApplicant->text_queue.pop();
 		//tutaj wyjebac
 		if(gm::Core::getClock().getElapsedTime().asSeconds() - time >= 5)
 		{
@@ -826,6 +870,115 @@ void Day_2::update(GameState *gs, sf::RenderWindow &win)
 		}
 		break;
 	case 47: //przychodzi janusz haker
+		gs->officeApplicant->text.setTextString(L"Czeœæ, nie znalaz³eœ mo¿e ¿adnego pendrive pod 102?");
+		gs->officeApplicant->setButtonInactive();
+		gs->officeApplicant->show();
+		showButtons = true;
+		state++;
+		break;
+	case 48:
+		if(gs->choice1->clicked(win)) //sciezka 1
+		{
+			showButtons = false;
+			gs->officeApplicant->text.setTextString(L"Tak, Tak to ja. Wpad³em tylko na chwilê. Potrzebuje po prostu tego pendrive");
+			gs->officeApplicant->addToQueue(L"Nie, nie, nie. Nie ma takiej potrzeby.");
+			gs->officeApplicant->addToQueue(L"Po prostu mi go oddaj. Trochê mi siê œpieszy, w koñcu jestem na urlopie.");
+			gs->playerIco.text.setTextString(L"Rozumiem, rozumiem, Bartek go znalaz³ ale akurat mam go przy sobie. Podobno jest z nim coœ nie tak.");
+			gs->playerIco.addToQueue(L"Mo¿e poproszê IT, ¿eby na niego zerknêli bo zaraz przyjd¹?");
+			gs->playerIco.show();
+			thought_time = gm::Core::getClock().getElapsedTime().asMilliseconds() + THOUGHT_TIME + 6000;
+			state++;
+		}
+		if(gs->choice2->clicked(win)) //sciezka 2
+		{
+			//do zrobienia AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+		}
+		break;
+	case 49: //1a
+		if(thought_time < gm::Core::getClock().getElapsedTime().asMilliseconds())
+		{
+			gs->playerIco.nextLine();
+			gs->officeApplicant->nextLine();
+			showButtons = true;
+			state++;
+		}
+		break;
+	case 50:
+		if(gs->choice1->clicked(win))
+		{
+			//lose
+		}
+		if(gs->choice2->clicked(win))
+		{
+			gs->playerIco.hide();
+			//gs->officeApplicant->hide();
+			gs->officeApplicant->ready = false;
+			
+			gs->openedcomputer->newInfo = true;
+			gs->computer->open();
+			gs->openedcomputer->setState(OpenPC::INFO_DISPLAY);
+			gs->openedcomputer->setExitButtonInactive();
+			state++;
+		}
+		break;
+	case 51:
+		if(gs->choice1->clicked(win))
+		{
+			gs->openedcomputer->setExitButtonActive();
+			gs->officeApplicant->setButtonActive();
+			gs->computer->close();
+			//lose AAAAA
+		}
+		if(gs->choice2->clicked(win)) //wygladasz inaczej
+		{
+			gs->openedcomputer->setExitButtonActive();
+			gs->computer->close();
+			gs->officeApplicant->text.setTextString(L"Trochê siê zmieni³em. Zdjêcia s¹ pewnie przestarza³e");
+			gs->officeApplicant->ready = true;
+			//gs->officeApplicant->show();
+			state++;
+		}
+		break;
+	case 52:
+		if(gs->choice1->clicked(win))
+		{
+			state++;
+		}
+		if(gs->choice2->clicked(win))
+		{
+			//win przychodzi szef
+			showButtons = false;
+		}
+		break;
+	case 53:
+		if(gs->choice1->clicked(win)) //oddaj pena lose
+		{
+			showButtons = false;
+		}
+		if(gs->choice2->clicked(win)) //wpadnij jutro koniec dnia
+		{
+			showButtons = false;
+			gs->officeApplicant->setButtonActive();
+			gs->officeApplicant->state = 0;
+			gs->playerIco.text.setTextString(L"Kadrowej ju¿ nie ma. Wpadnij jutro rano. Pendrive poczeka.");
+			gs->officeApplicant->text.setTextString(L"Jutro?! Dziêki za marnowanie mojego urlopu. ¯egnam.");
+			gs->officeApplicant->addToQueue(L" ");
+			gs->playerIco.show();
+			state++;
+		}
+		break;
+	case 54:
+		if(gs->officeApplicant->state == 1)
+		{
+			gs->playerIco.hide();
+			gs->officeApplicant->hide();
+			//kkoniec dnia
+		}
+		break;
+
+
+
+	case 55: //sciezka 2 poczatek;
 
 		break;
 	}
@@ -836,6 +989,7 @@ void Day_2::update(GameState *gs, sf::RenderWindow &win)
 
 void Day_2::draw(GameState *gs, sf::RenderWindow &win)
 {
+	
 	itGuy->draw(win);
 	thought->draw(win);
 	boss->draw(win);
@@ -864,18 +1018,20 @@ void Day_2::draw(GameState *gs, sf::RenderWindow &win)
 			win.draw(pendrive);
 	}
 		
-
+	/* 2 buttons + darkscreen */
 	if(state == 24 || state == 33 || state == 38 || state == 43 || state == 45)
 	{
 		win.draw(darkScreen);
 		gs->choice1->draw(win);
 		gs->choice2->draw(win);
 	}
-	if(state == 27 || state == 28 || state == 39 )
+	/* 2 buttons */
+	if(state == 27 || state == 28 || state == 39 || state == 48 || state == 50 || state == 51 || state == 52 || state == 53)
 	{
 		gs->choice1->draw(win);
 		gs->choice2->draw(win);
 	}
+	/* 3 buttons */
 	if(state == 34)
 	{
 		gs->choice1->draw(win);

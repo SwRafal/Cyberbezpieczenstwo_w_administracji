@@ -121,6 +121,7 @@ private:
 	sf::Sprite info_display;
 	
 public:
+
 	virtual void draw(sf::RenderTarget &target, sf::RenderStates states) = delete;
 	OpenPC(sf::Texture *texture, sf::Font *font);
 	~OpenPC();
@@ -142,4 +143,6 @@ public:
 	bool showExcessUsers;
 
 	sf::Sprite kurierexpol;
+	sf::Sprite* bonusInfo;
+	bool newInfo = false;
 };
