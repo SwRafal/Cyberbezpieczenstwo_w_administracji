@@ -92,6 +92,11 @@ Day_2::Day_2()
 
 	gm::Assets::LoadTexture("office friend hand", TEXTURE_OFFICE_FRIEND_HAND);
 
+	gm::Assets::LoadTexture("police", POLICE_TEXTURE);
+	police.setTexture(*gm::Assets::getTexture("police"));
+	police.setScale(0.8,0.8);
+	police.setPosition(1390,14);
+
 }
 
 Day_2::~Day_2()
@@ -174,6 +179,7 @@ void Day_2::update(GameState *gs, sf::RenderWindow &win)
 		{
 			gs->choice1->setScale(0.5,0.5);
 			gs->choice2->setScale(0.5,0.5);
+			gs->choice3->setScale(0.5,0.5);
 			gs->choice1->setText(L"Aaaa, jesteœ koleg¹ Bartka?\nWróci³eœ ju¿ z urlopu?");
 			gs->choice2->setText(L"Dzieñ Dobry Panu.\nCzy mogê prosiæ Pana Godnoœæ?");
 
@@ -211,6 +217,16 @@ void Day_2::update(GameState *gs, sf::RenderWindow &win)
 
 			gs->choice1->setPosition(SCREEN_WIDTH / 2 - gs->choice1->background.getGlobalBounds().width - 4, SCREEN_HEIGHT * 0.7);
 			gs->choice2->setPosition(SCREEN_WIDTH / 2 + 4 , SCREEN_HEIGHT * 0.7);
+		}
+		else if(state == 56)
+		{
+			gs->choice1->setText(L"Oddaj Pendrive");
+			gs->choice2->setText(L"Daj mi chwilê");
+			gs->choice3->setText(L"Poproœ o dokument to¿samoœci");
+
+			gs->choice2->setPosition(SCREEN_WIDTH / 2 - gs->choice1->background.getGlobalBounds().width / 2 , SCREEN_HEIGHT * 0.7);
+			gs->choice1->setPosition(SCREEN_WIDTH / 2  - gs->choice1->background.getGlobalBounds().width / 2 - gs->choice1->background.getGlobalBounds().width - 4, SCREEN_HEIGHT * 0.7);
+			gs->choice3->setPosition(SCREEN_WIDTH / 2  + gs->choice1->background.getGlobalBounds().width / 2 + 4, SCREEN_HEIGHT * 0.7);
 		}
 	}
 	else
@@ -480,7 +496,7 @@ void Day_2::update(GameState *gs, sf::RenderWindow &win)
 		{
 			gs->card->setPosition(-300,520);
 			thought->changeText(L"bla bla bla...");
-			thought_time = gm::Core::getClock().getElapsedTime().asMilliseconds() + THOUGHT_TIME;
+			thought_time = gm::Core::getClock().getElapsedTime().asMilliseconds() + 1500;
 			state++;
 		}
 		break;
@@ -496,20 +512,9 @@ void Day_2::update(GameState *gs, sf::RenderWindow &win)
 		thought->animate();
 		if(!thought->appearing && !thought->disappearing)
 		{
-			gs->lost = true;
-			gs->eyelids->close();
-			gs->info_time = gm::Core::getClock().getElapsedTime().asMilliseconds() + GAMELOST_INFO_TIME;
-			gs->gamelost_info = new sf::Text;
-			gs->gamelost_info->setFont(*gm::Assets::getFont());
-			gs->gamelost_info->setString(L"    Nie pilnowa³eœ nale¿ycie swojej karty uwierzytelniaj¹cej.\nSkradziona karta umo¿liwi³a kradzie¿ funduszy Ministerstwa.\nZostajesz zwolniony dyscyplinarnie w trybie natychmiastowym.");
-			gs->gamelost_info->setCharacterSize(48);
-			sf::Vector2f info_pos;
-			info_pos.x = SCREEN_WIDTH / 2 - (gs->gamelost_info->getLocalBounds().left + gs->gamelost_info->getLocalBounds().width) / 2;
-			info_pos.y = SCREEN_HEIGHT / 2 - (gs->gamelost_info->getLocalBounds().top + gs->gamelost_info->getLocalBounds().height) / 2;
-			gs->gamelost_info->setPosition(sf::Vector2f(info_pos));
-
-			//gs->data->returnToMenu = true;
+			gs->gameover(L"Nie pilnowa³eœ nale¿ycie swojej karty uwierzytelniaj¹cej. Skradziona karta umo¿liwi³a kradzie¿ funduszy Ministerstwa. Zostajesz zwolniony dyscyplinarnie w trybie natychmiastowym.");
 		}
+		break;
 	case 21: //init friend
 		gs->officeLady->state = 0;
 		temp = L"Hej ";
@@ -690,7 +695,7 @@ void Day_2::update(GameState *gs, sf::RenderWindow &win)
 		if(gs->choice1->clicked(win))
 		{
 			showButtons = false;
-			//przegrana
+			gs->gameover(L"Ty i twoi koledzy z pracy pod³¹czyliœcie do komputerów pendrive-a podrzuconego przez przestêpców. Wiêkszoœæ stanowisk w ministerstwie zainfekowano  oprogramowaniem szpieguj¹cym. Wyciek³y dane milionów obywateli. Zostajecie zwolnieni dyscyplinarnie w trybie natychmiastowym.");
 		}
 		if(gs->choice2->clicked(win))
 		{
@@ -740,10 +745,10 @@ void Day_2::update(GameState *gs, sf::RenderWindow &win)
 		}
 		break;
 	case 35: //przegrana po sprawdzeniu pliku
-
+		gs->gameover(L"Ministerstwo nie wspó³pracuje z firm¹ kurierexpol. Chocia¿ plik wydawa³ siê byæ faktur¹ w formacie pdf. Po wpisaniu has³a zainstalowa³eœ z³oœliwe oprogramowanie. Dane z zainfekowanych komputerów Ministerstwa wyciek³y. Zostajesz zwolniony dyscyplinarnie w trybie natychmiastowym.");
 		break;
 	case 36://przegrana po zadzwonieniu do kurierexpol
-
+		gs->gameover(L"W³aœnie wykona³eœ telefon do Republiki Po³udniowego Kongo. Twoja rozmowa kosztowa³a Ministerstwo kilkanaœcie tysiêcy z³otych. Zostajesz zwolniony dyscyplinarnie w trybie natychmiastowym.");
 		break;
 	case 37: //prawidlowa sciezka , rozmowa z kolezanka
 		if(gs->officeLady->state == 1)
@@ -774,6 +779,7 @@ void Day_2::update(GameState *gs, sf::RenderWindow &win)
 			showButtons = false;
 			state = 41;
 			gs->computer->close();
+			gs->data->nagany++;
 			//nagana
 		}
 		if(gs->choice2->clicked(win))
@@ -841,14 +847,15 @@ void Day_2::update(GameState *gs, sf::RenderWindow &win)
 		{
 			gs->playerIco.hide();
 			gs->officeLady->hide();
+			gs->data->nagany++;
 			//nagana i koniec dnia
 		}
 		break;
 	case 45: //another choice
 		if(gs->choice1->clicked(win))
 		{
-			//lose
 			showButtons = false;
+			gs->gameover(L"Ty i twoi koledzy z pracy pod³¹czyliœcie do komputerów pendrive-a podrzuconego przez przestêpców. Wiêkszoœæ stanowisk w ministerstwie zainfekowano  oprogramowaniem szpieguj¹cym. Wyciek³y dane milionów obywateli. Zostajecie zwolnieni dyscyplinarnie w trybie natychmiastowym");
 		}
 		if(gs->choice2->clicked(win))
 		{
@@ -892,7 +899,8 @@ void Day_2::update(GameState *gs, sf::RenderWindow &win)
 		}
 		if(gs->choice2->clicked(win)) //sciezka 2
 		{
-			//do zrobienia AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+			gs->officeApplicant->state = 0;
+			state = 55;
 		}
 		break;
 	case 49: //1a
@@ -907,12 +915,11 @@ void Day_2::update(GameState *gs, sf::RenderWindow &win)
 	case 50:
 		if(gs->choice1->clicked(win))
 		{
-			//lose
+			gs->gameover(L"Odda³eœ przestêpcy pendrive, który wykrad³ dane z kilku komputerów Ministerstwa. Zostajesz zwolniony dyscyplinarnie w trybie natychmiastowym.");
 		}
 		if(gs->choice2->clicked(win))
 		{
 			gs->playerIco.hide();
-			//gs->officeApplicant->hide();
 			gs->officeApplicant->ready = false;
 			
 			gs->openedcomputer->newInfo = true;
@@ -925,13 +932,15 @@ void Day_2::update(GameState *gs, sf::RenderWindow &win)
 	case 51:
 		if(gs->choice1->clicked(win))
 		{
+			
 			gs->openedcomputer->setExitButtonActive();
 			gs->officeApplicant->setButtonActive();
 			gs->computer->close();
-			//lose AAAAA
+			gs->gameover(L"Odda³eœ przestêpcy pendrive, który wykrad³ dane z kilku komputerów Ministerstwa. Zostajesz zwolniony dyscyplinarnie w trybie natychmiastowym.");
 		}
 		if(gs->choice2->clicked(win)) //wygladasz inaczej
 		{
+			
 			gs->openedcomputer->setExitButtonActive();
 			gs->computer->close();
 			gs->officeApplicant->text.setTextString(L"Trochê siê zmieni³em. Zdjêcia s¹ pewnie przestarza³e");
@@ -949,12 +958,14 @@ void Day_2::update(GameState *gs, sf::RenderWindow &win)
 		{
 			//win przychodzi szef
 			showButtons = false;
+			state = 58;
 		}
 		break;
 	case 53:
 		if(gs->choice1->clicked(win)) //oddaj pena lose
 		{
 			showButtons = false;
+			gs->gameover(L"Odda³eœ przestêpcy pendrive, który wykrad³ dane z kilku komputerów Ministerstwa. Zostajesz zwolniony dyscyplinarnie w trybie natychmiastowym.");
 		}
 		if(gs->choice2->clicked(win)) //wpadnij jutro koniec dnia
 		{
@@ -980,7 +991,116 @@ void Day_2::update(GameState *gs, sf::RenderWindow &win)
 
 
 	case 55: //sciezka 2 poczatek;
+		gs->officeApplicant->setButtonActive();
+		gs->officeApplicant->show();
+		gs->officeApplicant->text.setTextString(L"No co ty? Nie poznajesz mnie? Jestem przecie¿ koleg¹ Marka ze 102.");
+		gs->officeApplicant->addToQueue(L"To co? Masz tego Pendrive?");
+		
+		if(gs->officeApplicant->state == 1)
+		{
+			gs->officeApplicant->nextLine();
+			state++;
+		}
+			
+		break;
+	case 56: //2 choices
 
+		if(gs->choice1->clicked(win)) //oddaj lose
+		{
+			gs->gameover(L"Odda³eœ przestêpcy pendrive, który wykrad³ dane z kilku komputerów Ministerstwa. Zostajesz zwolniony dyscyplinarnie w trybie natychmiastowym.");
+		}
+		if(gs->choice2->clicked(win)) //daj mi chwile 
+		{
+			showButtons = false;
+			
+			gs->playerIco.hide();
+			gs->officeApplicant->ready = false;
+			gs->openedcomputer->newInfo = true;
+			gs->computer->open();
+			gs->openedcomputer->setState(OpenPC::INFO_DISPLAY);
+			gs->openedcomputer->setExitButtonInactive();
+			state = 51;
+		}
+		if(gs->choice3->clicked(win))
+		{
+			showButtons = false;
+			gs->playerIco.show();
+			gs->playerIco.text.setTextString(L"Poproszê dowód to¿samosci.");
+			gs->officeApplicant->setButtonInactive();
+			gs->officeApplicant->text.setTextString(L"Zapomnia³em z domu. To ja przyjdê jutro.");
+			thought_time = gm::Core::getClock().getElapsedTime().asMilliseconds() + 4000;
+			state++;
+		}
+
+		break;
+	case 57:
+		if(thought_time < gm::Core::getClock().getElapsedTime().asMilliseconds())
+		{
+			gs->playerIco.hide();
+			gs->officeApplicant->hide();
+			gs->officeApplicant->setButtonActive();
+		}
+		if(gs->playerIco.hidden && gs->officeApplicant->hidden)
+		{
+			//wychodzenie do domu
+			state = 58;
+		}
+		break;
+	case 58: //szef wbija
+		boss->animate();
+		gs->playerIco.hide();
+		gs->officeApplicant->hide();
+		if(gs->playerIco.hidden && gs->officeApplicant->hidden)
+		{
+			boss->show();
+			boss->setButtonInactive();
+			boss->text.setTextString(L"To¿ to znany Haker Janusz. Wzywam ochronê!");
+			thought_time = gm::Core::getClock().getElapsedTime().asMilliseconds() + 4000;
+			state++;
+		}
+		break;
+	case 59:
+		boss->animate();
+		if(thought_time < gm::Core::getClock().getElapsedTime().asMilliseconds())
+			boss->hide();
+
+		if(boss->hidden)
+		{
+			boss->setButtonActive();
+			gs->officeApplicant->show();
+			if(gs->officeApplicant->ready)
+			{
+				gs->officeApplicant->ready = false;
+				showPolice = true;
+				state++;
+			}
+		}
+			
+		break;
+	case 60: //pokaz animacje policjanta
+		if(police.getPosition().x > SCREEN_WIDTH - police.getGlobalBounds().width)
+		{
+			police.move(-5,0);
+			gs->officeApplicant->move(-3,0);
+		}
+		else
+		{
+			state++;
+			thought_time = gm::Core::getClock().getElapsedTime().asMilliseconds() + THOUGHT_TIME;
+		}
+		break;
+	case 61:
+		gs->officeApplicant->appearing = false;
+		if(thought_time < gm::Core::getClock().getElapsedTime().asMilliseconds())
+		{
+			if(gs->officeApplicant->getPosition().x < SCREEN_WIDTH + gs->officeApplicant->getGlobalBounds().width)
+			{
+				gs->officeApplicant->move(5,0);
+				police.move(5,0);
+				if(gs->officeApplicant->getPosition().x > SCREEN_WIDTH + 20)
+					state++;
+			}
+		}
 		break;
 	}
 	
@@ -994,6 +1114,8 @@ void Day_2::draw(GameState *gs, sf::RenderWindow &win)
 	itGuy->draw(win);
 	thought->draw(win);
 	boss->draw(win);
+
+	win.draw(police);
 
 	if(state== 10 || state == 11)
 		win.draw(*gs->card);
@@ -1033,7 +1155,7 @@ void Day_2::draw(GameState *gs, sf::RenderWindow &win)
 		gs->choice2->draw(win);
 	}
 	/* 3 buttons */
-	if(state == 34)
+	if(state == 34 || state == 56)
 	{
 		gs->choice1->draw(win);
 		gs->choice2->draw(win);

@@ -17,7 +17,9 @@ public:
 
 	bool singleActivity = false;
 	bool showPendrive = true;
-	
+	bool showPolice = false;
+
+	sf::Sprite police;
 
 	//quests / info
 	bool coffeeClicked;

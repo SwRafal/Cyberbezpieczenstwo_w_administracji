@@ -29,7 +29,7 @@ void GameOverState::init()
 	next.setAimedColor(sf::Color(190, 200, 190));
 	next.setPressColor(sf::Color(120, 150, 120));
 	next.setSize(57,57);
-	next.setPosition( 911 , 592);
+	next.setPosition( 1100 , 592);
 
 	arial.loadFromFile("resources/fonts/arialbd.ttf");
 	loadingText.setFont(arial);
