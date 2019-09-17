@@ -1,6 +1,14 @@
 #include "GameState.h"
 #include <thread>
 #include "MenuState.h"
+#include "GameOverState.h"
+
+void GameState::gameover(sf::String reason)
+{
+	data->whyFired = reason;
+	data->machine.addState(gm::StateRef(new GameOverState(this->data)));
+}
+
 
 GameState::GameState(gm::gameDataRef data) : data(data),playerIco(data->characterChoice)
 {
@@ -65,6 +73,7 @@ GameState::~GameState()
 
 void GameState::init()
 {
+	
 	data->password= L"Admin";
 
 	//Wall
@@ -326,6 +335,7 @@ void GameState::init()
 
 void GameState::handleInput()
 {
+	
 		/*Events*/
 		gm::Core::resetEvent();
 		gm::Core::setEnteredChar(NULL);

@@ -265,6 +265,7 @@ void Day_2::update(GameState *gs, sf::RenderWindow &win)
 	if(!initDelay)
 	{
 		//tutaj !!!!
+		
 		state = 47;
 		initDelay = true;
 		while(!gs->officeApplicant->text_queue.empty())

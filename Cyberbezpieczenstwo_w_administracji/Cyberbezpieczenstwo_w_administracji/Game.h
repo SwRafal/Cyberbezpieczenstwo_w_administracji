@@ -20,6 +20,8 @@ namespace gm
 		sf::String login = "Admin";
 		sf::String password ="Admin";
 
+		sf::String whyFired = " ";
+
 		bool sms_sent = false;
 
 		int nagany = 0;

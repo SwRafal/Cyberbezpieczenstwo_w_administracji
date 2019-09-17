@@ -207,6 +207,9 @@
     <ClCompile Include="playerIcon.cpp">
       <Filter>Pliki źródłowe\GameStateItems</Filter>
     </ClCompile>
+    <ClCompile Include="GameOverState.cpp">
+      <Filter>Pliki źródłowe</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\Assets.h">
@@ -397,6 +400,9 @@
     </ClInclude>
     <ClInclude Include="playerIcon.h">
       <Filter>Pliki nagłówkowe\GameStateItems</Filter>
+    </ClInclude>
+    <ClInclude Include="GameOverState.h">
+      <Filter>Pliki nagłówkowe</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

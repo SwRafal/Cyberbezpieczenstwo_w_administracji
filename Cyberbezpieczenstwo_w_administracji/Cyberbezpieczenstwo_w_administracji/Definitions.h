@@ -128,6 +128,11 @@
 #define INTRO_TEXT_SPACE "resources/text/intro/spacja.txt"
 #define INTRO_TEXT_CHOICE "resources/text/intro/choice.txt"
 
+/* game over */
+#define GAME_OVER_BACKGROUND "resources/textures/gameOver.png"
+#define GAME_OVER_BUTTON "resources/textures/goExit.png"
+
+
 /* day 0 */
 
 #define PC_SCREEN_TEXTURE "resources/textures/screen.png"

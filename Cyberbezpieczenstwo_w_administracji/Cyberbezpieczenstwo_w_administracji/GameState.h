@@ -103,6 +103,8 @@ private:
 	Day_2 *day2 = nullptr;
 	Day_3 *day3 = nullptr;
 
+	void gameover(sf::String reason);
+
 public:
 	GameState(gm::gameDataRef data);
 	~GameState();

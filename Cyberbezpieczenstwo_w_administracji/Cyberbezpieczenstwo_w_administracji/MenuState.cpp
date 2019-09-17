@@ -81,13 +81,12 @@ void MenuState::init()
 	clickSound.setBuffer(*gm::Assets::getSound("click"));
 
 	
-
+	
 	
 }
 
 void MenuState::handleInput()
 {
-	
 	/*Events*/
 	gm::Core::resetEvent();
 
