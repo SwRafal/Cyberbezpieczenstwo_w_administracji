@@ -1102,9 +1102,13 @@ void Day_2::update(GameState *gs, sf::RenderWindow &win)
 			}
 		}
 		break;
-	}
 	
 
+	case 62: //wychodzenie do domu
+
+	break;
+	
+	}
 	
 }
 
