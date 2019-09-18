@@ -110,6 +110,7 @@ private:
 	Day_3 *day3 = nullptr;
 
 	void gameover(sf::String reason);
+	void dayover(sf::String knowledge);//Knowledge to wiedza zdobyta podczas dnia
 
 public:
 	GameState(gm::gameDataRef data);

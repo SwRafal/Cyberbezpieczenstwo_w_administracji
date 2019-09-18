@@ -2,11 +2,18 @@
 #include <thread>
 #include "MenuState.h"
 #include "GameOverState.h"
+#include "DayOverState.h"
 
 void GameState::gameover(sf::String reason)
 {
 	data->whyFired = reason;
 	data->machine.addState(gm::StateRef(new GameOverState(this->data)));
+}
+
+void GameState::dayover(sf::String knowledge)
+{
+	data->knowledge = knowledge;
+	data->machine.addState(gm::StateRef(new DayOverState(this->data)), false);
 }
 
 

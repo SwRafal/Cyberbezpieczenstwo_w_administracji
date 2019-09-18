@@ -657,6 +657,12 @@ void Day_1::update(GameState *gs, sf::RenderWindow &win)
 
 			if (ITguy->state >= 6)
 			{
+				gs->dayover(L"-zaczynanie dnia od picia kawy\n"
+							L"-sprawdzanie wytycznych\n"
+							L"-logowanie do systemu\n"
+							L"-korzystanie z pomocy dzia³u IT\n"
+							L"-ochrona has³a\n"
+							L"-odrzucanie za³¹czników nieznanych Ÿróde³\n");
 				gs->nextDay = true;
 			}
 

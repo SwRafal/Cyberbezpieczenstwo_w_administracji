@@ -21,6 +21,7 @@ namespace gm
 		sf::String password ="Admin";
 
 		sf::String whyFired = " ";
+		sf::String knowledge = " ";
 
 		bool sms_sent = false;
 

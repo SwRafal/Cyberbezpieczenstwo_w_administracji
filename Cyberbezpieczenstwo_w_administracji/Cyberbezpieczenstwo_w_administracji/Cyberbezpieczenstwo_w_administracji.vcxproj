@@ -147,6 +147,7 @@
     <ClCompile Include="CardReader.cpp" />
     <ClCompile Include="ChoiceButton.cpp" />
     <ClCompile Include="Coffee.cpp" />
+    <ClCompile Include="DayOverState.cpp" />
     <ClCompile Include="Day_2.cpp" />
     <ClCompile Include="dayx.cpp" />
     <ClCompile Include="Day_0.cpp" />
@@ -210,6 +211,7 @@
     <ClInclude Include="ChoiceButton.h" />
     <ClInclude Include="Coffee.h" />
     <ClInclude Include="Day.h" />
+    <ClInclude Include="DayOverState.h" />
     <ClInclude Include="Days.h" />
     <ClInclude Include="dayx.h" />
     <ClInclude Include="Day_0.h" />
