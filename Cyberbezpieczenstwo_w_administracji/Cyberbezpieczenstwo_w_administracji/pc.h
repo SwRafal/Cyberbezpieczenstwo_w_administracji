@@ -30,6 +30,8 @@ public:
 	void turnOn();
 	void turnOff();
 
+	bool turnOffAvailable = false;
+
 	void update(sf::RenderWindow &win);
 	void draw(sf::RenderWindow &win);
 

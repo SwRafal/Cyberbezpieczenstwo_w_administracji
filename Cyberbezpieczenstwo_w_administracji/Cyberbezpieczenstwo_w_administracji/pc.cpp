@@ -49,7 +49,14 @@ void pc::update(sf::RenderWindow& win)
 		blackScreen.setColor(sf::Color(120, 150, 120));
 		if(powerOn)
 		{
-			open();
+			if(turnOffAvailable)
+			{
+				this->close();
+				this->turnOff();
+				turnOffAvailable = false;
+			}
+			else
+				open();
 		}
 		else if(!powerOn)
 		{

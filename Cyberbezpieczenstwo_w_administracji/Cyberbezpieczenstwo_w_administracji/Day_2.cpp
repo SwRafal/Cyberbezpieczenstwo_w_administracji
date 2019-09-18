@@ -282,10 +282,9 @@ void Day_2::update(GameState *gs, sf::RenderWindow &win)
 	{
 		//tutaj !!!!
 		
-		/*state = 47;
-		initDelay = true;
+		
 		while(!gs->officeApplicant->text_queue.empty())
-			gs->officeApplicant->text_queue.pop();*/
+			gs->officeApplicant->text_queue.pop();
 		//tutaj wyjebac
 		if(gm::Core::getClock().getElapsedTime().asSeconds() - time >= 5)
 		{
@@ -848,7 +847,7 @@ void Day_2::update(GameState *gs, sf::RenderWindow &win)
 			gs->playerIco.hide();
 			gs->officeLady->hide();
 			gs->data->nagany++;
-			//nagana i koniec dnia
+			state = 64;
 		}
 		break;
 	case 45: //another choice
@@ -984,7 +983,7 @@ void Day_2::update(GameState *gs, sf::RenderWindow &win)
 		{
 			gs->playerIco.hide();
 			gs->officeApplicant->hide();
-			//kkoniec dnia
+			state = 64;
 		}
 		break;
 
@@ -1019,6 +1018,7 @@ void Day_2::update(GameState *gs, sf::RenderWindow &win)
 			gs->computer->open();
 			gs->openedcomputer->setState(OpenPC::INFO_DISPLAY);
 			gs->openedcomputer->setExitButtonInactive();
+			showButtons = true;
 			state = 51;
 		}
 		if(gs->choice3->clicked(win))
@@ -1041,9 +1041,8 @@ void Day_2::update(GameState *gs, sf::RenderWindow &win)
 			gs->officeApplicant->setButtonActive();
 		}
 		if(gs->playerIco.hidden && gs->officeApplicant->hidden)
-		{
-			//wychodzenie do domu
-			state = 58;
+		{//dom
+			state = 64;
 		}
 		break;
 	case 58: //szef wbija
@@ -1104,10 +1103,37 @@ void Day_2::update(GameState *gs, sf::RenderWindow &win)
 		break;
 	
 
-	case 62: //wychodzenie do domu
-
+	case 62: //szefo
+		boss->state = 0;
+		boss->text.setTextString(L"Gratulacje pomog³eœ uj¹æ groŸnego przestêpcê.");
+		boss->addToQueue(L"W nagrodê dostaniesz wolne popo³udnie!");
+		boss->addToQueue(L" ");
+		boss->animate();
+		boss->show();
+		boss->setButtonActive();
+		state++;
 	break;
-	
+	case 63:
+		if(boss->state == 2)
+		{
+			boss->hide();
+			state++;
+		}
+		break;
+	case 64: //u re drunk go home
+		gs->playerIco.text.setTextString(L"Pora iœæ do domu. Muszê pamiêtaæ o zabraniu karty dostêpu z czytnika i wy³¹czeniu komputera");
+		gs->playerIco.show();
+		state++;
+		break;
+	case 65:
+		gs->computer->update(win);
+		gs->computer->turnOffAvailable = true;
+		if(!gs->computer->powerOn && !gs->cardReader->isCardInside())
+		{
+			gs->nextDay = true;
+			gs->playerIco.hide();
+		}
+		break;
 	}
 	
 }
