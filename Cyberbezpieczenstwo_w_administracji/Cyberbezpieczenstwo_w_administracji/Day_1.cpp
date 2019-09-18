@@ -10,32 +10,6 @@ Day_1::Day_1()
 	thought->changeText("Hmmm... Takie informacje przez telefon? To niezbyt bezpieczne...");
 	thought->setBubblePosition(0,-300);
 
-	//Quest 1
-	coffee_clicked = false;
-	open_book = false;
-	close_book = false;
-	//Quest 2
-	click_telephone = false;
-	finish_telephone = false;
-	finish_thought = false;
-	choose_user = false;
-	log_in = false;
-	finish_dialog = false;
-	click_mobile = false;
-	put_mobile = false;
-	change_lines = false;
-	remember_password = false;
-	write_down_password = false;
-	login_wifi = false;
-	choose_wifi = false;
-	refuse_wifi = false;
-	phone_it = false;
-	finish_phone_it = false;
-	rj45 = false;
-	//Quest 4
-	click_email = false;
-	refused_email = false;
-
 	//Initialize
 	ITguy = new OfficeApplicant(gm::Assets::getTexture("itGuy"));
 
@@ -52,6 +26,12 @@ Day_1::~Day_1()
 void Day_1::update(GameState *gs, sf::RenderWindow &win)
 {
 	thought->animate();
+	if (thought_time < gm::Core::getClock().getElapsedTime().asMilliseconds())
+	{
+		thought->closeBubble();
+		if (thought->scale <= 0.0)
+			thought->setBubblePosition(0, -300);
+	}
 
 	if(showButtons)
 	{
@@ -72,6 +52,11 @@ void Day_1::update(GameState *gs, sf::RenderWindow &win)
 				gs->choice1->setPosition(-300, 0);
 				gs->choice2->setPosition(-300, 0);
 			}
+		}
+		else if (state == 20)
+		{
+			gs->choice1->setPosition(420, 500);
+			gs->choice2->setPosition(620, 500);
 		}
 		else
 		{
@@ -154,7 +139,8 @@ void Day_1::update(GameState *gs, sf::RenderWindow &win)
 
 			if (gs->eyelids->getLvl() == FULL_CLOSED_EYES)
 			{
-				gs->lost = true;
+				gs->gameover(L"Zasn¹³eœ w pracy! Pamiêtaj o kawie!");
+				/*gs->lost = true;
 				gs->info_time = gm::Core::getClock().getElapsedTime().asMilliseconds() + GAMELOST_INFO_TIME;
 				gs->gamelost_info = new sf::Text;
 				gs->gamelost_info->setFont(*gm::Assets::getFont());
@@ -163,7 +149,7 @@ void Day_1::update(GameState *gs, sf::RenderWindow &win)
 				sf::Vector2f info_pos;
 				info_pos.x = SCREEN_WIDTH / 2 - (gs->gamelost_info->getLocalBounds().left + gs->gamelost_info->getLocalBounds().width) / 2;
 				info_pos.y = SCREEN_HEIGHT / 2 - (gs->gamelost_info->getLocalBounds().top + gs->gamelost_info->getLocalBounds().height) / 2;
-				gs->gamelost_info->setPosition(sf::Vector2f(info_pos));
+				gs->gamelost_info->setPosition(sf::Vector2f(info_pos));*/
 			}
 
 			break;
@@ -346,7 +332,8 @@ void Day_1::update(GameState *gs, sf::RenderWindow &win)
 			}
 			else if (gs->openedcomputer->getState() == OpenPC::LOGIN_WIFI)
 			{
-				gs->lost = true;
+				gs->gameover(L"Po³¹czy³eœ siê z internetem, nie zmieniwszy wczeœniej danych logowania!");
+				/*gs->lost = true;
 				gs->eyelids->close();
 				gs->info_time = gm::Core::getClock().getElapsedTime().asMilliseconds() + GAMELOST_INFO_TIME;
 				gs->gamelost_info = new sf::Text;
@@ -356,7 +343,7 @@ void Day_1::update(GameState *gs, sf::RenderWindow &win)
 				sf::Vector2f info_pos;
 				info_pos.x = SCREEN_WIDTH / 2 - (gs->gamelost_info->getLocalBounds().left + gs->gamelost_info->getLocalBounds().width) / 2;
 				info_pos.y = SCREEN_HEIGHT / 2 - (gs->gamelost_info->getLocalBounds().top + gs->gamelost_info->getLocalBounds().height) / 2;
-				gs->gamelost_info->setPosition(sf::Vector2f(info_pos));
+				gs->gamelost_info->setPosition(sf::Vector2f(info_pos));*/
 			}
 
 			break;
@@ -371,7 +358,8 @@ void Day_1::update(GameState *gs, sf::RenderWindow &win)
 			}
 			if (gs->openedcomputer->getState() != OpenPC::SET_PASSWORD && gs->data->password == "Admin")
 			{
-				gs->lost = true;
+				gs->gameover(L"Nie zmieni³eœ has³a i ktoœ wkrad³ siê na konto!");
+				/*gs->lost = true;
 				gs->eyelids->close();
 				gs->info_time = gm::Core::getClock().getElapsedTime().asMilliseconds() + GAMELOST_INFO_TIME;
 				gs->gamelost_info = new sf::Text;
@@ -381,7 +369,7 @@ void Day_1::update(GameState *gs, sf::RenderWindow &win)
 				sf::Vector2f info_pos;
 				info_pos.x = SCREEN_WIDTH / 2 - (gs->gamelost_info->getLocalBounds().left + gs->gamelost_info->getLocalBounds().width) / 2;
 				info_pos.y = SCREEN_HEIGHT / 2 - (gs->gamelost_info->getLocalBounds().top + gs->gamelost_info->getLocalBounds().height) / 2;
-				gs->gamelost_info->setPosition(sf::Vector2f(info_pos));
+				gs->gamelost_info->setPosition(sf::Vector2f(info_pos));*/
 			}
 			else if (gs->openedcomputer->getState() != OpenPC::SET_PASSWORD && gs->data->login != gs->data->name)
 			{
@@ -414,7 +402,8 @@ void Day_1::update(GameState *gs, sf::RenderWindow &win)
 				showButtons = false;
 				gs->officeLady->hide();
 
-				gs->lost = true;
+				gs->gameover(L"Firma sprz¹taj¹ca Ministerstwo znalaz³a twoje has³o do systemu!");
+				/*gs->lost = true;
 				gs->eyelids->close();
 				gs->info_time = gm::Core::getClock().getElapsedTime().asMilliseconds() + GAMELOST_INFO_TIME;
 				gs->gamelost_info = new sf::Text;
@@ -424,7 +413,7 @@ void Day_1::update(GameState *gs, sf::RenderWindow &win)
 				sf::Vector2f info_pos;
 				info_pos.x = SCREEN_WIDTH / 2 - (gs->gamelost_info->getLocalBounds().left + gs->gamelost_info->getLocalBounds().width) / 2;
 				info_pos.y = SCREEN_HEIGHT / 2 - (gs->gamelost_info->getLocalBounds().top + gs->gamelost_info->getLocalBounds().height) / 2;
-				gs->gamelost_info->setPosition(sf::Vector2f(info_pos));
+				gs->gamelost_info->setPosition(sf::Vector2f(info_pos));*/
 			}
 			else if (gs->choice2->clicked(gm::Core::getWindow()))
 			{
@@ -464,12 +453,6 @@ void Day_1::update(GameState *gs, sf::RenderWindow &win)
 			break;
 		case 15://Choose wifi
 
-			if (thought_time < gm::Core::getClock().getElapsedTime().asMilliseconds())
-			{
-				thought->closeBubble();
-				if (thought->scale <= 0.0)
-					thought->setBubblePosition(0, -300);
-			}
 			if (gs->openedcomputer->show_communique)
 			{
 				showButtons = true;
@@ -526,7 +509,7 @@ void Day_1::update(GameState *gs, sf::RenderWindow &win)
 					gs->data->nagany++;
 					gs->nagana_info = new sf::Text;
 					gs->nagana_info->setFont(*gm::Assets::getFont());
-					gs->nagana_info->setString(L"NAGANA OD SZEFA: Zainstalowa³eœ certyfikat z niepewnego Ÿród³a. Skontaktuj siê z dzia³em IT!");
+					gs->nagana_info->setString(L"Zainstalowa³eœ certyfikat z niepewnego Ÿród³a. Skontaktuj siê z dzia³em IT!");
 					gs->nagana_info->setFillColor(sf::Color::Red);
 					gs->info_time = gm::Core::getClock().getElapsedTime().asMilliseconds() + GAMELOST_INFO_TIME;
 					sf::Vector2f info_pos;
@@ -602,6 +585,16 @@ void Day_1::update(GameState *gs, sf::RenderWindow &win)
 					gs->naganiony = false;
 					rj45 = true;
 					state++;
+
+					gs->computer->open();
+					gs->openedcomputer->setState(OpenPC::MAIL);
+					gs->openedcomputer->newMail(L"Passwordmanagers",L"dzia³IT@Mindswszelakich.pl", L"Szanowny urzêdniku!\nPamiêtaj, aby nigdy nie zapisywaæ swoich hase³ w miejscach, "
+																									L"do których ktoœ nieupowa¿niony mo¿e mieæ dostêp.\n"
+																									L"W Ministerstwie u¿ywamy specjalnego programu do zarz¹dzania has³ami, pobierz go z za³¹cznika poni¿ej i dok³adnie przeczytaj instrukcje.\n\n"
+																									L"Za³¹cznik: Passmen.exe");
+					showButtons = true;
+					gs->choice1->setText(L"Pobierz");
+					gs->choice2->setText(L"Odrzuæ");
 				}
 			}
 			else if (ITguy->state >= 1)
@@ -633,14 +626,39 @@ void Day_1::update(GameState *gs, sf::RenderWindow &win)
 			break;
 		case 20://Click email
 
-			
-			gs->nextDay = true;
+			gs->openedcomputer->setState(OpenPC::MAIL);
+			if (gs->choice1->clicked(win))
+				gs->gameover(L"Pobra³eœ i zainstalowa³eœ zawirusowany za³¹cznik z nieautoryzowanego Ÿród³a. Twoje has³o do systemu zosta³o skradzione." 
+							 L"W wyniku twoich dzia³añ dosz³o do wycieku danych Ministerstwa a jego wiarygodnoœæ zosta³a zrujnowana. Zostajesz zwolniony dyscyplinarnie w trybie natychmiastowym.");
+			else if (gs->choice2->clicked(win))
+			{
+				while (!ITguy->text_queue.empty())
+					ITguy->text_queue.pop();
 
+				ITguy->text.setTextString(L"Pracownikom bez specjalnych uprawnieñ nie wolno samodzielnie instalowaæ ¿adnych programów.");
+				ITguy->addToQueue(L"Programy z niezaufanych Ÿróde³ s¹ niebezpieczene.");
+				ITguy->addToQueue(L"Dzia³ IT zajmie siê instalacj¹ potrzebnego ci oprogramowania.");
+				ITguy->addToQueue(L"Istotnie dobrze jest tworzyæ i zapisywaæ has³a w menad¿erze hase³,");
+				ITguy->addToQueue(L"wtedy s¹ one bezpieczne i musisz zapamiêtaæ tylko jedno has³o – do menad¿era.");
+				ITguy->addToQueue(L"Na dziœ dziêkujemy mo¿esz wracaæ do domu.");
+				ITguy->addToQueue(L"EOT");
+				ITguy->state = 0;
+				ITguy->show();
+
+				gs->openedcomputer->setState(OpenPC::USERS);
+				gs->computer->close();
+				showButtons = false;
+
+				state++;
+			}
 
 			break;
-		case 21://Refuse email
+		case 21://Dialog
 
-
+			if (ITguy->state >= 6)
+			{
+				gs->nextDay = true;
+			}
 
 			break;
 		default:
