@@ -6,7 +6,7 @@
 class Day_3 : public Day
 {
 private:
-	const float offset = 13;
+	const float offset = 10;
 
 public:
 	int state;
@@ -57,6 +57,8 @@ public:
 	bool finish_boss_dialog_3 = false;
 
 	//BURZA SPALI£A JE¿ELI ANIELA
+
+	const sf::Vector2f PAPERS_POS = sf::Vector2f(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2 - 120);
 
 	Day_3();
 	~Day_3();

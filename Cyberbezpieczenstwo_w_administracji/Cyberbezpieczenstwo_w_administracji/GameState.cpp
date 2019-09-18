@@ -51,7 +51,16 @@ GameState::~GameState()
 	doc = nullptr;
 	delete open_doc;
 	open_doc = nullptr;
+	delete xero;
+	xero = nullptr;
+	delete present;
+	present = nullptr;
+	delete papers;
+	papers = nullptr;
 
+	gm::Assets::EraseTexture("PAPERS");
+	gm::Assets::EraseTexture("XERO");
+	gm::Assets::EraseTexture("PRESENT");
 	gm::Assets::EraseTexture("RJ45");
 	gm::Assets::EraseTexture("SUSHI");
 	gm::Assets::EraseTexture("BIN");
@@ -298,6 +307,35 @@ void GameState::init()
 	{
 		rj45.setTexture(*gm::Assets::getTexture("RJ45"));
 		rj45.setPosition(sf::Vector2f(-300, 0));
+	}
+
+	//XERO
+	gm::Assets::LoadTexture("PRESENT", TEXTURE_PRESENT);
+	if (gm::Assets::getTexture("PRESENT") == nullptr)
+		error_win_close();
+	else
+	{
+		present = new gm::Button(sf::Vector2f(-300, 0),sf::Vector2f(XERO_WIDTH,XERO_HEIGHT));
+		present->setTexture(gm::Assets::getTexture("PRESENT"));
+		present->setIdleColor(sf::Color::White);
+		present->setAimedColor(sf::Color(190, 200, 190));
+		present->setPressColor(sf::Color(120, 150, 120));
+	}
+	gm::Assets::LoadTexture("XERO", TEXTURE_XERO);
+	if (gm::Assets::getTexture("XERO") == nullptr)
+		error_win_close();
+	else
+	{
+		xero = new Xero(gm::Assets::getTexture("XERO"));
+	}
+	gm::Assets::LoadTexture("PAPERS", TEXTURE_PAPERS);
+	if (gm::Assets::getTexture("PAPERS") == nullptr)
+		error_win_close();
+	else
+	{
+		papers = new sf::Sprite(*gm::Assets::getTexture("PAPERS"));
+		papers->setPosition(sf::Vector2f(-300, 0));
+
 	}
 
 	/*Starting settings*/
@@ -639,6 +677,9 @@ void GameState::draw(sf::RenderWindow& win)
 
 	/*Background*/
 	win.draw(wall);
+	win.draw(*present);
+	xero->draw(win);
+	win.draw(*papers);
 	win.draw(desk);
 	calendar->draw(win);
 	bell->draw(win);
@@ -675,7 +716,7 @@ void GameState::draw(sf::RenderWindow& win)
 	}
 
 	bin->draw(win);
-	battery->draw(win);
+	//battery->draw(win);
 
 	if (book->isOpened())
 		openedbook->draw(win);
@@ -700,6 +741,11 @@ void GameState::draw(sf::RenderWindow& win)
 		choice2->draw(win);
 
 		win.draw(rj45);
+	}
+	else if (day == 3)
+	{
+		choice1->draw(win);
+		choice2->draw(win);
 	}
 
 

@@ -64,8 +64,8 @@ void Day_1::update(GameState *gs, sf::RenderWindow &win)
 		{
 			if (gs->computer->isOpened())
 			{
-				gs->choice1->setPosition(MOBILE_POS_X - 300, MOBILE_POS_Y - 80);
-				gs->choice2->setPosition(MOBILE_POS_X - 150, MOBILE_POS_Y - 80);
+				gs->choice1->setPosition(MOBILE_POS_X - 300, MOBILE_POS_Y - 90);
+				gs->choice2->setPosition(MOBILE_POS_X - 150, MOBILE_POS_Y - 90);
 			}
 			else
 			{

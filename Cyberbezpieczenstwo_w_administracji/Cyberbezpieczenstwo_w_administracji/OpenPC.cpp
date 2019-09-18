@@ -287,98 +287,102 @@ bool OpenPC::update(sf::RenderWindow &win)
 		if(exitButtonActive)
 			return true;
 	}
-	switch (state)
+	if (!show_communique)
 	{
-	case USERS:
-		if (user_marek->clicked(win))
+		switch (state)
 		{
-			info->changeText(L"Nie znam has³a do tego konta...");
-			info->setBubblePosition(400, 100);
-			info->showBubble();
-			info_time = gm::Core::getClock().getElapsedTime().asMilliseconds() + INFO_DELAY;
-		}
-		else if (user_krysia->clicked(win))
-		{
-			if(krysiaPasswordKnown)
-			{
-				state = DESKTOP_KRYSIA;
-			}
-			else
+		case USERS:
+			if (user_marek->clicked(win))
 			{
 				info->changeText(L"Nie znam has³a do tego konta...");
 				info->setBubblePosition(400, 100);
 				info->showBubble();
-				info_time = gm::Core::getClock().getElapsedTime().asMilliseconds() + INFO_DELAY;	
-			}
-			
-		}
-		else if (user_player->clicked(win))
-		{
-			if(krysiaPasswordKnown)
-			{
-				info->changeText(L"Hmm, mia³em zalogowaæ siê na konto Krysi...");
-				info->setBubblePosition(400, 100);
-				info->showBubble();
 				info_time = gm::Core::getClock().getElapsedTime().asMilliseconds() + INFO_DELAY;
 			}
-			else
+			else if (user_krysia->clicked(win))
+			{
+				if (krysiaPasswordKnown)
+				{
+					state = DESKTOP_KRYSIA;
+				}
+				else
+				{
+					info->changeText(L"Nie znam has³a do tego konta...");
+					info->setBubblePosition(400, 100);
+					info->showBubble();
+					info_time = gm::Core::getClock().getElapsedTime().asMilliseconds() + INFO_DELAY;
+				}
+
+			}
+			else if (user_player->clicked(win))
+			{
+				if (krysiaPasswordKnown)
+				{
+					info->changeText(L"Hmm, mia³em zalogowaæ siê na konto Krysi...");
+					info->setBubblePosition(400, 100);
+					info->showBubble();
+					info_time = gm::Core::getClock().getElapsedTime().asMilliseconds() + INFO_DELAY;
+				}
+				else
+					setState(DESKTOP);
+			}
+			break;
+		case DESKTOP:
+			if (wifis->clicked(win) && !internet_works)
+				setState(LOGIN_WIFI);
+			else if (account_manager->clicked(win))
+				setState(SET_PASSWORD);
+			break;
+		case LOGIN_WIFI:
+			if (!show_communique)
+			{
+				if (wifi_mindswszelakich->clicked(win) || wifi_mindswszelakich_gov->clicked(win) || wifi_mindswszelakich_p1->clicked(win))
+				{
+					communique->setTextString(L"Aby pod³¹czyæ siê do sieci potrzebny jest certyfikat. Pobraæ?");
+					show_communique = true;
+				}
+				else if (wifi_Xfon_zosi->clicked(win))
+				{
+					info->changeText(L"Nie znam has³a do tej sieci...");
+					info->setBubblePosition(400, 100);
+					info->showBubble();
+					info_time = gm::Core::getClock().getElapsedTime().asMilliseconds() + INFO_DELAY;
+				}
+				else if (wifi_stolowka_wiesi->clicked(win))
+				{
+					info->changeText(L"Nie powinienem siê pod³¹czaæ do sieci publicznych...");
+					info->setBubblePosition(400, 100);
+					info->showBubble();
+					info_time = gm::Core::getClock().getElapsedTime().asMilliseconds() + INFO_DELAY;
+				}
+				else if (ok->clicked(win))
+					setState(DESKTOP);
+			}
+			break;
+		case SET_PASSWORD:
+			login->update(win, gm::Core::getEnteredChar());
+			password->update(win, gm::Core::getEnteredChar());
+			if (ok->clicked(win))
+			{
 				setState(DESKTOP);
-		}
-		break;
-	case DESKTOP:
-		if (wifis->clicked(win) && !internet_works)
-			setState(LOGIN_WIFI);
-		else if (account_manager->clicked(win))
-			setState(SET_PASSWORD);
-		break;
-	case LOGIN_WIFI:
-		if (!show_communique)
-		{
-			if (wifi_mindswszelakich->clicked(win) || wifi_mindswszelakich_gov->clicked(win) || wifi_mindswszelakich_p1->clicked(win))
-			{
-				communique->setTextString(L"Aby pod³¹czyæ siê do sieci potrzebny jest certyfikat. Pobraæ?");
-				show_communique = true;
 			}
-			else if (wifi_Xfon_zosi->clicked(win))
+			break;
+		case MAIL:
+			if (email.emailExit.clicked(gm::Core::getWindow()))
 			{
-				info->changeText(L"Nie znam has³a do tej sieci...");
-				info->setBubblePosition(400, 100);
-				info->showBubble();
-				info_time = gm::Core::getClock().getElapsedTime().asMilliseconds() + INFO_DELAY;
+				if (email.buttonActive)
+				{
+					setState(DESKTOP);
+				}
 			}
-			else if (wifi_stolowka_wiesi->clicked(win))
-			{
-				info->changeText(L"Nie powinienem siê pod³¹czaæ do sieci publicznych...");
-				info->setBubblePosition(400, 100);
-				info->showBubble();
-				info_time = gm::Core::getClock().getElapsedTime().asMilliseconds() + INFO_DELAY;
-			}
-			else if (ok->clicked(win))
-				setState(DESKTOP);
+			break;
+		case DESKTOP_KRYSIA:
+			break;
+		default:
+			break;
 		}
-		break;
-	case SET_PASSWORD:
-		login->update(win, gm::Core::getEnteredChar());
-		password->update(win, gm::Core::getEnteredChar());
-		if (ok->clicked(win))
-		{
-			setState(DESKTOP);
-		}
-		break;
-	case MAIL:
-		if(email.emailExit.clicked(gm::Core::getWindow()))
-		{
-			if(email.buttonActive)
-			{
-				setState(DESKTOP);
-			}
-		}
-		break;
-	case DESKTOP_KRYSIA:
-		break;
-	default:
-		break;
 	}
+	
 
 	info->animate();
 	if (info_time < gm::Core::getClock().getElapsedTime().asMilliseconds())

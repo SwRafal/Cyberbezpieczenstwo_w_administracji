@@ -282,10 +282,10 @@ void Day_2::update(GameState *gs, sf::RenderWindow &win)
 	{
 		//tutaj !!!!
 		
-		state = 47;
+		/*state = 47;
 		initDelay = true;
 		while(!gs->officeApplicant->text_queue.empty())
-			gs->officeApplicant->text_queue.pop();
+			gs->officeApplicant->text_queue.pop();*/
 		//tutaj wyjebac
 		if(gm::Core::getClock().getElapsedTime().asSeconds() - time >= 5)
 		{
@@ -785,7 +785,7 @@ void Day_2::update(GameState *gs, sf::RenderWindow &win)
 		if(gs->choice2->clicked(win))
 		{
 			gs->openedcomputer->setExitButtonActive();
-			gs->phone->text.setTextString(L"Kurierexpol przedra³ siê przez nasze filtry?!");
+			gs->phone->text.setTextString(L"Kurierexpol przedar³ siê przez nasze filtry?!");/*tu sie buguje*/
 			gs->phone->addToQueue(L"Dziêki za informacjê wysy³am grupê ratunkow¹. Bez odbioru.");
 			gs->playerIco.text.setTextString(L"W³aœnie dosta³em maila od Kurierexpol. W gazetach pisz¹, ¿e to atak phishingowy...");
 			state++;

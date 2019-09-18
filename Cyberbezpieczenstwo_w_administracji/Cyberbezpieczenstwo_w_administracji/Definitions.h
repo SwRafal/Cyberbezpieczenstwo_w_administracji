@@ -95,6 +95,9 @@
 #define TEXTURE_BIN "resources/textures/bin.png"
 #define TEXTURE_SUSHI "resources/textures/sushi.png"
 #define TEXTURE_RJ45 "resources/textures/kabel.png"
+#define TEXTURE_XERO "resources/textures/xero.png"
+#define TEXTURE_PRESENT "resources/textures/present.png"
+#define TEXTURE_PAPERS "resources/textures/papers.png"
 
 #define TEXTURE_TEXT_BUBBLE "resources/textures/textbubble.png"
 #define TEXTURE_CHAT_BUBBLE "resources/textures/chat bubble.png"

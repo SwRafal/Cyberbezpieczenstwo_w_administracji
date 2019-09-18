@@ -196,6 +196,7 @@
     <ClCompile Include="textBubble.cpp" />
     <ClCompile Include="Watch.cpp" />
     <ClCompile Include="Stamp.cpp" />
+    <ClCompile Include="Xero.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Applicant.h" />
@@ -262,6 +263,7 @@
     <ClInclude Include="textBubble.h" />
     <ClInclude Include="Watch.h" />
     <ClInclude Include="Stamp.h" />
+    <ClInclude Include="Xero.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

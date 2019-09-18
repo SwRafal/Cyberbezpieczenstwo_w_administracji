@@ -3,7 +3,7 @@
 
 Day_3::Day_3()
 {
-	showButtons = false;
+	showButtons = true;
 	init = false;
 	state = 0;
 	
@@ -45,39 +45,28 @@ void Day_3::update(GameState *gs, sf::RenderWindow &win)
 
 	if (showButtons)
 	{
-		if (state == 10)//Put mobile
+		if (state == 6 && gs->computer->isOpened())//Put mobile
 		{
-			gs->choice1->setPosition(MOBILE_POS_X - 300, MOBILE_POS_Y + 115);
-			gs->choice2->setPosition(MOBILE_POS_X - 150, MOBILE_POS_Y + 115);
+			gs->choice1->setPosition(SCREEN_WIDTH/2 - 110, SCREEN_HEIGHT/2 + 80);
 		}
-		else if (state == 16)//Refuse wifi
+		else if (state >= 9 && state <= 11)
 		{
-			if (gs->computer->isOpened())
-			{
-				gs->choice1->setPosition(MOBILE_POS_X - 300, MOBILE_POS_Y - 80);
-				gs->choice2->setPosition(MOBILE_POS_X - 150, MOBILE_POS_Y - 80);
-			}
-			else
-			{
-				gs->choice1->setPosition(-300, 0);
-				gs->choice2->setPosition(-300, 0);
-			}
+			gs->choice1->setPosition(SCREEN_WIDTH / 2 - 150, SCREEN_HEIGHT / 2 + 80);
+			gs->choice2->setPosition(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2 + 80);
 		}
 		else
 		{
-			gs->choice1->setPosition(gs->officeLady->chat.getPosition().x, gs->officeLady->chat.getPosition().y + gs->officeLady->chat.getGlobalBounds().height);
-			gs->choice2->setPosition(gs->choice1->background.getPosition().x + gs->choice1->background.getGlobalBounds().width, gs->choice1->background.getPosition().y);
+			gs->choice1->setPosition(0, -300);
+			gs->choice2->setPosition(0, -300);
 		}
-	}
-	else
-	{
-		gs->choice1->setPosition(0, -300);
-		gs->choice2->setPosition(0, -300);
 	}
 
 	if (!init)
 	{
 		gs->computer->update(win);
+
+		gs->xero->setPosition(sf::Vector2f(-300, 0));
+		gs->present->setPosition(sf::Vector2f(-300, 0));
 
 		gs->officeApplicant->text.setTextString(L"Petent: Czeœæ! Marek dziœ nie w pracy?");
 		gs->officeApplicant->addToQueue(L"Ja: Jego stanowisko zosta³o zajête.");
@@ -91,7 +80,7 @@ void Day_3::update(GameState *gs, sf::RenderWindow &win)
 		gs->openedbook->setInfoL(L"1. Zabezpiecz dane logowania");
 		gs->openedbook->setInfoR("");		
 
-		gs->choice1->setText(L"zapisz has³o");
+		gs->choice1->setText(L"OK");
 		gs->choice2->setText(L"nie zapisuj");
 
 		init = true;
@@ -216,7 +205,14 @@ void Day_3::update(GameState *gs, sf::RenderWindow &win)
 
 			break;
 		case 5://Finish boss dialog
-
+			if (boss->state >= 4)
+			{
+				gs->present->setPosition(XERO_POS_X, XERO_POS_Y);
+			}
+			if (boss->state >= 1)
+			{
+				gs->papers->setPosition(PAPERS_POS);
+			}
 			if (boss->state >= 6)
 			{
 				boss->hide();
@@ -229,38 +225,89 @@ void Day_3::update(GameState *gs, sf::RenderWindow &win)
 			}
 
 			break;
-		case 6://Uncover xero
+		case 6://Warning
+
+			if (gs->computer->isOpened())
+			{
+				if (gs->choice1->clicked(win))
+				{
+					gs->openedcomputer->show_communique = false;
+					state++;
+				}
+			}
+
+			break;
+		case 7://Uncover xero
 
 			if (!gs->computer->isOpened())
 			{
-				//xero->update();
+				if (gs->present->clicked(win))
+				{
+					gs->present->setPosition(-300, 0);
+					gs->xero->setPosition(XERO_POS_X, XERO_POS_Y);
+					state++;
+				}
 			}
 
-
 			break;
-		case 7://Papers_on_desk
+		case 8://Click Xero
 
+			if (gs->xero->clicked(win))
+			{
+				gs->choice1->setText(L"Skan próbny");
+				gs->choice2->setText(L"Skan dokumentów");
 
-
-			break;
-		case 8://Email warning
-
-
+				state++;
+			}
 
 			break;
 		case 9://Test scan
 
+			if (gs->choice1->clicked(win))
+			{
+				gs->choice1->setText(L"Ponowny skan próbny");
+				gs->choice2->setText(L"Skan dokumentów");
 
+				state++;
+			}
+			else if (gs->choice2->clicked(win))
+			{
+				state = 12;
+			}
 
 			break;
 		case 10://Test scan2
 
-
+			if (gs->choice1->clicked(win))
+			{
+				state++;
+			}
+			else if (gs->choice2->clicked(win))
+			{
+				state = 12;
+			}
 
 			break;
 		case 11://Test scan3
 
-
+			if (gs->choice1->clicked(win))
+			{
+				gs->lost = true;
+				gs->info_time = gm::Core::getClock().getElapsedTime().asMilliseconds() + GAMELOST_INFO_TIME;
+				gs->eyelids->close();
+				gs->gamelost_info = new sf::Text;
+				gs->gamelost_info->setFont(*gm::Assets::getFont());
+				gs->gamelost_info->setString(L"Ksero siê popsu³o!");
+				gs->gamelost_info->setCharacterSize(48);
+				sf::Vector2f info_pos;
+				info_pos.x = SCREEN_WIDTH / 2 - (gs->gamelost_info->getLocalBounds().left + gs->gamelost_info->getLocalBounds().width) / 2;
+				info_pos.y = SCREEN_HEIGHT / 2 - (gs->gamelost_info->getLocalBounds().top + gs->gamelost_info->getLocalBounds().height) / 2;
+				gs->gamelost_info->setPosition(sf::Vector2f(info_pos));
+			}
+			else if (gs->choice2->clicked(win))
+			{
+				state = 12;
+			}
 
 			break;
 		case 12://Scan papers

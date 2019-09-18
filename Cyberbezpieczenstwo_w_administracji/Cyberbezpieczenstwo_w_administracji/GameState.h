@@ -16,6 +16,7 @@
 #include "Mobile.h"
 #include "Document.h"
 #include "OpenedDoc.h"
+#include "Xero.h"
 
 #define GAMELOST_INFO_TIME 5000
 
@@ -84,6 +85,11 @@ private:
 	Bin *bin = nullptr;
 	sf::Sprite sushi;
 	sf::Sprite rj45;
+
+	//Day
+	gm::Button *present = nullptr;
+	Xero *xero = nullptr;
+	sf::Sprite *papers = nullptr;
 
 	PlayerIcon playerIco;
 	
