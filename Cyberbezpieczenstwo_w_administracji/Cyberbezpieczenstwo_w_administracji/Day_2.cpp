@@ -1130,6 +1130,7 @@ void Day_2::update(GameState *gs, sf::RenderWindow &win)
 		gs->computer->turnOffAvailable = true;
 		if(!gs->computer->powerOn && !gs->cardReader->isCardInside())
 		{
+			gs->dayover(L"");
 			gs->nextDay = true;
 			gs->playerIco.hide();
 		}

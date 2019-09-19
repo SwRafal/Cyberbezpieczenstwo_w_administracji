@@ -131,16 +131,7 @@ void Day_3::update(GameState *gs, sf::RenderWindow &win)
 
 			if (gs->eyelids->getLvl() == FULL_CLOSED_EYES)
 			{
-				gs->lost = true;
-				gs->info_time = gm::Core::getClock().getElapsedTime().asMilliseconds() + GAMELOST_INFO_TIME;
-				gs->gamelost_info = new sf::Text;
-				gs->gamelost_info->setFont(*gm::Assets::getFont());
-				gs->gamelost_info->setString(L"Zasn¹³eœ w pracy!\nPamiêtaj o kawie!");
-				gs->gamelost_info->setCharacterSize(48);
-				sf::Vector2f info_pos;
-				info_pos.x = SCREEN_WIDTH / 2 - (gs->gamelost_info->getLocalBounds().left + gs->gamelost_info->getLocalBounds().width) / 2;
-				info_pos.y = SCREEN_HEIGHT / 2 - (gs->gamelost_info->getLocalBounds().top + gs->gamelost_info->getLocalBounds().height) / 2;
-				gs->gamelost_info->setPosition(sf::Vector2f(info_pos));
+				gs->gameover(L"Zasn¹³eœ w pracy! Pamiêtaj o kawie!");
 			}
 
 			break;
@@ -292,17 +283,7 @@ void Day_3::update(GameState *gs, sf::RenderWindow &win)
 
 			if (gs->choice1->clicked(win))
 			{
-				gs->lost = true;
-				gs->info_time = gm::Core::getClock().getElapsedTime().asMilliseconds() + GAMELOST_INFO_TIME;
-				gs->eyelids->close();
-				gs->gamelost_info = new sf::Text;
-				gs->gamelost_info->setFont(*gm::Assets::getFont());
-				gs->gamelost_info->setString(L"Ksero siê popsu³o!");
-				gs->gamelost_info->setCharacterSize(48);
-				sf::Vector2f info_pos;
-				info_pos.x = SCREEN_WIDTH / 2 - (gs->gamelost_info->getLocalBounds().left + gs->gamelost_info->getLocalBounds().width) / 2;
-				info_pos.y = SCREEN_HEIGHT / 2 - (gs->gamelost_info->getLocalBounds().top + gs->gamelost_info->getLocalBounds().height) / 2;
-				gs->gamelost_info->setPosition(sf::Vector2f(info_pos));
+				gs->gameover(L"Ksero siê popsu³o!");
 			}
 			else if (gs->choice2->clicked(win))
 			{
@@ -393,7 +374,6 @@ void Day_3::update(GameState *gs, sf::RenderWindow &win)
 
 		}
 	}
-	std::cout << "end\n";
 }
 
 void Day_3::draw(GameState *gs, sf::RenderWindow &win)
