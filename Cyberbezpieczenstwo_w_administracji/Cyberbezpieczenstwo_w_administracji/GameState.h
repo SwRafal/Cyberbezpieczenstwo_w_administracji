@@ -108,6 +108,7 @@ private:
 	Day_1 *day1 = nullptr;/*!!!to musi byc wskaznik jezeli wzajemnie klasy sie includuja!!!*/
 	Day_2 *day2 = nullptr;
 	Day_3 *day3 = nullptr;
+	Day_4 *day4 = nullptr;
 
 	void gameover(sf::String reason);
 	void dayover(sf::String knowledge);//Knowledge to wiedza zdobyta podczas dnia
@@ -126,4 +127,5 @@ public:
 	friend class Day_1;
 	friend class Day_2;
 	friend class Day_3;
+	friend class Day_4;
 };

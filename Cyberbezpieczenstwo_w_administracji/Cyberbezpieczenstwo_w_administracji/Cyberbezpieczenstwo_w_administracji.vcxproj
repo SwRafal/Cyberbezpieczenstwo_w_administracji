@@ -153,6 +153,7 @@
     <ClCompile Include="Day_0.cpp" />
     <ClCompile Include="Day_1.cpp" />
     <ClCompile Include="Day_3.cpp" />
+    <ClCompile Include="Day_4.cpp" />
     <ClCompile Include="Document.cpp" />
     <ClCompile Include="email.cpp" />
     <ClCompile Include="Engine\Assets.cpp" />
@@ -218,6 +219,7 @@
     <ClInclude Include="Day_1.h" />
     <ClInclude Include="Day_2.h" />
     <ClInclude Include="Day_3.h" />
+    <ClInclude Include="Day_4.h" />
     <ClInclude Include="Definitions.h" />
     <ClInclude Include="Document.h" />
     <ClInclude Include="email.h" />

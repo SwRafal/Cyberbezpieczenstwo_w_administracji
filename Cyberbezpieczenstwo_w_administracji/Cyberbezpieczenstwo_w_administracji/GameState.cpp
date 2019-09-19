@@ -31,6 +31,8 @@ GameState::~GameState()
 	day2 = nullptr;
 	delete day3;
 	day3 = nullptr;
+	delete day4;
+	day4 = nullptr;
 
 	delete eyelids;
 
@@ -374,6 +376,7 @@ void GameState::init()
 	day1 = new Day_1;
 	day2 = new Day_2;
 	day3 = new Day_3;
+	day4 = new Day_4;
 
 	
 }
@@ -553,20 +556,38 @@ void GameState::update(sf::RenderWindow &win)
 				officeLady->text_queue.pop();
 			}
 
-			phone->addToQueue(L"Czeœæ " + data->name + L"! Jestem z dzia³u IT. Twoje dane logowania to:\nUser: Admin\nHas³o: Admin");
+			/*phone->addToQueue(L"Czeœæ " + data->name + L"! Jestem z dzia³u IT. Twoje dane logowania to:\nUser: Admin\nHas³o: Admin");
 			phone->addToQueue(L"Pamiêtaj, aby je zmieniæ po zalogowaniu!");
 
 			mobile->text.setTextString(L"Nadawca: 7780\n\n"
 				L"Gratulujemy! Jesteœ jednym z 10 szczêœliwców maj¹cych szansê na wygranie XMobile15 lub XTab Pro sponsorowanych"
 				L"przez naszych partnerów. Liczba prezentów jest ograniczona, decyduje kolejnoœæ zg³oszeñ. Aby otrzymaæ prezent"
-				L"wyœlij SMS o treœci JESTEM ZWYCIEZCA na numer 7780.");
+				L"wyœlij SMS o treœci JESTEM ZWYCIEZCA na numer 7780.");*/
 
 			officeLady->text.setTextString(L"To ty nie wiesz? Aniela wyrzuci³a swoje kartki z has³ami do œmieci. Na szczêœcie znaleŸli je pracownicy naszego ministerstwa.");
 			officeLady->addToQueue(L"Wiedzia³eœ? Istnieje coœ takiego jak Trashing. Z³odzieje przeszukuj¹ œmieci firm, ¿eby zdobyæ has³a czy inne wartoœciowe informacje.");
 			officeLady->addToQueue(L"W ¿yciu bym nie wpad³a na to, ¿e ktoœ mo¿e zdobywaæ dane w ten sposób. FUUUUUUUUUUUUJ.");
 			officeLady->addToQueue(L"EOT");
 		}
-
+		else if(day == 4)
+		{
+			eyelids->open();
+			coffee->reset();
+			computer->close();
+			computer->turnOff();
+			openedcomputer->setState(OpenPC::USERS);
+			openedcomputer->setLogin(data->login);
+			openedcomputer->setPassword(data->password);
+			watch->setHour(8, 0);
+			while (!phone->text_queue.empty())
+			{
+				phone->text_queue.pop();
+			}
+			while (!officeLady->text_queue.empty())
+			{
+				officeLady->text_queue.pop();
+			}
+		}
 
 		initialized = true;
 	}
@@ -628,8 +649,38 @@ void GameState::update(sf::RenderWindow &win)
 		}
 		day3->update(this, win);
 	}
+	else if(day == 4)
+	{
+		if (book->isOpened())
+		{
+			if (openedbook->update(win))
+				book->close();
+			return;
+		}
+		if (computer->isOpened())
+		{
+			if (openedcomputer->update(win))
+				computer->close();
+		}
+
+		if(day4->state > 3)
+		{
+			computer->update(win);
+			phone->update(win);
+			bell->update_rung(win);
+		}
+		
+
+		day4->update(this, win);
+	}
 	else//W inne dni
 	{
+		
+		
+		
+			
+		
+
 		if (book->isOpened())
 		{
 			if (openedbook->update(win))
@@ -662,6 +713,7 @@ void GameState::update(sf::RenderWindow &win)
 				no_stamp->setInactive();
 
 		}
+		cardReader->update();
 		card->update(win);
 	}
 
@@ -777,6 +829,8 @@ void GameState::draw(sf::RenderWindow& win)
 		day2->draw(this, win);
 	else if (day == 3)
 		day3->draw(this, win);
+	else if (day == 4)
+		day4->draw(this, win);
 	else
 	win.display();
 }

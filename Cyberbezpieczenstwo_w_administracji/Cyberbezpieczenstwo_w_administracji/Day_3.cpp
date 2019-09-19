@@ -13,7 +13,7 @@ Day_3::Day_3()
 
 	if (gm::Assets::getTexture("boss") == nullptr)
 	{
-		gm::Assets::LoadTexture("boss", TEXTURE_BELL);
+		gm::Assets::LoadTexture("boss", BOSS_TEXTURE);
 
 		if (gm::Assets::getTexture("boss") == nullptr)
 			error_win_close();

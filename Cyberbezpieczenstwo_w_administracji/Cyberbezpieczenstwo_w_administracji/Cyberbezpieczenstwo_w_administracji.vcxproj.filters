@@ -216,6 +216,9 @@
     <ClCompile Include="DayOverState.cpp">
       <Filter>Pliki źródłowe</Filter>
     </ClCompile>
+    <ClCompile Include="Day_4.cpp">
+      <Filter>Pliki źródłowe\Days</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\Assets.h">
@@ -415,6 +418,9 @@
     </ClInclude>
     <ClInclude Include="DayOverState.h">
       <Filter>Pliki nagłówkowe\GameStateItems</Filter>
+    </ClInclude>
+    <ClInclude Include="Day_4.h">
+      <Filter>Pliki nagłówkowe\Days</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

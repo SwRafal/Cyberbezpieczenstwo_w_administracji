@@ -291,7 +291,7 @@ void Day_0::draw(GameState* gs)
 		
 
 		gs->bin->draw(win);
-		gs->battery->draw(win);
+		
 
 		
 
@@ -321,7 +321,7 @@ void Day_0::draw(GameState* gs)
 		gs->mobile->draw(win);
 
 		gs->bin->draw(win);
-		gs->battery->draw(win);
+		
 
 		//border
 		win.draw(background);
@@ -352,7 +352,7 @@ void Day_0::draw(GameState* gs)
 		gs->mobile->draw(win);
 		
 		gs->bin->draw(win);
-		gs->battery->draw(win);
+		
 
 		//border
 		win.draw(background);
@@ -378,7 +378,7 @@ void Day_0::draw(GameState* gs)
 		gs->phone->draw(win);
 		gs->mobile->draw(win);
 		gs->bin->draw(win);
-		gs->battery->draw(win);
+	
 
 		
 
@@ -407,7 +407,7 @@ void Day_0::draw(GameState* gs)
 		gs->yes_stamp->draw(win);
 		gs->mobile->draw(win);
 		gs->bin->draw(win);
-		gs->battery->draw(win);
+		
 
 		
 
@@ -436,7 +436,7 @@ void Day_0::draw(GameState* gs)
 		gs->phone->draw(win);
 		gs->mobile->draw(win);
 		gs->bin->draw(win);
-		gs->battery->draw(win);
+		
 
 		
 
@@ -465,7 +465,7 @@ void Day_0::draw(GameState* gs)
 		gs->phone->draw(win);
 		gs->mobile->draw(win);
 		gs->bin->draw(win);
-		gs->battery->draw(win);
+		
 
 		
 
@@ -494,7 +494,7 @@ void Day_0::draw(GameState* gs)
 		gs->phone->draw(win);
 		gs->mobile->draw(win);
 		gs->bin->draw(win);
-		gs->battery->draw(win);
+		
 
 		
 
@@ -524,7 +524,7 @@ void Day_0::draw(GameState* gs)
 		gs->phone->draw(win);
 		gs->mobile->draw(win);
 		gs->bin->draw(win);
-		gs->battery->draw(win);
+		
 
 		
 
@@ -554,7 +554,7 @@ void Day_0::draw(GameState* gs)
 		gs->phone->draw(win);
 		
 		gs->bin->draw(win);
-		gs->battery->draw(win);
+		
 
 		
 
@@ -618,7 +618,7 @@ void Day_0::draw(GameState* gs)
 		gs->phone->draw(win);
 		gs->mobile->draw(win);
 		gs->bin->draw(win);
-		gs->battery->draw(win);
+		
 
 		
 
@@ -639,4 +639,3 @@ void Day_0::draw(GameState* gs)
 	}
 }
 
-//poprawic miejsce monitora i moze zmienic grafike zeby nie zaslanialo, poprawic miejsce table
