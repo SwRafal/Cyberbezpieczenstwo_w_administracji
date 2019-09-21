@@ -6,6 +6,8 @@
 #define BELL_SOUND_FILEPATH "resources/sounds/bell_sound.wav"
 #define PHONE_RINGING_FILEPATH "resources/sounds/phone ringing.wav"
 #define MOBILE_VIBRATION_FILEPATH "resources/sounds/mobile_vibration.wav"
+#define SOUND_SCANNING "resources/sounds/scanning.wav"
+#define SOUND_BEEP "resources/sounds/beep.wav"
 
 /* Fonts */
 
@@ -98,6 +100,7 @@
 #define TEXTURE_XERO "resources/textures/xero.png"
 #define TEXTURE_PRESENT "resources/textures/present.png"
 #define TEXTURE_PAPERS "resources/textures/papers.png"
+#define TEXTURE_PEACH "resources/textures/peach.png"
 
 #define TEXTURE_TEXT_BUBBLE "resources/textures/textbubble.png"
 #define TEXTURE_CHAT_BUBBLE "resources/textures/chat bubble.png"

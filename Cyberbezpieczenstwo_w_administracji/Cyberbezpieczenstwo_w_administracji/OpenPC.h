@@ -79,6 +79,8 @@ public:
 	
 
 private:
+	unsigned int *day = nullptr;
+
 	//Rzeczy w komputerze
 	PC_STATE state;
 	PC_STATE previousState;
@@ -123,7 +125,7 @@ private:
 public:
 
 	virtual void draw(sf::RenderTarget &target, sf::RenderStates states) = delete;
-	OpenPC(sf::Texture *texture, sf::Font *font);
+	OpenPC(sf::Texture *texture, sf::Font *font, unsigned int &day);
 	~OpenPC();
 
 	void draw(sf::RenderWindow &win);

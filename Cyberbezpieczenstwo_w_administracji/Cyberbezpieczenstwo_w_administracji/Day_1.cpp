@@ -333,17 +333,6 @@ void Day_1::update(GameState *gs, sf::RenderWindow &win)
 			else if (gs->openedcomputer->getState() == OpenPC::LOGIN_WIFI)
 			{
 				gs->gameover(L"Po³¹czy³eœ siê z internetem, nie zmieniwszy wczeœniej danych logowania!");
-				/*gs->lost = true;
-				gs->eyelids->close();
-				gs->info_time = gm::Core::getClock().getElapsedTime().asMilliseconds() + GAMELOST_INFO_TIME;
-				gs->gamelost_info = new sf::Text;
-				gs->gamelost_info->setFont(*gm::Assets::getFont());
-				gs->gamelost_info->setString(L"Po³¹czy³eœ siê z internetem nie\nzmieniwszy wczeœniej danych logowania!");
-				gs->gamelost_info->setCharacterSize(48);
-				sf::Vector2f info_pos;
-				info_pos.x = SCREEN_WIDTH / 2 - (gs->gamelost_info->getLocalBounds().left + gs->gamelost_info->getLocalBounds().width) / 2;
-				info_pos.y = SCREEN_HEIGHT / 2 - (gs->gamelost_info->getLocalBounds().top + gs->gamelost_info->getLocalBounds().height) / 2;
-				gs->gamelost_info->setPosition(sf::Vector2f(info_pos));*/
 			}
 
 			break;
@@ -359,17 +348,6 @@ void Day_1::update(GameState *gs, sf::RenderWindow &win)
 			if (gs->openedcomputer->getState() != OpenPC::SET_PASSWORD && gs->data->password == "Admin")
 			{
 				gs->gameover(L"Nie zmieni³eœ has³a i ktoœ wkrad³ siê na konto!");
-				/*gs->lost = true;
-				gs->eyelids->close();
-				gs->info_time = gm::Core::getClock().getElapsedTime().asMilliseconds() + GAMELOST_INFO_TIME;
-				gs->gamelost_info = new sf::Text;
-				gs->gamelost_info->setFont(*gm::Assets::getFont());
-				gs->gamelost_info->setString(L"Nie zmieni³eœ has³a i ktoœ wkrad³ siê na konto!");
-				gs->gamelost_info->setCharacterSize(48);
-				sf::Vector2f info_pos;
-				info_pos.x = SCREEN_WIDTH / 2 - (gs->gamelost_info->getLocalBounds().left + gs->gamelost_info->getLocalBounds().width) / 2;
-				info_pos.y = SCREEN_HEIGHT / 2 - (gs->gamelost_info->getLocalBounds().top + gs->gamelost_info->getLocalBounds().height) / 2;
-				gs->gamelost_info->setPosition(sf::Vector2f(info_pos));*/
 			}
 			else if (gs->openedcomputer->getState() != OpenPC::SET_PASSWORD && gs->data->login != gs->data->name)
 			{
@@ -381,6 +359,8 @@ void Day_1::update(GameState *gs, sf::RenderWindow &win)
 			}
 			else if (gs->openedcomputer->getState() != OpenPC::SET_PASSWORD)
 			{
+				gs->data->login = gs->openedcomputer->getLogin();
+				gs->data->password = gs->openedcomputer->getPassword();
 				gs->computer->close();
 			}
 			if (!gs->computer->isOpened())

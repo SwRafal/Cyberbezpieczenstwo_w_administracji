@@ -245,7 +245,7 @@ void GameState::init()
 		error_win_close();
 	else
 	{
-		openedcomputer = new OpenPC(gm::Assets::getTexture("OPENEDCOMPUTER"), gm::Assets::getFont());
+		openedcomputer = new OpenPC(gm::Assets::getTexture("OPENEDCOMPUTER"), gm::Assets::getFont(), day);
 	}
 
 	//card
@@ -833,4 +833,19 @@ void GameState::draw(sf::RenderWindow& win)
 		day4->draw(this, win);
 	else
 	win.display();
+}
+
+void GameState::nagana(sf::String text)
+{
+	naganiony = true;
+	data->nagany++;
+	nagana_info = new sf::Text;
+	nagana_info->setFont(*gm::Assets::getFont());
+	nagana_info->setString(text);
+	nagana_info->setFillColor(sf::Color::Red);
+	info_time = gm::Core::getClock().getElapsedTime().asMilliseconds() + GAMELOST_INFO_TIME;
+	sf::Vector2f info_pos;
+	info_pos.x = SCREEN_WIDTH / 2 - (nagana_info->getLocalBounds().left + nagana_info->getLocalBounds().width) / 2;
+	info_pos.y = SCREEN_HEIGHT / 2 - (nagana_info->getLocalBounds().top + nagana_info->getLocalBounds().height) / 2;
+	nagana_info->setPosition(sf::Vector2f(info_pos));
 }

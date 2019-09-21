@@ -1,9 +1,9 @@
 #include "OpenPC.h"
 #include "playerIcon.h"
 
-OpenPC::OpenPC(sf::Texture *texture, sf::Font *font) //: content(*gm::Assets::getFont())
+OpenPC::OpenPC(sf::Texture *texture, sf::Font *font, unsigned int &day) //: content(*gm::Assets::getFont())
 {
-	
+	this->day = &day;
 
 	this->setTexture(*texture);
 	this->setPosition(PC_OPENED_POS_X, PC_OPENED_POS_Y);
@@ -196,6 +196,9 @@ OpenPC::~OpenPC()
 
 	delete communique;
 	communique = nullptr;
+
+	delete day;
+	day = nullptr;
 }
 
 void OpenPC::draw(sf::RenderWindow &win)
@@ -207,8 +210,11 @@ void OpenPC::draw(sf::RenderWindow &win)
 	switch (state)
 	{
 	case USERS:
-		win.draw(*user_marek);
-		win.draw(*user_krysia);
+		if (*day < 3)
+		{
+			win.draw(*user_marek);
+			win.draw(*user_krysia);
+		}
 		win.draw(*user_player);
 		break;
 	case DESKTOP:
@@ -292,29 +298,32 @@ bool OpenPC::update(sf::RenderWindow &win)
 		switch (state)
 		{
 		case USERS:
-			if (user_marek->clicked(win))
+			if (*day < 3)
 			{
-				info->changeText(L"Nie znam has³a do tego konta...");
-				info->setBubblePosition(400, 100);
-				info->showBubble();
-				info_time = gm::Core::getClock().getElapsedTime().asMilliseconds() + INFO_DELAY;
-			}
-			else if (user_krysia->clicked(win))
-			{
-				if (krysiaPasswordKnown)
-				{
-					state = DESKTOP_KRYSIA;
-				}
-				else
+				if (user_marek->clicked(win))
 				{
 					info->changeText(L"Nie znam has³a do tego konta...");
 					info->setBubblePosition(400, 100);
 					info->showBubble();
 					info_time = gm::Core::getClock().getElapsedTime().asMilliseconds() + INFO_DELAY;
 				}
+				else if (user_krysia->clicked(win))
+				{
+					if (krysiaPasswordKnown)
+					{
+						state = DESKTOP_KRYSIA;
+					}
+					else
+					{
+						info->changeText(L"Nie znam has³a do tego konta...");
+						info->setBubblePosition(400, 100);
+						info->showBubble();
+						info_time = gm::Core::getClock().getElapsedTime().asMilliseconds() + INFO_DELAY;
+					}
 
+				}
 			}
-			else if (user_player->clicked(win))
+			if (user_player->clicked(win))
 			{
 				if (krysiaPasswordKnown)
 				{

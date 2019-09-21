@@ -6,6 +6,16 @@ Xero::Xero(sf::Texture *texture)
 	if (texture == nullptr)
 		error_win_close();
 
+	if (gm::Assets::getSound("scanning") == nullptr)
+	{
+		gm::Assets::LoadSound("scanning", SOUND_SCANNING);
+
+		if (gm::Assets::getSound("scanning") == nullptr)
+			error_win_close();
+		else
+			scanning.setBuffer(*gm::Assets::getSound("scanning"));
+	}
+
 	this->setTexture(texture);
 	setSize(sf::Vector2f(XERO_WIDTH, XERO_HEIGHT));
 	setIdleColor(sf::Color::White);

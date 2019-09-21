@@ -1,6 +1,7 @@
 #pragma once
 #include "Engine/Engine.h"
 #include "Functions.h"
+#include "Definitions.h"
 
 #define XERO_POS_X 910
 #define XERO_POS_Y 120
@@ -11,9 +12,10 @@ class Xero : public gm::Button
 {
 private:
 	bool _bussy;
-
+	
 public:
 	virtual void draw(sf::RenderTarget &target, sf::RenderStates states) = delete;
+	sf::Sound scanning;
 
 	Xero(sf::Texture *texture);
 

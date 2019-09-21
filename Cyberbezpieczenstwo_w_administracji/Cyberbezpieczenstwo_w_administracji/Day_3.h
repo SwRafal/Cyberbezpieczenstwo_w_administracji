@@ -20,16 +20,10 @@ public:
 	OfficeApplicant *ITguy = nullptr;
 	OfficeApplicant *boss = nullptr;
 
-	//Quest1
-	bool coffee_clicked = false;
-	bool open_book = false;
-	bool close_book = false;
-	bool finish_thought = false;
-	bool finish_dialog = false;
-	bool finish_boss_dialog = false;
-	bool uncover_xero = false;
-	bool papers_on_desk = false;
-	bool email_warning = false;
+	sf::Sprite *peach = nullptr;
+	sf::Int32 scan_time;
+	sf::Sound beep;
+
 	//Quest2
 	bool test_scan = false;
 	bool test_scan_2 = false;

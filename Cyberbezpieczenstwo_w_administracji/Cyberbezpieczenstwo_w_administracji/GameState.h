@@ -121,6 +121,7 @@ public:
 	void handleInput() override;
 	void update(sf::RenderWindow &win) override;
 	void draw(sf::RenderWindow& win) override;
+	void nagana(sf::String text);
 
 	friend class Day;
 	friend class Day_0;
