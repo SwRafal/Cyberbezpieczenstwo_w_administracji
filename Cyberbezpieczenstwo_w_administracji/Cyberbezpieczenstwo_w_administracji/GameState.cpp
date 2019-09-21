@@ -6,6 +6,7 @@
 
 void GameState::gameover(sf::String reason)
 {
+	dayShowScreen->dayNumber = 0;
 	data->whyFired = reason;
 	data->machine.addState(gm::StateRef(new GameOverState(this->data)));
 }
@@ -667,7 +668,8 @@ void GameState::update(sf::RenderWindow &win)
 		{
 			computer->update(win);
 			phone->update(win);
-			bell->update_rung(win);
+			if(bell->update_rung(win))
+				day4->callIn = true;
 		}
 		
 

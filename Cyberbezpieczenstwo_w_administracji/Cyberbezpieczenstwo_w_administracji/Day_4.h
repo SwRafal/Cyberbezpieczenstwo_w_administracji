@@ -9,6 +9,8 @@ public:
 	int state;
 	int offset;
 	bool showButtons;
+	bool callIn;
+	bool drawDowod;
 
 	//day start
 	bool coffeeClicked = false;
@@ -17,6 +19,12 @@ public:
 	//quest 1
 	bool showNewspaper;
 	sf::Sprite newspaper;
+	sf::Sprite dowod1;
+	bool quest1completed = false;
+	
+
+	//petenci
+	OfficeApplicant * petent1;
 
 	textBubble *thought = nullptr;
 	sf::Int32 thought_time;

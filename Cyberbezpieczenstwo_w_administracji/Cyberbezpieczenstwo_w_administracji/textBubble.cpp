@@ -50,6 +50,7 @@ void textBubble::animate()
 		showText = false;
 	if(appearing)
 	{
+		hidden = false;
 		if(scale < 1)
 		{
 			scale = scale + 0.05;
@@ -73,7 +74,11 @@ void textBubble::animate()
 			this->setScale(scale,scale);
 			keepInPlace();
 			if(scale <= 0.0)
+			{
 				disappearing = false;
+				hidden = true;
+			}
+				
 		}
 	}
 }

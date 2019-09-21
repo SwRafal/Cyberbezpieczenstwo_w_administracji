@@ -17,6 +17,7 @@ public:
 
 	gm::Information text;
 
+	bool hidden = true;
 	bool appearing;
 	bool disappearing;
 	bool showText;

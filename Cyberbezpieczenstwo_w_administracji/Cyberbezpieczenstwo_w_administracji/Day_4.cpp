@@ -30,7 +30,18 @@ Day_4::Day_4()
 	gm::Assets::LoadTexture("gazeta",GAZETA);
 	newspaper.setTexture(*gm::Assets::getTexture("gazeta"));
 	newspaper.setPosition(400,10);
+
+	gm::Assets::LoadTexture("petent1", PETENT1);
+	petent1 = new OfficeApplicant(gm::Assets::getTexture("petent1"));
+	petent1->move(0,2);
+	petent1->moveChatBox(30,0);
 	
+	gm::Assets::LoadTexture("dowod1", DOWOD1);
+	dowod1.setTexture(*gm::Assets::getTexture("dowod1"));
+	//dowod1.setPosition(285,133);
+
+	callIn = false;
+	drawDowod = false;
 }
 
 Day_4::~Day_4()
@@ -40,11 +51,31 @@ Day_4::~Day_4()
 
 void Day_4::update(GameState* gs, sf::RenderWindow& win)
 {
+	if(showButtons)
+	{
+		if(state == 0)
+		{
+			
+		}
+		else
+		{
+			gs->choice1->setPosition(SCREEN_WIDTH / 2 - gs->choice1->background.getGlobalBounds().width - 5,SCREEN_HEIGHT * 0.6);
+			gs->choice2->setPosition(SCREEN_WIDTH / 2 + 5,SCREEN_HEIGHT * 0.6);
+		}
+			
+	}
+	else
+	{
+		gs->choice1->setPosition(0,-300);
+		gs->choice2->setPosition(0,-300);
+	}
+
 	if(!gs->dayShowScreen->finished)
 		return;
 
 	itGuy->animate();
 	boss->animate();
+	petent1->animate();
 
 	switch (state)
 	{
@@ -86,6 +117,7 @@ void Day_4::update(GameState* gs, sf::RenderWindow& win)
 		}
 		break;
 	case 2: //read book
+		thought->animate();
 		gs->book->update(win);
 		gs->openedbook->update(win);
 		if(gs->book->isOpened())
@@ -162,11 +194,103 @@ void Day_4::update(GameState* gs, sf::RenderWindow& win)
 		if(thought_time < gm::Core::getClock().getElapsedTime().asMilliseconds())
 		{
 			thought->closeBubble();
-			thought->animate();
-			if(!thought->appearing && !thought->disappearing)
+			state++;
+		}
+		break;
+	case 8:
+		thought->animate();
+		if(thought->hidden)
 			{
-				std::cout << "wezwij typa";
+				state++;
 			}
+		break;
+	case 9: //1 petent
+		
+		if(callIn)
+		{
+			petent1->setButtonInactive();
+			petent1->text.setTextString(L"Dzieñ dobry, chcia³bym siê dowiedzieæ czy moje prawo jazdy ju¿ jest gotowe do odbioru?");
+			petent1->show();
+			gs->choice1->setText(L"Proszê o okazanie\ndowodu osobistego");
+			gs->choice2->setText(L"Prosze o podanie imienia,\nnazwiska i numeru PESEL");
+			showButtons = true;
+			state++;
+		}
+		break;
+	case 10:
+		if(gs->choice1->clicked(win))
+		{
+			drawDowod = true;
+			state++;
+		}
+		if(gs->choice2->clicked(win))
+		{
+			petent1->text.setTextString(L"Nazywam siê Jan Kowalski, numer PESEL to 93030215201");
+			gs->choice1->setText(L"Dokument jest gotowy do odbioru,\nproszê o okazanie dowodu osobistego");
+			gs->choice2->setText(L"Dokument jest gotowy do odbioru");
+			state = 14;
+		}
+		break;
+	case 11:
+		gs->choice1->setText(L"Wydaj prawo jazdy");
+		gs->choice2->setText(L"Skseruj dowód i wydaj prawo jazdy");
+		if(gs->choice1->clicked(win))
+		{
+			showButtons = false;
+			drawDowod = false;
+			dowod1.setPosition(SCREEN_WIDTH,SCREEN_HEIGHT);
+			petent1->text.setTextString(L"Dziêkujê");
+			petent1->addToQueue(L" ");
+			quest1completed = true;
+			petent1->setButtonActive();
+			petent1->state = 0;
+			state++;
+		}
+		if(gs->choice2->clicked(win))
+		{
+			showButtons = false;
+			drawDowod = false;
+			dowod1.setPosition(SCREEN_WIDTH,SCREEN_HEIGHT);
+			petent1->text.setTextString(L"Dziêkujê");
+			petent1->addToQueue(L" ");
+			petent1->setButtonActive();
+			petent1->state = 0;
+
+			thought_time = gm::Core::getClock().getElapsedTime().asMilliseconds() + 3000;
+			thought->changeText(L"Kserowanie dowodu nie jest niezbêdne do wykonania zadania, a nara¿a urz¹d na wyciek danych");
+			thought->showBubble();
+
+			gs->data->nagany++;
+			state = 13;
+			
+		}
+		break;
+	case 12:
+		if(petent1->state == 1)
+		{
+			petent1->hide();
+			
+			//go to quest 2
+		}
+		break;
+	case 13:
+		thought->animate();
+		if(thought_time < gm::Core::getClock().getElapsedTime().asMilliseconds())
+			thought->closeBubble();
+
+		if(thought->hidden)
+			state = 12;
+		break;
+	case 14:
+		if(gs->choice1->clicked(win))
+		{
+			drawDowod = true;
+			state = 11;
+		}
+		if(gs->choice2->clicked(win))
+		{
+			showButtons = false;
+			gs->gameover(L"Przekaza³eœ dokument zawierajacy dane osobowe (wyciek danych) osobie, której uprawnienia do otrzymania tych danych nie zweryfikowa³eœ.\nFa³szywy Jan Kowalski pos³u¿y³ siê prawem jazdy do wyp³aty gotówki w banku prawowitego w³aœciciela.\nZostajesz zwolniony dyscyplinarnie w trybie natychmiastowym");
 		}
 		break;
 	}
@@ -178,9 +302,20 @@ void Day_4::draw(GameState* gs, sf::RenderWindow& win)
 	thought->draw(win);
 	itGuy->draw(win);
 	boss->draw(win);
+	petent1->draw(win);
+
+	
+
+	if(drawDowod)
+	{
+		win.draw(dowod1);
+	}
 
 	if(showNewspaper)
 		win.draw(newspaper);
+
+	gs->choice1->draw(win);
+	gs->choice2->draw(win);
 
 	win.display();
 }

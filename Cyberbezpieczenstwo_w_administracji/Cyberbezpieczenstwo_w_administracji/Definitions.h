@@ -152,3 +152,7 @@
 /* day4 */
 
 #define GAZETA "resources/textures/gazeta.png"
+
+//petenci
+#define PETENT1 "resources/textures/petent1.png"
+#define DOWOD1 "resources/textures/dowod1.png"
