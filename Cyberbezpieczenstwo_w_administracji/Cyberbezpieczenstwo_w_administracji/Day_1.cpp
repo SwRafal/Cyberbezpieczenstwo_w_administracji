@@ -383,17 +383,6 @@ void Day_1::update(GameState *gs, sf::RenderWindow &win)
 				gs->officeLady->hide();
 
 				gs->gameover(L"Firma sprz¹taj¹ca Ministerstwo znalaz³a twoje has³o do systemu!");
-				/*gs->lost = true;
-				gs->eyelids->close();
-				gs->info_time = gm::Core::getClock().getElapsedTime().asMilliseconds() + GAMELOST_INFO_TIME;
-				gs->gamelost_info = new sf::Text;
-				gs->gamelost_info->setFont(*gm::Assets::getFont());
-				gs->gamelost_info->setString(L"Firma sprz¹taj¹ca Ministerstwo znalaz³a twoje has³o do systemu!");
-				gs->gamelost_info->setCharacterSize(48);
-				sf::Vector2f info_pos;
-				info_pos.x = SCREEN_WIDTH / 2 - (gs->gamelost_info->getLocalBounds().left + gs->gamelost_info->getLocalBounds().width) / 2;
-				info_pos.y = SCREEN_HEIGHT / 2 - (gs->gamelost_info->getLocalBounds().top + gs->gamelost_info->getLocalBounds().height) / 2;
-				gs->gamelost_info->setPosition(sf::Vector2f(info_pos));*/
 			}
 			else if (gs->choice2->clicked(gm::Core::getWindow()))
 			{
@@ -477,6 +466,7 @@ void Day_1::update(GameState *gs, sf::RenderWindow &win)
 					state+=3;
 
 					ITguy->show();
+					gs->rj45.setPosition(830, 400);
 				}
 			}
 			else
@@ -595,13 +585,6 @@ void Day_1::update(GameState *gs, sf::RenderWindow &win)
 			{	
 					gs->rj45.move(0, 2);
 			}
-			else
-			{
-				if (gs->rj45.getPosition().x > 280)
-				{
-					gs->rj45.move(-20, 0);
-				}
-			}
 
 			break;
 		case 20://Click email
@@ -637,13 +620,17 @@ void Day_1::update(GameState *gs, sf::RenderWindow &win)
 
 			if (ITguy->state >= 6)
 			{
-				gs->dayover(L"-zaczynanie dnia od picia kawy\n"
-							L"-sprawdzanie wytycznych\n"
-							L"-logowanie do systemu\n"
-							L"-korzystanie z pomocy dzia³u IT\n"
-							L"-ochrona has³a\n"
-							L"-odrzucanie za³¹czników nieznanych Ÿróde³\n");
-				gs->nextDay = true;
+				ITguy->hide();
+				if (ITguy->hidden)
+				{
+					gs->dayover(L"-zaczynanie dnia od picia kawy\n"
+						L"-sprawdzanie wytycznych\n"
+						L"-logowanie do systemu\n"
+						L"-korzystanie z pomocy dzia³u IT\n"
+						L"-ochrona has³a\n"
+						L"-odrzucanie za³¹czników nieznanych Ÿróde³\n");
+					gs->nextDay = true;
+				}
 			}
 
 			break;

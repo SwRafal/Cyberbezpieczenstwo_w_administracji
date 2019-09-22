@@ -51,7 +51,7 @@ private:
 	Eyelids *eyelids = nullptr;
 
 	/*Settings*/
-	unsigned int day;
+	int day;
 	bool initialized;
 	bool nextDay;
 

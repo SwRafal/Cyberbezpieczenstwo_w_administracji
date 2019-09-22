@@ -6,10 +6,10 @@
 class dayx : public sf::RectangleShape
 {
 public:
-	dayx(int _dayNumber);
+	dayx(int &_dayNumber);
 	~dayx();
 	sf::Text title;
-	int dayNumber;
+	int *dayNumber;
 	void update();
 	int opacity;
 	int timer;
