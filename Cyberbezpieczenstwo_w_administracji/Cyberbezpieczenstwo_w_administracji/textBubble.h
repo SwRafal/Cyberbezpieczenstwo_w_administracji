@@ -27,8 +27,9 @@ public:
 	void changeText(sf::String);
 
 	float scale;
+	float _maxScale;
 
-	textBubble(sf::Texture *tex);
+	textBubble(sf::Texture *tex, float maxScale = 1);
 	~textBubble();
 
 	int posx;

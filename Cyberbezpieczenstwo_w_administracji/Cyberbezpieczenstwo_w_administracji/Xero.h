@@ -11,7 +11,8 @@
 class Xero : public gm::Button
 {
 private:
-	bool _bussy;
+	bool _bussy = false;
+	bool side = false;
 	
 public:
 	virtual void draw(sf::RenderTarget &target, sf::RenderStates states) = delete;
@@ -20,6 +21,7 @@ public:
 	Xero(sf::Texture *texture);
 
 	void draw(sf::RenderWindow &win);
+	void update();
 	
 	bool putIn();//True if succesful
 	bool takeOut();//True if succesful

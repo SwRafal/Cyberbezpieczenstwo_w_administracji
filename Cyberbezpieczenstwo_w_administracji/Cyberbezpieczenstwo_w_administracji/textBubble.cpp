@@ -3,7 +3,7 @@
 
 
 
-textBubble::textBubble(sf::Texture *tex) : text(*gm::Assets::getFont())
+textBubble::textBubble(sf::Texture *tex, float maxScale) : text(*gm::Assets::getFont())
 {
 	if (tex == nullptr)
 		error_win_close();
@@ -21,7 +21,7 @@ textBubble::textBubble(sf::Texture *tex) : text(*gm::Assets::getFont())
 	disappearing = true;
 	showText = false;
 
-	
+	_maxScale = maxScale;
 	scale = 0.05;
 	this->setScale(scale,scale);
 
@@ -46,17 +46,17 @@ void textBubble::keepInPlace()
 
 void textBubble::animate()
 {
-	if(scale < 1)
+	if(scale < _maxScale)
 		showText = false;
 	if(appearing)
 	{
 		hidden = false;
-		if(scale < 1)
+		if(scale < _maxScale)
 		{
 			scale = scale + 0.05;
 			this->setScale(scale,scale);
 			keepInPlace();
-			if(scale >= 1.0)
+			if(scale >= _maxScale)
 			{
 				showText = true;
 				text.setPosition(posx - this->getGlobalBounds().width/2 + (this->getGlobalBounds().width * 0.01) , posy - this->getGlobalBounds().height / 2 + (this->getGlobalBounds().height * 0.01));

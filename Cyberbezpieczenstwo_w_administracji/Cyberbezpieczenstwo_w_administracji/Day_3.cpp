@@ -6,10 +6,13 @@ Day_3::Day_3()
 	showButtons = true;
 	init = false;
 	state = 0;
-	
+
 	thought = new textBubble(gm::Assets::getTexture("text bubble"));
 	thought->changeText(L"W koñcu usunêli konta starych u¿ytkowników...");
 	thought->setBubblePosition(0, -300);
+
+	ringIT = new textBubble(gm::Assets::getTexture("chat bubble"), 0.5);
+	ringIT->setBubblePosition(0, -300);
 
 	if (gm::Assets::getSound("beep") == nullptr)
 	{
@@ -69,7 +72,10 @@ Day_3::~Day_3()
 void Day_3::update(GameState *gs, sf::RenderWindow &win)
 {
 	thought->animate();
+	ringIT->animate();
 	boss->animate();
+
+	gs->mobile->pickedUp = false;
 
 	if (gs->info_time < gm::Core::getClock().getElapsedTime().asMilliseconds())
 	{
@@ -288,13 +294,15 @@ void Day_3::update(GameState *gs, sf::RenderWindow &win)
 
 				gs->xero->scanning.play();
 				peach[0].setPosition(XERO_POS_X + XERO_WIDTH/2, XERO_POS_Y);
-				scan_time = gm::Core::getClock().getElapsedTime().asMilliseconds() + GAMELOST_INFO_TIME;
+				scan_time = gm::Core::getClock().getElapsedTime().asMilliseconds() + 30000;
+				gs->xero->putIn();
 
 				state++;
 			}
 			else if (gs->choice2->clicked(win))
 			{
 				scan_time = gm::Core::getClock().getElapsedTime().asMilliseconds() + 30000;
+				gs->xero->putIn();
 				state = 12;
 			}
 
@@ -303,12 +311,15 @@ void Day_3::update(GameState *gs, sf::RenderWindow &win)
 
 			if (gm::Core::getClock().getElapsedTime().asMilliseconds() < scan_time)
 			{
-				if (peach[0].getPosition().y < 455)
+				if (peach[0].getPosition().y < 475)
 				{
 					peach[0].move(0, 10);
 				}
 				else
+				{
 					scan_time = gm::Core::getClock().getElapsedTime().asMilliseconds();
+					gs->xero->takeOut();
+				}
 			}
 			else
 			{
@@ -318,13 +329,15 @@ void Day_3::update(GameState *gs, sf::RenderWindow &win)
 
 					gs->xero->scanning.play();
 					peach[1].setPosition(XERO_POS_X + XERO_WIDTH / 2 + 15, XERO_POS_Y);
-					scan_time = gm::Core::getClock().getElapsedTime().asMilliseconds() + GAMELOST_INFO_TIME;
+					scan_time = gm::Core::getClock().getElapsedTime().asMilliseconds() + 30000;
+					gs->xero->putIn();
 
 					state++;
 				}
 				else if (gs->choice2->clicked(win))
 				{
 					scan_time = gm::Core::getClock().getElapsedTime().asMilliseconds() + 30000;
+					gs->xero->putIn();
 					state = 12;
 				}
 			}
@@ -334,12 +347,15 @@ void Day_3::update(GameState *gs, sf::RenderWindow &win)
 
 			if (gm::Core::getClock().getElapsedTime().asMilliseconds() < scan_time)
 			{
-				if (peach[1].getPosition().y < 465)
+				if (peach[1].getPosition().y < 485)
 				{
 					peach[1].move(0, 10);
 				}
 				else
+				{
 					scan_time = gm::Core::getClock().getElapsedTime().asMilliseconds();
+					gs->xero->takeOut();
+				}
 			}
 			else
 			{
@@ -350,6 +366,7 @@ void Day_3::update(GameState *gs, sf::RenderWindow &win)
 				else if (gs->choice2->clicked(win))
 				{
 					scan_time = gm::Core::getClock().getElapsedTime().asMilliseconds() + 30000;
+					gs->xero->putIn();
 					state = 12;
 				}
 			}
@@ -362,9 +379,7 @@ void Day_3::update(GameState *gs, sf::RenderWindow &win)
 				if (gs->xero->scanning.getStatus() == sf::Sound::Stopped)
 				{
 					gs->xero->scanning.play();
-					
 				}
-				gs->papers->move(0, 0.08);
 			}
 			else
 			{
@@ -372,9 +387,10 @@ void Day_3::update(GameState *gs, sf::RenderWindow &win)
 				gs->openedcomputer->communique->setTextString(L"FILTRY ZNÓW DZIA£AJ¥!");
 				gs->openedcomputer->show_communique = true;
 				gs->computer->open();
+				gs->xero->takeOut();
 				state++;
 			}
-				
+
 
 			break;
 		case 13://Finished scan
@@ -389,7 +405,7 @@ void Day_3::update(GameState *gs, sf::RenderWindow &win)
 					thought->showBubble();
 					thought->setBubblePosition(900, 100);
 					thought->text.setTextString(L"Zaciêcie papieru. POMOCY!!!");
-					
+					gs->xero->setTexture(gm::Assets::getTexture("XEROBROKEN"));
 
 					state++;
 				}
@@ -407,6 +423,8 @@ void Day_3::update(GameState *gs, sf::RenderWindow &win)
 				thought->closeBubble();
 
 				scan_time = gm::Core::getClock().getElapsedTime().asMilliseconds() + 12000;
+				gs->xero->putIn();
+				gs->xero->setTexture(gm::Assets::getTexture("XERO"));
 
 				state++;
 			}
@@ -424,9 +442,7 @@ void Day_3::update(GameState *gs, sf::RenderWindow &win)
 				if (gs->xero->scanning.getStatus() == sf::Sound::Stopped)
 				{
 					gs->xero->scanning.play();
-
 				}
-				gs->papers->move(0, 0.08);
 			}
 			else
 			{
@@ -434,6 +450,7 @@ void Day_3::update(GameState *gs, sf::RenderWindow &win)
 				thought->setBubblePosition(250, 500);
 				thought->text.setTextString(L"Ufff… tym razem oby³o siê bez zniszczenia dokumentów");
 				thought_time = gm::Core::getClock().getElapsedTime().asMilliseconds() + THOUGHT_TIME;
+				gs->xero->takeOut();
 
 				state++;
 			}
@@ -463,23 +480,76 @@ void Day_3::update(GameState *gs, sf::RenderWindow &win)
 
 			if (!thought->appearing && !thought->disappearing)
 			{
-				thought->setBubblePosition(-300,0);
+				thought->setBubblePosition(-300, 0);
 			}
 			if (boss->state >= 3)
 			{
 				boss->hide();
+				gs->officeLady->show();
+
 				state++;
 			}
 
 			break;
 		case 18://Finish boss dialog 2
 
+			if (gs->officeLady->ready)
+			{
+				gs->officeLady->hide();
+				ringIT->showBubble();
+				gs->mobile->call();
 
+				state++;
+			}
 
 			break;
 		case 19://Things vanish
 
+			gs->mobile->update(win);
+			if (gs->papers->getPosition().x < gs->officeLady->getPosition().x)
+				gs->papers->move(10, 0);
+			if (gs->phone->aimed(win))
+			{
+				if (gs->phone->clicked(win))
+				{
+					ringIT->setBubblePosition(-300, 0);
+					ringIT->closeBubble();
+					state++;
+					break;
+				}
+					
+				ringIT->setBubblePosition(5, 470);
+				ringIT->text.setTextString(L"Zadzwoñ do IT");
+			}
+			else if (gs->mobile->aimed(win))
+			{
+				if (gs->mobile->pickedUp)
+				{
+					ringIT->setBubblePosition(-300, 0);
+					ringIT->closeBubble();
+					gs->mobile->pickedUp = false;
+					state = 23;
 
+					gs->naganiony = true;
+					gs->nagana_info = new sf::Text;
+					gs->nagana_info->setOutlineThickness(5);
+					gs->nagana_info->setOutlineColor(sf::Color::Black);
+					gs->nagana_info->setFont(*gm::Assets::getFont());
+					gs->nagana_info->setString(L"Pocieszanie Anieli...");
+					gs->nagana_info->setFillColor(sf::Color::White);
+					gs->info_time = gm::Core::getClock().getElapsedTime().asMilliseconds() + GAMELOST_INFO_TIME;
+					sf::Vector2f info_pos;
+					info_pos.x = SCREEN_WIDTH / 2 - (gs->nagana_info->getLocalBounds().left + gs->nagana_info->getLocalBounds().width) / 2;
+					info_pos.y = SCREEN_HEIGHT / 2 - (gs->nagana_info->getLocalBounds().top + gs->nagana_info->getLocalBounds().height) / 2;
+					gs->nagana_info->setPosition(sf::Vector2f(info_pos));
+					break;
+				}
+					
+				ringIT->setBubblePosition(585, 475);
+				ringIT->text.setTextString(L"Dzwoni Aniela Ministerstwo");
+			}
+			else
+				ringIT->setBubblePosition(-300, 0);
 
 			break;
 		case 20://Phone pickup
@@ -494,7 +564,7 @@ void Day_3::update(GameState *gs, sf::RenderWindow &win)
 			break;
 		case 22://Finish IT dialog 
 
-
+			
 
 			break;
 		case 23://Mobile pickup
@@ -535,6 +605,7 @@ void Day_3::draw(GameState *gs, sf::RenderWindow &win)
 	{
 		win.draw(peach[i]);
 	}
+	ringIT->draw(win);
 
 	win.display();
 }

@@ -337,6 +337,10 @@ void GameState::init()
 	else
 	{
 		xero = new Xero(gm::Assets::getTexture("XERO"));
+
+		gm::Assets::LoadTexture("XEROBROKEN", TEXTURE_XEROBROKEN);
+		if (gm::Assets::getTexture("XEROBROKEN") == nullptr)
+			error_win_close();
 	}
 	gm::Assets::LoadTexture("PAPERS", TEXTURE_PAPERS);
 	if (gm::Assets::getTexture("PAPERS") == nullptr)
@@ -443,6 +447,7 @@ void GameState::update(sf::RenderWindow &win)
 	officeApplicant->animate();
 	textField->update(gm::Core::getWindow(),gm::Core::getEnteredChar());
 	eyelids->update();
+	xero->update();
 
 	/* days management */
 
@@ -782,7 +787,7 @@ void GameState::draw(sf::RenderWindow& win)
 		openedbook->draw(win);
 	if (computer->isOpened())
 		openedcomputer->draw(win);
-	if (mobile->pickedUp)
+	if (mobile->pickedUp && day != 3)
 		mobile->draw_view(win);
 
 

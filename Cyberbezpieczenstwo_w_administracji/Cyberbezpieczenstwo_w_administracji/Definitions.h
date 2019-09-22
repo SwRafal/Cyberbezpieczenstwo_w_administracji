@@ -18,7 +18,7 @@
 #define ICON_FILEPATH "resources/icon.png"
 #define ICON_SIZE 32
 
-#define SCREEN_TITLE "Cyberbezpieczeñstwo w administracji"
+#define SCREEN_TITLE L"Cyberbezpieczeñstwo w administracji"
 #define SCREEN_WIDTH 1280
 #define SCREEN_HEIGHT 720
 #define FPS 60
@@ -98,6 +98,7 @@
 #define TEXTURE_SUSHI "resources/textures/sushi.png"
 #define TEXTURE_RJ45 "resources/textures/kabel.png"
 #define TEXTURE_XERO "resources/textures/xero.png"
+#define TEXTURE_XEROBROKEN "resources/textures/xerobroken.png"
 #define TEXTURE_PRESENT "resources/textures/present.png"
 #define TEXTURE_PAPERS "resources/textures/papers.png"
 #define TEXTURE_PEACH "resources/textures/peach.png"

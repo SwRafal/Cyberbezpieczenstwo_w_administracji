@@ -14,6 +14,8 @@ public:
 
 	bool showButtons;
 
+	textBubble *ringIT = nullptr;
+
 	textBubble *thought = nullptr;
 	sf::Int32 thought_time;
 

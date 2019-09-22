@@ -29,6 +29,22 @@ void Xero::draw(sf::RenderWindow &win)
 	win.draw((sf::RectangleShape)*this);
 }
 
+void Xero::update()
+{
+	if (_bussy)
+	{
+		if (side)
+		{
+			move(2, 0);
+		}
+		else
+		{
+			move(-2, 0);
+		}
+		side = !side;
+	}
+}
+
 bool Xero::putIn()
 {
 	if (_bussy)

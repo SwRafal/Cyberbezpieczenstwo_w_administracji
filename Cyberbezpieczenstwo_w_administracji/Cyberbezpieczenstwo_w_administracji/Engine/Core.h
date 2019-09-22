@@ -9,7 +9,7 @@ namespace gm
 	{
 	public:
 		/*Editable constants*/
-		const std::string window_name = SCREEN_TITLE;
+		const sf::String window_name = SCREEN_TITLE;
 		const unsigned int resolution_x = SCREEN_WIDTH;
 		const unsigned int resolution_y = SCREEN_HEIGHT;
 		const unsigned int fps = FPS;
