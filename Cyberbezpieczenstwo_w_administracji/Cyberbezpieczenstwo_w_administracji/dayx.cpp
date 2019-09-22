@@ -3,14 +3,14 @@
 #include "Engine/Assets.h"
 
 
-dayx::dayx(int _dayNumber)
+dayx::dayx(int &_dayNumber)
 {
 	finished = false;
 	opacitySpeed = 5;
 	show = false;
 	timer = 0;
 	opacity = 0;
-	dayNumber = _dayNumber;
+	dayNumber = &_dayNumber;
 	this->setSize(sf::Vector2f(SCREEN_WIDTH,SCREEN_HEIGHT));
 	this->setFillColor(sf::Color(0,0,0,0));
 	title.setFillColor(sf::Color::White);
@@ -18,7 +18,7 @@ dayx::dayx(int _dayNumber)
 	title.setFont(*gm::Assets::getFont());
 	title.setCharacterSize(80);
 	title.setString(L"Dzieñ  ");
-	title.setString(title.getString() + std::to_string(dayNumber));
+	title.setString(title.getString() + std::to_string(*dayNumber));
 	title.setPosition(SCREEN_WIDTH /2 - title.getGlobalBounds().width /2 , SCREEN_HEIGHT / 2 - title.getGlobalBounds().height/2);
 }
 
@@ -73,7 +73,7 @@ void dayx::reset()
 void dayx::nextDay()
 {
 	this->reset();
-	dayNumber++;
+	(*dayNumber)++;
 	title.setString(L"Dzieñ  ");
-	title.setString(title.getString() + std::to_string(dayNumber));
+	title.setString(title.getString() + std::to_string(*dayNumber));
 }

@@ -349,7 +349,7 @@ void GameState::init()
 	}
 
 	/*Starting settings*/
-	dayShowScreen = new dayx(this->data->day);
+	dayShowScreen = new dayx(this->day);
 	initialized = false;
 	nextDay = false;
 	day = 0;
@@ -721,7 +721,6 @@ void GameState::update(sf::RenderWindow &win)
 
 	if(nextDay)
 	{
-		day++;
 		nextDay = false;
 		initialized = false;
 		dayShowScreen->nextDay();

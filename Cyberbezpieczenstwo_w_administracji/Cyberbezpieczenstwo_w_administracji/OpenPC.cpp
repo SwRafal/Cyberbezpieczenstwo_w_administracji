@@ -1,7 +1,7 @@
 #include "OpenPC.h"
 #include "playerIcon.h"
 
-OpenPC::OpenPC(sf::Texture *texture, sf::Font *font, unsigned int &day) //: content(*gm::Assets::getFont())
+OpenPC::OpenPC(sf::Texture *texture, sf::Font *font, int &day) //: content(*gm::Assets::getFont())
 {
 	this->day = &day;
 
