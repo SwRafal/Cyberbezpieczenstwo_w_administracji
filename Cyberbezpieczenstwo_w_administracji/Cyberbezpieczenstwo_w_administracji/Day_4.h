@@ -21,10 +21,13 @@ public:
 	sf::Sprite newspaper;
 	sf::Sprite dowod1;
 	bool quest1completed = false;
-	
+
+	//quest 2
+	bool quest2completed = false;
 
 	//petenci
 	OfficeApplicant * petent1;
+	OfficeApplicant * petent2;
 
 	textBubble *thought = nullptr;
 	sf::Int32 thought_time;

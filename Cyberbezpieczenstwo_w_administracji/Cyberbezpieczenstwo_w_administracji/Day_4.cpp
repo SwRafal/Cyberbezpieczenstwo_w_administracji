@@ -38,7 +38,11 @@ Day_4::Day_4()
 	
 	gm::Assets::LoadTexture("dowod1", DOWOD1);
 	dowod1.setTexture(*gm::Assets::getTexture("dowod1"));
-	//dowod1.setPosition(285,133);
+	
+	gm::Assets::LoadTexture("petent2", PETENT2);
+	petent2 = new OfficeApplicant(gm::Assets::getTexture("petent2"));
+	petent2->move(0,2);
+	petent2->moveChatBox(30,0);
 
 	callIn = false;
 	drawDowod = false;
@@ -53,9 +57,11 @@ void Day_4::update(GameState* gs, sf::RenderWindow& win)
 {
 	if(showButtons)
 	{
-		if(state == 0)
+		if(state == 17 || state == 20)
 		{
-			
+			gs->choice2->setPosition(SCREEN_WIDTH / 2 - gs->choice2->background.getGlobalBounds().width / 2,SCREEN_HEIGHT * 0.6);
+			gs->choice1->setPosition(gs->choice2->background.getPosition().x - gs->choice1->background.getGlobalBounds().width - 5,SCREEN_HEIGHT * 0.6);
+			gs->choice3->setPosition(gs->choice2->background.getPosition().x + gs->choice2->background.getGlobalBounds().width + 5,SCREEN_HEIGHT * 0.6);
 		}
 		else
 		{
@@ -68,14 +74,17 @@ void Day_4::update(GameState* gs, sf::RenderWindow& win)
 	{
 		gs->choice1->setPosition(0,-300);
 		gs->choice2->setPosition(0,-300);
+		gs->choice3->setPosition(0,-300);
 	}
 
 	if(!gs->dayShowScreen->finished)
 		return;
 
+	thought->animate();
 	itGuy->animate();
 	boss->animate();
 	petent1->animate();
+	petent2->animate();
 
 	switch (state)
 	{
@@ -87,6 +96,7 @@ void Day_4::update(GameState* gs, sf::RenderWindow& win)
 		gs->openedcomputer->getPassword() = gs->data->password;
 		gs->cardReader->hidden = false;
 		gs->cardReader->update();
+		state = 14;
 		state++;
 		break;
 	case 0: //wypij kawe
@@ -106,10 +116,10 @@ void Day_4::update(GameState* gs, sf::RenderWindow& win)
 			thought_time = gm::Core::getClock().getElapsedTime().asMilliseconds() + THOUGHT_TIME;
 			state++;
 		}
-		thought->animate();
+		//thought->animate();
 		break;
 	case 1: //nie spij w pracy
-		thought->animate();
+		//thought->animate();
 		if (thought_time < gm::Core::getClock().getElapsedTime().asMilliseconds())
 		{
 			thought->closeBubble();
@@ -117,7 +127,7 @@ void Day_4::update(GameState* gs, sf::RenderWindow& win)
 		}
 		break;
 	case 2: //read book
-		thought->animate();
+		//thought->animate();
 		gs->book->update(win);
 		gs->openedbook->update(win);
 		if(gs->book->isOpened())
@@ -189,7 +199,7 @@ void Day_4::update(GameState* gs, sf::RenderWindow& win)
 		}
 		break;
 	case 7: //info bubble
-		thought->animate();
+		//thought->animate();
 		//thought->setBubblePosition(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);
 		if(thought_time < gm::Core::getClock().getElapsedTime().asMilliseconds())
 		{
@@ -269,8 +279,8 @@ void Day_4::update(GameState* gs, sf::RenderWindow& win)
 		if(petent1->state == 1)
 		{
 			petent1->hide();
-			
-			//go to quest 2
+			callIn = false;
+			state = 15;
 		}
 		break;
 	case 13:
@@ -293,6 +303,244 @@ void Day_4::update(GameState* gs, sf::RenderWindow& win)
 			gs->gameover(L"Przekaza³eœ dokument zawierajacy dane osobowe (wyciek danych) osobie, której uprawnienia do otrzymania tych danych nie zweryfikowa³eœ.\nFa³szywy Jan Kowalski pos³u¿y³ siê prawem jazdy do wyp³aty gotówki w banku prawowitego w³aœciciela.\nZostajesz zwolniony dyscyplinarnie w trybie natychmiastowym");
 		}
 		break;
+	case 15: //quest 2;
+		if(callIn)
+		{
+			petent2->state = 0;
+			petent2->text.setTextString(L"Dzieñ dobry, chcia³abym zap³aciæ  za mandaty, które dosta³am.");
+			petent2->addToQueue(L"Przy okazji jak ju¿ tu jestem chcia³abym zap³aciæ za mandaty mê¿a, bo te¿ mówi³, ¿e coœ tam ma zaleg³ego. Piotr Nowak");
+			petent2->show();
+			state++;
+		}
+		break;
+	case 16:
+		if(petent2->state == 1)
+		{
+			showButtons = true;
+			gs->choice1->setText(L"ZgódŸ siê");
+			gs->choice2->setText(L"Poproœ o dodatkowe informacje");
+			gs->choice3->setText(L"Odmów");
+			state++;
+		}
+		break;
+	case 17:
+		if(gs->choice1->clicked(win))//sciezka 1
+		{
+			gs->playerIco.text.setTextString(L"Dobrze, podam Pani informacje o mandatach mê¿a. Poproszê o PESEL mê¿a");
+			gs->playerIco.show();
+			thought_time = gm::Core::getClock().getElapsedTime().asMilliseconds() + 3000;
+			showButtons = false;
+			state++;
+		}
+		if(gs->choice2->clicked(win)) //sciezka 2
+		{
+			showButtons = false;
+			gs->playerIco.text.setTextString(L"Nie ma problemu, poproszê o upowa¿nie od mê¿a dla Pani do za³atwienia tej sprawy w jego imieniu lub upowa¿nienie ogólne");
+			gs->playerIco.show();
+			state = 26;
+		}
+		if(gs->choice3->clicked(win)) //sciezka 3
+		{
+			showButtons = false;
+			gs->playerIco.text.setTextString(L"Przepraszam, ale nie mogê przekazaæ danych dotycz¹cych innych osób, RODO, rozumie Pani");
+			gs->playerIco.show();
+			thought_time = gm::Core::getClock().getElapsedTime().asMilliseconds() + 3000;
+			state = 30;
+		}
+		break;
+	case 18: //sciezka 1
+		if(thought_time < gm::Core::getClock().getElapsedTime().asMilliseconds())
+		{
+			gs->playerIco.hide();
+			petent2->state = 0;
+			petent2->text.setTextString(L"Czyli jednak ma jakieœ mandaty! Pirat jeden! Teraz bêdê mia³a na niego haka!");
+			petent2->addToQueue(L"Czyli jednak ma jakieœ mandaty! Pirat jeden! Teraz bêdê mia³a na niego haka!");
+			petent2->setButtonActive();
+			state++;
+		}
+		break;
+	case 19:
+		if(petent2->state == 1)
+		{
+			petent2->setButtonInactive();
+			gs->playerIco.text.setTextString(L"Chwila, czyli nie ma Pani upowa¿nienia od mê¿a?");
+			gs->playerIco.show();
+			showButtons = true;
+			gs->choice1->setText(L"Zignoruj ma³zeñsk¹ sprzeczkê");
+			gs->choice2->setText(L"Zg³oœ wyciek danych do UODO");
+			gs->choice3->setText(L"Zg³oœ wyciek danych do IOD");
+			state++;
+		}
+		break;
+	case 20:
+		if(gs->choice1->clicked(win))
+		{
+			petent2->hide();
+			gs->playerIco.hide();
+			showButtons = false;
+			gs->data->nagany++;
+			thought->setBubblePosition(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);
+			thought->showBubble();
+			thought->changeText(L"Nie tylko dopuszczono do wycieku danych, ale w dodatku nie podjêto ¿adnych dzia³añ, przez co nara¿ono instytujê na dalsze ryzyko.");
+			thought_time = gm::Core::getClock().getElapsedTime().asMilliseconds() + 4000;
+			state++;
+		}
+		if(gs->choice2->clicked(win))
+		{
+			petent2->hide();
+			gs->playerIco.hide();
+			showButtons = false;
+			gs->data->nagany++;
+			thought->setBubblePosition(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);
+			thought->showBubble();
+			thought->changeText(L"Masz dobre intencje, ale pope³ni³eœ b³¹d! Formularz na stronie UODO przyjmie Twoje zg³oszenie, ale zg³oszenie zostanie bez rozpatrzenia.");
+			thought_time = gm::Core::getClock().getElapsedTime().asMilliseconds() + 4000;
+			state++;
+		}
+		if(gs->choice3->clicked(win))
+		{
+			petent2->hide();
+			gs->playerIco.hide();
+			if(gs->phone->pickedUp)
+				state = 25;
+			showButtons = false;
+			gs->phone->call();
+			gs->phone->addToQueue(L"Dobrze, ¿e to zg³osi³eœ do IOD, który nada temu zg³oszeniu dalszy bieg.");
+			gs->phone->addToQueue(L"Otrzymujesz pouczenie i incydent ostaje odnotowany w rejestrach IOD.");
+			gs->phone->addToQueue(L"Musisz wzi¹æ udzia³ w szkoleniu z zakresu ochrony danych osobowych.");
+		}
+		break;
+	case 21: //sciezka 1 koniec 1
+		if(thought_time < gm::Core::getClock().getElapsedTime().asMilliseconds())
+		{
+			thought->changeText(L"Innymi s³owy - jak bêdziesz mi dalej dok³adaæ tylu stresów to nied³ugo bêdziesz mieæ nowego szefa");
+			thought_time = gm::Core::getClock().getElapsedTime().asMilliseconds() + 4000;
+			state++;
+		}
+		break;
+	case 22: //sciezka 1 koniec 1
+		if(thought_time < gm::Core::getClock().getElapsedTime().asMilliseconds())
+		{
+			thought->closeBubble();
+			state = 33;
+		}
+		break;
+	case 23: //sciezka 1 koniec 2
+		if(thought_time < gm::Core::getClock().getElapsedTime().asMilliseconds())
+		{
+			thought->changeText(L" wyciek danych, który spowodowa³eœ, nie nara¿a podmiotu danych (Piotra Nowaka) na szkodê. Sprawa wycieku wzi¹¿ nie jest zakoñczona!");
+			thought_time = gm::Core::getClock().getElapsedTime().asMilliseconds() + 4000;
+			state++;
+		}
+		break;
+	case 24: //sciezka 1 koniec 2
+		if(thought_time < gm::Core::getClock().getElapsedTime().asMilliseconds())
+		{
+			thought->closeBubble();
+			state = 33;
+		}
+		break;
+	case 25: //sciezka 1 koniec 3 
+		if(!gs->phone->pickedUp)
+		{
+			state = 33;
+		}
+		break;
+	case 26: //sciezka 2
+		if(gs->playerIco.ready)
+		{
+			petent2->state = 0;
+			petent2->text.setTextString(L"Nie mam ¿adnego upowa¿nienia, a po co mi to?");
+			petent2->addToQueue(L"Nie mam ¿adnego upowa¿nienia, a po co mi to?");
+			state++;
+		}
+		break;
+	case 27:
+		if(petent2->state == 1)
+		{
+			gs->playerIco.text.setTextString(L"Potrzebujê upowa¿nienia, ¿eby móc udostêpniæ dane mê¿a");
+			petent2->state = 0;
+			petent2->text.setTextString(L"Akurat, napewno mi je da, pirat jeden. I na co ja siê t³uk³am. Dziêkujê za nic");
+			petent2->addToQueue(L"Akurat, napewno mi je da, pirat jeden. I na co ja siê t³uk³am. Dziêkujê za nic");
+			state++;
+		}
+		break;
+	case 28:
+		if(petent2->state == 1)
+		{
+			gs->playerIco.text.setTextString(L"A Pani mandaty?");
+			petent2->state = 0;
+			petent2->text.setTextString(L"Jednak nie mam ¿adnych manadatów. Ale on na pewno ma. Wiem to!");
+			petent2->addToQueue(L"Jednak nie mam ¿adnych manadatów. Ale on na pewno ma. Wiem to!");
+			state++;
+		}
+		break;
+	case 29:
+		if(petent2->state == 1) //koniec sciezki 2
+		{
+			petent2->hide();
+			gs->playerIco.hide();
+			state = 33;
+		}
+		break;
+	case 30: //sciezka 3
+		if(thought_time < gm::Core::getClock().getElapsedTime().asMilliseconds())
+		{
+			gs->playerIco.hide();
+			petent2->setButtonInactive();
+			petent2->text.setTextString(L"Przecie¿ nie proszê o dane osobowe mê¿a, wiêc RODO nie ma tu nic do rzeczy");
+			gs->choice1->setScale(0.8,0.8);
+			gs->choice2->setScale(0.8,0.8);
+			gs->choice1->setText(L"Owszem, RODO dotyczy przetwarzania danych osobowych,\na zatem miêdzy innymi danych osób zobowi¹zanych do\nzap³aty mandatów. Muszê odmówiæ.");
+			gs->choice2->setText(L" Rzeczywiœcie, RODO obejmuje tylko imiê, nazwisko,\nPESEL, adres itd, a o mandatach nic tam nie ma,\nwiêc je¿eli poda mi Pani dane mê¿a to bêdzie\nwszystko w porz¹dku. Ju¿ sprawdzamy.");
+			showButtons = true;
+			state++;
+		}
+		break;
+	case 31:
+		if(gs->choice1->clicked(win)) //sciezka 3 koniec
+		{
+			petent2->hide();
+			gs->playerIco.hide();
+			gs->choice1->setScale(0.6,0.6);
+			gs->choice2->setScale(0.6,0.6);
+			showButtons = false;
+			quest2completed = true;
+			state = 33;
+		}
+		if(gs->choice2->clicked(win))
+		{
+			gs->choice1->setScale(0.6,0.6);
+			gs->choice2->setScale(0.6,0.6);
+			petent2->hide();
+			gs->playerIco.hide();
+			showButtons = false;
+			gs->data->nagany++;
+			thought->setBubblePosition(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);
+			thought->showBubble();
+			thought->changeText(L"Niezgodnie z obowi¹zuj¹cym prawem przetworzono dane osobowe osoby nie bêd¹cej petentem.");
+			thought_time = gm::Core::getClock().getElapsedTime().asMilliseconds() + 4000;
+			state++;
+		}
+		break;
+	case 32:
+		if(thought_time < gm::Core::getClock().getElapsedTime().asMilliseconds())
+		{
+			thought->changeText(L"Innymi s³owy - jak przyjdzie ''uradowany'' ma¿ by ''podziêkowaæ'' odsy³amy go do Ciebie");
+			thought_time = gm::Core::getClock().getElapsedTime().asMilliseconds() + 4000;
+			state++;
+		}
+		break;
+	case 33: //sciezka 1 koniec 1
+		if(thought_time < gm::Core::getClock().getElapsedTime().asMilliseconds())
+		{
+			thought->closeBubble();
+			state = 33;
+		}
+		break;
+	case 34: //quest 3
+		
+		break;
 	}
 
 }
@@ -303,7 +551,7 @@ void Day_4::draw(GameState* gs, sf::RenderWindow& win)
 	itGuy->draw(win);
 	boss->draw(win);
 	petent1->draw(win);
-
+	petent2->draw(win);
 	
 
 	if(drawDowod)
@@ -316,6 +564,7 @@ void Day_4::draw(GameState* gs, sf::RenderWindow& win)
 
 	gs->choice1->draw(win);
 	gs->choice2->draw(win);
+	gs->choice3->draw(win);
 
 	win.display();
 }

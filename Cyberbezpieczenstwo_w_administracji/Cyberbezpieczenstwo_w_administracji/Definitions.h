@@ -156,3 +156,5 @@
 //petenci
 #define PETENT1 "resources/textures/petent1.png"
 #define DOWOD1 "resources/textures/dowod1.png"
+
+#define PETENT2 "resources/textures/petent2.png"
