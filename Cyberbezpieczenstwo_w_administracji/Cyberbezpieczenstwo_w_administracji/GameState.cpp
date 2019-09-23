@@ -352,6 +352,11 @@ void GameState::init()
 
 	}
 
+	gm::Assets::LoadTexture("mariolka", TEXTURE_SECOND_OFFICE_FRIEND);
+	mariolka = new OfficeApplicant(gm::Assets::getTexture("mariolka"));
+	mariolka->move(0,-2);
+	
+
 	/*Starting settings*/
 	dayShowScreen = new dayx(this->day);
 	initialized = false;

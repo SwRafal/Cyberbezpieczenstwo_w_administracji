@@ -3,6 +3,12 @@
 #include "textBubble.h"
 #include "OfficeApplicant.h"
 
+#define LETTER_START_X 800
+#define LETTER_START_Y 270
+#define LETTER_FINISH_X 1070
+#define LETTER_FINISH_Y 470
+
+
 class Day_4 : public Day
 {
 public:
@@ -24,6 +30,12 @@ public:
 
 	//quest 2
 	bool quest2completed = false;
+
+	//quest 3
+	sf::Sprite letter;
+	sf::Sprite letterOpen;
+	bool drawLetter = false;
+	bool drawLetterOpen = false;
 
 	//petenci
 	OfficeApplicant * petent1;

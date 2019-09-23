@@ -45,6 +45,7 @@ private:
 
 	//OfficeFriend *officeLady;
 	OfficeApplicant *officeLady;
+	OfficeApplicant *mariolka;
 	OfficeApplicant *officeApplicant = nullptr;
 
 

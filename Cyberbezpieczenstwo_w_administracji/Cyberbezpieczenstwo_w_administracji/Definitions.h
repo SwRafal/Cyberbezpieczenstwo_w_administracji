@@ -110,6 +110,7 @@
 #define BUBBLE2 "resources/textures/bubble2.png"
 
 #define TEXTURE_OFFICE_FRIEND "resources/textures/friend.png"
+#define TEXTURE_SECOND_OFFICE_FRIEND "resources/textures/secondFriend.png"
 #define TEXTURE_APPLICANT "resources/textures/applicant.png"
 #define TEXTURE_ARROW_BUTTON "resources/textures/arrow.png"
 
@@ -155,6 +156,8 @@
 /* day4 */
 
 #define GAZETA "resources/textures/gazeta.png"
+#define LETTER "resources/textures/letter.png"
+#define LETTER_OPEN "resources/textures/letterOpen.png"
 
 //petenci
 #define PETENT1 "resources/textures/petent1.png"

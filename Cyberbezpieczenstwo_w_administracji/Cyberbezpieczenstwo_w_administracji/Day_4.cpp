@@ -46,6 +46,12 @@ Day_4::Day_4()
 
 	callIn = false;
 	drawDowod = false;
+
+	gm::Assets::LoadTexture("letter", LETTER);
+	gm::Assets::LoadTexture("letterOpen", LETTER_OPEN);
+	letter.setTexture(*gm::Assets::getTexture("letter"));
+	letterOpen.setTexture(*gm::Assets::getTexture("letterOpen"));
+
 }
 
 Day_4::~Day_4()
@@ -85,6 +91,7 @@ void Day_4::update(GameState* gs, sf::RenderWindow& win)
 	boss->animate();
 	petent1->animate();
 	petent2->animate();
+	gs->mariolka->animate();
 
 	switch (state)
 	{
@@ -96,7 +103,7 @@ void Day_4::update(GameState* gs, sf::RenderWindow& win)
 		gs->openedcomputer->getPassword() = gs->data->password;
 		gs->cardReader->hidden = false;
 		gs->cardReader->update();
-		state = 14;
+		state = 33;
 		state++;
 		break;
 	case 0: //wypij kawe
@@ -422,7 +429,7 @@ void Day_4::update(GameState* gs, sf::RenderWindow& win)
 		if(thought_time < gm::Core::getClock().getElapsedTime().asMilliseconds())
 		{
 			thought->closeBubble();
-			state = 33;
+			state = 34;
 		}
 		break;
 	case 23: //sciezka 1 koniec 2
@@ -437,13 +444,13 @@ void Day_4::update(GameState* gs, sf::RenderWindow& win)
 		if(thought_time < gm::Core::getClock().getElapsedTime().asMilliseconds())
 		{
 			thought->closeBubble();
-			state = 33;
+			state = 34;
 		}
 		break;
 	case 25: //sciezka 1 koniec 3 
 		if(!gs->phone->pickedUp)
 		{
-			state = 33;
+			state = 34;
 		}
 		break;
 	case 26: //sciezka 2
@@ -480,7 +487,7 @@ void Day_4::update(GameState* gs, sf::RenderWindow& win)
 		{
 			petent2->hide();
 			gs->playerIco.hide();
-			state = 33;
+			state = 34;
 		}
 		break;
 	case 30: //sciezka 3
@@ -506,7 +513,7 @@ void Day_4::update(GameState* gs, sf::RenderWindow& win)
 			gs->choice2->setScale(0.6,0.6);
 			showButtons = false;
 			quest2completed = true;
-			state = 33;
+			state = 34;
 		}
 		if(gs->choice2->clicked(win))
 		{
@@ -531,15 +538,89 @@ void Day_4::update(GameState* gs, sf::RenderWindow& win)
 			state++;
 		}
 		break;
-	case 33: //sciezka 1 koniec 1
+	case 33: 
 		if(thought_time < gm::Core::getClock().getElapsedTime().asMilliseconds())
 		{
 			thought->closeBubble();
-			state = 33;
+			state = 34;
 		}
 		break;
 	case 34: //quest 3
-		
+		gs->mariolka->state = 0;
+		gs->playerIco.state = 0;
+
+		gs->mariolka->text.setTextString(L"Hej, zapl¹ta³o mi siê coœ z Twojej korespondencji.");  //0
+		gs->mariolka->addToQueue(L"Chyba wa¿ne bo od NIK-u. I grube, sporo tego. Zobaczmy czego chc¹"); //1
+		gs->mariolka->addToQueue(L"No i?"); //2
+		gs->mariolka->addToQueue(L"No co ty, nie ufasz mi? Znamy siê ju¿ 4 dni... Czyli praktycznie jesteœmy rodzin¹."); //3
+		gs->mariolka->addToQueue(L"Oj wyluzuj. Czepiasz siê bardziej ni¿ IOD."); //4
+		gs->mariolka->addToQueue(L"Dobra – trzymaj."); //5
+
+		gs->mariolka->setButtonActive();
+
+		gs->playerIco.text.setTextString(L"Emm, to chyba by³o adresowane bezpoœrednio do mnie...");
+		gs->playerIco.addToQueue(L"S¹dzê, ¿e nie powinnaœ tego czytaæ jak nie ma potrzeby.");
+		gs->playerIco.addToQueue(L"Po prostu mi to daj.");
+		gs->playerIco.addToQueue(L"Inspektorowii Ochrony Danych to zaraz zg³oszê naruszenie bezpieczeñstwa danych jak mi tego nie dasz.");
+		gs->mariolka->show();
+
+		state++;
+		break;
+	case 35:
+		if(gs->mariolka->state == 1)
+		{
+			gs->playerIco.show();
+			state++;
+		}
+		break;
+	case 36:
+		if(gs->mariolka->state == 2)
+		{
+			gs->playerIco.nextLine();
+			state++;
+		}
+		break;
+	case 37:
+		if(gs->mariolka->state == 3)
+		{
+			gs->playerIco.nextLine();
+			state++;
+		}
+		break;
+	case 38:
+		if(gs->mariolka->state == 4)
+		{
+			gs->playerIco.nextLine();
+			state++;
+		}
+		break;
+	case 39:
+		if(gs->mariolka->state == 5)
+		{
+			gs->playerIco.hide();
+			gs->mariolka->hide();
+			letter.setPosition(LETTER_START_X,LETTER_START_Y);
+			state++;
+		}
+		break;
+	case 40:
+		drawLetter = true;
+		if(letter.getPosition().x < LETTER_FINISH_X)
+			letter.move(2,0);
+		if(letter.getPosition().y < LETTER_FINISH_Y)
+			letter.move(0,2);
+		if(letter.getPosition().x == LETTER_FINISH_X || letter.getPosition().y == LETTER_FINISH_Y )
+		{
+			thought_time = gm::Core::getClock().getElapsedTime().asMilliseconds() + 500;
+			state++;
+		}
+		break;
+	case 41:
+		if(thought_time < gm::Core::getClock().getElapsedTime().asMilliseconds())
+		{
+			drawLetter = false;
+			drawLetterOpen = true;
+		}
 		break;
 	}
 
@@ -547,6 +628,7 @@ void Day_4::update(GameState* gs, sf::RenderWindow& win)
 
 void Day_4::draw(GameState* gs, sf::RenderWindow& win)
 {
+	gs->mariolka->draw(win);
 	thought->draw(win);
 	itGuy->draw(win);
 	boss->draw(win);
@@ -558,7 +640,10 @@ void Day_4::draw(GameState* gs, sf::RenderWindow& win)
 	{
 		win.draw(dowod1);
 	}
-
+	if(drawLetter)
+		win.draw(letter);
+	if(drawLetterOpen)
+		win.draw(letterOpen);
 	if(showNewspaper)
 		win.draw(newspaper);
 
