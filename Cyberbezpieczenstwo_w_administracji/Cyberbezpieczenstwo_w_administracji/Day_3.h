@@ -26,18 +26,8 @@ public:
 	sf::Int32 scan_time;
 	sf::Sound beep;
 
-	//Quest2
-	bool test_scan = false;
-	bool test_scan_2 = false;
-	bool test_scan_3 = false;
-	bool scan_papers = false;
-	bool finished_scans = false;
-	bool finish_communique = false;
-	bool broken_scanner = false;
-	bool fix_scanner = false;
-	bool finish_thought_2 = false;
-	bool finish_boss_dialog_2 = false;
-	bool things_vanish = false;
+	sf::Sprite *lighting = nullptr;
+
 
 	//Phone
 	bool phone_pickup = false;

@@ -8,6 +8,7 @@
 #define MOBILE_VIBRATION_FILEPATH "resources/sounds/mobile_vibration.wav"
 #define SOUND_SCANNING "resources/sounds/scanning.wav"
 #define SOUND_BEEP "resources/sounds/beep.wav"
+#define SOUND_BOOM "resources/sounds/boom.wav"
 
 /* Fonts */
 

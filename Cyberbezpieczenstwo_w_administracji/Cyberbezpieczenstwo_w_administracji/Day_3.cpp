@@ -24,6 +24,40 @@ Day_3::Day_3()
 			beep.setBuffer(*gm::Assets::getSound("beep"));
 	}
 
+	if (gm::Assets::getSound("boom") == nullptr)
+	{
+		gm::Assets::LoadSound("boom", SOUND_BOOM);
+
+		if (gm::Assets::getSound("boom") == nullptr)
+			error_win_close();
+	}
+
+	if (gm::Assets::getTexture("pc explosion") == nullptr)
+	{
+		gm::Assets::LoadTexture("pc explosion", PC_SCREEN_EXPLOSION);
+
+		if (gm::Assets::getTexture("pc explosion") == nullptr)
+			error_win_close();
+	}
+
+	if (gm::Assets::getTexture("pc broken") == nullptr)
+	{
+		gm::Assets::LoadTexture("pc broken", PC_SCREEN_CRACKED);
+
+		if (gm::Assets::getTexture("pc broken") == nullptr)
+			error_win_close();
+	}
+
+	if (gm::Assets::getTexture("lighting") == nullptr)
+	{
+		gm::Assets::LoadTexture("lighting", PC_SCREEN_EXPLOSION);
+
+		if (gm::Assets::getTexture("lighting") == nullptr)
+			error_win_close();
+	}
+	lighting = new sf::Sprite(*gm::Assets::getTexture("lighting"));
+
+
 	if (gm::Assets::getTexture("boss") == nullptr)
 	{
 		gm::Assets::LoadTexture("boss", BOSS_TEXTURE);
@@ -32,6 +66,15 @@ Day_3::Day_3()
 			error_win_close();
 	}
 	boss = new OfficeApplicant(gm::Assets::getTexture("boss"));
+
+	if (gm::Assets::getTexture("ITguy") == nullptr)
+	{
+		gm::Assets::LoadTexture("ITguy", IT_GUY_TEXTURE);
+
+		if (gm::Assets::getTexture("ITguy") == nullptr)
+			error_win_close();
+	}
+	ITguy = new OfficeApplicant(gm::Assets::getTexture("ITguy"));
 
 	if (gm::Assets::getTexture("peach") == nullptr)
 	{
@@ -74,6 +117,7 @@ void Day_3::update(GameState *gs, sf::RenderWindow &win)
 	thought->animate();
 	ringIT->animate();
 	boss->animate();
+	ITguy->animate();
 
 	gs->mobile->pickedUp = false;
 
@@ -106,18 +150,6 @@ void Day_3::update(GameState *gs, sf::RenderWindow &win)
 
 		gs->xero->setPosition(sf::Vector2f(-300, 0));
 		gs->present->setPosition(sf::Vector2f(-300, 0));
-
-		gs->officeApplicant->text.setTextString(L"Petent: Czeœæ! Marek dziœ nie w pracy?");
-		gs->officeApplicant->addToQueue(L"Ja: Jego stanowisko zosta³o zajête.");
-		gs->officeApplicant->addToQueue(L"Petent: Szkoda, dobrze nam siê z nim pracowa³o…");
-		gs->officeApplicant->addToQueue(L"Ja: Nie spe³nia³ wymogów bezpieczeñstwa. ");
-		gs->officeApplicant->addToQueue(L"Petent: Wiesz co siê sta³o?");
-		gs->officeApplicant->addToQueue(L"Ja: Nie mogê Ci tego powiedzieæ.");
-		gs->officeApplicant->addToQueue(L"Petent: Có¿, witaj w naszym zespole. Masz, to dla Ciebie.");
-		gs->officeApplicant->addToQueue(L"EOT");//Dodatkowa linijka potrzebna
-
-		gs->openedbook->setInfoL(L"1. Zabezpiecz dane logowania");
-		gs->openedbook->setInfoR("");		
 
 		gs->choice1->setText(L"OK");
 		gs->choice2->setText(L"nie zapisuj");
@@ -211,6 +243,7 @@ void Day_3::update(GameState *gs, sf::RenderWindow &win)
 				state++;
 
 				gs->officeLady->show();
+				gs->playerIco.show();
 			}
 
 			break;
@@ -219,7 +252,8 @@ void Day_3::update(GameState *gs, sf::RenderWindow &win)
 			if (!thought->appearing && !thought->disappearing)
 				thought->setBubblePosition(0, -300);
 
-
+			if (gs->officeLady->state > 0)
+				gs->playerIco.hide();
 			if (gs->officeLady->state >= 3)
 			{
 				gs->officeLady->hide();
@@ -498,6 +532,7 @@ void Day_3::update(GameState *gs, sf::RenderWindow &win)
 				gs->officeLady->hide();
 				ringIT->showBubble();
 				gs->mobile->call();
+				gs->phone->setFillColor(sf::Color::White);
 
 				state++;
 			}
@@ -510,19 +545,37 @@ void Day_3::update(GameState *gs, sf::RenderWindow &win)
 				gs->papers->move(10, 0);
 			if (gs->phone->aimed(win))
 			{
+				ringIT->setBubblePosition(5, 470);
+				ringIT->text.setTextString(L"Zadzwoñ do IT");
+
 				if (gs->phone->clicked(win))
 				{
 					ringIT->setBubblePosition(-300, 0);
 					ringIT->closeBubble();
-					state++;
-					break;
-				}
+
 					
-				ringIT->setBubblePosition(5, 470);
-				ringIT->text.setTextString(L"Zadzwoñ do IT");
+					while (!gs->phone->text_queue.empty())
+						gs->phone->text_queue.pop();
+
+					gs->phone->text.setTextString(L"Tu dzia³ IT s³ucham? \n *Mariusz ile mo¿na czekaæ, koñcz swoj¹ turê! Gramy czy nie?!*");
+					gs->phone->addToQueue(L"S³uchaj a mo¿e zrobimy to jutro? Dziœ jesteœmy bardzo zajêci… NO POCZEKAJ NO ZDOBYWAM ZAMEK!!!");
+					gs->phone->addToQueue(L"Nic, nic. Bêdziemy za 5 minut.");
+
+					while (!gs->playerIco.text_queue.empty())
+						gs->playerIco.text_queue.pop();
+					gs->playerIco.text.setTextString(L"Halo? IT? Pomo¿ecie mi skonfigurowaæ kopiê zapasow¹?");
+
+					gs->phone->pickedUp = true;
+					gs->playerIco.show();
+
+					state++;
+				}
 			}
 			else if (gs->mobile->aimed(win))
 			{
+				ringIT->setBubblePosition(585, 475);
+				ringIT->text.setTextString(L"Dzwoni Aniela Ministerstwo");
+
 				if (gs->mobile->pickedUp)
 				{
 					ringIT->setBubblePosition(-300, 0);
@@ -542,11 +595,7 @@ void Day_3::update(GameState *gs, sf::RenderWindow &win)
 					info_pos.x = SCREEN_WIDTH / 2 - (gs->nagana_info->getLocalBounds().left + gs->nagana_info->getLocalBounds().width) / 2;
 					info_pos.y = SCREEN_HEIGHT / 2 - (gs->nagana_info->getLocalBounds().top + gs->nagana_info->getLocalBounds().height) / 2;
 					gs->nagana_info->setPosition(sf::Vector2f(info_pos));
-					break;
 				}
-					
-				ringIT->setBubblePosition(585, 475);
-				ringIT->text.setTextString(L"Dzwoni Aniela Ministerstwo");
 			}
 			else
 				ringIT->setBubblePosition(-300, 0);
@@ -554,37 +603,120 @@ void Day_3::update(GameState *gs, sf::RenderWindow &win)
 			break;
 		case 20://Phone pickup
 
+			if (gs->papers->getPosition().x < gs->officeLady->getPosition().x)
+				gs->papers->move(10, 0);
 
+			gs->phone->update(win);
+			if (!gs->phone->pickedUp)
+			{
+				gs->info_time = gm::Core::getClock().getElapsedTime().asMilliseconds() + 5000;
+				gs->playerIco.hide();
+
+				state++;
+			}
+			else
+			{
+				if (gs->phone->text_queue.size() == 2)
+				{
+					gs->playerIco.text.setTextString(L"Halo? IT? Pomo¿ecie mi skonfigurowaæ kopiê zapasow¹?");
+				}
+				else if (gs->phone->text_queue.size() == 1)
+				{
+					gs->playerIco.text.setTextString(L"...");
+				}
+				else if (gs->phone->text_queue.size() == 0)
+				{
+					gs->playerIco.text.setTextString(L"S£UCHAM?");
+				}
+			}
 
 			break;
 		case 21://Finish phone
 
+			if (gs->info_time < gm::Core::getClock().getElapsedTime().asMilliseconds())
+			{
+				while (!ITguy->text_queue.empty())
+					ITguy->text_queue.pop();
 
+				ITguy->text.setTextString(L"Kopia zapasowa to bardzo wa¿ny element cyberbezpieczeñstwa Ministerstwa.");
+				ITguy->addToQueue(L"Pamiêtaj aby wykonywaæ j¹ przynajmniej raz w tygodniu. Dziêki temu nasze szanse na wygran¹ w konkursie rosn¹.");
+				ITguy->addToQueue("EOT");
+				ITguy->show();
+
+				state++;
+			}
 
 			break;
 		case 22://Finish IT dialog 
 
-			
+			if (ITguy->state >= 2)
+			{
+				ITguy->hide();
+
+				while (!boss->text_queue.empty())
+					boss->text_queue.pop();
+
+				boss->state = 0;
+
+				boss->text.setTextString(L"Dopóki nowa kole¿anka nie przejdzie wymaganych szkoleñ bêdziesz odpowiada³ równie¿ za obs³ugê petentów.");
+				boss->addToQueue(L"Zaczniesz od jutra. Zobaczymy jak sobie poradzisz. Kto wie mo¿e j¹ zast¹pisz Na dziœ to wszystko. IdŸ do domu.");
+				boss->addToQueue("EOT");
+				
+				boss->show();
+
+				state = 26;
+			}
 
 			break;
 		case 23://Mobile pickup
 
+			if (gs->info_time < gm::Core::getClock().getElapsedTime().asMilliseconds())
+			{
+				gs->computer->blackScreen.setTexture(*gm::Assets::getTexture("pc explosion"));
+				lighting->setPosition(100, 0);
+				state++;
 
+				beep.setBuffer(*gm::Assets::getSound("boom"));
+				beep.play();
+				gs->info_time = gm::Core::getClock().getElapsedTime().asMilliseconds() + 100;
+			}
+			else
+			{
+				gs->watch->setHour(gs->watch->getHours(), gs->watch->getMinutes() + 1);
+			}
 
 			break;
 		case 24://Aniela talking
 
+			if (gs->info_time < gm::Core::getClock().getElapsedTime().asMilliseconds())
+			{
+				lighting->setPosition(-300, 0);
+				gs->computer->blackScreen.setTexture(*gm::Assets::getTexture("pc broken"));
+				state++;
 
+				gs->info_time = gm::Core::getClock().getElapsedTime().asMilliseconds() + 3000;
+			}
 
 			break;
 		case 25://Passed time
 
-
+			if (gs->info_time < gm::Core::getClock().getElapsedTime().asMilliseconds())
+			{
+				gs->gameover(L"Nie wykona³eœ kopii bezpieczeñstwa. Burza spali³a dysk twardy w twoim komputerze, przez co znaczn¹ czêœæ zasobów Ministerstwa bezpowrotnie utracono."
+							 L"Zostajesz zwolniony dyscyplinarnie w trybie natychmiastowym.");
+			}
 
 			break;
 		case 26://Finish boss dialog
 
-
+			if (boss->state >= 2)
+			{
+				gs->dayover(L"-obs³uga kserokopiarki\n"
+					L"-wykonywanie kopii dokumentów\n"
+					L"-odpieranie ataków phishingowych\n"
+					L"-skupianie siê na swojej pracy\n");
+				gs->nextDay = true;
+			}
 
 			break;
 		default:
@@ -601,6 +733,7 @@ void Day_3::draw(GameState *gs, sf::RenderWindow &win)
 {
 	thought->draw(win);
 	boss->draw(win);
+	ITguy->draw(win);
 	for (int i = 0; i < 2; i++)
 	{
 		win.draw(peach[i]);

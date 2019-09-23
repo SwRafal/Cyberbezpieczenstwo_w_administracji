@@ -574,6 +574,17 @@ void GameState::update(sf::RenderWindow &win)
 			officeLady->addToQueue(L"Wiedzia³eœ? Istnieje coœ takiego jak Trashing. Z³odzieje przeszukuj¹ œmieci firm, ¿eby zdobyæ has³a czy inne wartoœciowe informacje.");
 			officeLady->addToQueue(L"W ¿yciu bym nie wpad³a na to, ¿e ktoœ mo¿e zdobywaæ dane w ten sposób. FUUUUUUUUUUUUJ.");
 			officeLady->addToQueue(L"EOT");
+
+			while (!playerIco.text_queue.empty())
+			{
+				playerIco.text_queue.pop();
+			}
+
+			playerIco.text.setTextString(L"Kim jesteœ?");
+
+			openedbook->setInfoL(L"1. Wykonaj kopiê zapasow¹.\n"
+								 L"2. Czytaj uwa¿nie maile.");
+			openedbook->setInfoR("");
 		}
 		else if(day == 4)
 		{
