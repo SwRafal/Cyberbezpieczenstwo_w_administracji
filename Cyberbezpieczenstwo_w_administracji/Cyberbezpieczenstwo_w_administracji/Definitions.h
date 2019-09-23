@@ -103,6 +103,7 @@
 #define TEXTURE_PRESENT "resources/textures/present.png"
 #define TEXTURE_PAPERS "resources/textures/papers.png"
 #define TEXTURE_PEACH "resources/textures/peach.png"
+#define TEXTURE_LIGHTING "resources/textures/lighting.png"
 
 #define TEXTURE_TEXT_BUBBLE "resources/textures/textbubble.png"
 #define TEXTURE_CHAT_BUBBLE "resources/textures/chat bubble.png"

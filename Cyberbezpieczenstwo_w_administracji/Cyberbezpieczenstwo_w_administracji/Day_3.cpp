@@ -50,12 +50,13 @@ Day_3::Day_3()
 
 	if (gm::Assets::getTexture("lighting") == nullptr)
 	{
-		gm::Assets::LoadTexture("lighting", PC_SCREEN_EXPLOSION);
+		gm::Assets::LoadTexture("lighting", TEXTURE_LIGHTING);
 
 		if (gm::Assets::getTexture("lighting") == nullptr)
 			error_win_close();
 	}
 	lighting = new sf::Sprite(*gm::Assets::getTexture("lighting"));
+	lighting->setPosition(-300, 0);
 
 
 	if (gm::Assets::getTexture("boss") == nullptr)
@@ -527,7 +528,7 @@ void Day_3::update(GameState *gs, sf::RenderWindow &win)
 			break;
 		case 18://Finish boss dialog 2
 
-			if (gs->officeLady->ready)
+			if (gs->officeLady->getPosition().x < 850)
 			{
 				gs->officeLady->hide();
 				ringIT->showBubble();
@@ -731,6 +732,7 @@ void Day_3::update(GameState *gs, sf::RenderWindow &win)
 
 void Day_3::draw(GameState *gs, sf::RenderWindow &win)
 {
+	win.draw(*lighting);
 	thought->draw(win);
 	boss->draw(win);
 	ITguy->draw(win);
