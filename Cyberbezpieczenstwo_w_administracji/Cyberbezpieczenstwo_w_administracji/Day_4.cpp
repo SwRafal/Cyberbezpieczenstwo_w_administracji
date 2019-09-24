@@ -93,7 +93,7 @@ void Day_4::update(GameState* gs, sf::RenderWindow& win)
 {
 	if(showButtons)
 	{
-		if(state == 17 || state == 20 || state == 42)
+		if(state == 17 || state == 20 || state == 42 || state == 56)
 		{
 			gs->choice2->setPosition(SCREEN_WIDTH / 2 - gs->choice2->background.getGlobalBounds().width / 2,SCREEN_HEIGHT * 0.6);
 			gs->choice1->setPosition(gs->choice2->background.getPosition().x - gs->choice1->background.getGlobalBounds().width - 5,SCREEN_HEIGHT * 0.6);
@@ -137,7 +137,7 @@ void Day_4::update(GameState* gs, sf::RenderWindow& win)
 		gs->openedcomputer->getPassword() = gs->data->password;
 		gs->cardReader->hidden = false;
 		gs->cardReader->update();
-		state = 33;
+		state = 53;
 		state++;
 		break;
 	case 0: //wypij kawe
@@ -819,13 +819,71 @@ void Day_4::update(GameState* gs, sf::RenderWindow& win)
 		break;
 
 	case 54: //last quest
-
+		gs->mariolka->show();
+		gs->mariolka->setButtonActive();
+		gs->mariolka->state = 0;
+		gs->mariolka->text.setTextString(L"Czeœæ, s³ysza³am, ¿e trafi³o Ci siê zestawienie NIKu za ostatnie 3 miesi¹ce.");
+		gs->mariolka->addToQueue(L"Mo¿esz mi przes³aæ pe³n¹ listê swoich interesantów z ostatniego kwarta³u?");
+		gs->mariolka->addToQueue(L"Muszê coœ takiego przygotowaæ dla szefa w ramach szkolenia.");
+		state++;
+		break;
+	case 55:
+		if(gs->mariolka->state == 2)
+		{
+			gs->mariolka->setButtonInactive();
+			showButtons = true;
+			gs->choice1->setText(L"Ok, nie ma sprawy");
+			gs->choice2->setText(L"Nie mogê Ci pomóc");
+			gs->choice3->setText(L"A w jakim celu s¹ Ci te dane potrzebne?");
+			state++;
+		}
+		break;
+	case 56:
+		if(gs->choice1->clicked(win)) //sciezka 1
+		{
+			showButtons = false;
+			thought_time = gm::Core::getClock().getElapsedTime().asMilliseconds() + THOUGHT_TIME;
+			thought->setBubblePosition(SCREEN_WIDTH /2, SCREEN_HEIGHT /2);
+			thought->changeText(L"Wykryto nieupranion¹ próbê skopiowania danych z systemu\nSzef-bot 3000 jest z³y :(");
+			thought->showBubble();
+			gs->data->nagany++;
+			state++;
+		}
+		if(gs->choice2->clicked(win))
+		{
+			showButtons = false;
+			gs->playerIco.text.setTextString(L"Nie mogê Ci ich przes³aæ, poniewa¿ zajmujesz siê nimi w innym celu, wiêc by³oby to nieuprawnion¹ zmian¹ celu przetwarzania");
+			gs->playerIco.show();
+			gs->mariolka->text.setTextString(L"No wiesz, myœla³am, ¿e jesteœ moj¹ kole¿ank¹...");
+			gs->mariolka->addToQueue(L" ");
+			gs->mariolka->state = 0;
+			gs->mariolka->setButtonActive();
+			state = 58;
+		}
+		if(gs->choice3->clicked(win)) //sciezka 3;
+		{
+			
+		}
+		break;
+	case 57:
+		if(thought_time < gm::Core::getClock().getElapsedTime().asMilliseconds())
+		{
+			thought->closeBubble();
+			//last conversation
+		}
+		break;
+	case 58: //sciezka 2
+		if(gs->mariolka->state == 1)
+		{
+			gs->mariolka->hide();
+			gs->playerIco.hide();
+			//last conversation;
+		}
+		break;
+	case 59: //sciezka 3 
 
 		break;
-
-	case 10000:
-		
-		break;
+	
 	
 	}
 
