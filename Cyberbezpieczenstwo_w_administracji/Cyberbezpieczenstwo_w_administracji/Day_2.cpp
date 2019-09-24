@@ -283,6 +283,7 @@ void Day_2::update(GameState *gs, sf::RenderWindow &win)
 		//tutaj !!!!
 		
 		
+		
 		while(!gs->officeApplicant->text_queue.empty())
 			gs->officeApplicant->text_queue.pop();
 		//tutaj wyjebac
@@ -1092,18 +1093,25 @@ void Day_2::update(GameState *gs, sf::RenderWindow &win)
 		gs->officeApplicant->appearing = false;
 		if(thought_time < gm::Core::getClock().getElapsedTime().asMilliseconds())
 		{
-			if(gs->officeApplicant->getPosition().x < SCREEN_WIDTH + gs->officeApplicant->getGlobalBounds().width)
+			
+			if(gs->officeApplicant->getPosition().x < SCREEN_WIDTH + 10)
 			{
 				gs->officeApplicant->move(5,0);
 				police.move(5,0);
-				if(gs->officeApplicant->getPosition().x > SCREEN_WIDTH + 20)
-					state++;
+				//if(gs->officeApplicant->getPosition().x >= SCREEN_WIDTH )//+ 20)
+				//{
+				//	state++;
+				//}
+			}
+			else
+			{
+				state = 62;
+				thought_time = 5;
 			}
 		}
 		break;
-	
-
 	case 62: //szefo
+		boss->animate();
 		boss->state = 0;
 		boss->text.setTextString(L"Gratulacje pomog³eœ uj¹æ groŸnego przestêpcê.");
 		boss->addToQueue(L"W nagrodê dostaniesz wolne popo³udnie!");
@@ -1114,6 +1122,7 @@ void Day_2::update(GameState *gs, sf::RenderWindow &win)
 		state++;
 	break;
 	case 63:
+		boss->animate();
 		if(boss->state == 2)
 		{
 			boss->hide();

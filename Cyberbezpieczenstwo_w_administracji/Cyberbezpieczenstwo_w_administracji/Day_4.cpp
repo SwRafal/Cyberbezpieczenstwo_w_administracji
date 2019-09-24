@@ -1,7 +1,7 @@
 #include "Day_4.h"
 #include "GameState.h"
 
-Day_4::Day_4()
+Day_4::Day_4() : b1(*gm::Assets::getFont()), b2(*gm::Assets::getFont()), b3(*gm::Assets::getFont()), b4(*gm::Assets::getFont()), b5(*gm::Assets::getFont()), b6(*gm::Assets::getFont()), b7(*gm::Assets::getFont()),b8(*gm::Assets::getFont())
 {
 	showButtons = false;
 	state = -1;
@@ -52,6 +52,36 @@ Day_4::Day_4()
 	letter.setTexture(*gm::Assets::getTexture("letter"));
 	letterOpen.setTexture(*gm::Assets::getTexture("letterOpen"));
 
+	gm::Assets::LoadTexture("L1", L1);
+	gm::Assets::LoadTexture("L2", L2);
+	gm::Assets::LoadTexture("L3", L3);
+
+	gm::Assets::LoadTexture("finalResponse", FINAL_RESPONSE);
+	finalResponse.setTexture(*gm::Assets::getTexture("finalResponse"));
+
+	gm::Assets::LoadTexture("checkingGameBG", CHECKING_GAME);
+	checkingGameBG.setTexture(*gm::Assets::getTexture("checkingGameBG"));
+	checkingGameBG.setPosition(235, 120);
+
+	b1.setSize(20,20);
+	b2.setSize(20,20);
+	b3.setSize(20,20);
+	b4.setSize(20,20);
+	b5.setSize(20,20);
+	b6.setSize(20,20);
+	b7.setSize(20,20);
+	b8.setSize(20,20);
+
+	b1.setPosition( 320, 242);
+	b2.setPosition( 320, 316);
+	b3.setPosition( 320, 414);
+	b4.setPosition( 320, 500);
+
+	b5.setPosition( 672, 242);
+	b6.setPosition( 672, 316);
+	b7.setPosition( 672, 414);
+	b8.setPosition( 672, 500);
+
 }
 
 Day_4::~Day_4()
@@ -63,11 +93,15 @@ void Day_4::update(GameState* gs, sf::RenderWindow& win)
 {
 	if(showButtons)
 	{
-		if(state == 17 || state == 20)
+		if(state == 17 || state == 20 || state == 42)
 		{
 			gs->choice2->setPosition(SCREEN_WIDTH / 2 - gs->choice2->background.getGlobalBounds().width / 2,SCREEN_HEIGHT * 0.6);
 			gs->choice1->setPosition(gs->choice2->background.getPosition().x - gs->choice1->background.getGlobalBounds().width - 5,SCREEN_HEIGHT * 0.6);
 			gs->choice3->setPosition(gs->choice2->background.getPosition().x + gs->choice2->background.getGlobalBounds().width + 5,SCREEN_HEIGHT * 0.6);
+		}
+		else if(state == 52)
+		{
+			gs->choice1->setPosition(SCREEN_WIDTH / 2 - gs->choice1->background.getGlobalBounds().width / 2, SCREEN_HEIGHT * 0.85);
 		}
 		else
 		{
@@ -618,10 +652,181 @@ void Day_4::update(GameState* gs, sf::RenderWindow& win)
 	case 41:
 		if(thought_time < gm::Core::getClock().getElapsedTime().asMilliseconds())
 		{
-			drawLetter = false;
+			//drawLetter = false;
 			drawLetterOpen = true;
+			showButtons = true;
+			gs->choice1->setText(L"Przeœlij dane");
+			gs->choice2->setText(L"Odmów przes³ania danych");
+			gs->choice3->setText(L"Zapytaj o cel pozyskania danych");
+			state++;
 		}
 		break;
+	case 42: //response choice
+		if(gs->choice1->clicked(win))
+		{
+			drawLetterOpen = false;
+			showButtons = false;
+			response.setTexture(*gm::Assets::getTexture("L1"));
+			rChoice = 1;
+			state++;
+		}
+		if(gs->choice2->clicked(win))
+		{
+			drawLetterOpen = false;
+			showButtons = false;
+			response.setTexture(*gm::Assets::getTexture("L2"));
+			rChoice = 2;
+			state++;
+		}
+		if(gs->choice3->clicked(win))
+		{
+			drawLetterOpen = false;
+			showButtons = false;
+			response.setTexture(*gm::Assets::getTexture("L3"));
+			rChoice = 3;
+			state++;
+		}
+		break;
+	case 43:
+		drawResponse = true;
+		if(sf::Mouse::isButtonPressed(sf::Mouse::Left))
+		{
+			drawResponse = false;
+			state++;
+		}
+		break;
+	case 44:
+		if(letter.getPosition().x < SCREEN_WIDTH + 10);
+			letter.move(1,0);
+		if(letter.getPosition().y > 0)
+			letter.move(0,-2);
+		if(letter.getPosition().x >= SCREEN_WIDTH + 10 && letter.getPosition().y <= 0)
+		{
+			if(rChoice == 1) //sciezka 1
+				state++;
+			if(rChoice == 2 || rChoice == 3)
+				state = 50; // sciezka 2;
+		}
+		break;
+	case 45: //sciezka 1
+		gs->mariolka->text.setTextString(L"Zrobisz kopiê danych, zanim je wyœlesz do NIK?");
+		gs->choice1->setScale(0.8,0.8);
+		gs->choice2->setScale(0.8,0.8);
+		
+		gs->choice1->setText(L"Tak, muszê w koñcu zachowaæ integraloœæ bazy.\nJak tylko dokumenty wróc¹ z NIK to kopie zniszczê.\nMuszê tylko to wszystko uzgodniæ z IOD.");
+		gs->choice2->setText(L"Nie zrobiê kopii. Zasady przetwarzania tych danych\nnie przewidywa³y tworzenia kopii.\nW NIK przecie¿ te dane nie zgin¹.");
+		showButtons = true;
+		gs->mariolka->setButtonInactive();
+		gs->mariolka->show();
+		state++;
+		break;
+	case 46:
+		if(gs->choice1->clicked(win))
+		{
+			showButtons = false;
+			gs->choice1->setScale(0.6,0.6);
+			gs->mariolka->hide();
+			state++;
+		}
+		if(gs->choice2->clicked(win))
+		{
+			showButtons = false;
+			gs->choice2->setScale(0.6,0.6);
+			gs->mariolka->hide();
+			state++;
+		}
+		break;
+	case 47:
+		gs->computer->open();
+		gs->openedcomputer->newMail(L"Nagana", L"IOD",L"Szanowna Pani/Panie,\nZosta³em poinformowany, i¿ niezgodnie z obowi¹zuj¹cym prawem przekaza³a Pani/Pan dane petentów do instytucji zewnêtrznej w ramach procedur kontrolnych prowadzonych przez tê instytucjê.\nTakie dzia³anie jest niezgodne z celem, dla którego zosta³y pozyskane i nie jest uzasadnione celem konktroli.\nProszê o niezw³oczne przekazanie szczegó³owego raportu ze zdarzenia w celu nadania biegu sprawie w ramach procedur ochrony danych osobowych");
+		gs->openedcomputer->setState(OpenPC::MAIL);
+		state++;
+		break;
+	case 48:
+		if(gs->openedcomputer->getState() != OpenPC::MAIL)
+		{
+			gs->computer->close();
+			gs->data->nagany++;
+			thought_time = gm::Core::getClock().getElapsedTime().asMilliseconds() + THOUGHT_TIME;
+			thought->changeText(L"Wielki Szef patrzy i widza³ maila. Pilnuj siê...");
+			thought->setBubblePosition(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);
+			thought->showBubble();
+			state++;
+		}
+		break;
+	case 49:
+		if(thought_time < gm::Core::getClock().getElapsedTime().asMilliseconds())
+		{
+			thought->closeBubble();
+			state = 54;
+		}
+		break;
+	case 50: //sciezka 2
+		if(letter.getPosition().x > LETTER_FINISH_X)
+			letter.move(-1,0);
+		if(letter.getPosition().y < LETTER_FINISH_Y)
+			letter.move(0,2);
+		if(letter.getPosition().x == LETTER_FINISH_X || letter.getPosition().y == LETTER_FINISH_Y )
+		{
+			drawFinalResponse = true;
+			state++;
+		}
+		break;
+	case 51:
+		if(sf::Mouse::isButtonPressed(sf::Mouse::Left))
+		{
+			drawFinalResponse = false;
+			drawLetter = false;
+			showMinigame = true;
+			showButtons = true;
+			gs->choice1->setText(L"Drukuj");
+			state++;
+		}
+		break;
+	case 52: //minigame;
+		b1.update(win);
+		b2.update(win);
+		b3.update(win);
+		b4.update(win);
+		b5.update(win);
+		b6.update(win);
+		b7.update(win);
+		b8.update(win);
+
+		if(gs->choice1->clicked(win))
+		{//1 2 4 5
+			if(b1.isChecked() && b2.isChecked() && b4.isChecked() && b5.isChecked() && !b3.isChecked() && !b6.isChecked() && !b7.isChecked() && !b8.isChecked())
+			{
+				showButtons = false;
+				selectedProperly = true;
+			}
+			else
+			{
+				showButtons = false;
+				selectedProperly = false;
+			}
+			state++;
+			showMinigame = false;
+		}
+		break;
+	case 53:
+		if(selectedProperly)
+		{
+			state = 54;
+		}
+		else
+			state = 47;
+		break;
+
+	case 54: //last quest
+
+
+		break;
+
+	case 10000:
+		
+		break;
+	
 	}
 
 }
@@ -644,8 +849,25 @@ void Day_4::draw(GameState* gs, sf::RenderWindow& win)
 		win.draw(letter);
 	if(drawLetterOpen)
 		win.draw(letterOpen);
+	if(drawResponse)
+		win.draw(response);
+	if(drawFinalResponse)
+		win.draw(finalResponse);
 	if(showNewspaper)
 		win.draw(newspaper);
+
+	if(state == 52)
+	{
+		win.draw(checkingGameBG);
+		win.draw(b1);
+		win.draw(b2);
+		win.draw(b3);
+		win.draw(b4);
+		win.draw(b5);
+		win.draw(b6);
+		win.draw(b7);
+		win.draw(b8);
+	}
 
 	gs->choice1->draw(win);
 	gs->choice2->draw(win);

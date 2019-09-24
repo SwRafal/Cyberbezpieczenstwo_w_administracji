@@ -159,6 +159,14 @@
 #define LETTER "resources/textures/letter.png"
 #define LETTER_OPEN "resources/textures/letterOpen.png"
 
+#define L1 "resources/textures/l1.png"
+#define L2 "resources/textures/l2.png"
+#define L3 "resources/textures/l3.png"
+
+#define FINAL_RESPONSE "resources/textures/finalResponse.png"
+
+#define CHECKING_GAME "resources/textures/checkingGame.png"
+
 //petenci
 #define PETENT1 "resources/textures/petent1.png"
 #define DOWOD1 "resources/textures/dowod1.png"

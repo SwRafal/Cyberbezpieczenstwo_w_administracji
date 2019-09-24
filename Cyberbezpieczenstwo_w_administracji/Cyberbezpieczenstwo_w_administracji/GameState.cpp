@@ -673,26 +673,28 @@ void GameState::update(sf::RenderWindow &win)
 	}
 	else if(day == 4)
 	{
-		if (book->isOpened())
+		if(!day4->showMinigame)
 		{
-			if (openedbook->update(win))
-				book->close();
-			return;
+			if (book->isOpened())
+			{
+				if (openedbook->update(win))
+					book->close();
+				return;
+			}
+			if (computer->isOpened())
+			{
+				if (openedcomputer->update(win))
+					computer->close();
+			}
+	
+			if(day4->state > 3)
+			{
+				computer->update(win);
+				phone->update(win);
+				if(bell->update_rung(win))
+					day4->callIn = true;
+			}
 		}
-		if (computer->isOpened())
-		{
-			if (openedcomputer->update(win))
-				computer->close();
-		}
-
-		if(day4->state > 3)
-		{
-			computer->update(win);
-			phone->update(win);
-			if(bell->update_rung(win))
-				day4->callIn = true;
-		}
-		
 
 		day4->update(this, win);
 	}

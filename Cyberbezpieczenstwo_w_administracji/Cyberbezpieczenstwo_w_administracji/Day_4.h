@@ -34,8 +34,21 @@ public:
 	//quest 3
 	sf::Sprite letter;
 	sf::Sprite letterOpen;
+	sf::Sprite response;
+	sf::Sprite finalResponse;
+	int rChoice = 0;
+	bool drawFinalResponse = false;
 	bool drawLetter = false;
 	bool drawLetterOpen = false;
+	bool drawResponse = false;
+	bool showMinigame = false;
+
+	gm::CheckBox b1,b2,b3,b4,b5,b6,b7,b8;
+	sf::Sprite checkingGameBG;
+
+	bool selectedProperly = false;
+
+
 
 	//petenci
 	OfficeApplicant * petent1;
