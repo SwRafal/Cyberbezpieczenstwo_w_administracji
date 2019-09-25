@@ -260,6 +260,8 @@
     <ClInclude Include="Phishing.h" />
     <ClInclude Include="Phone.h" />
     <ClInclude Include="playerIcon.h" />
+    <ClInclude Include="resource.h" />
+    <ClInclude Include="resource1.h" />
     <ClInclude Include="Rubbish.h" />
     <ClInclude Include="Screen.h" />
     <ClInclude Include="SelfWrittingText.h" />
@@ -270,6 +272,12 @@
     <ClInclude Include="Watch.h" />
     <ClInclude Include="Stamp.h" />
     <ClInclude Include="Xero.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Cyberbezpieczenstwo_w_administracji.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="resources\ikona2.ico" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
