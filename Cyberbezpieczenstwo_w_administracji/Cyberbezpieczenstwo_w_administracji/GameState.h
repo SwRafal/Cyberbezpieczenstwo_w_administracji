@@ -18,6 +18,7 @@
 #include "OpenedDoc.h"
 #include "Xero.h"
 
+
 #define GAMELOST_INFO_TIME 5000
 
 void error_win_close();

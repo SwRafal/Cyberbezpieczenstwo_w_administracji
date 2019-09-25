@@ -265,22 +265,27 @@ void Day_3::update(GameState *gs, sf::RenderWindow &win)
 
 			break;
 		case 5://Finish boss dialog
-			if (boss->state >= 4)
-			{
-				gs->present->setPosition(XERO_POS_X, XERO_POS_Y);
-			}
-			if (boss->state >= 1)
+			
+			if (boss->state == 1)
 			{
 				gs->papers->setPosition(PAPERS_POS);
 			}
-			if (boss->state >= 6)
+			else if (boss->state == 4)
+			{
+				gs->present->setPosition(XERO_POS_X, XERO_POS_Y);
+			}
+			else if (boss->state >= 6)
 			{
 				boss->hide();
-				state++;
+				
+				if (boss->hidden)
+				{
+					state++;
 
-				gs->openedcomputer->communique->setTextString(L"AWARIA FILTRÓW EMAIL. ZALECANA OSTRO¯NOŒÆ");
-				gs->openedcomputer->show_communique = true;
-				gs->computer->open();
+					gs->openedcomputer->communique->setTextString(L"AWARIA FILTRÓW EMAIL. ZALECANA OSTRO¯NOŒÆ");
+					gs->openedcomputer->show_communique = true;
+					gs->computer->open();
+				}
 			}
 
 			break;
@@ -291,6 +296,7 @@ void Day_3::update(GameState *gs, sf::RenderWindow &win)
 				if (gs->choice1->clicked(win))
 				{
 					gs->openedcomputer->show_communique = false;
+					gs->computer->close();
 					state++;
 				}
 			}
@@ -336,8 +342,8 @@ void Day_3::update(GameState *gs, sf::RenderWindow &win)
 			}
 			else if (gs->choice2->clicked(win))
 			{
-				scan_time = gm::Core::getClock().getElapsedTime().asMilliseconds() + 30000;
 				gs->xero->putIn();
+				minigame.turned_on = true;
 				state = 12;
 			}
 
@@ -371,8 +377,8 @@ void Day_3::update(GameState *gs, sf::RenderWindow &win)
 				}
 				else if (gs->choice2->clicked(win))
 				{
-					scan_time = gm::Core::getClock().getElapsedTime().asMilliseconds() + 30000;
 					gs->xero->putIn();
+					minigame.turned_on = true;
 					state = 12;
 				}
 			}
@@ -400,8 +406,8 @@ void Day_3::update(GameState *gs, sf::RenderWindow &win)
 				}
 				else if (gs->choice2->clicked(win))
 				{
-					scan_time = gm::Core::getClock().getElapsedTime().asMilliseconds() + 30000;
 					gs->xero->putIn();
+					minigame.turned_on = true;
 					state = 12;
 				}
 			}
@@ -409,13 +415,13 @@ void Day_3::update(GameState *gs, sf::RenderWindow &win)
 			break;
 		case 12://Scan papers
 
-			if (scan_time > gm::Core::getClock().getElapsedTime().asMilliseconds())
+			if (minigame.turned_on)
 			{
 				if (gs->xero->scanning.getStatus() == sf::Sound::Stopped)
 				{
 					gs->xero->scanning.play();
 				}
-				//Fishing
+				minigame.update(win);
 			}
 			else
 			{
@@ -742,6 +748,9 @@ void Day_3::draw(GameState *gs, sf::RenderWindow &win)
 		win.draw(peach[i]);
 	}
 	ringIT->draw(win);
+
+	if(minigame.turned_on)
+		minigame.draw(win);
 
 	win.display();
 }

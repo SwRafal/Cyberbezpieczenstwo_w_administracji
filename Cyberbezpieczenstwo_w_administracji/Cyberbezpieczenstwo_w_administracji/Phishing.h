@@ -13,7 +13,11 @@ class Phishing
 public:
 	bool turned_on;
 	bool show_content;
+	bool good_mail;
 	sf::Sprite background;
+	sf::Sprite screen;
+
+	sf::Int32 randomize_time;
 
 	std::vector<gm::TextButton*>mails;
 

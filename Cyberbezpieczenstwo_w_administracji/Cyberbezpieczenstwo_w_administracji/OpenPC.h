@@ -63,7 +63,6 @@ public:
 		LOGIN,
 		DESKTOP_KRYSIA,
 		INFO_DISPLAY,
-		PHISHING
 	};
 
 	bool internet_works = false;
@@ -78,7 +77,6 @@ public:
 	void setExitButtonActive();
 	void setExitButtonInactive();
 	
-
 private:
 	int *day = nullptr;
 
@@ -122,10 +120,6 @@ private:
 
 	//info
 	sf::Sprite info_display;
-
-	//Phishing
-	//...
-	
 public:
 
 	virtual void draw(sf::RenderTarget &target, sf::RenderStates states) = delete;

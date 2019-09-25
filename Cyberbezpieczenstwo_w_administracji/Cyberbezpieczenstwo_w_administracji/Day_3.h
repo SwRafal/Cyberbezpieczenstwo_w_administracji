@@ -2,6 +2,7 @@
 #include "Day.h"
 #include "textBubble.h"
 #include "OfficeApplicant.h"
+#include "Phishing.h"
 
 class Day_3 : public Day
 {
@@ -28,6 +29,8 @@ public:
 
 	sf::Sprite *lighting = nullptr;
 
+	//Phishing
+	Phishing minigame;
 
 	//Phone
 	bool phone_pickup = false;
