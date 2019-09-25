@@ -82,6 +82,17 @@ Day_4::Day_4() : b1(*gm::Assets::getFont()), b2(*gm::Assets::getFont()), b3(*gm:
 	b7.setPosition( 672, 414);
 	b8.setPosition( 672, 500);
 
+	gm::Assets::LoadTexture("endgame", "resources/textures/endgame.png");
+	endgame.setTexture(*gm::Assets::getTexture("endgame"));
+
+	endtext.setFont(*gm::Assets::getFont());
+	endtext.setCharacterSize(50);
+	endtext.setFillColor(sf::Color::White);
+	endtext.setOutlineThickness(1.0);
+	endtext.setOutlineColor(sf::Color::Black);
+	endtext.setString(L"Weekend urzêdnik spêdza w tropikach!");
+	endtext.setPosition(SCREEN_WIDTH / 2 - endtext.getGlobalBounds().width / 2, SCREEN_HEIGHT * 0.1);
+
 }
 
 Day_4::~Day_4()
@@ -138,6 +149,7 @@ void Day_4::update(GameState* gs, sf::RenderWindow& win)
 		gs->cardReader->hidden = false;
 		gs->cardReader->update();
 		state++;
+		state = 64;
 		break;
 	case 0: //wypij kawe
 		if (gs->coffee->update_drunk(win))
@@ -960,8 +972,17 @@ void Day_4::update(GameState* gs, sf::RenderWindow& win)
 			gs->dayover(L"");
 			gs->nextDay = true;
 			gs->playerIco.hide();
-			
+			state++;
 		}
+		break;
+	case 64:
+		if(sf::Mouse::isButtonPressed(sf::Mouse::Left))
+		{	
+			gs->data->returnToMenu = true;
+			state++;
+		}
+		break;
+	case 65:
 		break;
 	
 	}
@@ -1009,6 +1030,12 @@ void Day_4::draw(GameState* gs, sf::RenderWindow& win)
 	gs->choice1->draw(win);
 	gs->choice2->draw(win);
 	gs->choice3->draw(win);
+
+	if(state == 64)
+	{
+		win.draw(endgame);
+		win.draw(endtext);
+	}
 
 	win.display();
 }
