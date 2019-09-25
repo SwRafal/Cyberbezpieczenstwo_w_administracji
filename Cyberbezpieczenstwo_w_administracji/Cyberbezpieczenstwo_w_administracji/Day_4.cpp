@@ -149,7 +149,6 @@ void Day_4::update(GameState* gs, sf::RenderWindow& win)
 		gs->cardReader->hidden = false;
 		gs->cardReader->update();
 		state++;
-		state = 64;
 		break;
 	case 0: //wypij kawe
 		if (gs->coffee->update_drunk(win))
