@@ -960,6 +960,7 @@ void Day_4::update(GameState* gs, sf::RenderWindow& win)
 			gs->dayover(L"");
 			gs->nextDay = true;
 			gs->playerIco.hide();
+			
 		}
 		break;
 	

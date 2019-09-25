@@ -18,6 +18,8 @@ public:
 	gm::Button next;
 	gm::Information knowledge;
 
+	sf::Sprite background;
+
 	short text_alpha;
 
 	int state;

@@ -107,6 +107,7 @@ Day_2::~Day_2()
 
 void Day_2::update(GameState *gs, sf::RenderWindow &win)
 {
+	
 	if(showButtons)
 	{
 		if (state == 24)//Put mobile

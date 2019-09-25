@@ -41,6 +41,9 @@ void DayOverState::init()
 
 	text_alpha = 0;
 	state = 0;
+
+	gm::Assets::LoadTexture("sunset", "resources/textures/sunset.png");
+	background.setTexture(*gm::Assets::getTexture("sunset"));
 }
 
 void DayOverState::handleInput()
@@ -81,7 +84,7 @@ void DayOverState::update(sf::RenderWindow& win)
 void DayOverState::draw(sf::RenderWindow& win)
 {
 	win.clear(sf::Color::Black);
-
+	win.draw(background);
 	win.draw(text);
 	knowledge.draw(win);
 	win.draw(next);
