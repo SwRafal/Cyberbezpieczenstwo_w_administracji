@@ -219,6 +219,9 @@
     <ClCompile Include="Day_4.cpp">
       <Filter>Pliki źródłowe\Days</Filter>
     </ClCompile>
+    <ClCompile Include="Phishing.cpp">
+      <Filter>Pliki źródłowe</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\Assets.h">
@@ -421,6 +424,9 @@
     </ClInclude>
     <ClInclude Include="Day_4.h">
       <Filter>Pliki nagłówkowe\Days</Filter>
+    </ClInclude>
+    <ClInclude Include="Phishing.h">
+      <Filter>Pliki nagłówkowe</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

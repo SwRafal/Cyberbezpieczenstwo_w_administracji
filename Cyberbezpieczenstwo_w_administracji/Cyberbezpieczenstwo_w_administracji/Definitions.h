@@ -87,6 +87,7 @@
 #define TEXTURE_EMAIL_EXIT_BUTTON "resources/textures/emailExit.png"
 #define TEXTURE_EMAIL_TEMPLATE "resources/textures/emailTemplate.png"
 
+#define TEXTURE_PHISHING "resources/textures/phishing_background.png"
 
 
 #define TEXTURE_BATTERY "resources/textures/battery.png"

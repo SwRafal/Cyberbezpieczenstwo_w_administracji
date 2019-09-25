@@ -187,6 +187,7 @@
     <ClCompile Include="PauseState.cpp" />
     <ClCompile Include="pc.cpp" />
     <ClCompile Include="PersonalID.cpp" />
+    <ClCompile Include="Phishing.cpp" />
     <ClCompile Include="Phone.cpp" />
     <ClCompile Include="playerIcon.cpp" />
     <ClCompile Include="Rubbish.cpp" />
@@ -256,6 +257,7 @@
     <ClInclude Include="PauseState.h" />
     <ClInclude Include="pc.h" />
     <ClInclude Include="PersonalID.h" />
+    <ClInclude Include="Phishing.h" />
     <ClInclude Include="Phone.h" />
     <ClInclude Include="playerIcon.h" />
     <ClInclude Include="Rubbish.h" />

@@ -415,6 +415,7 @@ void Day_3::update(GameState *gs, sf::RenderWindow &win)
 				{
 					gs->xero->scanning.play();
 				}
+				//Fishing
 			}
 			else
 			{

@@ -62,7 +62,8 @@ public:
 		MAIL,
 		LOGIN,
 		DESKTOP_KRYSIA,
-		INFO_DISPLAY
+		INFO_DISPLAY,
+		PHISHING
 	};
 
 	bool internet_works = false;
@@ -121,6 +122,9 @@ private:
 
 	//info
 	sf::Sprite info_display;
+
+	//Phishing
+	//...
 	
 public:
 
