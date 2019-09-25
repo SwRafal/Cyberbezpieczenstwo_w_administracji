@@ -20,6 +20,10 @@ dayx::dayx(int &_dayNumber)
 	title.setString(L"Dzieñ  ");
 	title.setString(title.getString() + std::to_string(*dayNumber));
 	title.setPosition(SCREEN_WIDTH /2 - title.getGlobalBounds().width /2 , SCREEN_HEIGHT / 2 - title.getGlobalBounds().height/2);
+
+	gm::Assets::LoadTexture("sunrise", "resources/textures/sunrise.png");
+	background.setTexture(*gm::Assets::getTexture("sunrise"));
+	
 }
 
 
@@ -29,7 +33,8 @@ dayx::~dayx()
 
 void dayx::draw(sf::RenderTarget &target, sf::RenderStates states) const
 	{
-		target.draw((sf::RectangleShape)*this,states);
+		//target.draw((sf::RectangleShape)*this,states);
+		target.draw(background);
 		if(show)
 			target.draw(title);
 	}
@@ -42,7 +47,8 @@ void dayx::update()
 		if(opacity > 0)
 		{
 			opacity = opacity - opacitySpeed;
-			this->setFillColor(sf::Color(0,0,0,opacity));
+			background.setColor(sf::Color(255,255,255,opacity));
+			//this->setFillColor(sf::Color(0,0,0,opacity));
 
 		}
 
@@ -53,7 +59,8 @@ void dayx::update()
 	if(opacity < 255 && timer!= 200)
 		opacity = opacity + opacitySpeed;
 	if(opacity <= 255)
-		this->setFillColor(sf::Color(0,0,0,opacity));
+		background.setColor(sf::Color(255,255,255,opacity));
+		//this->setFillColor(sf::Color(0,0,0,opacity));
 
 	if(opacity == 255 && timer < 200)
 	{
