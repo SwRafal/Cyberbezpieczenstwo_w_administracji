@@ -137,7 +137,6 @@ void Day_4::update(GameState* gs, sf::RenderWindow& win)
 		gs->openedcomputer->getPassword() = gs->data->password;
 		gs->cardReader->hidden = false;
 		gs->cardReader->update();
-		state = 53;
 		state++;
 		break;
 	case 0: //wypij kawe

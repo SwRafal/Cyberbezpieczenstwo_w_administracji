@@ -85,6 +85,12 @@ void IntroState::init()
 	Icon2.setScale(0.5,0.5);
 	Icon3.setScale(0.5,0.5);
 
+
+	gm::Assets::LoadTexture("introbg1", "resources/textures/introbg1.png");
+	gm::Assets::LoadTexture("introbg2", "resources/textures/introbg2.png");
+
+	bg1.setTexture(*gm::Assets::getTexture("introbg1"));
+	bg2.setTexture(*gm::Assets::getTexture("introbg2"));
 	
 }
 
@@ -317,6 +323,7 @@ void IntroState::draw(sf::RenderWindow& win)
 	{
 		win.draw(choice1);
 		win.draw(choice2);
+		win.draw(bg1);
 	}
 	delay = false;
 	
@@ -328,6 +335,7 @@ void IntroState::draw(sf::RenderWindow& win)
 	}
 	if(state == 4)
 	{
+		win.draw(bg2);
 		win.draw(choice1);
 		win.draw(choice2);
 		win.draw(choice3);

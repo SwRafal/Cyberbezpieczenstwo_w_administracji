@@ -25,6 +25,10 @@ public:
 	gm::SelfWrittingText message2;
 
 	sf::Text title;
+
+	sf::Sprite bg1,bg2;
+	bool showbg1 = false;
+	bool showbg2 = false;
 	
 
 	bool initialized;
