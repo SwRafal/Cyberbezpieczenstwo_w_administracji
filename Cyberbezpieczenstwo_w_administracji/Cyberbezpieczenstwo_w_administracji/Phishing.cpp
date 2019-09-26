@@ -167,7 +167,7 @@ void Phishing::update(sf::RenderWindow &win)
 
 			mails.push_back(new_mail);
 
-			randomize_time = gm::Core::getClock().getElapsedTime().asMilliseconds() + 5000;
+			randomize_time = gm::Core::getClock().getElapsedTime().asMilliseconds() + 2500;
 		}
 
 		if (show_content)

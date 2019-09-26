@@ -416,6 +416,7 @@ void Day_3::update(GameState *gs, sf::RenderWindow &win)
 			break;
 		case 12://Scan papers
 
+			gs->papers->setTexture(*gm::Assets::getTexture("PAPERS_4"));
 			if (minigame.turned_on)
 			{
 				if (gs->xero->scanning.getStatus() == sf::Sound::Stopped)
@@ -431,9 +432,10 @@ void Day_3::update(GameState *gs, sf::RenderWindow &win)
 				gs->openedcomputer->show_communique = true;
 				gs->computer->open();
 				gs->xero->takeOut();
+				gs->papers->setTexture(*gm::Assets::getTexture("PAPERS_3"));
+
 				state++;
 			}
-
 
 			break;
 		case 13://Finished scan
@@ -479,7 +481,10 @@ void Day_3::update(GameState *gs, sf::RenderWindow &win)
 			{
 				thought->setBubblePosition(-300, 0);
 			}
-
+			if(scan_time < gm::Core::getClock().getElapsedTime().asMilliseconds() + 6000)
+				gs->papers->setTexture(*gm::Assets::getTexture("PAPERS_2"));
+			else if (scan_time < gm::Core::getClock().getElapsedTime().asMilliseconds() + 3000)
+				gs->papers->setTexture(*gm::Assets::getTexture("PAPERS_1"));
 			if (scan_time > gm::Core::getClock().getElapsedTime().asMilliseconds())
 			{
 				if (gs->xero->scanning.getStatus() == sf::Sound::Stopped)
@@ -494,6 +499,7 @@ void Day_3::update(GameState *gs, sf::RenderWindow &win)
 				thought->text.setTextString(L"Ufff… tym razem oby³o siê bez zniszczenia dokumentów");
 				thought_time = gm::Core::getClock().getElapsedTime().asMilliseconds() + THOUGHT_TIME;
 				gs->xero->takeOut();
+				gs->papers->setPosition(-300, 0);
 
 				state++;
 			}
@@ -529,6 +535,7 @@ void Day_3::update(GameState *gs, sf::RenderWindow &win)
 			{
 				boss->hide();
 				gs->mariolka->show();
+				gs->papers->setTexture(*gm::Assets::getTexture("PAPERS_5"));
 
 				state++;
 			}
@@ -538,6 +545,7 @@ void Day_3::update(GameState *gs, sf::RenderWindow &win)
 
 			if (gs->mariolka->getPosition().x < 850)
 			{
+				gs->papers->setPosition(750, 350);
 				gs->mariolka->hide();
 				ringIT->showBubble();
 				gs->mobile->call();

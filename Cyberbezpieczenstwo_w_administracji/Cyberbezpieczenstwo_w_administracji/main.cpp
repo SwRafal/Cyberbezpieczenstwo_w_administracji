@@ -7,8 +7,7 @@
 
 int main()
 {
-	HWND hWnd = GetConsoleWindow(); 
-	ShowWindow( hWnd, SW_HIDE );
+	FreeConsole();
 
 	srand(time(nullptr));
 

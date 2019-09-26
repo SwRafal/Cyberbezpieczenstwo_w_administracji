@@ -32,22 +32,7 @@ public:
 	//Phishing
 	Phishing minigame;
 
-	//Phone
-	bool phone_pickup = false;
-	bool finish_phone = false;
-	bool finish_IT_dialog = false;
-
-	//Mobile
-	bool mobile_pickup = false;
-	bool aniela_talking = false;
-	bool passed_time = false;
-
-	//Quest3
-	bool finish_boss_dialog_3 = false;
-
-	//BURZA SPALI£A JE¿ELI ANIELA
-
-	const sf::Vector2f PAPERS_POS = sf::Vector2f(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2 - 120);
+	const sf::Vector2f PAPERS_POS = sf::Vector2f(870, 510);
 
 	Day_3();
 	~Day_3();

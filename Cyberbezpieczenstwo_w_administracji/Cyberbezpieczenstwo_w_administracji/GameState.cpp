@@ -342,15 +342,29 @@ void GameState::init()
 		if (gm::Assets::getTexture("XEROBROKEN") == nullptr)
 			error_win_close();
 	}
-	gm::Assets::LoadTexture("PAPERS", TEXTURE_PAPERS);
-	if (gm::Assets::getTexture("PAPERS") == nullptr)
+	//PAPERS
+	gm::Assets::LoadTexture("PAPERS_5", TEXTURE_PAPERS_5);
+	if (gm::Assets::getTexture("PAPERS_5") == nullptr)
 		error_win_close();
 	else
 	{
-		papers = new sf::Sprite(*gm::Assets::getTexture("PAPERS"));
+		papers = new sf::Sprite(*gm::Assets::getTexture("PAPERS_5"));
 		papers->setPosition(sf::Vector2f(-300, 0));
 
 	}
+	gm::Assets::LoadTexture("PAPERS_4", TEXTURE_PAPERS_4);
+	if (gm::Assets::getTexture("PAPERS_4") == nullptr)
+		error_win_close();
+	gm::Assets::LoadTexture("PAPERS_3", TEXTURE_PAPERS_3);
+	if (gm::Assets::getTexture("PAPERS_3") == nullptr)
+		error_win_close();
+	gm::Assets::LoadTexture("PAPERS_2", TEXTURE_PAPERS_2);
+	if (gm::Assets::getTexture("PAPERS_2") == nullptr)
+		error_win_close();
+	gm::Assets::LoadTexture("PAPERS_1", TEXTURE_PAPERS_1);
+	if (gm::Assets::getTexture("PAPERS_1") == nullptr)
+		error_win_close();
+
 
 	gm::Assets::LoadTexture("mariolka", TEXTURE_SECOND_OFFICE_FRIEND);
 	mariolka = new OfficeApplicant(gm::Assets::getTexture("mariolka"));
@@ -762,8 +776,8 @@ void GameState::draw(sf::RenderWindow& win)
 	win.draw(wall);
 	win.draw(*present);
 	xero->draw(win);
-	win.draw(*papers);
 	win.draw(desk);
+	win.draw(*papers);
 	calendar->draw(win);
 	bell->draw(win);
 	watch->draw(win);

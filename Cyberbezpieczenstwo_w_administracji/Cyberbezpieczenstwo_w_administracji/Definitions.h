@@ -102,7 +102,13 @@
 #define TEXTURE_XERO "resources/textures/xero.png"
 #define TEXTURE_XEROBROKEN "resources/textures/xerobroken.png"
 #define TEXTURE_PRESENT "resources/textures/present.png"
-#define TEXTURE_PAPERS "resources/textures/papers.png"
+
+#define TEXTURE_PAPERS_5 "resources/textures/papers5.png"
+#define TEXTURE_PAPERS_4 "resources/textures/papers4.png"
+#define TEXTURE_PAPERS_3 "resources/textures/papers3.png"
+#define TEXTURE_PAPERS_2 "resources/textures/papers2.png"
+#define TEXTURE_PAPERS_1 "resources/textures/papers1.png"
+
 #define TEXTURE_PEACH "resources/textures/peach.png"
 #define TEXTURE_LIGHTING "resources/textures/lighting.png"
 
@@ -112,6 +118,7 @@
 
 #define TEXTURE_OFFICE_FRIEND "resources/textures/friend.png"
 #define TEXTURE_SECOND_OFFICE_FRIEND "resources/textures/secondFriend.png"
+#define TEXTURE_SECOND_OFFICE_FRIEND_HAND "resources/textures/secondFriend_hand.png"
 #define TEXTURE_APPLICANT "resources/textures/applicant.png"
 #define TEXTURE_ARROW_BUTTON "resources/textures/arrow.png"
 
