@@ -452,10 +452,10 @@ void GameState::handleInput()
 	}
 	
 
-	if(gm::Core::getEnteredChar() == 0x0000007A)
+	/*if(gm::Core::getEnteredChar() == 0x0000007A)
 	{
 		nextDay = true;
-	}
+	}*/
 
 	
 }
