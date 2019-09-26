@@ -48,7 +48,9 @@ public:
 
 	bool selectedProperly = false;
 
-
+	//koniec
+	sf::Sprite endgame;
+	sf::Text endtext;
 
 	//petenci
 	OfficeApplicant * petent1;
