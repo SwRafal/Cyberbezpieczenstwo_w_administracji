@@ -772,7 +772,5 @@ void Day_3::draw(GameState *gs, sf::RenderWindow &win)
 	if(minigame.turned_on)
 		minigame.draw(win);
 
-	gs->bin->draw(win);
-
 	win.display();
 }

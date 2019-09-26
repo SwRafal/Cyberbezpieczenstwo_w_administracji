@@ -32,7 +32,7 @@ public:
 	//Phishing
 	Phishing minigame;
 
-	const sf::Vector2f PAPERS_POS = sf::Vector2f(870, 510);
+	const sf::Vector2f PAPERS_POS = sf::Vector2f(860, 510);
 
 	Day_3();
 	~Day_3();
