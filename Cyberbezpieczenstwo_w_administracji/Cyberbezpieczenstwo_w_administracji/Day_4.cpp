@@ -553,8 +553,10 @@ void Day_4::update(GameState* gs, sf::RenderWindow& win)
 		{
 			petent2->hide();
 			gs->playerIco.hide();
-			gs->choice1->setScale(0.6,0.6);
-			gs->choice2->setScale(0.6,0.6);
+			gs->choice1->setScale(0.4,0.4);
+			gs->choice2->setScale(0.4,0.4);
+			gs->choice3->setScale(0.4,0.4);
+			
 			showButtons = false;
 			quest2completed = true;
 			state = 34;
@@ -750,6 +752,7 @@ void Day_4::update(GameState* gs, sf::RenderWindow& win)
 		gs->computer->open();
 		gs->openedcomputer->newMail(L"Nagana", L"IOD",L"Szanowna Pani/Panie,\nZosta³em poinformowany, i¿ niezgodnie z obowi¹zuj¹cym prawem przekaza³a Pani/Pan dane petentów do instytucji zewnêtrznej w ramach procedur kontrolnych prowadzonych przez tê instytucjê.\nTakie dzia³anie jest niezgodne z celem, dla którego zosta³y pozyskane i nie jest uzasadnione celem konktroli.\nProszê o niezw³oczne przekazanie szczegó³owego raportu ze zdarzenia w celu nadania biegu sprawie w ramach procedur ochrony danych osobowych");
 		gs->openedcomputer->setState(OpenPC::MAIL);
+		gs->openedcomputer->setMailButtonActive();
 		state++;
 		break;
 	case 48:
@@ -965,6 +968,7 @@ void Day_4::update(GameState* gs, sf::RenderWindow& win)
 		break;
 	case 63:
 		//gs->computer->update(win);
+		gs->cardReader->update();
 		gs->computer->turnOffAvailable = true;
 		if(!gs->computer->powerOn && !gs->cardReader->isCardInside())
 		{
