@@ -369,6 +369,15 @@ void GameState::init()
 	gm::Assets::LoadTexture("mariolka", TEXTURE_SECOND_OFFICE_FRIEND);
 	mariolka = new OfficeApplicant(gm::Assets::getTexture("mariolka"));
 	mariolka->move(0,-2);
+
+	gm::Assets::LoadTexture("exit_sign", TEXTURE_EXIT);
+	if (gm::Assets::getTexture("exit_sign") == nullptr)
+		error_win_close();
+	else
+	{
+		exit = new gm::Button(sf::Vector2f(-300, 0), sf::Vector2f(139, 81));
+		exit->setTexture(gm::Assets::getTexture("exit_sign"));
+	}
 	
 
 	/*Starting settings*/
@@ -774,6 +783,7 @@ void GameState::draw(sf::RenderWindow& win)
 
 	/*Background*/
 	win.draw(wall);
+	win.draw(*exit);
 	win.draw(*present);
 	xero->draw(win);
 	win.draw(desk);

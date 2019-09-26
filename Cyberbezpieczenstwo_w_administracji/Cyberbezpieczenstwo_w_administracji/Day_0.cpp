@@ -632,6 +632,7 @@ void Day_0::draw(GameState* gs)
 		
 		break;
 	case 11:
+		gs->dayover(L"-Dzia³anie poszczególnych urz¹dzeñ");
 		gs->nextDay = true;
 		gs->officeLady->hide();
 		break;

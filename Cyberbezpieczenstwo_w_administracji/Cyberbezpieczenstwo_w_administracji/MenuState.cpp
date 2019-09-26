@@ -16,7 +16,6 @@ MenuState::~MenuState()
 
 void MenuState::init()
 {
-	std::cout << "W ostatecznej wersji nie bedzie tego okienka";
 	/* Play button */
 	playButton.setPosition(60,435);
 	playButton.setTextIdleColor(sf::Color::White);
@@ -25,32 +24,32 @@ void MenuState::init()
 	playButton.setIdleColor(sf::Color::Transparent);
 	playButton.setAimedColor(sf::Color::Transparent);
 	playButton.setPressColor(sf::Color::Transparent);
-	playButton.setSize(200,55);
-	playButton.setTextSize(250);
-	playButton.setTextString("Nowa gra");
+	playButton.setSize(280,60);
+	playButton.setTextSize(42);
+	playButton.setTextString(L"Nowa gra");
 
 	/* Load Game button */
-	loadGameButton.setPosition(58, 501);
+	loadGameButton.setPosition(65, 501);
 	loadGameButton.setTextIdleColor(sf::Color::White);
 	loadGameButton.setTextAimedColor(sf::Color(230, 120, 255, 255));
 	loadGameButton.setTextPressColor(sf::Color(216, 46, 255, 255));
 	loadGameButton.setIdleColor(sf::Color::Transparent);
 	loadGameButton.setAimedColor(sf::Color::Transparent);
 	loadGameButton.setPressColor(sf::Color::Transparent);
-	loadGameButton.setSize(250, 55);
-	loadGameButton.setTextSize(70);
+	loadGameButton.setSize(290, 60);
+	loadGameButton.setTextSize(42);
 	loadGameButton.setTextString(L"Wczytaj grê");
 
 	/* Exit button */
-	exitButton.setPosition(36,575);
+	exitButton.setPosition(70,575);
 	exitButton.setTextIdleColor(sf::Color::White);
 	exitButton.setTextAimedColor(sf::Color(230, 120, 255,255));
 	exitButton.setTextPressColor(sf::Color(216, 46, 255,255));
 	exitButton.setIdleColor(sf::Color::Transparent);
 	exitButton.setAimedColor(sf::Color::Transparent);
 	exitButton.setPressColor(sf::Color::Transparent);
-	exitButton.setSize(200,40);
-	exitButton.setTextSize(70);
+	exitButton.setSize(230,60);
+	exitButton.setTextSize(42);
 	exitButton.setTextString(L"Wyjœcie");
 
 	/* intro button */
@@ -66,8 +65,6 @@ void MenuState::init()
 	intro.setTextString("intro");*/
 
 	/* animated background */
-	animationCounteri = 0;
-	animationCounterj = 0;
 	gm::Assets::LoadTexture("menu bg", MENU_BACKGROUND_ANIMATION_FILEPATH);
 	if (gm::Assets::getTexture("menu bg") == nullptr)
 	{
@@ -137,20 +134,6 @@ void MenuState::handleInput()
 
 void MenuState::update(sf::RenderWindow &win)
 {
-	background_animation_spritesheet.setTextureRect(sf::IntRect(animationCounteri * 500,animationCounterj * 281,500,281));
-	background_animation_spritesheet.setScale(2.56,2.56227758007);
-
-	if(animationCounterj!=16)
-		animationCounteri++;
-	
-	if(animationCounteri == 13)
-	{
-		animationCounteri = 0;
-		animationCounterj++;
-	}
-		
-	if(animationCounterj == 15)
-		animationCounterj = 0;
 }
 
 void MenuState::draw(sf::RenderWindow& win)

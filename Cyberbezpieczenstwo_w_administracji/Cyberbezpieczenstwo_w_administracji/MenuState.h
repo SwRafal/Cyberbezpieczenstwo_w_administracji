@@ -22,8 +22,6 @@ public:
 	gm::TextButton exitButton;
 
 	sf::Sprite background_animation_spritesheet;
-	int animationCounteri;
-	int animationCounterj;
 
 	sf::Sound clickSound;
 

@@ -62,6 +62,7 @@
 #define TEXTURE_MOBILE_VIEW "resources/textures/mobile_view.png"
 #define TEXTURE_DOC "resources/textures/dokument.png"
 #define TEXTURE_OPEN_DOC "resources/textures/open_doc.png"
+#define TEXTURE_EXIT "resources/textures/exit.png"
 
 
 #define ID_CARD_TEXTURE "resources/textures/karta.png"

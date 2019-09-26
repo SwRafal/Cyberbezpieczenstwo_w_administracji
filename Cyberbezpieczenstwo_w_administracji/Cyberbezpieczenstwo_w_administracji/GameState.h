@@ -92,6 +92,7 @@ private:
 	gm::Button *present = nullptr;
 	Xero *xero = nullptr;
 	sf::Sprite *papers = nullptr;
+	gm::Button *exit = nullptr;
 
 	PlayerIcon playerIco;
 	

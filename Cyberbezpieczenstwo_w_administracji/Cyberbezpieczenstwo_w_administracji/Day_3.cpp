@@ -728,6 +728,16 @@ void Day_3::update(GameState *gs, sf::RenderWindow &win)
 
 			if (boss->state >= 2)
 			{
+				boss->hide();
+				state++;
+			}
+
+			break;
+		case 27://End
+
+			gs->exit->setFillColor(sf::Color::White);
+			if (gs->exit->clicked(win))
+			{
 				gs->dayover(L"-obs³uga kserokopiarki\n"
 					L"-wykonywanie kopii dokumentów\n"
 					L"-odpieranie ataków phishingowych\n"

@@ -3,6 +3,7 @@
 
 Day_2::Day_2()
 {
+
  	itGuy = new OfficeApplicant(gm::Assets::getTexture("itGuy"));
 	itGuy->move(0,10);
 	offset = 20;
@@ -240,7 +241,7 @@ void Day_2::update(GameState *gs, sf::RenderWindow &win)
 
 	if(!init)
 	{
-		
+		gs->exit->setPosition(1010, 50);
 
 		gs->coffee->reset();
 
@@ -1140,9 +1141,17 @@ void Day_2::update(GameState *gs, sf::RenderWindow &win)
 		gs->computer->turnOffAvailable = true;
 		if(!gs->computer->powerOn && !gs->cardReader->isCardInside())
 		{
-			gs->dayover(L"");
-			gs->nextDay = true;
-			gs->playerIco.hide();
+			gs->exit->setFillColor(sf::Color::White);
+			if (gs->exit->clicked(win))
+			{
+				gs->dayover(L"-Uwierzytelnianie dwusk³adnikowe – upewnij siê, ¿e z niego korzystasz, a elementy do niego potrzebne s¹ bezpiecznie przechowywane.\n"
+					L"-Weryfikuj to¿samoœæ napotkanych osób.\n"
+					L"-Zg³aszaj niezablokowane i nieusuniête konta by³ych pracowników.\n"
+					L"-Nie pod³¹czaj urz¹dzeñ z nieznanych Ÿróde³.\n"
+					L"-Weryfikuj przychodz¹ce emaile, ich nadawców, nie pobieraj nieznanych plików, nie dzwoñ na niesprawdzone numery telefonów.\n");
+				gs->nextDay = true;
+				gs->playerIco.hide();
+			}
 		}
 		break;
 	}

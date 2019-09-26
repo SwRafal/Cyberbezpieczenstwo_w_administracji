@@ -503,7 +503,7 @@ void Day_1::update(GameState *gs, sf::RenderWindow &win)
 					}
 					gs->playerIco.state = 0;
 					gs->playerIco.text.setTextString(L"Czeœæ tu " + gs->data->name + L"! Nie mogê po³¹czyæ siê z sieci¹, pomo¿ecie?");
-					gs->phone->addToQueue(L"Pracownik dzia³u IT: Pomo¿emy!!!");
+					gs->phone->addToQueue(L"Pomo¿emy!!!");
 					gs->phone->call();
 
 					gs->computer->setFillColor(gs->computer->getPressColor());
@@ -573,6 +573,8 @@ void Day_1::update(GameState *gs, sf::RenderWindow &win)
 				gs->nagana_info->setFont(*gm::Assets::getFont());
 				gs->nagana_info->setString(L"Dostêp do sieci przyznany!");
 				gs->nagana_info->setFillColor(sf::Color::Green);
+				gs->nagana_info->setOutlineThickness(3);
+				gs->nagana_info->setOutlineColor(sf::Color::Black);
 				gs->info_time = gm::Core::getClock().getElapsedTime().asMilliseconds() + GAMELOST_INFO_TIME;
 				sf::Vector2f info_pos;
 				info_pos.x = SCREEN_WIDTH / 2 - (gs->nagana_info->getLocalBounds().left + gs->nagana_info->getLocalBounds().width) / 2;

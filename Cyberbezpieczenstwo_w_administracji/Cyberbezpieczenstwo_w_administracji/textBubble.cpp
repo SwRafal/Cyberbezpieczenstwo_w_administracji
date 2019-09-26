@@ -10,7 +10,7 @@ textBubble::textBubble(sf::Texture *tex, float maxScale) : text(*gm::Assets::get
 
 	this->setTexture(*tex);
 
-	text.setTextSize(20);
+	text.setTextSize(16);
 	text.setTextColor(sf::Color::Black);
 	text.setFillColor(sf::Color::Transparent);
 

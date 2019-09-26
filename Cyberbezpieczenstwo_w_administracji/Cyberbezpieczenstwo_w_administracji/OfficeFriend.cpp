@@ -24,7 +24,7 @@ OfficeFriend::OfficeFriend(sf::Texture *texture) : text(*gm::Assets::getFont())
 	chat.setTexture(*gm::Assets::getTexture("chat bubble"));
 	chat.setPosition(FINAL_POS_X- chat.getGlobalBounds().width + 15,POS_Y - 40);
 
-	text.setTextSize(20);
+	text.setTextSize(16);
 	text.setTextColor(sf::Color::Black);
 	text.setFillColor(sf::Color::Transparent);
 	text.setPosition(FINAL_POS_X- chat.getGlobalBounds().width + 15 + 3,POS_Y - 40 + 2);

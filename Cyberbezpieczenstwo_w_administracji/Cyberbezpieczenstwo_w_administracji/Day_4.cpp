@@ -968,10 +968,14 @@ void Day_4::update(GameState* gs, sf::RenderWindow& win)
 		gs->computer->turnOffAvailable = true;
 		if(!gs->computer->powerOn && !gs->cardReader->isCardInside())
 		{
-			gs->dayover(L"");
-			gs->nextDay = true;
-			gs->playerIco.hide();
-			state++;
+			gs->exit->setFillColor(sf::Color::White);
+			if (gs->exit->clicked(win))
+			{
+				gs->dayover(L"");
+				gs->nextDay = true;
+				gs->playerIco.hide();
+				state++;
+			}
 		}
 		break;
 	case 64:

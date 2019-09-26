@@ -15,7 +15,7 @@ namespace gm
 					last_space = i;
 				text.setString(str.substring(0, i + 1));
 
-				if (text.getLocalBounds().width > getSize().x)
+				if (text.getLocalBounds().width + text.getLocalBounds().left > getSize().x)
 				{
 					str[last_space] = '\n';
 				}

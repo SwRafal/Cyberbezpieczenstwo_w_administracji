@@ -31,7 +31,7 @@ PlayerIcon::PlayerIcon(int character) : text(*gm::Assets::getFont())
 	chat.setTexture(*gm::Assets::getTexture("playerChat"));
 	chat.setPosition(FINAL_POS_X - 25 + icon.getGlobalBounds().width,POS_Y);
 
-	text.setTextSize(20);
+	text.setTextSize(16);
 	text.setTextColor(sf::Color::Black);
 	text.setFillColor(sf::Color::Transparent);
 	text.setPosition(FINAL_POS_X + chat.getPosition().x + 22, POS_Y + 3);
