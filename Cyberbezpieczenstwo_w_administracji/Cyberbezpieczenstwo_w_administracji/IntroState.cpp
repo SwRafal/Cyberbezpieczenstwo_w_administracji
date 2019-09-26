@@ -90,6 +90,7 @@ void IntroState::init()
 	gm::Assets::LoadTexture("introbg2", "resources/textures/introbg2.png");
 
 	bg1.setTexture(*gm::Assets::getTexture("introbg1"));
+	bg1.move(-20,0);
 	bg2.setTexture(*gm::Assets::getTexture("introbg2"));
 	
 }
@@ -150,11 +151,12 @@ void IntroState::update(sf::RenderWindow& win)
 
 		if(state == 2) //co wybierzesz
 		{
+			message.move(0,-20);
 			message.loadNewText(INTRO_TEXT_3);
 			message.setStyle(sf::Text::Style::Bold);
 			message.setCharacterSize(40);
-			choice1.setPosition(SCREEN_WIDTH * 0.2,SCREEN_HEIGHT * 0.75);
-			choice2.setPosition(SCREEN_WIDTH * 0.65,SCREEN_HEIGHT * 0.75);
+			choice1.setPosition(SCREEN_WIDTH * 0.23,SCREEN_HEIGHT * 0.92);
+			choice2.setPosition(SCREEN_WIDTH * 0.6,SCREEN_HEIGHT * 0.92);
 		}
 
 		if (state == 3) //wybierz gracza

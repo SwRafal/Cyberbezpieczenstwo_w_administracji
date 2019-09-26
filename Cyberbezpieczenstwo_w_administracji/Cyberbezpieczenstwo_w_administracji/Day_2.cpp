@@ -1127,11 +1127,13 @@ void Day_2::update(GameState *gs, sf::RenderWindow &win)
 		boss->animate();
 		if(boss->state == 2)
 		{
+			boss->setButtonInactive();
 			boss->hide();
 			state++;
 		}
 		break;
 	case 64: //u re drunk go home
+		boss->animate();
 		gs->playerIco.text.setTextString(L"Pora iœæ do domu. Muszê pamiêtaæ o zabraniu karty dostêpu z czytnika i wy³¹czeniu komputera");
 		gs->playerIco.show();
 		state++;

@@ -662,7 +662,7 @@ void Day_1::update(GameState *gs, sf::RenderWindow &win)
 						L"-logowanie do systemu\n"
 						L"-korzystanie z pomocy dzia³u IT\n"
 						L"-ochrona has³a\n"
-						L"-odrzucanie za³¹czników nieznanych Ÿróde³\n");
+						L"-odrzucanie za³¹czników nieznanych z Ÿróde³\n");
 					gs->nextDay = true;
 				}
 			}
