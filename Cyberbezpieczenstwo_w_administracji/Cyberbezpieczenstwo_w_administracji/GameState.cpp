@@ -562,9 +562,9 @@ void GameState::update(sf::RenderWindow &win)
 			{
 				phone->text_queue.pop();
 			}
-			while (!officeLady->text_queue.empty())
+			while (!mariolka->text_queue.empty())
 			{
-				officeLady->text_queue.pop();
+				mariolka->text_queue.pop();
 			}
 
 			/*phone->addToQueue(L"Czeœæ " + data->name + L"! Jestem z dzia³u IT. Twoje dane logowania to:\nUser: Admin\nHas³o: Admin");
@@ -575,10 +575,10 @@ void GameState::update(sf::RenderWindow &win)
 				L"przez naszych partnerów. Liczba prezentów jest ograniczona, decyduje kolejnoœæ zg³oszeñ. Aby otrzymaæ prezent"
 				L"wyœlij SMS o treœci JESTEM ZWYCIEZCA na numer 7780.");*/
 
-			officeLady->text.setTextString(L"To ty nie wiesz? Aniela wyrzuci³a swoje kartki z has³ami do œmieci. Na szczêœcie znaleŸli je pracownicy naszego ministerstwa.");
-			officeLady->addToQueue(L"Wiedzia³eœ? Istnieje coœ takiego jak Trashing. Z³odzieje przeszukuj¹ œmieci firm, ¿eby zdobyæ has³a czy inne wartoœciowe informacje.");
-			officeLady->addToQueue(L"W ¿yciu bym nie wpad³a na to, ¿e ktoœ mo¿e zdobywaæ dane w ten sposób. FUUUUUUUUUUUUJ.");
-			officeLady->addToQueue(L"EOT");
+			mariolka->text.setTextString(L"To ty nie wiesz? Aniela wyrzuci³a swoje kartki z has³ami do œmieci. Na szczêœcie znaleŸli je pracownicy naszego ministerstwa.");
+			mariolka->addToQueue(L"Wiedzia³eœ? Istnieje coœ takiego jak Trashing. Z³odzieje przeszukuj¹ œmieci firm, ¿eby zdobyæ has³a czy inne wartoœciowe informacje.");
+			mariolka->addToQueue(L"W ¿yciu bym nie wpad³a na to, ¿e ktoœ mo¿e zdobywaæ dane w ten sposób. FUUUUUUUUUUUUJ.");
+			mariolka->addToQueue(L"EOT");
 
 			while (!playerIco.text_queue.empty())
 			{

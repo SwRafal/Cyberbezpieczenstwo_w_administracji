@@ -5,8 +5,18 @@ Phishing::Phishing()
 	turned_on = false;
 	show_content = false;
 	good_mail = false;
+	game_lost = false;
+	which_mail = 0;
 
 	randomize_time = 0;
+
+	points = 0;
+	text_points.setFont(*gm::Assets::getFont());
+	text_points.setFillColor(sf::Color::Blue);
+	text_points.setOutlineThickness(1);
+	text_points.setOutlineColor(sf::Color::White);
+	text_points.setCharacterSize(48);
+	text_points.setPosition(20, 1);
 
 	gm::Assets::LoadTexture("PHISHING", TEXTURE_PHISHING);
 	if (gm::Assets::getTexture("PHISHING") == nullptr)
@@ -41,7 +51,7 @@ Phishing::Phishing()
 	accept->setTextPressColor(sf::Color(230,230,230));
 	accept->setOutlineThickness(1);
 	accept->setOutlineColor(sf::Color::Black);
-	accept->setPosition(400,500);
+	accept->setPosition(400,600);
 	accept->setSize(110, 50);
 	accept->setTextSize(24);
 	accept->setTextString(L"Akceptuj");
@@ -55,19 +65,19 @@ Phishing::Phishing()
 	decline->setTextPressColor(sf::Color(230, 230, 230));
 	decline->setOutlineThickness(1);
 	decline->setOutlineColor(sf::Color::Black);
-	decline->setPosition(650, 500);
+	decline->setPosition(650, 600);
 	decline->setSize(110, 50);
 	decline->setTextSize(24);
 	decline->setTextString(L"Odrzuæ");
 
 	content = new gm::Information(*gm::Assets::getFont());
 	content->setSize(600, 350);
-	content->setPosition(300, 180);
+	content->setPosition(300, 250);
 	content->setOutlineThickness(2);
 	content->setOutlineColor(sf::Color::Black);
 	content->setFillColor(sf::Color(245, 245, 245));
 	content->setTextColor(sf::Color::Black);
-	content->setTextSize(24);
+	content->setTextSize(16);
 	content->setTextString("NULL");
 }
 
@@ -85,7 +95,6 @@ Phishing::~Phishing()
 void Phishing::draw(sf::RenderWindow &win)
 {
 	win.draw(background);
-	win.draw(screen);
 
 	for (auto &i : mails)
 	{
@@ -99,49 +108,127 @@ void Phishing::draw(sf::RenderWindow &win)
 		win.draw(*accept);
 		win.draw(*decline);
 	}
+
+	win.draw(screen);
+
+	win.draw(text_points);
 }
 
 void Phishing::update(sf::RenderWindow &win)
 {
-	if (randomize_time < gm::Core::getClock().getElapsedTime().asMilliseconds())
+	if (game_lost)
 	{
-		mails.push_back(new gm::TextButton(*gm::Assets::getFont(), sf::Vector2f(600, 400), sf::Vector2f(400, 50), 24, "Random"));
+		show_content = false;
 
-		randomize_time += 2000;
-	}
+		sf::Vector2f new_points_pos;
+		new_points_pos.x = SCREEN_WIDTH / 2 - (text_points.getLocalBounds().left + text_points.getLocalBounds().width) / 2;
+		new_points_pos.y = SCREEN_HEIGHT / 2 - (text_points.getLocalBounds().top + text_points.getLocalBounds().height) / 2;
+		text_points.setPosition(new_points_pos);
 
-	if (show_content)
-	{
-		if (accept->clicked(win))
-		{
-			if (good_mail)
-				show_content = false;
-			else
-				/*lose*/;
-		}
-		else if (decline->clicked(win))
-		{
-			if (!good_mail)
-				show_content = false;
-			else
-				/*lose*/;
-		}
+		while (!mails.empty())
+			mails.pop_back();
+
+		if (background.getColor() == sf::Color(255, 0, 0))
+			turned_on = false;
+
+		background.setColor(sf::Color(255, background.getColor().g - 1, background.getColor().b - 1));
 	}
 	else
 	{
-		for (auto &i : mails)
+		if (randomize_time < gm::Core::getClock().getElapsedTime().asMilliseconds())
 		{
-			if (i->clicked(win))
-			{
-				content->setTextString(" Od:" /*+ mail*/ + '\n');
-				content->setTextString(content->getTextString() + " Tytu³: " /*+ title*/ + '\n');
-				content->setTextString("Tresc");
+			PhishingMail* new_mail = new PhishingMail(*gm::Assets::getFont(), sf::Vector2f(MAIL_POS_X, MAIL_POS_Y + mails.size() * MAIL_HEIGHT), sf::Vector2f(MAIL_WIDTH, MAIL_HEIGHT), 20, "Random");
+			new_mail->setIdleColor(sf::Color(250, 250, 250));
+			new_mail->setAimedColor(sf::Color(254,254,254));
+			new_mail->setPressColor(sf::Color(230, 230, 230));
+			new_mail->setOutlineThickness(-1);
+			new_mail->setOutlineColor(sf::Color::Black);
+			new_mail->setFillColor(new_mail->getIdleColor());
 
-				show_content = true;
+			//Losu losu
+			new_mail->good_mail = rand() % 2;
+
+			if (new_mail->good_mail)
+			{
+				int randomized = rand() % 14;
+				new_mail->sender = g_senders[randomized];
+				new_mail->title = g_titles[randomized];
+				new_mail->content = g_contents[randomized];
+			}
+			else
+			{
+				int randomized = rand() % 20;
+				new_mail->sender = b_senders[randomized];
+				new_mail->title = b_titles[randomized];
+				new_mail->content = b_contents[randomized];
+			}
+
+			new_mail->setTextString(new_mail->title);
+
+			mails.push_back(new_mail);
+
+			randomize_time = gm::Core::getClock().getElapsedTime().asMilliseconds() + 5000;
+		}
+
+		if (show_content)
+		{
+			if (accept->clicked(win))
+			{
+				if (good_mail)
+				{
+					mails.erase(mails.begin()+which_mail);
+					pos_mails();
+					show_content = false;
+					points += 50;
+				}
+				else
+					game_lost = true;
+			}
+			else if (decline->clicked(win))
+			{
+				if (!good_mail)
+				{
+					mails.erase(mails.begin() + which_mail);
+					pos_mails();
+					show_content = false;
+					points += 50;
+				}
+				else
+					game_lost = true;
 			}
 		}
+		else
+		{
+			int which = 0;
+			for (auto &i : mails)
+			{
+				if (i->clicked(win))
+				{
+					good_mail = i->good_mail;
+					content->setTextString(" Od:" + i->sender + '\n');
+					content->setTextString(content->getTextString() + L" Tytu³: " + i->title + '\n' + ' ' + '\n');
+					content->setTextString(content->getTextString() + i->content);
+
+					which_mail = which;
+					show_content = true;
+				}
+				which++;
+			}
+		}
+
+		if (mails.size() > 7)
+			game_lost = true;
 	}
 
-	if (mails.size() > 5)
-		/*lose*/;
+	text_points.setString("Punkty: " + std::to_string(points));
+}
+
+void Phishing::pos_mails()
+{
+	int number = 0;
+	for (auto &i : mails)
+	{
+		i->setPosition(MAIL_POS_X, MAIL_POS_Y + number * MAIL_HEIGHT);
+		number++;
+	}
 }

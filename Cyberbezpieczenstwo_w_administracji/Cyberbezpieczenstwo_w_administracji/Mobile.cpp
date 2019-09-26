@@ -20,11 +20,11 @@ Mobile::Mobile(sf::Texture *tex) : text(*gm::Assets::getFont())
 	mobile_view.setTexture(*gm::Assets::getTexture("MOBILE_VIEW"));
 	mobile_view.setPosition(MOBILE_VIEW_POS_X, MOBILE_VIEW_POS_Y);
 
-	text.setSize(MOBILE_VIEW_WIDTH - 100, MOBILE_VIEW_HEIGHT - 100);
-	text.setPosition(mobile_view.getPosition().x + 50, mobile_view.getPosition().y + 60);
+	text.setSize(MOBILE_VIEW_WIDTH - 40, MOBILE_VIEW_HEIGHT - 200);
+	text.setPosition(mobile_view.getPosition().x + 20, mobile_view.getPosition().y + 90);
 	text.setTextColor(sf::Color::Black);
 	text.setFillColor(sf::Color::Transparent);
-	text.setTextSize(20);
+	text.setTextSize(18);
 
 	/* variables */
 

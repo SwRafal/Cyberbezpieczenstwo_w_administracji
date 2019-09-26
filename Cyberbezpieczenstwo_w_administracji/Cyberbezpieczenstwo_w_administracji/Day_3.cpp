@@ -119,6 +119,7 @@ void Day_3::update(GameState *gs, sf::RenderWindow &win)
 	ringIT->animate();
 	boss->animate();
 	ITguy->animate();
+	gs->mariolka->animate();
 
 	gs->mobile->pickedUp = false;
 
@@ -164,7 +165,7 @@ void Day_3::update(GameState *gs, sf::RenderWindow &win)
 		if (gm::Core::getClock().getElapsedTime().asMilliseconds() > gs->info_time)
 		{
 			state = 0;
-			gs->officeLady->hide();
+			gs->mariolka->hide();
 			gs->lost = false;
 			gs->initialized = false;
 			delete gs->gamelost_info;
@@ -243,7 +244,7 @@ void Day_3::update(GameState *gs, sf::RenderWindow &win)
 				thought->closeBubble();
 				state++;
 
-				gs->officeLady->show();
+				gs->mariolka->show();
 				gs->playerIco.show();
 			}
 
@@ -253,11 +254,11 @@ void Day_3::update(GameState *gs, sf::RenderWindow &win)
 			if (!thought->appearing && !thought->disappearing)
 				thought->setBubblePosition(0, -300);
 
-			if (gs->officeLady->state > 0)
+			if (gs->mariolka->state > 0)
 				gs->playerIco.hide();
-			if (gs->officeLady->state >= 3)
+			if (gs->mariolka->state >= 3)
 			{
-				gs->officeLady->hide();
+				gs->mariolka->hide();
 				state++;
 
 				boss->show();
@@ -282,7 +283,7 @@ void Day_3::update(GameState *gs, sf::RenderWindow &win)
 				{
 					state++;
 
-					gs->openedcomputer->communique->setTextString(L"AWARIA FILTRÓW EMAIL. ZALECANA OSTRO¯NOŒÆ");
+					gs->openedcomputer->communique->setTextString(L"AWARIA FILTRÓW EMAIL. ZALECANA OSTRO¯NOŒÆ!");
 					gs->openedcomputer->show_communique = true;
 					gs->computer->open();
 				}
@@ -527,7 +528,7 @@ void Day_3::update(GameState *gs, sf::RenderWindow &win)
 			if (boss->state >= 3)
 			{
 				boss->hide();
-				gs->officeLady->show();
+				gs->mariolka->show();
 
 				state++;
 			}
@@ -535,9 +536,9 @@ void Day_3::update(GameState *gs, sf::RenderWindow &win)
 			break;
 		case 18://Finish boss dialog 2
 
-			if (gs->officeLady->getPosition().x < 850)
+			if (gs->mariolka->getPosition().x < 850)
 			{
-				gs->officeLady->hide();
+				gs->mariolka->hide();
 				ringIT->showBubble();
 				gs->mobile->call();
 				gs->phone->setFillColor(sf::Color::White);
@@ -549,7 +550,7 @@ void Day_3::update(GameState *gs, sf::RenderWindow &win)
 		case 19://Things vanish
 
 			gs->mobile->update(win);
-			if (gs->papers->getPosition().x < gs->officeLady->getPosition().x)
+			if (gs->papers->getPosition().x < gs->mariolka->getPosition().x)
 				gs->papers->move(10, 0);
 			if (gs->phone->aimed(win))
 			{
@@ -611,7 +612,7 @@ void Day_3::update(GameState *gs, sf::RenderWindow &win)
 			break;
 		case 20://Phone pickup
 
-			if (gs->papers->getPosition().x < gs->officeLady->getPosition().x)
+			if (gs->papers->getPosition().x < gs->mariolka->getPosition().x)
 				gs->papers->move(10, 0);
 
 			gs->phone->update(win);
@@ -743,6 +744,7 @@ void Day_3::draw(GameState *gs, sf::RenderWindow &win)
 	thought->draw(win);
 	boss->draw(win);
 	ITguy->draw(win);
+	gs->mariolka->draw(win);
 	for (int i = 0; i < 2; i++)
 	{
 		win.draw(peach[i]);

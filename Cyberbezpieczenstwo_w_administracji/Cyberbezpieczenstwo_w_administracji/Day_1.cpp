@@ -10,6 +10,9 @@ Day_1::Day_1()
 	thought->changeText("Hmmm... Takie informacje przez telefon? To niezbyt bezpieczne...");
 	thought->setBubblePosition(0,-300);
 
+	talked = false;
+	talked2 = false;
+
 	//Initialize
 	ITguy = new OfficeApplicant(gm::Assets::getTexture("itGuy"));
 
@@ -44,8 +47,8 @@ void Day_1::update(GameState *gs, sf::RenderWindow &win)
 		{
 			if (gs->computer->isOpened())
 			{
-				gs->choice1->setPosition(MOBILE_POS_X - 300, MOBILE_POS_Y - 90);
-				gs->choice2->setPosition(MOBILE_POS_X - 150, MOBILE_POS_Y - 90);
+				gs->choice1->setPosition(MOBILE_POS_X - 300, MOBILE_POS_Y - 110);
+				gs->choice2->setPosition(MOBILE_POS_X - 150, MOBILE_POS_Y - 110);
 			}
 			else
 			{
@@ -75,14 +78,18 @@ void Day_1::update(GameState *gs, sf::RenderWindow &win)
 	{
 		gs->computer->update(win);
 
-		gs->officeApplicant->text.setTextString(L"Petent: Czeœæ! Marek dziœ nie w pracy?");
-		gs->officeApplicant->addToQueue(L"Ja: Jego stanowisko zosta³o zajête.");
-		gs->officeApplicant->addToQueue(L"Petent: Szkoda, dobrze nam siê z nim pracowa³o…");
-		gs->officeApplicant->addToQueue(L"Ja: Nie spe³nia³ wymogów bezpieczeñstwa. ");
-		gs->officeApplicant->addToQueue(L"Petent: Wiesz co siê sta³o?");
-		gs->officeApplicant->addToQueue(L"Ja: Nie mogê Ci tego powiedzieæ.");
-		gs->officeApplicant->addToQueue(L"Petent: Có¿, witaj w naszym zespole. Masz, to dla Ciebie.");
+		gs->officeApplicant->text.setTextString(L"Czeœæ! Marek dziœ nie w pracy?");
+		//gs->officeApplicant->addToQueue(L"Ja: Jego stanowisko zosta³o zajête.");
+		gs->officeApplicant->addToQueue(L"Szkoda, dobrze nam siê z nim pracowa³o…");
+		//gs->officeApplicant->addToQueue(L"Ja: Nie spe³nia³ wymogów bezpieczeñstwa. ");
+		gs->officeApplicant->addToQueue(L"Wiesz co siê sta³o?");
+		//gs->officeApplicant->addToQueue(L"Ja: Nie mogê Ci tego powiedzieæ.");
+		gs->officeApplicant->addToQueue(L"Có¿, witaj w naszym zespole. Masz, to dla Ciebie.");
 		gs->officeApplicant->addToQueue(L"EOT");//Dodatkowa linijka potrzebna
+
+		gs->playerIco.text.setTextString(L"Jego stanowisko zosta³o zajête.");
+		gs->playerIco.addToQueue(L"Nie spe³nia³ wymogów bezpieczeñstwa.");
+		gs->playerIco.addToQueue(L"Nie mogê Ci tego powiedzieæ.");
 		
 		ITguy->text.setTextString(L"Tym Ciê pod³¹czymy do sieci.");
 		ITguy->addToQueue(L"EOT");//Dodatkowa linijka potrzebna
@@ -117,7 +124,6 @@ void Day_1::update(GameState *gs, sf::RenderWindow &win)
 			if (gs->coffee->update_drunk(win))
 			{
 				gs->battery->setActivation(true);
-				coffee_clicked = true;
 				state++;
 				gs->book->setFillColor(sf::Color(230, 230, 230));
 				gs->eyelids->open();
@@ -140,16 +146,6 @@ void Day_1::update(GameState *gs, sf::RenderWindow &win)
 			if (gs->eyelids->getLvl() == FULL_CLOSED_EYES)
 			{
 				gs->gameover(L"Zasn¹³eœ w pracy! Pamiêtaj o kawie!");
-				/*gs->lost = true;
-				gs->info_time = gm::Core::getClock().getElapsedTime().asMilliseconds() + GAMELOST_INFO_TIME;
-				gs->gamelost_info = new sf::Text;
-				gs->gamelost_info->setFont(*gm::Assets::getFont());
-				gs->gamelost_info->setString(L"Zasn¹³eœ w pracy!\nPamiêtaj o kawie!");
-				gs->gamelost_info->setCharacterSize(48);
-				sf::Vector2f info_pos;
-				info_pos.x = SCREEN_WIDTH / 2 - (gs->gamelost_info->getLocalBounds().left + gs->gamelost_info->getLocalBounds().width) / 2;
-				info_pos.y = SCREEN_HEIGHT / 2 - (gs->gamelost_info->getLocalBounds().top + gs->gamelost_info->getLocalBounds().height) / 2;
-				gs->gamelost_info->setPosition(sf::Vector2f(info_pos));*/
 			}
 
 			break;
@@ -158,7 +154,6 @@ void Day_1::update(GameState *gs, sf::RenderWindow &win)
 			if (gs->book->clicked(win))
 			{
 				gs->book->open();
-				open_book = true;
 				state++;
 
 				gs->computer->setFillColor(gs->computer->getPressColor());
@@ -176,7 +171,6 @@ void Day_1::update(GameState *gs, sf::RenderWindow &win)
 
 			if (!gs->book->isOpened())
 			{
-				close_book = true;
 				state++;
 
 				gs->phone->call();
@@ -188,7 +182,6 @@ void Day_1::update(GameState *gs, sf::RenderWindow &win)
 			gs->phone->update(win);
 			if (gs->phone->pickedUp)
 			{
-				click_telephone = true;
 				state++;
 			}
 
@@ -198,7 +191,6 @@ void Day_1::update(GameState *gs, sf::RenderWindow &win)
 			gs->phone->update(win);
 			if (!gs->phone->pickedUp)
 			{
-				finish_telephone = true;
 				thought->setBubblePosition(300, 400);
 				thought->showBubble();
 				thought_time = gm::Core::getClock().getElapsedTime().asMilliseconds() + THOUGHT_TIME;
@@ -221,7 +213,6 @@ void Day_1::update(GameState *gs, sf::RenderWindow &win)
 			if (thought_time < gm::Core::getClock().getElapsedTime().asMilliseconds())
 			{
 				thought->closeBubble();
-				finish_thought = true;
 				state++;
 			}
 
@@ -235,28 +226,42 @@ void Day_1::update(GameState *gs, sf::RenderWindow &win)
 			gs->openedcomputer->update(win);
 			if (gs->openedcomputer->getState() == OpenPC::DESKTOP)
 			{
-				choose_user = true;
 				state++;
 			}
 
 			break;
 		case 7://Login
 
-			log_in = true;
 			gs->computer->close();
 			gs->officeApplicant->show();
 			state++;
 
 			break;
 		case 8://Finish dialog
-
-			if(gs->officeApplicant->state == 6)
-				gs->sushi.setPosition(830, 400);
-
-			if (gs->officeApplicant->state >= 7)
+			
+			if (gs->officeApplicant->state == 1)
+				gs->playerIco.show();
+			else if (gs->officeApplicant->state == 2)
 			{
+				if (talked == false)
+				{
+					talked = true;
+					gs->playerIco.nextLine();
+				}
+			}
+			else if (gs->officeApplicant->state == 3)
+			{
+				if (talked2 == false)
+				{
+					talked2 = true;
+					gs->playerIco.nextLine();
+				}
+				gs->sushi.setPosition(830, 400);
+			}
+			else if (gs->officeApplicant->state >= 4)
+			{
+				gs->playerIco.hide();
 				gs->officeApplicant->hide();
-				finish_dialog = true;
 				state++;
 
 				gs->mobile->call();
@@ -271,7 +276,6 @@ void Day_1::update(GameState *gs, sf::RenderWindow &win)
 				gs->sushi.move(0, 2);
 			if (gs->mobile->pickedUp)
 			{
-				click_mobile = true;
 				showButtons = true;
 				gs->choice1->setText(L"Wyœlij");
 				gs->choice2->setText(L"Nie wysy³aj");
@@ -306,7 +310,6 @@ void Day_1::update(GameState *gs, sf::RenderWindow &win)
 			if (!gs->mobile->pickedUp)
 			{
 
-				put_mobile = true;
 				state++;
 
 				gs->computer->setFillColor(gs->computer->getPressColor());
@@ -327,7 +330,6 @@ void Day_1::update(GameState *gs, sf::RenderWindow &win)
 				gs->computer->update(win);
 			if (gs->openedcomputer->getState() == OpenPC::SET_PASSWORD)
 			{
-				change_lines = true;
 				state++;
 			}
 			else if (gs->openedcomputer->getState() == OpenPC::LOGIN_WIFI)
@@ -366,7 +368,6 @@ void Day_1::update(GameState *gs, sf::RenderWindow &win)
 			if (!gs->computer->isOpened())
 			{
 				gs->officeLady->show();
-				remember_password = true;
 				gs->choice1->setText(L"Zapisz");
 				gs->choice2->setText(L"Nie zapisuj");
 				state++;
@@ -388,7 +389,6 @@ void Day_1::update(GameState *gs, sf::RenderWindow &win)
 			{
 				showButtons = false;
 				gs->officeLady->hide();
-				write_down_password = true;
 				state++;
 
 				gs->openedcomputer->setState(OpenPC::DESKTOP);
@@ -415,7 +415,6 @@ void Day_1::update(GameState *gs, sf::RenderWindow &win)
 			}
 			else if (gs->openedcomputer->getState() == OpenPC::LOGIN_WIFI)
 			{
-				login_wifi = true;
 				state++;
 			}
 
@@ -427,7 +426,6 @@ void Day_1::update(GameState *gs, sf::RenderWindow &win)
 				showButtons = true;
 				gs->choice1->setText(L"Pobierz");
 				gs->choice2->setText(L"Anuluj");
-				choose_wifi = true;
 				state++;
 			}
 			else
@@ -443,7 +441,6 @@ void Day_1::update(GameState *gs, sf::RenderWindow &win)
 					thought_time = gm::Core::getClock().getElapsedTime().asMilliseconds() + THOUGHT_TIME;
 				}
 			}
-			//gs->nextDay = true;
 
 			break;
 		case 16://Refuse wifi
@@ -460,7 +457,6 @@ void Day_1::update(GameState *gs, sf::RenderWindow &win)
 				if (gs->info_time < gm::Core::getClock().getElapsedTime().asMilliseconds())
 				{
 					gs->naganiony = false;
-					refuse_wifi = true;
 					gs->openedcomputer->setState(OpenPC::DESKTOP);
 					gs->openedcomputer->internet_works = true;
 					state+=3;
@@ -492,7 +488,6 @@ void Day_1::update(GameState *gs, sf::RenderWindow &win)
 				{
 					showButtons = false;
 					gs->openedcomputer->show_communique = false;
-					refuse_wifi = true;
 					gs->openedcomputer->setState(OpenPC::DESKTOP);
 					gs->computer->close();
 					gs->openedcomputer->internet_works = true;
@@ -502,8 +497,12 @@ void Day_1::update(GameState *gs, sf::RenderWindow &win)
 					{
 						gs->phone->text_queue.pop();
 					}
-
-					gs->phone->addToQueue(L"Ja: Czeœæ tu " + gs->data->name + L"! Nie mogê po³¹czyæ siê z sieci¹, pomo¿ecie?");
+					while (!gs->playerIco.text_queue.empty())
+					{
+						gs->playerIco.text_queue.pop();
+					}
+					gs->playerIco.state = 0;
+					gs->playerIco.text.setTextString(L"Czeœæ tu " + gs->data->name + L"! Nie mogê po³¹czyæ siê z sieci¹, pomo¿ecie?");
 					gs->phone->addToQueue(L"Pracownik dzia³u IT: Pomo¿emy!!!");
 					gs->phone->call();
 
@@ -524,7 +523,7 @@ void Day_1::update(GameState *gs, sf::RenderWindow &win)
 
 			if (gs->phone->pickedUp)
 			{
-				phone_it = true;
+				gs->playerIco.show();
 				state++;
 			}
 			else
@@ -539,7 +538,7 @@ void Day_1::update(GameState *gs, sf::RenderWindow &win)
 			{
 				ITguy->show();
 				gs->rj45.setPosition(830, 400);
-
+				gs->playerIco.hide();
 				state++;
 			}
 
@@ -553,7 +552,6 @@ void Day_1::update(GameState *gs, sf::RenderWindow &win)
 				if (gs->info_time < gm::Core::getClock().getElapsedTime().asMilliseconds())
 				{
 					gs->naganiony = false;
-					rj45 = true;
 					state++;
 
 					gs->computer->open();

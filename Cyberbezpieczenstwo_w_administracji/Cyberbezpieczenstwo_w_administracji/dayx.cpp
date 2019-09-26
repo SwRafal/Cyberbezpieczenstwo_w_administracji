@@ -18,7 +18,7 @@ dayx::dayx(int &_dayNumber)
 	title.setFont(*gm::Assets::getFont());
 	title.setCharacterSize(80);
 	title.setString(L"Dzieñ  ");
-	title.setString(title.getString() + std::to_string(*dayNumber));
+	title.setString(title.getString() + std::to_string(*dayNumber + 1));
 	title.setPosition(SCREEN_WIDTH /2 - title.getGlobalBounds().width /2 , SCREEN_HEIGHT / 2 - title.getGlobalBounds().height/2);
 
 	gm::Assets::LoadTexture("sunrise", "resources/textures/sunrise.png");
@@ -82,5 +82,5 @@ void dayx::nextDay()
 	this->reset();
 	(*dayNumber)++;
 	title.setString(L"Dzieñ  ");
-	title.setString(title.getString() + std::to_string(*dayNumber));
+	title.setString(title.getString() + std::to_string(*dayNumber + 1));
 }

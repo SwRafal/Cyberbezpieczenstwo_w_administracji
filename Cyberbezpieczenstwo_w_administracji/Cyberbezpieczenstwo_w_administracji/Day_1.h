@@ -19,31 +19,8 @@ public:
 
 	OfficeApplicant *ITguy = nullptr;
 
-	//Quest 1
-	bool coffee_clicked;
-	bool open_book;
-	bool close_book;
-	//Quest 2
-	bool click_telephone;
-	bool finish_telephone;
-	bool finish_thought;
-	bool choose_user;
-	bool log_in;
-	bool finish_dialog;
-	bool click_mobile;
-	bool put_mobile;
-	bool change_lines;
-	bool remember_password;
-	bool write_down_password;
-	bool login_wifi;
-	bool choose_wifi;
-	bool refuse_wifi;
-	bool phone_it;
-	bool finish_phone_it;
-	bool rj45;
-	//Quest 4
-	bool click_email;
-	bool refused_email;
+	bool talked = false;
+	bool talked2 = false;
 
 	Day_1();
 	~Day_1();

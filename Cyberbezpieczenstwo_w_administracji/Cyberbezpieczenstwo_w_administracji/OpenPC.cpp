@@ -38,16 +38,33 @@ OpenPC::OpenPC(sf::Texture *texture, sf::Font *font, int &day) //: content(*gm::
 	user_marek->setPosition(sf::Vector2f(SCREEN_WIDTH/2 - USER_WIDTH/2, 200));
 	user_marek->setTextString("Marek");
 	user_marek->setTextSize(USER_CHARSIZE);
+	user_marek->setOutlineThickness(1);
+	user_marek->setOutlineColor(sf::Color::Blue);
+	user_marek->setIdleColor(sf::Color(230, 230, 240));
+	user_marek->setAimedColor(sf::Color(240, 240, 245));
+	user_marek->setPressColor(sf::Color(210, 210, 220));
+
 	user_krysia = new gm::TextButton(*gm::Assets::getFont());
 	user_krysia->setSize(sf::Vector2f(USER_WIDTH, USER_HEIGHT));
 	user_krysia->setPosition(sf::Vector2f(SCREEN_WIDTH / 2 - USER_WIDTH / 2, 300));
 	user_krysia->setTextString("Krysia");
 	user_krysia->setTextSize(USER_CHARSIZE);
+	user_krysia->setOutlineThickness(1);
+	user_krysia->setOutlineColor(sf::Color::Blue);
+	user_krysia->setIdleColor(sf::Color(230, 230, 240));
+	user_krysia->setAimedColor(sf::Color(240, 240, 245));
+	user_krysia->setPressColor(sf::Color(210, 210, 220));
+
 	user_player = new gm::TextButton(*gm::Assets::getFont());
 	user_player->setSize(sf::Vector2f(USER_WIDTH, USER_HEIGHT));
 	user_player->setPosition(sf::Vector2f(SCREEN_WIDTH / 2 - USER_WIDTH / 2, 400));
 	user_player->setTextString("Admin");//Login i has³o z gamedata!!!!
 	user_player->setTextSize(USER_CHARSIZE);
+	user_player->setOutlineThickness(1);
+	user_player->setOutlineColor(sf::Color::Blue);
+	user_player->setIdleColor(sf::Color(230, 230, 240));
+	user_player->setAimedColor(sf::Color(240, 240, 245));
+	user_player->setPressColor(sf::Color(210, 210, 220));
 
 	/*DESKTOP*/
 	gm::Assets::LoadTexture("WIFI_BUTTON", TEXTURE_WIFI_BUTTON);
@@ -57,6 +74,8 @@ OpenPC::OpenPC(sf::Texture *texture, sf::Font *font, int &day) //: content(*gm::
 	{
 		wifis = new gm::Button(sf::Vector2f(WIFIS_POS_X, WIFIS_POS_Y), sf::Vector2f(WIFIS_SIZE, WIFIS_SIZE));
 		wifis->setTexture(gm::Assets::getTexture("WIFI_BUTTON"));
+		wifis->setOutlineThickness(2);
+		wifis->setOutlineColor(sf::Color::White);
 	}
 
 	gm::Assets::LoadTexture("ACCOUNT_BUTTON", TEXTURE_ACCOUNT_BUTTON);
@@ -66,6 +85,8 @@ OpenPC::OpenPC(sf::Texture *texture, sf::Font *font, int &day) //: content(*gm::
 	{
 		account_manager = new gm::Button(sf::Vector2f(ACCOUNT_POS_X, ACCOUNT_POS_Y), sf::Vector2f(ACCOUNT_SIZE, ACCOUNT_SIZE));
 		account_manager->setTexture(gm::Assets::getTexture("ACCOUNT_BUTTON"));
+		account_manager->setOutlineThickness(2);
+		account_manager->setOutlineColor(sf::Color::White);
 	}
 
 	/*WIFI*/
@@ -105,11 +126,22 @@ OpenPC::OpenPC(sf::Texture *texture, sf::Font *font, int &day) //: content(*gm::
 	login->setPosition(sf::Vector2f(LOGIN_POS_X, LOGIN_POS_Y));
 	login->setTextSize(LINE_CHARSIZE);
 	login->setTextString("Admin");///GAMEDATA !!!!!
+	login->setOutlineThickness(1);
+	login->setOutlineColor(sf::Color::Blue);
+	login->setIdleColor(sf::Color(230, 230, 240));
+	login->setAimedColor(sf::Color(240, 240, 245));
+	login->setPressColor(sf::Color(210, 210, 220));
+
 	password = new gm::TextField(*gm::Assets::getFont());
 	password->setSize(sf::Vector2f(LINE_WIDTH, LINE_HEIGHT));
 	password->setPosition(sf::Vector2f(PASSWORD_POS_X, PASSWORD_POS_Y));
 	password->setTextSize(LINE_CHARSIZE);
 	password->setTextString("Admin");//GAMEDATA!!!!!!!
+	password->setOutlineThickness(1);
+	password->setOutlineColor(sf::Color::Blue);
+	password->setIdleColor(sf::Color(230, 230, 240));
+	password->setAimedColor(sf::Color(240, 240, 245));
+	password->setPressColor(sf::Color(210, 210, 220));
 
 	ok = new gm::TextButton(*gm::Assets::getFont());
 	ok->setSize(OK_SIZE, OK_SIZE);
@@ -128,9 +160,11 @@ OpenPC::OpenPC(sf::Texture *texture, sf::Font *font, int &day) //: content(*gm::
 
 	communique = new gm::Information(*gm::Assets::getFont());
 	communique->setSize(sf::Vector2f(PC_OPENED_WIDTH / 2, PC_OPENED_HEIGHT / 2));
-	communique->setFillColor(sf::Color(128, 128, 128));
-	communique->setTextColor(sf::Color::White);
+	communique->setFillColor(sf::Color(230, 230, 240));
+	communique->setTextColor(sf::Color::Black);
 	communique->setPosition(sf::Vector2f(PC_OPENED_POS_X + PC_OPENED_WIDTH / 4, PC_OPENED_POS_Y + PC_OPENED_HEIGHT / 4));
+	communique->setOutlineThickness(3);
+	communique->setOutlineColor(sf::Color::Blue);
 
 	gm::Assets::LoadTexture("desktop krysia", KRYSIA_DESKTOP_FILES);
 	krysia_folders.setTexture(*gm::Assets::getTexture("desktop krysia"));
