@@ -1144,7 +1144,7 @@ void Day_2::update(GameState *gs, sf::RenderWindow &win)
 			gs->exit->setFillColor(sf::Color::White);
 			if (gs->exit->clicked(win))
 			{
-				gs->dayover(L"-Uwierzytelnianie dwusk³adnikowe – upewnij siê, ¿e z niego korzystasz, a elementy do niego potrzebne s¹ bezpiecznie przechowywane.\n"
+				gs->dayover(L"-Uwierzytelnianie dwusk³adnikowe – upewnij siê, ¿e z niego korzystasz, a elementy\n  do niego potrzebne s¹ bezpiecznie przechowywane.\n"
 					L"-Weryfikuj to¿samoœæ napotkanych osób.\n"
 					L"-Zg³aszaj niezablokowane i nieusuniête konta by³ych pracowników.\n"
 					L"-Nie pod³¹czaj urz¹dzeñ z nieznanych Ÿróde³.\n"

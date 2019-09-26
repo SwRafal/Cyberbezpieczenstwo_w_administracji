@@ -353,7 +353,7 @@ void Day_3::update(GameState *gs, sf::RenderWindow &win)
 
 			if (gm::Core::getClock().getElapsedTime().asMilliseconds() < scan_time)
 			{
-				if (peach[0].getPosition().y < 475)
+				if (peach[0].getPosition().y < 465)
 				{
 					peach[0].move(0, 10);
 				}
@@ -389,7 +389,7 @@ void Day_3::update(GameState *gs, sf::RenderWindow &win)
 
 			if (gm::Core::getClock().getElapsedTime().asMilliseconds() < scan_time)
 			{
-				if (peach[1].getPosition().y < 485)
+				if (peach[1].getPosition().y < 475)
 				{
 					peach[1].move(0, 10);
 				}
@@ -771,6 +771,8 @@ void Day_3::draw(GameState *gs, sf::RenderWindow &win)
 
 	if(minigame.turned_on)
 		minigame.draw(win);
+
+	gs->bin->draw(win);
 
 	win.display();
 }
