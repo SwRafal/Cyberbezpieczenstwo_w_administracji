@@ -351,6 +351,10 @@ void Day_1::update(GameState *gs, sf::RenderWindow &win)
 			{
 				gs->gameover(L"Nie zmieni³eœ has³a i ktoœ wkrad³ siê na konto!");
 			}
+			else if (gs->openedcomputer->getState() != OpenPC::SET_PASSWORD && gs->data->password == gs->openedcomputer->getLogin())
+			{
+				gs->gameover(L"Has³o by³o takie same jak login. Ktoœ wkrad³ siê na konto!");
+			}
 			else if (gs->openedcomputer->getState() != OpenPC::SET_PASSWORD && gs->data->login != gs->data->name)
 			{
 				gs->openedcomputer->setState(OpenPC::SET_PASSWORD);
@@ -359,11 +363,41 @@ void Day_1::update(GameState *gs, sf::RenderWindow &win)
 				thought->showBubble();
 				thought_time = gm::Core::getClock().getElapsedTime().asMilliseconds() + THOUGHT_TIME;
 			}
+			else if (gs->openedcomputer->getState() != OpenPC::SET_PASSWORD && gs->data->password.getSize() < 6)
+			{
+				gs->openedcomputer->setState(OpenPC::SET_PASSWORD);
+				thought->changeText(L"Has³o jest za krótkie...");
+				thought->setBubblePosition(200, 100);
+				thought->showBubble();
+				thought_time = gm::Core::getClock().getElapsedTime().asMilliseconds() + THOUGHT_TIME;
+			}
 			else if (gs->openedcomputer->getState() != OpenPC::SET_PASSWORD)
 			{
-				gs->data->login = gs->openedcomputer->getLogin();
-				gs->data->password = gs->openedcomputer->getPassword();
-				gs->computer->close();
+				bool small_letter = false;
+				bool big_letter = false;
+
+				for (int i = 0; i < gs->data->password.getSize(); i++)
+				{
+					if (gs->data->password[i] >= 'A' && gs->data->password[i] <= 'Z')
+						big_letter = true;
+					else if (gs->data->password[i] >= 'a' && gs->data->password[i] <= 'z')
+						small_letter = true;
+				}
+
+				if (small_letter && big_letter)
+				{
+					gs->data->login = gs->openedcomputer->getLogin();
+					gs->data->password = gs->openedcomputer->getPassword();
+					gs->computer->close();
+				}
+				else
+				{
+					gs->openedcomputer->setState(OpenPC::SET_PASSWORD);
+					thought->changeText(L"Has³o jest za s³abe... Spróbuj wielkich liter.");
+					thought->setBubblePosition(200, 100);
+					thought->showBubble();
+					thought_time = gm::Core::getClock().getElapsedTime().asMilliseconds() + THOUGHT_TIME;
+				}				
 			}
 			if (!gs->computer->isOpened())
 			{
