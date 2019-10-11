@@ -366,7 +366,7 @@ void Day_2::update(GameState *gs, sf::RenderWindow &win)
 
 		if(boss->getPosition().x == 1390)
 		{
-			gs->playerIco.text.setTextString(L"co siê sta³o?");
+			gs->playerIco.text.setTextString(L"Co siê sta³o?");
 			gs->playerIco.state = 0;
 			gs->playerIco.show();
 			gs->officeLady->state = 0;

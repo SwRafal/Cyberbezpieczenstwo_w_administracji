@@ -4,7 +4,7 @@
 #include "Rubbish.h"
 
 #define BIN_POS_X 945
-#define BIN_POS_Y 620
+#define BIN_POS_Y 630
 #define BIN_WIDTH 190
 #define BIN_HEIGHT 295
 

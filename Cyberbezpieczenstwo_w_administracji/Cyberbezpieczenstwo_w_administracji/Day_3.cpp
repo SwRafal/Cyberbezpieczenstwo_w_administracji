@@ -656,7 +656,7 @@ void Day_3::update(GameState *gs, sf::RenderWindow &win)
 					ITguy->text_queue.pop();
 
 				ITguy->text.setTextString(L"Kopia zapasowa to bardzo wa¿ny element cyberbezpieczeñstwa Ministerstwa.");
-				ITguy->addToQueue(L"Pamiêtaj aby wykonywaæ j¹ przynajmniej raz w tygodniu. Dziêki temu nasze szanse na wygran¹ w konkursie rosn¹.");
+				ITguy->addToQueue(L"Pamiêtaj, aby wykonywaæ j¹ przynajmniej raz w tygodniu. Dziêki temu nasze szanse na wygran¹ w konkursie rosn¹.");
 				ITguy->addToQueue("EOT");
 				ITguy->show();
 
@@ -676,7 +676,7 @@ void Day_3::update(GameState *gs, sf::RenderWindow &win)
 				boss->state = 0;
 
 				boss->text.setTextString(L"Dopóki nowa kole¿anka nie przejdzie wymaganych szkoleñ bêdziesz odpowiada³ równie¿ za obs³ugê petentów.");
-				boss->addToQueue(L"Zaczniesz od jutra. Zobaczymy jak sobie poradzisz. Kto wie mo¿e j¹ zast¹pisz Na dziœ to wszystko. IdŸ do domu.");
+				boss->addToQueue(L"Zaczniesz od jutra. Zobaczymy jak sobie poradzisz. Kto wie mo¿e j¹ zast¹pisz. Na dziœ to wszystko, idŸ do domu.");
 				boss->addToQueue("EOT");
 				
 				boss->show();

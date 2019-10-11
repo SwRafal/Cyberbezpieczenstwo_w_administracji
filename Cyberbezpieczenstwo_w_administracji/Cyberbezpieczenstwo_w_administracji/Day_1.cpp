@@ -509,7 +509,7 @@ void Day_1::update(GameState *gs, sf::RenderWindow &win)
 					gs->data->nagany++;
 					gs->nagana_info = new sf::Text;
 					gs->nagana_info->setFont(*gm::Assets::getFont());
-					gs->nagana_info->setString(L"Zainstalowa³eœ certyfikat z niepewnego Ÿród³a. Skontaktuj siê z dzia³em IT!");
+					gs->nagana_info->setString(L"Zainstalowa³eœ certyfikat z niepewnego Ÿród³a.\nSkontaktuj siê z dzia³em IT!");
 					gs->nagana_info->setFillColor(sf::Color::Red);
 					gs->info_time = gm::Core::getClock().getElapsedTime().asMilliseconds() + GAMELOST_INFO_TIME;
 					sf::Vector2f info_pos;
@@ -592,7 +592,7 @@ void Day_1::update(GameState *gs, sf::RenderWindow &win)
 					gs->openedcomputer->setState(OpenPC::MAIL);
 					gs->openedcomputer->newMail(L"Passwordmanagers",L"dzia³IT@Mindswszelakich.pl", L"Szanowny urzêdniku!\nPamiêtaj, aby nigdy nie zapisywaæ swoich hase³ w miejscach, "
 																									L"do których ktoœ nieupowa¿niony mo¿e mieæ dostêp.\n"
-																									L"W Ministerstwie u¿ywamy specjalnego programu do zarz¹dzania has³ami, pobierz go z za³¹cznika poni¿ej i dok³adnie przeczytaj instrukcje.\n\n"
+																									L"W Ministerstwie u¿ywamy specjalnego programu do zarz¹dzania has³ami. Pobierz go z za³¹cznika poni¿ej i dok³adnie przeczytaj instrukcje.\n\n"
 																									L"Za³¹cznik: Passmen.exe");
 					showButtons = true;
 					gs->choice1->setText(L"Pobierz");
@@ -635,8 +635,8 @@ void Day_1::update(GameState *gs, sf::RenderWindow &win)
 				ITguy->text.setTextString(L"Pracownikom bez specjalnych uprawnieñ nie wolno samodzielnie instalowaæ ¿adnych programów.");
 				ITguy->addToQueue(L"Programy z niezaufanych Ÿróde³ s¹ niebezpieczene.");
 				ITguy->addToQueue(L"Dzia³ IT zajmie siê instalacj¹ potrzebnego ci oprogramowania.");
-				ITguy->addToQueue(L"Istotnie dobrze jest tworzyæ i zapisywaæ has³a w menad¿erze hase³,");
-				ITguy->addToQueue(L"wtedy s¹ one bezpieczne i musisz zapamiêtaæ tylko jedno has³o – do menad¿era.");
+				ITguy->addToQueue(L"Istotnie dobrze jest tworzyæ i zapisywaæ has³a w menad¿erze hase³.");
+				ITguy->addToQueue(L"Wtedy s¹ one bezpieczne i musisz zapamiêtaæ tylko jedno has³o – do menad¿era.");
 				ITguy->addToQueue(L"Na dziœ dziêkujemy mo¿esz wracaæ do domu.");
 				ITguy->addToQueue(L"EOT");
 				ITguy->state = 0;

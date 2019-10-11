@@ -219,18 +219,14 @@ void Day_4::update(GameState* gs, sf::RenderWindow& win)
 			{
 				showNewspaper = false;
 				itGuy->state = 0;
-				itGuy->text.setTextString(L"Ooooo widzê, ¿e pamiêæ naszego kombajnu jest totalnie zapchana");
-				itGuy->addToQueue(L"woooaaa!!! Zeskanowa³eœ wczoraj ca³¹ bazê pracowników Ministerstwa?");
+				itGuy->text.setTextString(L"Ooooo widzê, ¿e pamiêæ naszego kombajnu jest totalnie zapchana.");
+				itGuy->addToQueue(L"Woooaaa!!! Zeskanowa³eœ wczoraj ca³¹ bazê pracowników Ministerstwa?");
 				itGuy->addToQueue(L"No tak, szef pewnie nie powiedzia³ ci, ¿e po zakoñczonym skanowaniu,");
 				itGuy->addToQueue(L"drukowaniu czy kserowaniu trzeba czyœciæ pamiêæ takiego urz¹dzenia?");
-				itGuy->addToQueue(L"Nie? To w jego stylu… przecie¿ ''Drukarka to nie komputer''");
-				itGuy->addToQueue(L"''Nikt przez nas przez ni¹ nie zaatakuje.''");
-				itGuy->addToQueue(L"Na przysz³oœæ pamiêtaj, ¿e\n drukarka pod³¹czona do sieci");
-				itGuy->addToQueue(L"jest najs³abszym ogniwem obrony naszych urzêdów");
-				itGuy->addToQueue(L"Góra ¿a³uje nam funduszy na prawid³owe ich zabezpieczenie");
-				itGuy->addToQueue(L"Postaraj siê, ¿eby czyœciæ jej pamiêæ zanim pójdziesz do domu");
-				itGuy->addToQueue(L"Mieliœmy szczêœcie, ¿e tym razem nie zaatakowano nas");
-				itGuy->addToQueue(L"OK, zrobi³em co mia³em zrobiæ.");
+				itGuy->addToQueue(L"Nie? To w jego stylu… przecie¿ \"Drukarka to nie komputer\" \"Nikt przez nas przez ni¹ nie zaatakuje.\"");
+				itGuy->addToQueue(L"Na przysz³oœæ pamiêtaj, ¿e\n drukarka pod³¹czona do sieci jest najs³abszym ogniwem obrony naszych urzêdów.");
+				itGuy->addToQueue(L"Góra ¿a³uje nam funduszy na prawid³owe ich zabezpieczenie. Postaraj siê, ¿eby czyœciæ jej pamiêæ zanim pójdziesz do domu.");
+				itGuy->addToQueue(L"Mieliœmy szczêœcie, ¿e tym razem nie zaatakowano nas. OK, zrobi³em co mia³em zrobiæ.");
 				itGuy->addToQueue(L"Masz zainstalowny nowy system pozwalaj¹cy sprawniej zapraszaæ petentów. Powodzenia!");
 				itGuy->addToQueue(L" ");
 				state++;
@@ -300,7 +296,7 @@ void Day_4::update(GameState* gs, sf::RenderWindow& win)
 			showButtons = false;
 			drawDowod = false;
 			dowod1.setPosition(SCREEN_WIDTH,SCREEN_HEIGHT);
-			petent1->text.setTextString(L"Dziêkujê");
+			petent1->text.setTextString(L"Dziêkujê.");
 			petent1->addToQueue(L" ");
 			quest1completed = true;
 			petent1->setButtonActive();
@@ -312,12 +308,12 @@ void Day_4::update(GameState* gs, sf::RenderWindow& win)
 			showButtons = false;
 			drawDowod = false;
 			dowod1.setPosition(SCREEN_WIDTH,SCREEN_HEIGHT);
-			petent1->text.setTextString(L"Dziêkujê");
+			petent1->text.setTextString(L"Dziêkujê.");
 			petent1->addToQueue(L" ");
 			petent1->setButtonActive();
 			petent1->state = 0;
 
-			thought_time = gm::Core::getClock().getElapsedTime().asMilliseconds() + 3000;
+			thought_time = gm::Core::getClock().getElapsedTime().asMilliseconds() + 5000;
 			thought->changeText(L"Kserowanie dowodu nie jest niezbêdne do wykonania zadania, a nara¿a urz¹d na wyciek danych");
 			thought->showBubble();
 
@@ -358,8 +354,8 @@ void Day_4::update(GameState* gs, sf::RenderWindow& win)
 		if(callIn)
 		{
 			petent2->state = 0;
-			petent2->text.setTextString(L"Dzieñ dobry, chcia³abym zap³aciæ  za mandaty, które dosta³am.");
-			petent2->addToQueue(L"Przy okazji jak ju¿ tu jestem chcia³abym zap³aciæ za mandaty mê¿a, bo te¿ mówi³, ¿e coœ tam ma zaleg³ego. Piotr Nowak");
+			petent2->text.setTextString(L"Dzieñ dobry. Chcia³abym zap³aciæ  za mandaty, które dosta³am.");
+			petent2->addToQueue(L"Przy okazji jak ju¿ tu jestem chcia³abym zap³aciæ za mandaty mê¿a, bo te¿ mówi³, ¿e coœ tam ma zaleg³ego. Piotr Nowak.");
 			petent2->show();
 			state++;
 		}
@@ -386,14 +382,14 @@ void Day_4::update(GameState* gs, sf::RenderWindow& win)
 		if(gs->choice2->clicked(win)) //sciezka 2
 		{
 			showButtons = false;
-			gs->playerIco.text.setTextString(L"Nie ma problemu, poproszê o upowa¿nie od mê¿a dla Pani do za³atwienia tej sprawy w jego imieniu lub upowa¿nienie ogólne");
+			gs->playerIco.text.setTextString(L"Nie ma problemu, poproszê o upowa¿nie od mê¿a dla Pani do za³atwienia tej sprawy w jego imieniu lub upowa¿nienie ogólne.");
 			gs->playerIco.show();
 			state = 26;
 		}
 		if(gs->choice3->clicked(win)) //sciezka 3
 		{
 			showButtons = false;
-			gs->playerIco.text.setTextString(L"Przepraszam, ale nie mogê przekazaæ danych dotycz¹cych innych osób, RODO, rozumie Pani");
+			gs->playerIco.text.setTextString(L"Przepraszam, ale nie mogê przekazaæ danych dotycz¹cych innych osób, RODO, rozumie Pani.");
 			gs->playerIco.show();
 			thought_time = gm::Core::getClock().getElapsedTime().asMilliseconds() + 3000;
 			state = 30;
@@ -579,7 +575,7 @@ void Day_4::update(GameState* gs, sf::RenderWindow& win)
 	case 32:
 		if(thought_time < gm::Core::getClock().getElapsedTime().asMilliseconds())
 		{
-			thought->changeText(L"Innymi s³owy - jak przyjdzie ''uradowany'' ma¿ by ''podziêkowaæ'' odsy³amy go do Ciebie");
+			thought->changeText(L"Innymi s³owy - jak przyjdzie \"uradowany\" ma¿ by \"podziêkowaæ\" odsy³amy go do Ciebie");
 			thought_time = gm::Core::getClock().getElapsedTime().asMilliseconds() + 4000;
 			state++;
 		}
@@ -596,7 +592,7 @@ void Day_4::update(GameState* gs, sf::RenderWindow& win)
 		gs->playerIco.state = 0;
 
 		gs->mariolka->text.setTextString(L"Hej, zapl¹ta³o mi siê coœ z Twojej korespondencji.");  //0
-		gs->mariolka->addToQueue(L"Chyba wa¿ne bo od NIK-u. I grube, sporo tego. Zobaczmy czego chc¹"); //1
+		gs->mariolka->addToQueue(L"Chyba wa¿ne bo od NIK-u. I grube, sporo tego. Zobaczmy czego chc¹."); //1
 		gs->mariolka->addToQueue(L"No i?"); //2
 		gs->mariolka->addToQueue(L"No co ty, nie ufasz mi? Znamy siê ju¿ 4 dni... Czyli praktycznie jesteœmy rodzin¹."); //3
 		gs->mariolka->addToQueue(L"Oj wyluzuj. Czepiasz siê bardziej ni¿ IOD."); //4
@@ -761,7 +757,7 @@ void Day_4::update(GameState* gs, sf::RenderWindow& win)
 			gs->computer->close();
 			gs->data->nagany++;
 			thought_time = gm::Core::getClock().getElapsedTime().asMilliseconds() + THOUGHT_TIME;
-			thought->changeText(L"Wielki Szef patrzy i widza³ maila. Pilnuj siê...");
+			thought->changeText(L"Wielki Szef patrzy i widzia³ maila. Pilnuj siê...");
 			thought->setBubblePosition(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);
 			thought->showBubble();
 			state++;
@@ -856,7 +852,7 @@ void Day_4::update(GameState* gs, sf::RenderWindow& win)
 		{
 			gs->mariolka->hide();
 			showButtons = false;
-			thought_time = gm::Core::getClock().getElapsedTime().asMilliseconds() + THOUGHT_TIME;
+			thought_time = gm::Core::getClock().getElapsedTime().asMilliseconds() + 1.5 * THOUGHT_TIME;
 			thought->setBubblePosition(SCREEN_WIDTH /2, SCREEN_HEIGHT /2);
 			thought->changeText(L"Wykryto nieupranion¹ próbê skopiowania danych z systemu\nSzef-bot 3000 jest z³y :(");
 			thought->showBubble();
@@ -929,9 +925,9 @@ void Day_4::update(GameState* gs, sf::RenderWindow& win)
 	case 60:
 		gs->mariolka->state = 0;
 		gs->mariolka->setButtonActive();
-		gs->mariolka->text.setTextString(L"Nareszcie koniec. Ocean petentów, i te ich ¿¹dania, ¿e mamy ich ''zapomnieæ'', wyobra¿asz sobie?");
+		gs->mariolka->text.setTextString(L"Nareszcie koniec. Ocean petentów, i te ich ¿¹dania, ¿e mamy ich \"zapomnieæ\", wyobra¿asz sobie?");
 		gs->mariolka->addToQueue(L"A do tego poczta, maile...");
-		gs->mariolka->addToQueue(L"Dobrze, ¿e zwiêkszaj¹ zatrudnienie, bo ju¿ nie wyrabiam. A przecie¿ lediwe zaczê³am!");
+		gs->mariolka->addToQueue(L"Dobrze, ¿e zwiêkszaj¹ zatrudnienie, bo ju¿ nie wyrabiam. A przecie¿ ledwie zaczê³am!");
 
 		gs->playerIco.text.setTextString(L"O, to fajnie, bêdzie trochê l¿ej.");
 
