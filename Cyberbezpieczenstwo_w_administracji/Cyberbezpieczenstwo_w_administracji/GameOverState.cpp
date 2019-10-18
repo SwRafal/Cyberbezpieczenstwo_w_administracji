@@ -77,7 +77,7 @@ void GameOverState::update(sf::RenderWindow& win)
 	if(animated && state == 1)
 	{
 		sf::String s = L"-iloœæ przepracowanych dni: ";
-		s = s + std::to_string(data->day) + L"\n\n-iloœæ nagan: " + std::to_string(data->nagany);
+		s = s + std::to_string(data->day) + L"\n\n-iloœæ upomnieñ: " + std::to_string(data->nagany);
 	}
 
 	if(!animated)

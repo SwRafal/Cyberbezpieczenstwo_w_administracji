@@ -35,7 +35,7 @@ void DayOverState::init()
 	text.setString(L"EKRAN PODSUMOWANIA DNIA");
 
 
-	knowledge.setTextString(L"Gratulacje! Ukoñczy³eœ kolejny dzieñ pracy!\nLiczba nagan: ");
+	knowledge.setTextString(L"Gratulacje! Ukoñczy³eœ kolejny dzieñ pracy!\nLiczba upomnieñ: ");
 	knowledge.setTextString(knowledge.getTextString() + std::to_string(data->nagany));
 	knowledge.setTextString(knowledge.getTextString() + "\n\nZdobyta wiedza:\n" + data->knowledge);
 
