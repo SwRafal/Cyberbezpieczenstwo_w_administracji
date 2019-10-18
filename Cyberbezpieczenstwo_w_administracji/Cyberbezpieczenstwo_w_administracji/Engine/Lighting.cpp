@@ -97,8 +97,9 @@ namespace gm
 
 		this->position = position;
 		this->radius = radius;
-		this->color = color;
-
+		
 		update();
+
+		this->setColor(color);
 	}
 }

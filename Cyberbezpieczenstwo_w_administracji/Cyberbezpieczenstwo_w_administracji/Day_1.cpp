@@ -16,6 +16,7 @@ Day_1::Day_1()
 	//Initialize
 	ITguy = new OfficeApplicant(gm::Assets::getTexture("itGuy"));
 
+	light = new gm::Lighting(sf::Vector2f(226,350), 350, sf::Color::Yellow);
 }
 
 Day_1::~Day_1()
@@ -24,6 +25,8 @@ Day_1::~Day_1()
 	thought = nullptr;
 	delete ITguy;
 	ITguy = nullptr;
+	delete light;
+	light = nullptr;
 }
 
 void Day_1::update(GameState *gs, sf::RenderWindow &win)
@@ -222,7 +225,8 @@ void Day_1::update(GameState *gs, sf::RenderWindow &win)
 			if (!thought->appearing && !thought->disappearing)
 				thought->setBubblePosition(0, -300);
 
-			gs->computer->update(win);
+			if(!gs->computer->isOpened())
+				gs->computer->update(win);
 			gs->openedcomputer->update(win);
 			if (gs->openedcomputer->getState() == OpenPC::DESKTOP)
 			{
@@ -679,6 +683,12 @@ void Day_1::draw(GameState *gs, sf::RenderWindow &win)
 	thought->draw(win);
 	gs->officeApplicant->draw(win);
 	ITguy->draw(win);
+
+	if ((state == 6 || state == 11) && !gs->computer->isOpened())
+	{
+		win.draw(*light);
+		gs->computer->draw(win);
+	}
 
 	win.display();
 }

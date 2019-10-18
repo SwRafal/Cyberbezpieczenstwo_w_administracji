@@ -49,6 +49,28 @@ namespace gm
 			if (!aimed(win) && sf::Mouse::isButtonPressed(sf::Mouse::Left))
 				is_active = false;
 		}
+
+		frame_br++;
+		if (frame_br > FRAME_BREAK)
+		{
+			frame_br = 0;
+			cursor_visible = !cursor_visible;
+		}
+		sf::Vector2f cursor_pos;
+		cursor_pos.x = text.getPosition().x + text.getLocalBounds().width + text.getLocalBounds().left;
+		cursor_pos.y = text.getPosition().y;
+		cursor.setPosition(cursor_pos);
+
+		cursor.setFillColor(getTextColor());
+		cursor.setSize(sf::Vector2f(2, text.getLocalBounds().height + text.getLocalBounds().top));
+	}
+
+	void TextField::draw(sf::RenderTarget &target, sf::RenderStates states) const
+	{
+		TextButton::draw(target,states);
+
+		if(cursor_visible && is_active)
+			target.draw(cursor);
 	}
 
 	TextField::TextField(sf::Font &font, const sf::Vector2f &position, const sf::Vector2f &size, unsigned int font_size)

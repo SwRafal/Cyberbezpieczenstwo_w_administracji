@@ -19,6 +19,8 @@ public:
 
 	OfficeApplicant *ITguy = nullptr;
 
+	gm::Lighting *light = nullptr;
+
 	bool talked = false;
 	bool talked2 = false;
 

@@ -2,7 +2,7 @@
 #include "TextButton.h"
 #include <iostream>
 
-#define FRAME_BREAK 120
+#define FRAME_BREAK 30
 #define BACKSPACE 8
 #define ENTER 13
 
@@ -14,12 +14,17 @@ namespace gm
 		bool is_active = false;
 		bool hasLimit = true;
 		unsigned short limit;
+
+		bool cursor_visible = false;
+		sf::RectangleShape cursor;
+		unsigned int frame_br;
 	public:
 		void setActive(bool active);
 		void switchStatus();
 		void setLimit(bool on, unsigned short limit);
 		void setLimit(bool on);
 
+		void draw(sf::RenderTarget &target, sf::RenderStates states) const;
 		void update(sf::RenderWindow &win, sf::Uint32 char_entered);
 
 		TextField(sf::Font &font) : TextField(font, sf::Vector2f(0, 0), sf::Vector2f(200, 100)) {};

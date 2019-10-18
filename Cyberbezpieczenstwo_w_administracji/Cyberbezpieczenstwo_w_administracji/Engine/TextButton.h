@@ -54,5 +54,7 @@ namespace gm
 		const sf::Color &getTextIdleColor() { return idle_text_color; }
 		const sf::Color &getTextAimedColor() { return aimed_text_color; }
 		const sf::Color &getTextPressColor() { return press_text_color; }
+
+		friend class TextField;
 	};
 }
