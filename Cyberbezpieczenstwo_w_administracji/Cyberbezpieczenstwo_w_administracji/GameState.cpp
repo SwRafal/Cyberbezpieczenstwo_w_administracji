@@ -891,6 +891,8 @@ void GameState::nagana(sf::String text)
 	nagana_info->setFont(*gm::Assets::getFont());
 	nagana_info->setString(text);
 	nagana_info->setFillColor(sf::Color::Red);
+	nagana_info->setOutlineThickness(2);
+	nagana_info->setOutlineColor(sf::Color::Black);
 	info_time = gm::Core::getClock().getElapsedTime().asMilliseconds() + GAMELOST_INFO_TIME;
 	sf::Vector2f info_pos;
 	info_pos.x = SCREEN_WIDTH / 2 - (nagana_info->getLocalBounds().left + nagana_info->getLocalBounds().width) / 2;

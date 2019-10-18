@@ -362,12 +362,12 @@ void Day_1::update(GameState *gs, sf::RenderWindow &win)
 			else if (gs->openedcomputer->getState() != OpenPC::SET_PASSWORD && gs->data->login != gs->data->name)
 			{
 				gs->openedcomputer->setState(OpenPC::SET_PASSWORD);
-				thought->changeText(L"Login powinien byæ taki sam jak moje imiê...");
+				thought->changeText(L"Login powinien byæ taki sam jak moje imiê, czyli " + gs->data->name + L"...");
 				thought->setBubblePosition(200, 100);
 				thought->showBubble();
 				thought_time = gm::Core::getClock().getElapsedTime().asMilliseconds() + THOUGHT_TIME;
 			}
-			else if (gs->openedcomputer->getState() != OpenPC::SET_PASSWORD && gs->data->password.getSize() < 6)
+			else if (gs->openedcomputer->getState() != OpenPC::SET_PASSWORD && gs->data->password.getSize() < 8)
 			{
 				gs->openedcomputer->setState(OpenPC::SET_PASSWORD);
 				thought->changeText(L"Has³o jest za krótkie...");
@@ -379,6 +379,8 @@ void Day_1::update(GameState *gs, sf::RenderWindow &win)
 			{
 				bool small_letter = false;
 				bool big_letter = false;
+				bool special_char = false;
+				bool digit = false;
 
 				for (int i = 0; i < gs->data->password.getSize(); i++)
 				{
@@ -386,22 +388,50 @@ void Day_1::update(GameState *gs, sf::RenderWindow &win)
 						big_letter = true;
 					else if (gs->data->password[i] >= 'a' && gs->data->password[i] <= 'z')
 						small_letter = true;
+					else if ((gs->data->password[i] > 32 && gs->data->password[i] < 48) || (gs->data->password[i] > 57 && gs->data->password[i] < 65) || (gs->data->password[i] > 122 && gs->data->password[i] < 127))
+						special_char = true;
+					else if (gs->data->password[i] >= 48 && gs->data->password[i] <= 57)
+						digit = true;
 				}
 
-				if (small_letter && big_letter)
+				if (small_letter && big_letter && special_char && digit)
 				{
 					gs->data->login = gs->openedcomputer->getLogin();
 					gs->data->password = gs->openedcomputer->getPassword();
 					gs->computer->close();
 				}
-				else
+				else if(!small_letter)
 				{
 					gs->openedcomputer->setState(OpenPC::SET_PASSWORD);
-					thought->changeText(L"Has³o jest za s³abe... Spróbuj wielkich liter.");
+					thought->changeText(L"Has³o jest za s³abe... Spróbuj równie¿ ma³ych liter.");
 					thought->setBubblePosition(200, 100);
 					thought->showBubble();
 					thought_time = gm::Core::getClock().getElapsedTime().asMilliseconds() + THOUGHT_TIME;
-				}				
+				}
+				else if (!big_letter)
+				{
+					gs->openedcomputer->setState(OpenPC::SET_PASSWORD);
+					thought->changeText(L"Has³o jest za s³abe... Spróbuj równie¿ wielkich liter.");
+					thought->setBubblePosition(200, 100);
+					thought->showBubble();
+					thought_time = gm::Core::getClock().getElapsedTime().asMilliseconds() + THOUGHT_TIME;
+				}
+				else if (!special_char)
+				{
+					gs->openedcomputer->setState(OpenPC::SET_PASSWORD);
+					thought->changeText(L"Has³o jest za s³abe... Spróbuj równie¿ znaków specjalnych.");
+					thought->setBubblePosition(200, 100);
+					thought->showBubble();
+					thought_time = gm::Core::getClock().getElapsedTime().asMilliseconds() + THOUGHT_TIME;
+				}
+				else if (!digit)
+				{
+					gs->openedcomputer->setState(OpenPC::SET_PASSWORD);
+					thought->changeText(L"Has³o jest za s³abe... Spróbuj równie¿ cyfr.");
+					thought->setBubblePosition(200, 100);
+					thought->showBubble();
+					thought_time = gm::Core::getClock().getElapsedTime().asMilliseconds() + THOUGHT_TIME;
+				}
 			}
 			if (!gs->computer->isOpened())
 			{
