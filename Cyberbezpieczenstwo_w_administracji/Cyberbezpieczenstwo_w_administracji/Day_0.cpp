@@ -207,6 +207,8 @@ void Day_0::update(GameState* gs, sf::RenderWindow &win)
 
 			//zegar i kalendarz
 			gs->officeLady->addToQueue(L"Co wiêcej mogê powiedzieæ. Zegar i kalendarz ju¿ pewnie zosta³ przez Ciebie zauwa¿ony.");
+			/**/gs->officeLady->addToQueue(L"Zegar przy twoim stanowisku jest uszkodzony, w przysz³ym tygodniu ktoœ ma siê tym zaj¹æ");
+			gs->officeLady->addToQueue(L"Do tego czasu korzystaj z w³asnego zegarka.");
 			gs->officeLady->addToQueue(L"Pilnuj czasu. Jak to mówi¹ spóŸnienia to pierwszy stopieñ na dywanik u Szefa.");
 
 			//telefon prywatny
@@ -246,14 +248,14 @@ void Day_0::update(GameState* gs, sf::RenderWindow &win)
 		if(gs->officeLady->state == 21)
 			state = 6;
 		if(gs->officeLady->state == 23)
-			state = 7;
-		if(gs->officeLady->state == 25)
+			state = 7; //zegar
+		if(gs->officeLady->state == 27) //25
 			state = 8;
-		if(gs->officeLady->state == 28)
+		if(gs->officeLady->state == 30) //28
 			state = 9;
-		if(gs->officeLady->state == 30)
+		if(gs->officeLady->state == 32) //30
 			state = 10;
-		if(gs->officeLady->state == 34)
+		if(gs->officeLady->state == 36) //34
 			state = 11;
 
 	
@@ -585,7 +587,7 @@ void Day_0::draw(GameState* gs)
 		gs->phone->draw(win);
 		gs->mobile->draw(win);
 		gs->bin->draw(win);
-		gs->battery->draw(win);
+		//gs->battery->draw(win);
 
 		gs->coffee->draw(win);
 

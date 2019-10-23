@@ -1134,11 +1134,14 @@ void Day_2::update(GameState *gs, sf::RenderWindow &win)
 		break;
 	case 64: //u re drunk go home
 		boss->animate();
+		boss->hide();
 		gs->playerIco.text.setTextString(L"Pora iœæ do domu. Muszê pamiêtaæ o zabraniu karty dostêpu z czytnika i wy³¹czeniu komputera");
 		gs->playerIco.show();
 		state++;
 		break;
 	case 65:
+		boss->animate();
+		boss->hide();
 		gs->computer->update(win);
 		gs->computer->turnOffAvailable = true;
 		if(!gs->computer->powerOn && !gs->cardReader->isCardInside())

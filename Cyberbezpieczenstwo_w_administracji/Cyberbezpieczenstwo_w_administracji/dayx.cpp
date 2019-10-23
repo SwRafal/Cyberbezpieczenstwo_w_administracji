@@ -9,7 +9,7 @@ dayx::dayx(int &_dayNumber)
 	opacitySpeed = 5;
 	show = false;
 	timer = 0;
-	opacity = 0;
+	opacity = 255;
 	dayNumber = &_dayNumber;
 	this->setSize(sf::Vector2f(SCREEN_WIDTH,SCREEN_HEIGHT));
 	this->setFillColor(sf::Color(0,0,0,0));
